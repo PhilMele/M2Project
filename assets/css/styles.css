@@ -1,3 +1,11 @@
 body{
     background: black;
 }
+
+.first-screen-div{
+    display:none
+}
+
+.second-screen-div{
+    display: none;
+}
