@@ -24,8 +24,9 @@ body{
 /*Second Screen*/
 
     /*General*/
-    .canva-div{
-        background-image: url(/assets/images/screens/second_screen.jpg);
+
+    .worldmap{
+        /*background-image: url('/assets/images/screens/second_screen.jpg'); */        
         height: 100vh;
         background-repeat: no-repeat;
         background-size: auto; /* Set background size to auto */
@@ -33,4 +34,11 @@ body{
         justify-content: center;
         align-items: center;
         background-position: top;
+    }
+
+    #npcOne-position-avatar-image {
+
+        background-image: url('/assets/images/avatars/npc.gif');
+        width:52px;
+        position: absolute;
     }

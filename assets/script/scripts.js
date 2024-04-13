@@ -17,8 +17,9 @@ console.log("connected")
         let npcOne = { 
             name: '', 
             avatar: 'assets/images/avatars/npc.gif',
-            Xposition:'',
-            Yposition:'',
+            Xposition:'337',
+            Yposition:'300',
+            radius:40,
 
             };
             console.log(npcOne)
@@ -85,10 +86,15 @@ console.log("connected")
 
     /*Second Screen*/
         /*General*/
+        /*credit - https://www.w3schools.com/html/tryit.asp?filename=tryhtml_images_map5*/
+        /*credit for .coords - https://www.w3schools.com/jsref/prop_area_coords.asp*/
+        /**
+        * Sets elements on screen when hero starts
+        */
         function screenTwoGeneral(hero){  
             let missionTitle = document.getElementById('mission-title').textContent=`${hero.name}'s epic adventure`;
             let heroAvatarImg = document.getElementById('hero-avatar-selected').src=`${hero.avatar}`;
-            let npcOnePosition = document.getElementById('npcOne-avatar-selected').src=`${npcOne.avatar}`;
+            
         }
 
         
