@@ -72,7 +72,8 @@ console.log("connected")
             hero.name = heroName
             hero.avatar = heroAvatar
             // Call another function with the updated hero object
-            screenTwoGeneral(hero);
+            //recurring problem - forget to pass argument in function
+            screenTwoGeneral(hero, npcOne);
             updateScreen(); // Update screen after hero name is updated
         }
 
@@ -91,9 +92,11 @@ console.log("connected")
         /**
         * Sets elements on screen when hero starts
         */
-        function screenTwoGeneral(hero){  
+        function screenTwoGeneral(hero, npcOne){  
             let missionTitle = document.getElementById('mission-title').textContent=`${hero.name}'s epic adventure`;
             let heroAvatarImg = document.getElementById('hero-avatar-selected').src=`${hero.avatar}`;
+
+            let npcOnePositionClick = document.getElementById('npcOne-position-click').coords=`"${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}"`;
             
         }
 

@@ -41,4 +41,7 @@ body{
         background-image: url('/assets/images/avatars/npc.gif');
         width:52px;
         position: absolute;
+        top:337px;
+        left:300px;
+
     }
