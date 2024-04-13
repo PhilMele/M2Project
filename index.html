@@ -10,13 +10,49 @@
 
 </head>
 <body>
+    <!--Screen 1-->
     <div class="first-screen-div">
-        <label for="heroName">Enter the name of your hero:</label>
-        <input type="text" id="heroName">
+
+        <!--Select Hero Name -->
+        <label for="hero-name">Enter the name of your hero:</label>
+        <input type="text" id="hero-name">
+
+        <!--Select Hero Avatar -->
+         <label for="hero-avatar">Select your avatar</label><br>
+            <select id="hero-avatar" class="width-control" name="hero-avatar" required>
+                <option disabled="" selected="" value="">Select Option</option>
+                <option value="assets\images\avatars\hero-avatar-1.jpg">Avatar 1</option>
+                <option value="assets\images\avatars\hero-avatar-2.webp">Avatar 2</option>
+            </select><br><br> 
+
+        <!-- Validate Choice -->
          <button type="button" onclick="createHero(event)">Create Hero</button>
     </div>
+    
+    <!--Screen 2-->
     <div class="second-screen-div">
-        <p>this is the second screen</p>
+        <div class="container width-control">
+            <!--Big title-->
+            <div class="row">
+                <!--Mission Title-->
+                <h1 id="mission-title"></h1>
+                <!--Avatar Image-->
+                <img id="hero-avatar-selected">
+            </div>
+            <!-- Inventory -->
+            <div class="row">
+                <h2>Inventory here</h2>
+            </div>
+            <!-- Map -->
+            <div class="row">
+                
+                <div class="canva-div">
+                </div>
+            </div>
+            
+       
+        </div>
+
     </div>
    
 

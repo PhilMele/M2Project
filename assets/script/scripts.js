@@ -3,11 +3,18 @@ console.log("connected")
 
 
 /*Characters*/
-    /***
-    * hero variable that stores stats
-    */
-    let hero = { name: '', avatar: '' };
-    console.log(hero)
+    /*Hero*/
+        /***
+        * hero variable that stores stats
+        */
+        let hero = { name: '', avatar: '' };
+        console.log(hero)
+
+
+
+    /*NPCs*/
+
+    /*Boss*/
 
 
 /*Event management*/
@@ -29,6 +36,7 @@ console.log("connected")
             document.querySelector('.second-screen-div').style.display = 'none';
         } else {
             console.log(`we have a name! the name is ${hero.name}`);
+            console.log(`the avatar is ${hero.avatar}`);
             document.querySelector('.first-screen-div').style.display = 'none';
             document.querySelector('.second-screen-div').style.display = 'flex';
         }
@@ -38,15 +46,23 @@ console.log("connected")
 
     /*First Screen*/
 
-        /***
+        /*bug - started with a form, but I couldnt keep the data. 
+        I then took it to stackoverflow with this question: https://stackoverflow.com/questions/78315736/update-object-property-after-form-submission-for-use-in-a-seperate-function?noredirect=1#comment138072099_78315736
+        Which make me realise my understanding of how forms work was flawed.
+        I then tried to use javascript class, as a suggestion from this link: https://www.taniarascia.com/understanding-classes-in-javascript/
+        but I couldnt make this work.
+        The solution I found works, but feels clunky.*/
+        /**
         * Creates hero name + avatar
         */
         function createHero(event){
-            let heroName = document.getElementById('heroName').value
+            let heroName = document.getElementById('hero-name').value
+            let heroAvatar = document.getElementById('hero-avatar').value
             console.log(`heroName: ${heroName}`)
             hero.name = heroName
+            hero.avatar = heroAvatar
             // Call another function with the updated hero object
-            newHeroName(hero);
+            screenTwoGeneral(hero);
             updateScreen(); // Update screen after hero name is updated
         }
 
@@ -59,8 +75,21 @@ console.log("connected")
         }
 
     /*Second Screen*/
+        /*General*/
+        function screenTwoGeneral(hero){  
+            let missionTitle = document.getElementById('mission-title').textContent=`${hero.name}'s epic adventure`;
+            let heroAvatarImg = document.getElementById('hero-avatar-selected').src=`${hero.avatar}`
+        }
+        
+        /*Intro */
+            /*Hero arrives on Screen 2*/
+                /*credit - https://stackoverflow.com/questions/11722400/programmatically-change-the-src-of-an-img-tag*/
+                /**
+                *Hero's initial position on screen
+                */
 
-        /*Generate map*/
+
+
 
         /*Mission 1*/
 
