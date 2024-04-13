@@ -14,6 +14,15 @@ console.log("connected")
 
     /*NPCs*/
 
+        let npcOne = { 
+            name: '', 
+            avatar: 'assets/images/avatars/npc.gif',
+            Xposition:'',
+            Yposition:'',
+
+            };
+            console.log(npcOne)
+
     /*Boss*/
 
 
@@ -78,8 +87,10 @@ console.log("connected")
         /*General*/
         function screenTwoGeneral(hero){  
             let missionTitle = document.getElementById('mission-title').textContent=`${hero.name}'s epic adventure`;
-            let heroAvatarImg = document.getElementById('hero-avatar-selected').src=`${hero.avatar}`
+            let heroAvatarImg = document.getElementById('hero-avatar-selected').src=`${hero.avatar}`;
+            let npcOnePosition = document.getElementById('npcOne-avatar-selected').src=`${npcOne.avatar}`;
         }
+
         
         /*Intro */
             /*Hero arrives on Screen 2*/
@@ -87,6 +98,12 @@ console.log("connected")
                 /**
                 *Hero's initial position on screen
                 */
+                function heroPosition(){
+                    //initial position when starts
+
+
+                    //new position
+                }
 
 
 
