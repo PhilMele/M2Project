@@ -33,6 +33,7 @@ console.log("connected")
     *Manages events and screen display
     */
     document.addEventListener("DOMContentLoaded", function(){
+        
         updateScreen(); // Update screen based on initial state
     });
 
@@ -89,15 +90,22 @@ console.log("connected")
         /*General*/
         /*credit - https://www.w3schools.com/html/tryit.asp?filename=tryhtml_images_map5*/
         /*credit for .coords - https://www.w3schools.com/jsref/prop_area_coords.asp*/
+        /*credit call coordinates for image position - https://stackoverflow.com/questions/28598910/position-an-html-element-at-any-x-y-coordinate-in-a-page*/
+        /*credit img element src is 'content' css - https://stackoverflow.com/questions/2182716/is-it-possible-to-set-a-src-attribute-of-an-img-tag-in-css*/
         /**
         * Sets elements on screen when hero starts
         */
         function screenTwoGeneral(hero, npcOne){  
+            //positions h1
             let missionTitle = document.getElementById('mission-title').textContent=`${hero.name}'s epic adventure`;
+            //positions hero avatar image
             let heroAvatarImg = document.getElementById('hero-avatar-selected').src=`${hero.avatar}`;
-
-            let npcOnePositionClick = document.getElementById('npcOne-position-click').coords=`"${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}"`;
-            
+            //positions NPCs + clickable area 
+                //npcOne
+                let npcOnePositionClick = document.getElementById('npcOne-position-click').coords=`"${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}"`;
+                let npcOnePositionImage = document.getElementById('npcOne-position-avatar-image')
+                    npcOnePositionImage.style.left= npcOne.Xposition + "px";
+                    npcOnePositionImage.style.top= npcOne.Yposition + "px";
         }
 
         

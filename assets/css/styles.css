@@ -25,6 +25,11 @@ body{
 
     /*General*/
 
+    .canva-div {
+        position: relative; /* Ensure container div is positioned relative */
+        display: inline-block;
+    }
+
     .worldmap{
         /*background-image: url('/assets/images/screens/second_screen.jpg'); */        
         height: 100vh;
@@ -35,13 +40,16 @@ body{
         align-items: center;
         background-position: top;
     }
+    /*#npcOne-avatar-selected{
 
-    #npcOne-position-avatar-image {
-
-        background-image: url('/assets/images/avatars/npc.gif');
+        content: url('/assets/images/avatars/npc.gif');
         width:52px;
         position: absolute;
-        top:337px;
-        left:300px;
+    }*/
+    #npcOne-position-avatar-image {
+
+        content: url('/assets/images/avatars/npc.gif');
+        width:52px;
+        position: absolute;
 
     }
