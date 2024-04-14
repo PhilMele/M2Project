@@ -101,8 +101,12 @@ console.log("connected")
             //positions hero avatar image
             let heroAvatarImg = document.getElementById('hero-avatar-selected').src=`${hero.avatar}`;
             //positions NPCs + clickable area 
-                //npcOne
-                let npcOnePositionClick = document.getElementById('npcOne-position-click').coords=`"${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}"`;
+                //npcOne - clickable area
+                let npcOnePositionClick = document.getElementById('npcOne-position-click').
+                    coords=`"${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}"`;
+                document.getElementById('npcOne-position-click').addEventListener('click', npcOnConversation)
+                
+                //npcOne - avatar img position on map
                 let npcOnePositionImage = document.getElementById('npcOne-position-avatar-image')
                     npcOnePositionImage.style.left= npcOne.Xposition + "px";
                     npcOnePositionImage.style.top= npcOne.Yposition + "px";
@@ -126,6 +130,23 @@ console.log("connected")
 
 
         /*Mission 1*/
+            /**
+            *When user click on location, a conversation starts
+            */
+
+            function npcOnConversation(event){
+                alert("You clicked the spot!")
+                //when user click on `let npcOnePositionClick`
+                //an event starts (need to add param)
+                //upon starting the event triggers a pannel
+                //the pannel will show the conversation (loop of sentences)
+                //at the end, the hero is asked a question
+                //if replies "no" nothing happens
+                //if replies "yes" an item is added to inventory
+                //at the end of the conversation the pannel closes
+                //once the panel closes the user is free to click somewhere else on the map
+
+            }
 
 
         /*Mission 2*/
