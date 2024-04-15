@@ -21,6 +21,21 @@ body{
     
 }
 
+.conversation-screen-div{
+    display: none;
+    height: inherit;
+    background-color: aqua;
+
+    
+}
+
+.validation-screen-div{
+    display: none;
+    position: relative;
+    background-color: blue;
+}
+
+
 /*Second Screen*/
 
     /*General*/

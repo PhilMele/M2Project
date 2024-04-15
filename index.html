@@ -26,12 +26,13 @@
             </select><br><br> 
 
         <!-- Validate Choice -->
-         <button type="button" onclick="createHero(event)">Create Hero</button>
+         <button type="button" onclick="createHero()">Create Hero</button>
     </div>
     
     <!--Screen 2-->
     <div class="second-screen-div">
         <div class="container width-control">
+
             <!--Big title-->
             <div class="row">
                 <!--Mission Title-->
@@ -40,23 +41,20 @@
                 <img id="hero-avatar-selected">
                 <img id="npcOne-avatar-selected">
             </div>
+
             <!-- Inventory -->
             <div class="row">
                 <h2>Inventory here</h2>
             </div>
+
             <!-- Map -->
             <div class="row">
-                
                 <div class="canva-div">
                     <img src="/assets/images/screens/second_screen.jpg" usemap="#worldmap">
                     <img  id="npcOne-position-avatar-image" usemap="#worldmap">
-                    
-
                     <map name="worldmap"> 
-                    
                         <area id="npcOne-position-click" shape="circle">
                     </map>
-
                 </div>
             </div>
             
@@ -64,7 +62,68 @@
         </div>
 
     </div>
-   
+    <!-- Screen 3-->
+
+    <!--User validation screen-->
+    <div class="validation-screen-div">
+        <div class="container width-control">
+
+            <!--Prompt Question-->
+            <div class="row">
+
+                <!--Script-->
+                <div class="col">
+                    <p>Do you want to talk to this npc?</p>
+                </div>
+                <!--Hero Answer-->
+
+                <div class="col">
+                    <label for="hero-decision">Select your answer</label><br>
+                        <select id="hero-decision" class="width-control" name="hero-decision" required>
+                            <option disabled="" selected="" value="">Select Option</option>
+                            <option value="1">Yes</option>
+                            <option value="2">No.</option>
+                        </select>
+                    <button type="button" onclick="npcOneConversation()">Subit Answer</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--Conversation Screen-->
+    <div class="conversation-screen-div">
+        <div class="container width-control">
+
+            <!--NPC Conversation-->
+            <div class="row">
+                <!--Script-->
+                <div class="col">
+                    <p></p>
+                </div>
+                <!--Avatar-->
+                <div class="col">
+                    <img>
+                </div>
+            </div>
+
+            <!-- Hero -->
+            <div class="row">
+                <!--Script-->
+                <div class="col">
+                    <p></p>
+                </div>
+                <!--Avatar-->
+                <div class="col">
+                    <img>
+                </div>
+                
+            </div>
+
+            
+       
+        </div>
+
+    </div>
 
     <script src="assets/script/scripts.js">
 

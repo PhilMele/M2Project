@@ -53,6 +53,9 @@ console.log("connected")
         }
     }
 
+
+
+
 /*Events*/
 
     /*First Screen*/
@@ -104,7 +107,9 @@ console.log("connected")
                 //npcOne - clickable area
                 let npcOnePositionClick = document.getElementById('npcOne-position-click').
                     coords=`"${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}"`;
-                document.getElementById('npcOne-position-click').addEventListener('click', npcOnConversation)
+                document.getElementById('npcOne-position-click').addEventListener('click', function(){
+                    npcOneConversation(hero, npcOne);
+                })
                 
                 //npcOne - avatar img position on map
                 let npcOnePositionImage = document.getElementById('npcOne-position-avatar-image')
@@ -133,17 +138,28 @@ console.log("connected")
             /**
             *When user click on location, a conversation starts
             */
-
-            function npcOnConversation(event){
-                alert("You clicked the spot!")
+            function npcOneConversation(hero, npcOne){
+                //alert("You clicked the spot!")
+                //when user is in range of npc (if)
                 //when user click on `let npcOnePositionClick`
-                //an event starts (need to add param)
-                //upon starting the event triggers a pannel
-                //the pannel will show the conversation (loop of sentences)
-                //at the end, the hero is asked a question
-                //if replies "no" nothing happens
-                //if replies "yes" an item is added to inventory
-                //at the end of the conversation the pannel closes
+                //first panel appears to ask user to confirm if they want to start conversation
+                document.querySelector('.validation-screen-div').style.display = 'flex';
+                answer = document.getElementById('hero-decision').value
+                console.log(answer)
+                if (answer === 1){
+                    //if yes conversation screen div opens
+                        //displays loop of sentences from npc
+                        //ask a yes a no question to Characters
+                            //if replies "no" nothing happens
+                                //panel closes
+                            //if replies "yes" an item is added to inventory
+                                //panel closes
+                
+                }
+                //if no panel closes
+                else{
+                }
+
                 //once the panel closes the user is free to click somewhere else on the map
 
             }
