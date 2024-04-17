@@ -20,7 +20,12 @@ console.log("connected")
             Xposition:'337',
             Yposition:'300',
             radius:40,
-            question: `Hello ${hero.name}. Great to see you. Bla bla bla`,
+            conversation:{
+                sentenceOne:'Hello',
+                sentenceTwo:'Are you looking for this piece of item?',
+                sentenceThree:'It is yours now. Farewell!',
+            }
+            
 
             };
             console.log(npcOne)
@@ -177,9 +182,25 @@ console.log("connected")
             */
             function npcOneConversation(hero, npcOne){
                 //At this stage, the hero answered Yes (1)
-                alert("npcOneConversation()starts!")
-                console.log(npcOne.question)
+                //alert("npcOneConversation()starts!")
+                //logs npcOne.question. Currently doesnt return hero.name
+                console.log(`${npcOne.conversation.sentenceOne} ${hero.name}!`)
                     //if yes conversation screen div opens
+
+                    //set up conversation div
+                    document.querySelector('.conversation-screen-div').style.display = 'flex'
+                    document.querySelector('.second-screen-div').style.display = 'none'
+
+                    //set up rows and cols content for hero and npc
+                        //hero
+                        document.querySelector('#hero-img').src=`${hero.avatar}`
+                        document.querySelector('#hero-text')
+
+
+                        //npc
+                        document.querySelector('#npc-img').src=`${npcOne.avatar}`
+                        document.querySelector('#npc-text').textContent=`${npcOne.conversation.sentenceOne} ${hero.name}!`;
+                    
                         //displays loop of sentences from npc
                         //ask a yes a no question to Characters
                             //if replies "no" nothing happens
