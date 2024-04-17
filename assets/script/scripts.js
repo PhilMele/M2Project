@@ -20,6 +20,7 @@ console.log("connected")
             Xposition:'337',
             Yposition:'300',
             radius:40,
+            question: `Hello ${hero.name}. Great to see you. Bla bla bla`,
 
             };
             console.log(npcOne)
@@ -177,6 +178,7 @@ console.log("connected")
             function npcOneConversation(hero, npcOne){
                 //At this stage, the hero answered Yes (1)
                 alert("npcOneConversation()starts!")
+                console.log(npcOne.question)
                     //if yes conversation screen div opens
                         //displays loop of sentences from npc
                         //ask a yes a no question to Characters
