@@ -48,7 +48,7 @@ console.log("connected")
             // if clicked yes (1), the rest of the logic is dealt by other function
             $('#submit-answer-button').click(function() {
                 // Get variable in #hero-decision 
-                let decision = $('hero-decision').val();
+                let decision = $('#hero-decision').val();
                 
                 // Check if the selected option is "No" (2)
                 if (decision === '2') {
@@ -92,7 +92,7 @@ console.log("connected")
         //when user click on `let npcOnePositionClick`
         //first panel appears to ask user to confirm if they want to start conversation
         $('.validation-screen-div').show();
-        answer = $('hero-decision').val();
+        answer = $('#hero-decision').val();
         console.log(answer)
      }
 
@@ -149,7 +149,7 @@ console.log("connected")
             
             //positions NPCs + clickable area 
                 //npcOne - clickable area
-                let npcOnePositionClick = $('npcOne-position-click').attr(
+                let npcOnePositionClick = $('#npcOne-position-click').attr(
                     'coords',`${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}`);
                 $('#npcOne-position-click').click(function(){
                     heroDecisionValidation();
