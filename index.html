@@ -9,6 +9,10 @@
 
     <!--css-->
     <link rel="stylesheet" href="assets/css/styles.css">  
+
+    <!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <title>Hello Hero</title>
 
 </head>
@@ -16,21 +20,27 @@
     <div class="screen-container">
         <!--Screen 1-->
         <div class="first-screen-div">
-
+            <div class="container blurred-box">
             <!--Select Hero Name -->
-            <label for="hero-name">Enter the name of your hero:</label>
-            <input type="text" id="hero-name">
-
-            <!--Select Hero Avatar -->
-            <label for="hero-avatar">Select your avatar</label><br>
-                <select id="hero-avatar" class="width-control" name="hero-avatar" required>
-                    <option disabled="" selected="" value="">Select Option</option>
-                    <option value="assets\images\avatars\hero-avatar-1.jpg">Avatar 1</option>
-                    <option value="assets\images\avatars\hero-avatar-2.webp">Avatar 2</option>
-                </select><br><br> 
-
-            <!-- Validate Choice -->
-            <button type="button" onclick="createHero()">Create Hero</button>
+                <div class="row first-screen-row">
+                    
+                    <input type="text" id="hero-name" placeholder="Name your hero...">
+                    <br>
+                </div>
+                <!--Select Hero Avatar -->
+                <div class="row first-screen-row">
+                    <label for="hero-avatar">Select your avatar</label>
+                        <select id="hero-avatar" class="width-control" name="hero-avatar" required>
+                            <option disabled="" selected="" value="">Select Option</option>
+                            <option value="assets\images\avatars\hero-avatar-1.jpg">Avatar 1</option>
+                            <option value="assets\images\avatars\hero-avatar-2.webp">Avatar 2</option>
+                        </select><br><br> 
+                </div>
+                <!-- Validate Choice -->
+                <div class="row first-screen-row">
+                    <button type="button" onclick="createHero()">Create Hero</button>
+                </div>
+            </div>
         </div>
         
         <!--Screen 2-->

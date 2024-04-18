@@ -20,9 +20,7 @@
 
     .screen-container{}
 
-    .first-screen-div{
-        display:none
-    }
+
 
     .second-screen-div{
         display: none;
@@ -45,6 +43,28 @@
         background-color: blue;
     }
 
+/*First Screen*/
+
+    .first-screen-div{
+        display:none;
+        background-image: url('/assets/images/screens/first_screen.jpg');
+        height: var(--height);
+        background-repeat: no-repeat;
+        background-size: auto; /* Set background size to auto */
+        justify-content: center;
+        align-items: center;
+        background-position: top;
+    }
+
+    .first-screen-row{
+        display: grid;
+    }
+
+    .blurred-box{
+        background-color: #ffffff9e;
+        padding: 20px;
+        border-radius: 15px;
+    }
 
 /*Second Screen*/
 

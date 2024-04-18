@@ -38,7 +38,7 @@ console.log("connected")
     /**
     *Manages events and screen display
     */
-    document.addEventListener("DOMContentLoaded", function(){
+    $(document).ready(function(){
         
         updateScreen(); // Update screen based on initial state
         
@@ -46,20 +46,20 @@ console.log("connected")
         //when the user clicks, the decision is validated:
             //if clicked No (2) then the div disapears
             // if clicked yes (1), the rest of the logic is dealt by other function
-            document.getElementById('submit-answer-button').addEventListener('click', function() {
-            // Get variable in #hero-decision 
-            let decision = document.getElementById('hero-decision').value;
-            
-            // Check if the selected option is "No" (2)
-            if (decision === '2') {
-                // Hide the validation screen
-                document.querySelector('.validation-screen-div').style.display = 'none';
-            } else {
-                // Value 1 has been selected and the conversation function can start
-                document.querySelector('.validation-screen-div').style.display = 'none';
-                npcOneConversation(hero, npcOne)
-            }
-    });
+            $('#submit-answer-button').click(function() {
+                // Get variable in #hero-decision 
+                let decision = $('hero-decision').val();
+                
+                // Check if the selected option is "No" (2)
+                if (decision === '2') {
+                    // Hide the validation screen
+                    $('.validation-screen-div').hide();
+                } else {
+                    // Value 1 has been selected and the conversation function can start
+                    $('.validation-screen-div').hide();
+                    npcOneConversation(hero, npcOne)
+                }
+            });
     });
 
     /***
@@ -68,13 +68,13 @@ console.log("connected")
     */
     function updateScreen() {
         if (hero.name === ''){
-            document.querySelector('.first-screen-div').style.display = 'flex';
-            document.querySelector('.second-screen-div').style.display = 'none';
+            $('.first-screen-div').show();
+            $('.second-screen-div').hide();
         } else {
             console.log(`we have a name! the name is ${hero.name}`);
             console.log(`the avatar is ${hero.avatar}`);
-            document.querySelector('.first-screen-div').style.display = 'none';
-            document.querySelector('.second-screen-div').style.display = 'flex';
+            $('.first-screen-div').hide();
+            $('.second-screen-div').show();
         }
     }
 
@@ -91,8 +91,8 @@ console.log("connected")
         //when user is in range of npc (if)
         //when user click on `let npcOnePositionClick`
         //first panel appears to ask user to confirm if they want to start conversation
-        document.querySelector('.validation-screen-div').style.display = 'flex';
-        answer = document.getElementById('hero-decision').value
+        $('.validation-screen-div').show();
+        answer = $('hero-decision').val();
         console.log(answer)
      }
 
@@ -111,8 +111,8 @@ console.log("connected")
         * Creates hero name + avatar
         */
         function createHero(event){
-            let heroName = document.getElementById('hero-name').value
-            let heroAvatar = document.getElementById('hero-avatar').value
+            let heroName = $('#hero-name').val()
+            let heroAvatar = $('#hero-avatar').val()
             console.log(`heroName: ${heroName}`)
             hero.name = heroName
             hero.avatar = heroAvatar
@@ -136,26 +136,29 @@ console.log("connected")
         /*credit for .coords - https://www.w3schools.com/jsref/prop_area_coords.asp*/
         /*credit call coordinates for image position - https://stackoverflow.com/questions/28598910/position-an-html-element-at-any-x-y-coordinate-in-a-page*/
         /*credit img element src is 'content' css - https://stackoverflow.com/questions/2182716/is-it-possible-to-set-a-src-attribute-of-an-img-tag-in-css*/
+        /*Credit for conversion to jquery for left & top in css - https://stackoverflow.com/questions/12744928/in-jquery-how-can-i-set-top-left-properties-of-an-element-with-position-values*/
         /**
         * Sets elements on screen when hero starts
         */
         function screenTwoGeneral(hero, npcOne){  
             //positions h1
-            let missionTitle = document.getElementById('mission-title').textContent=`${hero.name}'s epic adventure`;
+            let missionTitle = $('#mission-title').text(`${hero.name}'s epic adventure`);
+            
             //positions hero avatar image
-            let heroAvatarImg = document.getElementById('hero-avatar-selected').src=`${hero.avatar}`;
+            let heroAvatarImg = $('#hero-avatar-selected').attr('src',hero.avatar);
+            
             //positions NPCs + clickable area 
                 //npcOne - clickable area
-                let npcOnePositionClick = document.getElementById('npcOne-position-click').
-                    coords=`"${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}"`;
-                document.getElementById('npcOne-position-click').addEventListener('click', function(){
+                let npcOnePositionClick = $('npcOne-position-click').attr(
+                    'coords',`${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}`);
+                $('#npcOne-position-click').click(function(){
                     heroDecisionValidation();
                 })
                 
                 //npcOne - avatar img position on map
-                let npcOnePositionImage = document.getElementById('npcOne-position-avatar-image')
-                    npcOnePositionImage.style.left= npcOne.Xposition + "px";
-                    npcOnePositionImage.style.top= npcOne.Yposition + "px";
+                let npcOnePositionImage = $('#npcOne-position-avatar-image').
+                    css({left:npcOne.Xposition + "px",top:npcOne.Yposition + "px"})
+                    
         }
 
         
@@ -188,18 +191,18 @@ console.log("connected")
                     //if yes conversation screen div opens
 
                     //set up conversation div
-                    document.querySelector('.conversation-screen-div').style.display = 'flex'
-                    document.querySelector('.second-screen-div').style.display = 'none'
+                    $('.conversation-screen-div').show()
+                    $('.second-screen-div').hide()
 
                     //set up rows and cols content for hero and npc
                         //hero
-                        document.querySelector('#hero-img').src=`${hero.avatar}`
-                        document.querySelector('#hero-text')
+                        $('#hero-img').attr('src',`${hero.avatar}`);
+                        $('#hero-text')
 
 
                         //npc
-                        document.querySelector('#npc-img').src=`${npcOne.avatar}`
-                        document.querySelector('#npc-text').textContent=`${npcOne.conversation.sentenceOne} ${hero.name}!`;
+                        $('#npc-img').attr('src',`${npcOne.avatar}`)
+                        $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`);
                     
                         //displays loop of sentences from npc
                         //ask a yes a no question to Characters
