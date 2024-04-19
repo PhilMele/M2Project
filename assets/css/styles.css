@@ -64,14 +64,32 @@
         display: grid;
     }
 
+
+
     .blurred-box{
         background-color: #ffffff9e;
         padding: 20px;
         border-radius: 15px;
+        text-align: center;
+    }
+
+    .first-screen-row-avatar{
+        display: flex;
+    }
+
+    .select-avatar-col{
+        width:45%;
     }
 
     .avatar-img-select{
         height: 52px;
+        filter: grayscale(1);
+    }
+
+    /*hides radio buttons in index.html 
+    in first-screen-div for design purpose */
+    input[type="radio"] {
+        display: none;
     }
 
 /*Second Screen*/

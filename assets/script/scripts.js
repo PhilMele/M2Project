@@ -60,6 +60,10 @@ console.log("connected")
             });
     });
 
+    /*Manages Radio buttons & images rendering when clicked*/
+        //if radio button is checked
+            //change colour of image attached to it
+
     /*Credit - JQuery .show() renders in block instead of flex. 
     * this link told me I couldnt achieve flex with show(). and revert back to .css('display', 'flex')
     * https://stackoverflow.com/questions/38491653/jquery-show-a-flex-box
