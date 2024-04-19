@@ -231,14 +231,18 @@ console.log("connected")
                                 }else if(sentenceNum == npcOne.conversation.sentenceTwo){
                                     console.log('this is sentenceTwo')
                                     // hero is presented a yes or no answer
-                                    //use auto submit when radio button is selected
-
+                                    //use auto submit when radio button is selected                                                         
+                                    heroDecisionValidation(){
                                         //if hero says no 
-                                            //conversation moves to sentenceThree
+                                        //conversation moves to sentenceThree
+                                        if (){
+                                        } 
                                         //if hero says yes
-                                            // item1 is added to hero property (need to create one)
-                                            //conversation moves to sentenceThree                                      
-                                            
+                                        // item1 is added to hero property (need to create one)
+                                        //conversation moves to sentenceThree     
+                                        else if(){
+                                        }
+                                    }
                                 }
                                 else if (sentenceNum == npcOne.conversation.sentenceThree){
                                     console.log('this is sentenceThree')
