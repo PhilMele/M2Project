@@ -213,17 +213,32 @@ console.log("connected")
                             console.log(sentence)
                             if (npcOne.conversation.hasOwnProperty(sentence)){
                                 console.log(npcOne.conversation[sentence])
+                                //create sentence number variable: sentenceNum
                                 let sentenceNum = npcOne.conversation[sentence]
-                                
-                            }
 
-                        }
-                        //ask a yes a no question to Characters
-                            //if replies "no" nothing happens
-                                //panel closes
-                            //if replies "yes" an item is added to inventory
-                                //panel closes
-            
+                                //if sentenceNum is 1
+                                if (sentenceNum == npcOne.conversation.sentenceOne){
+                                    console.log('this is sentenceOne')
+                                    //hero clicks next to progress to next part sentence 2
+
+                                // if sentenceNum is 2
+                                }else if(sentenceNum == npcOne.conversation.sentenceTwo){
+                                    console.log('this is sentenceTwo')
+                                    // hero is presented a yes or no answer
+                                        //if hero says no 
+                                            //conversation moves to sentenceThree
+                                        //if hero says yes
+                                            // item1 is added to hero property (need to create one)
+                                            //conversation moves to sentenceThree                                      
+                                            
+                                }
+                                else if (sentenceNum == npcOne.conversation.sentenceThree){
+                                    console.log('this is sentenceThree')
+                                    //npc renders sentenceNum 3 
+                                    //hero returns to second screen div
+                                }                                
+                            }
+                        }            
             }
 
 
