@@ -18,6 +18,7 @@
 </head>
 <body>
     <div class="screen-container">
+    
         <!--Screen 1-->
         <div class="first-screen-div">
             <div class="container blurred-box">
@@ -27,15 +28,20 @@
                     <input type="text" id="hero-name" placeholder="Name your hero...">
                     <br>
                 </div>
+
                 <!--Select Hero Avatar -->
                 <div class="row first-screen-row">
                     <label for="hero-avatar">Select your avatar</label>
-                        <select id="hero-avatar" class="width-control" name="hero-avatar" required>
-                            <option disabled="" selected="" value="">Select Option</option>
-                            <option value="assets\images\avatars\hero-avatar-1.jpg">Avatar 1</option>
-                            <option value="assets\images\avatars\hero-avatar-2.webp">Avatar 2</option>
-                        </select><br><br> 
+                    <label for="avatar1">
+                        <img src="assets/images/avatars/hero-avatar-1.jpg" class="avatar-img-select" alt="Avatar 1">
+                        <input type="radio" id="avatar1" name="hero-avatar" value="assets/images/avatars/hero-avatar-1.jpg" required>
+                    </label>
+                    <label for="avatar2">
+                        <img src="assets/images/avatars/hero-avatar-2.webp" class="avatar-img-select" alt="Avatar 2">
+                        <input type="radio" id="avatar2" name="hero-avatar" value="assets/images/avatars/hero-avatar-2.webp" required>
+                    </label>
                 </div>
+
                 <!-- Validate Choice -->
                 <div class="row first-screen-row">
                     <button type="button" onclick="createHero()">Create Hero</button>
@@ -104,6 +110,7 @@
             </div>
 
         </div>
+
         <!--Conversation Screen-->
         <div class="conversation-screen-div">
             <div class="container width-control">
@@ -138,6 +145,7 @@
             </div>
 
         </div>
+
     </div>
     <script src="assets/script/scripts.js">
 

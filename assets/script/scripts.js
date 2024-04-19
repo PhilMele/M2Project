@@ -115,7 +115,7 @@ console.log("connected")
         */
         function createHero(event){
             let heroName = $('#hero-name').val()
-            let heroAvatar = $('#hero-avatar').val()
+            let heroAvatar = $('input[name="hero-avatar"]:checked').val()
             console.log(`heroName: ${heroName}`)
             hero.name = heroName
             hero.avatar = heroAvatar
