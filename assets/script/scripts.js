@@ -184,6 +184,7 @@ console.log("connected")
         /*Mission 1*/
             /*Credits - for .hasOwnProperty used to loop through sentences - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty*/
             /*Credits - extra credits for sentence loops : https://stackoverflow.com/questions/8312459/iterate-through-object-properties*/
+            /*Credits - change one sentence to another : https://stackoverflow.com/questions/37809591/jquery-how-can-showint-text-and-hide-then-showing-another */
             /**
             *When user click on location, a conversation starts
             */
@@ -220,11 +221,16 @@ console.log("connected")
                                 if (sentenceNum == npcOne.conversation.sentenceOne){
                                     console.log('this is sentenceOne')
                                     //hero clicks next to progress to next part sentence 2
+                                    $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`).delay(2500).hide(function(){
+                                        $('#npc-text').text(`${npcOne.conversation.sentenceTwo}`).delay(2500).show()
+                                        })
 
                                 // if sentenceNum is 2
                                 }else if(sentenceNum == npcOne.conversation.sentenceTwo){
                                     console.log('this is sentenceTwo')
                                     // hero is presented a yes or no answer
+                                    //use auto submit when radio button is selected
+
                                         //if hero says no 
                                             //conversation moves to sentenceThree
                                         //if hero says yes
