@@ -6,10 +6,13 @@
     }
 
     body{
-        height: 100vh;
         background: black;
-        color:white;
+        color:black;
 
+    }
+
+    h1{
+        color:white
     }
 
     .width-control{
@@ -25,14 +28,6 @@
     .second-screen-div{
         display: none;
         height: var(--height);
-
-        
-    }
-
-    .conversation-screen-div{
-        display: none;
-        height: var(--height);
-        background-color: aqua;
 
         
     }
@@ -98,7 +93,7 @@
     .conversation-screen-div{
         display: none;
         height: var(--height);
-        background-color: aqua;
+
     }
 
     .conversation-row{

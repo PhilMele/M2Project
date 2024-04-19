@@ -10,8 +10,6 @@ console.log("connected")
         let hero = { name: '', avatar: '' };
         console.log(hero)
 
-
-
     /*NPCs*/
 
         let npcOne = { 
@@ -62,19 +60,24 @@ console.log("connected")
             });
     });
 
+    /*Credit - JQuery .show() renders in block instead of flex. 
+    * this link told me I couldnt achieve flex with show(). and revert back to .css('display', 'flex')
+    * https://stackoverflow.com/questions/38491653/jquery-show-a-flex-box
+    */
+
     /***
     * Function to update screen based on hero's progress
     * add screen 2 + 3 later
     */
     function updateScreen() {
         if (hero.name === ''){
-            $('.first-screen-div').show();
+            $('.first-screen-div').css('display', 'flex');
             $('.second-screen-div').hide();
         } else {
             console.log(`we have a name! the name is ${hero.name}`);
             console.log(`the avatar is ${hero.avatar}`);
             $('.first-screen-div').hide();
-            $('.second-screen-div').show();
+            $('.second-screen-div').css('display', 'flex');
         }
     }
 
@@ -91,7 +94,7 @@ console.log("connected")
         //when user is in range of npc (if)
         //when user click on `let npcOnePositionClick`
         //first panel appears to ask user to confirm if they want to start conversation
-        $('.validation-screen-div').show();
+        $('.validation-screen-div').css('display', 'flex');
         answer = $('#hero-decision').val();
         console.log(answer)
      }
@@ -179,7 +182,8 @@ console.log("connected")
 
 
         /*Mission 1*/
-
+            /*Credits - for .hasOwnProperty used to loop through sentences - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty*/
+            /*Credits - extra credits for sentence loops : https://stackoverflow.com/questions/8312459/iterate-through-object-properties*/
             /**
             *When user click on location, a conversation starts
             */
@@ -191,7 +195,7 @@ console.log("connected")
                     //if yes conversation screen div opens
 
                     //set up conversation div
-                    $('.conversation-screen-div').show()
+                    $('.conversation-screen-div').css('display', 'flex')
                     $('.second-screen-div').hide()
 
                     //set up rows and cols content for hero and npc
@@ -205,6 +209,15 @@ console.log("connected")
                         $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`);
                     
                         //displays loop of sentences from npc
+                        for (const sentence in npcOne.conversation){
+                            console.log(sentence)
+                            if (npcOne.conversation.hasOwnProperty(sentence)){
+                                console.log(npcOne.conversation[sentence])
+                                let sentenceNum = npcOne.conversation[sentence]
+                                
+                            }
+
+                        }
                         //ask a yes a no question to Characters
                             //if replies "no" nothing happens
                                 //panel closes
