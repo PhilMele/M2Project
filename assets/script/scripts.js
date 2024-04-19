@@ -58,11 +58,9 @@ console.log("connected")
                     npcOneConversation(hero, npcOne)
                 }
             });
+
     });
 
-    /*Manages Radio buttons & images rendering when clicked*/
-        //if radio button is checked
-            //change colour of image attached to it
 
     /*Credit - JQuery .show() renders in block instead of flex. 
     * this link told me I couldnt achieve flex with show(). and revert back to .css('display', 'flex')

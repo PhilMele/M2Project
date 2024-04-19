@@ -75,15 +75,21 @@
 
     .first-screen-row-avatar{
         display: flex;
+        padding: 10px 0 10px 0;
     }
 
     .select-avatar-col{
         width:45%;
     }
 
-    .avatar-img-select{
-        height: 52px;
-        filter: grayscale(1);
+    /*Credits : was trying to switch from grayscale 0 to 1 through javascript. Was given a much simpler way to achieve input
+    - https://stackoverflow.com/questions/78355169/accessing-parent-div-from-child-element?noredirect=1#comment138138297_78355169*/
+    label:has(input:checked) img {
+    filter: grayscale(0);
+    }
+    .avatar-img-select {
+    height: 52px;
+    filter: grayscale(1);
     }
 
     /*hides radio buttons in index.html 
