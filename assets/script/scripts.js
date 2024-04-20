@@ -106,16 +106,13 @@ console.log("connected")
             $('.validation-screen-div').css('display', 'flex');
             answer = $('#hero-decision').val();
             console.log(answer)
-        }else{
-            console.log('this call is coming from somewhere else')
+        } else if (decisionOrigin==='npcOneConversation'){
+            console.log('this call is coming from npcOneConversation()')
+            $('.conv-validation-screen-div').css('display', 'flex')
+            answer = $('input[name="hero-answer"]:checked').val()
+            console.log(answer)
         }
     }
-
-    function heroConversationDecisionValidation(){
-
-    
-    }
-
 
 /*Events*/
 
