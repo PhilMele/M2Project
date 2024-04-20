@@ -82,24 +82,39 @@ console.log("connected")
             $('.second-screen-div').css('display', 'flex');
         }
     }
-
+    /*Comment - it feels like there should just be one function for decision validation.
+    *
+    */
     /*Initial bug - the decision validation process was included in the npcOneConversation()
     this resulted in being unable validate anything. I seperated the validation (do you want ot start the conversation)
     from the actual conversation. Allowing me to close the panel and leave the user to:
         if selected no, do anything else
         if selected Yes, to move on to conversation() */
-
+    
     /***
      * Validation function: when the hero is asked to do something (Yes Or No)
      */
-     function heroDecisionValidation(){
+    function heroDecisionValidation(decisionOrigin){
         //when user is in range of npc (if)
         //when user click on `let npcOnePositionClick`
         //first panel appears to ask user to confirm if they want to start conversation
-        $('.validation-screen-div').css('display', 'flex');
-        answer = $('#hero-decision').val();
-        console.log(answer)
-     }
+        
+        
+
+        if (decisionOrigin==='screenTwoGeneral'){
+            console.log('this call is coming from screenTwoGeneral()')
+            $('.validation-screen-div').css('display', 'flex');
+            answer = $('#hero-decision').val();
+            console.log(answer)
+        }else{
+            console.log('this call is coming from somewhere else')
+        }
+    }
+
+    function heroConversationDecisionValidation(){
+
+    
+    }
 
 
 /*Events*/
@@ -157,13 +172,15 @@ console.log("connected")
                 let npcOnePositionClick = $('#npcOne-position-click').attr(
                     'coords',`${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}`);
                 $('#npcOne-position-click').click(function(){
-                    heroDecisionValidation();
+                    heroDecisionValidation('screenTwoGeneral');
                 })
                 
                 //npcOne - avatar img position on map
                 let npcOnePositionImage = $('#npcOne-position-avatar-image').
                     css({left:npcOne.Xposition + "px",top:npcOne.Yposition + "px"})
-                    
+            
+                //allows for heroDecisionValidation to have the decisionOrigin parameter
+                
         }
 
         
@@ -230,19 +247,20 @@ console.log("connected")
                                 // if sentenceNum is 2
                                 }else if(sentenceNum == npcOne.conversation.sentenceTwo){
                                     console.log('this is sentenceTwo')
+                                    heroDecisionValidation('npcOneConversation')
                                     // hero is presented a yes or no answer
                                     //use auto submit when radio button is selected                                                         
-                                    heroDecisionValidation(){
+                                    //heroDecisionValidation(){
                                         //if hero says no 
                                         //conversation moves to sentenceThree
-                                        if (){
-                                        } 
+                                        //if (){
+                                        //} 
                                         //if hero says yes
                                         // item1 is added to hero property (need to create one)
                                         //conversation moves to sentenceThree     
-                                        else if(){
-                                        }
-                                    }
+                                        //else if(){
+                                        //}
+                                    //}
                                 }
                                 else if (sentenceNum == npcOne.conversation.sentenceThree){
                                     console.log('this is sentenceThree')
