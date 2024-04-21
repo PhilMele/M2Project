@@ -141,41 +141,38 @@
 
                 <!-- Hero -->
                 <div class="row conversation-row">
-                    <!--Script-->
+                    <!--Avatar-->
                     <div class="col hero-img-col">
                         <img id="hero-img">
                     </div>
-                    <!--Avatar-->
+                    <!--Script-->
                     <div class="col hero-text-col">
-                        <p id="hero-text"></p>
+                        <div class="container conv-validation-container">
+                            <!--Radio buttons start here-->
+                            <div class="row">
+                                <label for="hero-answer-yes">
+                                    <p id="hero-text">Yes!</p>
+                                    <input type="radio" id="hero-answer-yes" name="hero-answer" value="1" required>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <label for="hero-answer-no">
+                                    <p id="hero-text">Nope.</p>
+                                    <input type="radio" id="hero-answer-no" name="hero-answer" value="2" required>
+                                </label>
+                            </div>
+                            <!--Submission of radio buttons-->
+                            <div class="row">
+                               <button type="button" id="submit-question-answer-button">Submit Answer</button>
+                            </div>
+                        </div>
+                        
                     </div>
                     
                 </div>
 
                 
         
-            </div>
-
-        </div>
-
-        <!--User conversation validation screen-->
-        <div class="conv-validation-screen-div">
-            <div class="container width-control">
-
-                <!--Yes Row-->
-                <div class="row">
-                    <p>Yes!</p>
-                    <label for="yes-answer">
-                        <input type="radio" id="hero-answer-yes" name="hero-answer" value="1" required>
-                    </label>
-                </div>
-                <!--No Row-->
-                <div class="row">
-                    <p>Nope.</p>
-                    <label for="no-answer">
-                        <input type="radio" id="hero-answer-no" name="hero-answer" value="2" required>
-                    </label>
-                </div>
             </div>
 
         </div>

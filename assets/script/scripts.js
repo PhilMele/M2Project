@@ -59,6 +59,17 @@ console.log("connected")
                 }
             });
 
+        /**
+        *This section cover the submit button for #submit-question-answer-button
+        */ 
+            $('#submit-question-answer-button').click(function(){
+                let decision = $('input[name="hero-answer"]:checked').val()
+                console.log(`hero decision is ${decision}`)
+                npcOneConversation(hero, npcOne, decision)
+
+                
+            })
+
     });
 
 
@@ -93,13 +104,13 @@ console.log("connected")
     
     /***
      * Validation function: when the hero is asked to do something (Yes Or No)
+     * parameter `decisionOrigin` allows function to be called by other function
+     *the if statement processes the call differently based on the function that call it
      */
     function heroDecisionValidation(decisionOrigin){
         //when user is in range of npc (if)
-        //when user click on `let npcOnePositionClick`
-        //first panel appears to ask user to confirm if they want to start conversation
-        
-        
+            //when user click on `let npcOnePositionClick`
+            //first panel appears to ask user to confirm if they want to start conversation
 
         if (decisionOrigin==='screenTwoGeneral'){
             console.log('this call is coming from screenTwoGeneral()')
@@ -108,7 +119,7 @@ console.log("connected")
             console.log(answer)
         } else if (decisionOrigin==='npcOneConversation'){
             console.log('this call is coming from npcOneConversation()')
-            $('.conv-validation-screen-div').css('display', 'flex')
+            $('.conv-validation-container').css('display', 'inline-grid')
             answer = $('input[name="hero-answer"]:checked').val()
             console.log(answer)
         }
@@ -176,7 +187,7 @@ console.log("connected")
                 let npcOnePositionImage = $('#npcOne-position-avatar-image').
                     css({left:npcOne.Xposition + "px",top:npcOne.Yposition + "px"})
             
-                //allows for heroDecisionValidation to have the decisionOrigin parameter
+
                 
         }
 
@@ -204,7 +215,7 @@ console.log("connected")
             /**
             *When user click on location, a conversation starts
             */
-            function npcOneConversation(hero, npcOne){
+            function npcOneConversation(hero, npcOne, decision){
                 //At this stage, the hero answered Yes (1)
                 //alert("npcOneConversation()starts!")
                 //logs npcOne.question. Currently doesnt return hero.name
@@ -244,8 +255,11 @@ console.log("connected")
                                 // if sentenceNum is 2
                                 }else if(sentenceNum == npcOne.conversation.sentenceTwo){
                                     console.log('this is sentenceTwo')
+                                    // hero is presented a yes or no question
                                     heroDecisionValidation('npcOneConversation')
-                                    // hero is presented a yes or no answer
+                                    console.log(`This is the hero decision value ${decision}`)
+                                    //Need to add system to avoid dialog refreshing after decision is brought back to function
+                                    
                                     //use auto submit when radio button is selected                                                         
                                     //heroDecisionValidation(){
                                         //if hero says no 
