@@ -22,6 +22,7 @@ console.log("connected")
                 sentenceOne:'Hello',
                 sentenceTwo:'Are you looking for this piece of item?',
                 sentenceThree:'It is yours now. Farewell!',
+                sentenceFour:'Farewell then!',
             }
             
 
@@ -219,7 +220,7 @@ console.log("connected")
                 //At this stage, the hero answered Yes (1)
                 //alert("npcOneConversation()starts!")
                 //logs npcOne.question. Currently doesnt return hero.name
-                console.log(`${npcOne.conversation.sentenceOne} ${hero.name}!`)
+                //console.log(`${npcOne.conversation.sentenceOne} ${hero.name}!`)
                     //if yes conversation screen div opens
 
                     //set up conversation div
@@ -235,50 +236,82 @@ console.log("connected")
                         //npc
                         $('#npc-img').attr('src',`${npcOne.avatar}`)
                         $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`);
-                    
+
+                        let sentenceThreeReached = false
+                        let sentenceFourReached = false
+
                         //displays loop of sentences from npc
                         for (const sentence in npcOne.conversation){
-                            console.log(sentence)
-                            if (npcOne.conversation.hasOwnProperty(sentence)){
-                                console.log(npcOne.conversation[sentence])
-                                //create sentence number variable: sentenceNum
-                                let sentenceNum = npcOne.conversation[sentence]
+                            //console.log(sentence)
 
-                                //if sentenceNum is 1
-                                if (sentenceNum == npcOne.conversation.sentenceOne){
-                                    console.log('this is sentenceOne')
-                                    //hero clicks next to progress to next part sentence 2
-                                    $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`).delay(2500).hide(function(){
-                                        $('#npc-text').text(`${npcOne.conversation.sentenceTwo}`).delay(2500).show()
-                                        })
-
-                                // if sentenceNum is 2
-                                }else if(sentenceNum == npcOne.conversation.sentenceTwo){
-                                    console.log('this is sentenceTwo')
-                                    // hero is presented a yes or no question
-                                    heroDecisionValidation('npcOneConversation')
-                                    console.log(`This is the hero decision value ${decision}`)
-                                    //Need to add system to avoid dialog refreshing after decision is brought back to function
+                                if (npcOne.conversation.hasOwnProperty(sentence)){
+                                    //console.log(npcOne.conversation[sentence])
+                                    //create sentence number variable: sentenceNum
+                                    let sentenceNum = npcOne.conversation[sentence]
                                     
-                                    //use auto submit when radio button is selected                                                         
-                                    //heroDecisionValidation(){
-                                        //if hero says no 
-                                        //conversation moves to sentenceThree
-                                        //if (){
-                                        //} 
-                                        //if hero says yes
-                                        // item1 is added to hero property (need to create one)
-                                        //conversation moves to sentenceThree     
-                                        //else if(){
-                                        //}
-                                    //}
+
+                                        //if sentenceNum is 1
+                                        if (sentenceNum == npcOne.conversation.sentenceOne){
+                                            //console.log('this is sentenceOne')
+                                            console.log(`sentenceFourReached is ${sentenceFourReached}`)
+                                           
+                                            //hero clicks next to progress to next part sentence 2
+                                            $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`).delay(2500).hide(function(){
+                                                $('#npc-text').text(`${npcOne.conversation.sentenceTwo}`).delay(2500).show()
+                                                })
+
+                                        // if sentenceNum is 2
+                                        }else if(sentenceNum == npcOne.conversation.sentenceTwo){
+                                            //console.log('this is sentenceTwo')
+                                            // hero is presented a yes or no question
+                                            heroDecisionValidation('npcOneConversation')
+
+                                        } else {
+                                            //console.log('this is sentenceThree')
+                                        
+                                            //console.log(`This is the hero decision value ${decision}`)
+                                            // fix: if decision is not none show this.
+                                            // remove existing text. and Add sentence3
+                                            //BUG : After the end of sentenceThree or sentenceFour, the loop goes back to first if statement
+                                            //I tried `break` at the end of the function, but this is unresponsive
+                                            //also tried to add a boolean field at the end of sentenceThree and sentenceFour and turn it to true
+                                                //and add an if statement at the top of the for loop : if boolean is true then dont loop: but it didnt work.
+                                                if (decision === '1'){
+                                                    //console.log('The hero gets an item + farewell message')
+                                                    //sentenceThree appears
+                                                    $('#npc-text').text(`${npcOne.conversation.sentenceThree} ${hero.name}!`).show();
+                                                    sentenceThreeReached = true
+                                                    
+                                                    //add item to hero object logic
+
+                                                    //conversation panel is moved to hidden.
+                                                }
+                                                else if (decision === '2') {
+                                                    //console.log('The hero gets farewell message and no item');
+                                                    //sentenceThree appears
+                                                    //issue with delay: delay() didnt seem to have any effect in this context
+                                                    //I used setTimeout() which worked.
+                                                    //credit: https://stackoverflow.com/questions/7407935/delay-and-settimeout#:~:text=The%20.,appropriate%20for%20certain%20use%20cases.
+                                                    $('#npc-text').text(`${npcOne.conversation.sentenceFour}`);
+                                                    setTimeout(function() {
+                                                        $('.conversation-screen-div').hide(function() {
+                                                            $('.second-screen-div').css('display', 'flex');
+                                                        });
+                                                    }, 2000);
+                                                   
+                                                     
+
+                                                    
+                                                }
+                                                else{
+                                                    console.log('someone is wrong with conversation sentence three logic. Or the hero is not at the stage yet.')
+                                                }
+                                                //npc renders sentenceNum 3 
+                                                //hero returns to second screen div
+                                        } 
+                                                                
                                 }
-                                else if (sentenceNum == npcOne.conversation.sentenceThree){
-                                    console.log('this is sentenceThree')
-                                    //npc renders sentenceNum 3 
-                                    //hero returns to second screen div
-                                }                                
-                            }
+                           
                         }            
             }
 
