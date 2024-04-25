@@ -7,7 +7,21 @@ console.log("connected")
         /***
         * hero variable that stores stats
         */
-        let hero = { name: '', avatar: '' };
+        let hero = { name: '', 
+                    avatar: '',
+                    inventory:{
+                        itemOne:{
+                            name: 'item1',
+                            hasItem: false,
+                            itemOneImg: '',
+                        },
+                        itemTwo:{
+                            name: 'item2',
+                            hasItem: false,
+                            itemOneImg: '',
+                        },
+                        
+                    }};
         console.log(hero)
 
     /*NPCs*/
@@ -151,6 +165,24 @@ console.log("connected")
             updateScreen(); // Update screen after hero name is updated
         }
 
+
+        /*Credit to map all array properties of inventory*/
+        const listInventory = Object.values(hero.inventory).map((inventory) => inventory.name);
+        console.log(heroInventory)
+        /**
+        *Manages inventory
+        */
+        function heroInventory(hero){
+            //I need first to create a table with 
+                //headers for each columns
+                //rows
+            $('inventoryList').
+
+            //I then push content for these rows if the item object is true
+        }
+        
+
+
         /***
         * Another function that uses the hero object
         */
@@ -237,9 +269,6 @@ console.log("connected")
                         $('#npc-img').attr('src',`${npcOne.avatar}`)
                         $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`);
 
-                        let sentenceThreeReached = false
-                        let sentenceFourReached = false
-
                         //displays loop of sentences from npc
                         for (const sentence in npcOne.conversation){
                             //console.log(sentence)
@@ -273,16 +302,25 @@ console.log("connected")
                                             // fix: if decision is not none show this.
                                             // remove existing text. and Add sentence3
                                             //BUG : After the end of sentenceThree or sentenceFour, the loop goes back to first if statement
-                                            //I tried `break` at the end of the function, but this is unresponsive
-                                            //also tried to add a boolean field at the end of sentenceThree and sentenceFour and turn it to true
+                                                //I tried `break` at the end of the function, but this is unresponsive
+                                                //also tried to add a boolean field at the end of sentenceThree and sentenceFour and turn it to true
                                                 //and add an if statement at the top of the for loop : if boolean is true then dont loop: but it didnt work.
+                                                //as a workaround I reduced the timeout so that the user doesnt see the loop starting again as the div is turns to `hide` before the loop restarts.
                                                 if (decision === '1'){
                                                     //console.log('The hero gets an item + farewell message')
                                                     //sentenceThree appears
-                                                    $('#npc-text').text(`${npcOne.conversation.sentenceThree} ${hero.name}!`).show();
-                                                    sentenceThreeReached = true
-                                                    
+                                                    $('#npc-text').text(`${npcOne.conversation.sentenceThree}`);
+                                                    setTimeout(function() {
+                                                        $('.conversation-screen-div').hide(function() {
+                                                            $('.second-screen-div').css('display', 'flex');
+                                                        });
+                                                    }, 2000);
+                                                   
                                                     //add item to hero object logic
+
+                                                    hero.inventory.itemOne.hasItem = true;
+                                                    screenTwoGeneral(hero)
+                                                    console.log(hero)
 
                                                     //conversation panel is moved to hidden.
                                                 }
