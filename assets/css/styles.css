@@ -101,6 +101,28 @@
 /*Second Screen*/
 
     /*General*/
+        /*Manages profile and inventory display*/
+            .hero-profile-container{
+                color: white;
+            }
+
+            .hero-profile-rows{
+            display: inline-flex;
+            
+            }
+
+            .prof-inv-rows{
+                width: 50%;
+            
+            }
+
+            #hero-avatar-selected{
+                width:50%
+            }
+
+            .item-img{
+                width: 50%;
+            }
 
     .canva-div {
         position: relative; /* Ensure container div is positioned relative */

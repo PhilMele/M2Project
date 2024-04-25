@@ -13,7 +13,7 @@ console.log("connected")
                         itemOne:{
                             name: 'item1',
                             hasItem: false,
-                            itemOneImg: '',
+                            itemOneImg: 'assets/images/items/item_one.jpg',
                         },
                         itemTwo:{
                             name: 'item2',
@@ -21,7 +21,12 @@ console.log("connected")
                             itemOneImg: '',
                         },
                         
-                    }};
+                        },
+                    stats:{
+                        lifePoints: 100,
+                        reputation: 100,
+                    }
+                    };
         console.log(hero)
 
     /*NPCs*/
@@ -84,6 +89,11 @@ console.log("connected")
 
                 
             })
+
+
+
+
+
 
     });
 
@@ -164,24 +174,8 @@ console.log("connected")
             screenTwoGeneral(hero, npcOne);
             updateScreen(); // Update screen after hero name is updated
         }
-
-
-        /*Credit to map all array properties of inventory*/
-        const listInventory = Object.values(hero.inventory).map((inventory) => inventory.name);
-        console.log(heroInventory)
-        /**
-        *Manages inventory
-        */
-        function heroInventory(hero){
-            //I need first to create a table with 
-                //headers for each columns
-                //rows
-            $('inventoryList').
-
-            //I then push content for these rows if the item object is true
-        }
+    
         
-
 
         /***
         * Another function that uses the hero object
@@ -207,6 +201,20 @@ console.log("connected")
             
             //positions hero avatar image
             let heroAvatarImg = $('#hero-avatar-selected').attr('src',hero.avatar);
+
+            //sets intial hero life points
+            let heroLifePoints = $('#life-points').text(hero.stats.lifePoints)
+
+            //sets initial hero reputation
+            let heroReputation = $('#reputation-points').text(hero.stats.reputation)
+
+            //sets styling of items in inventory
+            $('#item-one-img').attr('src', `${hero.inventory.itemOne.itemOneImg}`);
+                if (hero.inventory.itemOne.hasItem == false){
+                    $('#item-one-img').css('filter', 'grayscale(1)')
+                }else{
+                    $('#item-one-img').css('filter', 'grayscale(0)')
+                }
             
             //positions NPCs + clickable area 
                 //npcOne - clickable area
@@ -219,9 +227,35 @@ console.log("connected")
                 //npcOne - avatar img position on map
                 let npcOnePositionImage = $('#npcOne-position-avatar-image').
                     css({left:npcOne.Xposition + "px",top:npcOne.Yposition + "px"})
-            
-
                 
+            //updates inventory
+            /*Inventory display section*/
+            /*Creates inventory table frame for inventory display*/
+            let itemOneExists = false;
+            let itemTwoExists = false;
+            hasItem(hero)
+
+            /**
+            *prevents rows to be created undefinitely through the if statement
+            */
+ 
+            /*Create rows items are True*/
+            function hasItem(hero){
+                console.log("Checking if hero has itemOne...");
+                if (hero.inventory.itemOne.hasItem == true && !itemOneExists ){
+                    $('#heroInventory').append("<tr id='itemOneRow'><td><img src=''></td><td>Text Item 1</td></tr>");
+                    itemOneExists = true
+
+                } else if(hero.inventory.itemTwo.hasItem == true && !itemTwoExists){
+                    
+                    //add row for itemTwo
+                    $$('#heroInventory').append("<tr id='itemTwoRow'><td><img src=''></td><td>Text Item 2</td></tr>");
+                    itemTwoExists = true
+                }else if (hero.inventory.itemTwo.hasItem == false && hero.inventory.itemTwo.hasItem == false){
+                    $('#heroInventory').append("<tr id='emptyInventoryRow'><td>Inventory is empty</td></tr>");
+                }
+            }
+      
         }
 
         
@@ -282,7 +316,6 @@ console.log("connected")
                                         //if sentenceNum is 1
                                         if (sentenceNum == npcOne.conversation.sentenceOne){
                                             //console.log('this is sentenceOne')
-                                            console.log(`sentenceFourReached is ${sentenceFourReached}`)
                                            
                                             //hero clicks next to progress to next part sentence 2
                                             $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`).delay(2500).hide(function(){
@@ -319,7 +352,7 @@ console.log("connected")
                                                     //add item to hero object logic
 
                                                     hero.inventory.itemOne.hasItem = true;
-                                                    screenTwoGeneral(hero)
+                                                    screenTwoGeneral(hero, npcOne)
                                                     console.log(hero)
 
                                                     //conversation panel is moved to hidden.
