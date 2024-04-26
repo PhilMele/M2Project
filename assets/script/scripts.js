@@ -25,7 +25,9 @@ console.log("connected")
                     stats:{
                         lifePoints: 100,
                         reputation: 100,
-                    }
+                    },
+                    Xposition:'227',
+                    Yposition:'200',
                     };
         console.log(hero)
 
@@ -222,39 +224,17 @@ console.log("connected")
                     'coords',`${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}`);
                 $('#npcOne-position-click').click(function(){
                     heroDecisionValidation('screenTwoGeneral');
+                    heroPosition()
                 })
                 
                 //npcOne - avatar img position on map
                 let npcOnePositionImage = $('#npcOne-position-avatar-image').
                     css({left:npcOne.Xposition + "px",top:npcOne.Yposition + "px"})
-                
-            //updates inventory
-            /*Inventory display section*/
-            /*Creates inventory table frame for inventory display*/
-            let itemOneExists = false;
-            let itemTwoExists = false;
-            hasItem(hero)
-
-            /**
-            *prevents rows to be created undefinitely through the if statement
-            */
- 
-            /*Create rows items are True*/
-            function hasItem(hero){
-                console.log("Checking if hero has itemOne...");
-                if (hero.inventory.itemOne.hasItem == true && !itemOneExists ){
-                    $('#heroInventory').append("<tr id='itemOneRow'><td><img src=''></td><td>Text Item 1</td></tr>");
-                    itemOneExists = true
-
-                } else if(hero.inventory.itemTwo.hasItem == true && !itemTwoExists){
-                    
-                    //add row for itemTwo
-                    $$('#heroInventory').append("<tr id='itemTwoRow'><td><img src=''></td><td>Text Item 2</td></tr>");
-                    itemTwoExists = true
-                }else if (hero.inventory.itemTwo.hasItem == false && hero.inventory.itemTwo.hasItem == false){
-                    $('#heroInventory').append("<tr id='emptyInventoryRow'><td>Inventory is empty</td></tr>");
-                }
-            }
+            
+            //positions hero
+                //hero - avatar img position on map
+                let heroPositionImage = $('#hero-position-avatar-image').
+                    css({left:hero.Xposition + "px",top:hero.Yposition + "px", }).attr('src',hero.avatar)
       
         }
 
@@ -263,13 +243,18 @@ console.log("connected")
             /*Hero arrives on Screen 2*/
                 /*credit - https://stackoverflow.com/questions/11722400/programmatically-change-the-src-of-an-img-tag*/
                 /**
-                *Hero's initial position on screen
+                *Hero's position on screen
                 */
                 function heroPosition(){
-                    //initial position when starts
-
-
+                    //initial or current position when starts
+                        let heroCurrentXPosition = $('#hero-position-avatar-image').position().left;
+                            console.log(heroCurrentXPosition)
+                        let heroCurrentYPosition = $('#hero-position-avatar-image').position().top;
+                            console.log(heroCurrentYPosition)
+                        
                     //new position
+
+                    //animation from old to new position
                 }
 
 
@@ -312,7 +297,6 @@ console.log("connected")
                                     //create sentence number variable: sentenceNum
                                     let sentenceNum = npcOne.conversation[sentence]
                                     
-
                                         //if sentenceNum is 1
                                         if (sentenceNum == npcOne.conversation.sentenceOne){
                                             //console.log('this is sentenceOne')
@@ -353,7 +337,7 @@ console.log("connected")
 
                                                     hero.inventory.itemOne.hasItem = true;
                                                     screenTwoGeneral(hero, npcOne)
-                                                    console.log(hero)
+                                                   
 
                                                     //conversation panel is moved to hidden.
                                                 }
