@@ -26,8 +26,8 @@ console.log("connected")
                         lifePoints: 100,
                         reputation: 100,
                     },
-                    Xposition:'227',
-                    Yposition:'200',
+                    Xposition:'337',
+                    Yposition:'300',
                     };
         console.log(hero)
 
@@ -222,9 +222,9 @@ console.log("connected")
                 //npcOne - clickable area
                 let npcOnePositionClick = $('#npcOne-position-click').attr(
                     'coords',`${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}`);
-                $('#npcOne-position-click').click(function(){
+                $('#npcOne-position-click').click(function(event){
                     heroDecisionValidation('screenTwoGeneral');
-                    heroPosition()
+                    heroPosition(event)
                 })
                 
                 //npcOne - avatar img position on map
@@ -245,16 +245,33 @@ console.log("connected")
                 /**
                 *Hero's position on screen
                 */
-                function heroPosition(){
+                function heroPosition(event){
                     //initial or current position when starts
-                        let heroCurrentXPosition = $('#hero-position-avatar-image').position().left;
+                    //position() gives me the position of the hero in relation to div, not document.
+                    //offset() gives me the position in relation to document. Opted for offset() is it migth be easier 
+                        //if the screen resolution changes.
+                        let heroCurrentXPosition = $('#hero-position-avatar-image').offset().left;
                             console.log(heroCurrentXPosition)
-                        let heroCurrentYPosition = $('#hero-position-avatar-image').position().top;
+                        let heroCurrentYPosition = $('#hero-position-avatar-image').offset().top;
                             console.log(heroCurrentYPosition)
                         
-                    //new position
+                    //new position where the hero clicked
+                    // this is facilitated by the event parameter.
+                    //I need to the offset position (which is relative to the document and not the parent div
+                        // Get the offset of the parent element of the clicked area
+                        let newHeroXPosition = event.pageX;
+                            console.log(newHeroXPosition)
+                        let newHeroYPosition = event.pageY;
+                            console.log(newHeroYPosition)
+                        hero.Xposition = newHeroXPosition
+                        hero.Yposition = newHeroYPosition
+
+                        console.log(hero)
+                        screenTwoGeneral(hero, npcOne)
 
                     //animation from old to new position
+
+
                 }
 
 
@@ -353,10 +370,7 @@ console.log("connected")
                                                             $('.second-screen-div').css('display', 'flex');
                                                         });
                                                     }, 2000);
-                                                   
-                                                     
 
-                                                    
                                                 }
                                                 else{
                                                     console.log('someone is wrong with conversation sentence three logic. Or the hero is not at the stage yet.')

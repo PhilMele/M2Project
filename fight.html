@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!--Boostrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!--css-->
+    <link rel="stylesheet" href="assets/css/styles.css">  
+
+    <!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Hello Hero</title>
+
+</head>
+<body>
+    <div class="screen-container">
+    
+<div class="container">
+    <!--npc section-->
+    <div class="row fighter-row">
+
+        <div class="col comment-col">
+            <div class="row">[Variable here]</div>
+        </div>
+
+        <div class="col profile-col">
+            <div class="row">
+                <img class="fighter-avatar-img" src="assets/images/avatars/npc.gif">
+            </div> 
+            <div class="row hero-stats-row">
+                <div class="row fight-row">NPC Name</div>
+                <div class="row fight-row">
+                    <label for="life-points">Life Points</label>
+                    <progress id="life-points" value="32" max="100"> 32% </progress>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+
+    <!--hero section-->
+    <div class="row fighter-row"> 
+        <div class="col profile-col">
+            <div class="row">
+                <img class="fighter-avatar-img" src="assets/images/avatars/hero-avatar-1.jpg">
+            </div> 
+            <div class="row hero-stats-row">
+                <div class="row fight-row">Hero Name</div>
+                <div class="row fight-row">
+                    <label for="life-points">Life Points</label>
+                    <progress id="life-points" value="32" max="100"> 32% </progress>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col action-col">
+            <div class="row fight-row">Actions 1</div>
+            <div class="row fight-row">Actions 2</div>
+        </div>
+    </div>
+</div>
+
+    </div>
+    <div id="coordinates">X: 0, Y: 0</div>
+    <script src="assets/script/scripts.js"></script>
+
+ <script>
+        //used to capture coordinates as I move the mouse
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            var coordinatesDiv = document.getElementById('coordinates');
+
+            function updateCoordinates(event) {
+                var x = event.clientX;
+                var y = event.clientY;
+                coordinatesDiv.textContent = 'X: ' + x + ', Y: ' + y;
+            }
+       
+            document.addEventListener('mousemove', updateCoordinates);
+        });
+
+
+    </script>
+</body>
+</html>
