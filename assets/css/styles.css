@@ -203,6 +203,9 @@
         }
 
     /*Fight Screen*/
+        .fight-screen-div{
+            display: none;
+        }
         .fighter-row{
             background: blue;
             border-color: white solid;
@@ -241,4 +244,25 @@
 
         .fighter-avatar-img{
             width: 100%;
+        }
+
+        #life-bar{
+            width: 100%;
+            background-color: grey;   
+        }
+
+        #hero-life-points{
+            height: 30px;
+            background-color: green;
+        }
+
+        #npc-life-points{
+            height: 30px;
+            background-color: green;
+        }
+
+        #npc-avatar-fight{
+        }
+
+        #hero-avatar-fight{
         }

@@ -18,55 +18,55 @@
 </head>
 <body>
     <div class="screen-container">
-    
-<div class="container">
-    <!--npc section-->
-    <div class="row fighter-row">
+<div class="fight-screen-div"> 
+    <div class="container">
+        <!--npc section-->
+        <div class="row fighter-row">
 
-        <div class="col comment-col">
-            <div class="row">[Variable here]</div>
-        </div>
+            <div class="col comment-col">
+                <div class="row">[Variable here]</div>
+            </div>
 
-        <div class="col profile-col">
-            <div class="row">
-                <img class="fighter-avatar-img" src="assets/images/avatars/npc.gif">
-            </div> 
-            <div class="row hero-stats-row">
-                <div class="row fight-row">NPC Name</div>
-                <div class="row fight-row">
-                    <label for="life-points">Life Points</label>
-                    <progress id="life-points" value="32" max="100"> 32% </progress>
+            <div class="col profile-col">
+                <div class="row">
+                    <img class="fighter-avatar-img" src="assets/images/avatars/npc.gif">
+                </div> 
+                <div class="row hero-stats-row">
+                    <div class="row fight-row">NPC Name</div>
+                    <div class="row fight-row">
+                        <label for="life-points">Life Points</label>
+                        <progress id="life-points" max="100">  </progress>
+                    </div>
                 </div>
             </div>
+
+
         </div>
 
 
-    </div>
-    </div>
+        <!--hero section-->
+        <div class="row fighter-row"> 
+            <div class="col profile-col">
+                <div class="row">
+                    <img class="fighter-avatar-img" src="assets/images/avatars/hero-avatar-1.jpg">
+                </div> 
+                <div class="row hero-stats-row">
+                    <div class="row fight-row">Hero Name</div>
+                    <div class="row fight-row">
+                        <label for="life-points">Life Points</label>
+                        <progress id="life-points" value="32" max="100"> 32% </progress>
 
-    <!--hero section-->
-    <div class="row fighter-row"> 
-        <div class="col profile-col">
-            <div class="row">
-                <img class="fighter-avatar-img" src="assets/images/avatars/hero-avatar-1.jpg">
-            </div> 
-            <div class="row hero-stats-row">
-                <div class="row fight-row">Hero Name</div>
-                <div class="row fight-row">
-                    <label for="life-points">Life Points</label>
-                    <progress id="life-points" value="32" max="100"> 32% </progress>
-
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col action-col">
-            <div class="row fight-row">Attach</div>
-            <div class="row fight-row">Heal</div>
+            <div class="col action-col">
+                <div class="row fight-row"><p id="hero-attack">Attack</p></div>
+                <div class="row fight-row"><p id="hero-heal">Heal</p></div>
+            </div>
         </div>
     </div>
-</div>
-
+</div> 
     </div>
     <div id="coordinates">X: 0, Y: 0</div>
     <script src="assets/script/scripts.js"></script>

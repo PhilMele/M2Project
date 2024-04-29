@@ -86,10 +86,13 @@ console.log("connected")
                 if (decision === '2') {
                     // Hide the validation screen
                     $('.validation-screen-div').hide();
-                } else {
+                } else if (decision === '1') {
                     // Value 1 has been selected and the conversation function can start
                     $('.validation-screen-div').hide();
                     npcOneConversation(hero, npcOne)
+                } else if (decision === '3'){
+                    $('.validation-screen-div').hide()
+                    fight(hero, npcOne)
                 }
             });
 
@@ -103,12 +106,6 @@ console.log("connected")
 
                 
             })
-
-
-
-
-
-
     });
 
 
@@ -189,8 +186,6 @@ console.log("connected")
             updateScreen(); // Update screen after hero name is updated
         }
     
-        
-
         /***
         * Another function that uses the hero object
         */
@@ -250,7 +245,6 @@ console.log("connected")
       
         }
 
-        
         /*Intro */
             /*Hero arrives on Screen 2*/
                 /*credit - https://stackoverflow.com/questions/11722400/programmatically-change-the-src-of-an-img-tag*/
@@ -407,29 +401,62 @@ console.log("connected")
         /**
         *Add life points to hero
         */
-        function healing(hero, npcOne){
-            //when hero clicks on healing potion life points increase by 25
-
+        function healing(hero){
         }
         /**
         *Reduce life points to opponent
         */
-        function attack(hero, npcOne){
-            //when hero or npc attack, a random math logic is generated between damageLow and damageHigh
-            //to determine actual attack value
+        function attack(hero){
         }
 
         function fight(hero, npcOne){
+            console.log('fight kicks off!')
+            $('.fight-screen-div').css('display', 'flex')
+            $('.second-screen-div').hide()
+            
+            //fill progress bar with lifepoints
+                //Hero
+                    /**
+                    *define hero life points left in % of full bar length
+                    */
+                    let heroLifePoints = (hero.stats.lifePoints/hero.stats.lifePoints)*100
+                        console.log(heroLifePoints)
+                    $('#hero-life-points').css('width', heroLifePoints + '%')
 
-          while(hero.stats.lifePoints > 0 && npcOne.stats.lifePoints > 0){
-            //hero's turn
-                //hero's action
-                //check if npc is defeated show alert success message
+                //NPC
+                    /**
+                    *define npc life points left in % of full bar length
+                    */
+                    let npcLifePoints = (npcOne.stats.lifePoints/npcOne.stats.lifePoints)*100
+                            console.log(npcLifePoints)
+                    $('#npc-life-points').css('width', npcLifePoints + '%')
 
-            //npc's turn
-                //npc's action
-                //check if hero is defeated show alert success message
-          
-          }
+            //set avatar images in avatar boxes
+                //Hero
+                    $('#hero-avatar-fight').attr('src',`${hero.avatar}`);
+                //NPC
+                    $('#npc-avatar-fight').attr('src',`${npcOne.avatar}`);
+
+                
+
+            while (hero.stats.lifePoints > hero.stats.lifePoints && npcOne.stats.lifePoints > hero.stats.lifePoints){
+                //hero's turn
+                    //select value between attack and heal
+                        //if attack is selected
+                            //play attack function
+                            //reduce npc hp
+                            //move on top next side of loop
+                        //if heal is selected
+                            //play heal function
+                            //increase hero hp
+                            //move on top next side of loop
+                //npc's turn
+                    //npc attacks
+                        //play attack function
+                        //reduce hero hp
+                        //loop back to stage hero's turn
+            }
+
+
 
         }
