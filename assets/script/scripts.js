@@ -401,13 +401,26 @@ console.log("connected")
         /**
         *Add life points to hero
         */
-        function healing(hero){
+        function healing(hero, npcOne){
+            let healingPoints = 25;
+            return healingPoints
         }
         /**
         *Reduce life points to opponent
         */
-        function attack(hero){
+        function attack(hero, npcOne){
+            let heroMaxDamage = hero.stats.damage.damageHigh
+                console.log(`max damage: ${heroMaxDamage}`)
+            let heroLowDamage = hero.stats.damage.damageLow
+                console.log(`min damage: ${heroLowDamage}`)
+            let attackDamage = Math.floor(Math.random() * (heroMaxDamage - heroLowDamage + 1)) + heroLowDamage;
+                console.log(`Actual Damage: ${attackDamage}`)
+            
+            return attackDamage;
+
         }
+
+        
 
         function fight(hero, npcOne){
             console.log('fight kicks off!')
@@ -436,25 +449,76 @@ console.log("connected")
                     $('#hero-avatar-fight').attr('src',`${hero.avatar}`);
                 //NPC
                     $('#npc-avatar-fight').attr('src',`${npcOne.avatar}`);
+            
+            //Hero Action Panel
 
-                
 
-            while (hero.stats.lifePoints > hero.stats.lifePoints && npcOne.stats.lifePoints > hero.stats.lifePoints){
-                //hero's turn
-                    //select value between attack and heal
-                        //if attack is selected
-                            //play attack function
-                            //reduce npc hp
-                            //move on top next side of loop
-                        //if heal is selected
-                            //play heal function
-                            //increase hero hp
-                            //move on top next side of loop
+            while (hero.stats.lifePoints > 0 && npcOne.stats.lifePoints > 0){
+                console.log('you are inside the loop')
+                if (heroTurn){
+                    console.log(`heroTurn is ${heroTurn}`)
+                    //hero's turn
+                        //select value between attack and heal
+                        //show action panel:
+                        $('#submit-hero-action-button').click(function(){
+                            let action = $('input[name="hero-fight-action"]:checked').val()
+                            console.log(action)
+                            if (action == '1'){
+                            //if attack is selected
+                                
+                                console.log(`${action} is selected. Attack time!`)
+                                //play attack function
+                                const heroDamage = attack(hero, npcOne)
+                                console.log(`Damages to impact on npc life points: ${heroDamage}`)
+                                //reduce npc hp
+                                npcLifePoints = npcLifePoints - heroDamage
+                                console.log(npcLifePoints)
+                                $('#npc-life-points').css('width', npcLifePoints + '%')
+                                //move on top next side of loop
+                                if (npcLifePoints <= 0){
+                                    console.log(`${npcOne.name} is kaboom!`)
+                                    
+                                }
+    
+                            }
+                            
+                            else if(action == '2'){
+                            //if heal is selected
+                                console.log(`${action} is selected. Heal time!`)
+                                //play heal function
+                                const heroHeal = healing(hero, npcOne)
+                                //increase hero hp
+                                
+                                
+                                heroLifePoints = heroLifePoints + heroHeal;
+                                console.log(heroLifePoints)
+                                //limits HP increase to character's max life    
+                                if (heroLifePoints > hero.stats.lifePoints){
+                                    console.log('Thats too many HP for you my friend!')
+                                    heroLifePoints = 100
+                                }
+                                console.log(`new lifepoints : ${heroLifePoints}`)
+                                //move on top next side of loop
+
+                                heroTurn = false
+                            }
+                            else{
+                                console.log('Something is wrong')
+                            }
+                            console.log(`heroTurn after attack/healing action is ${heroTurn}`)
+                        })
+                        break;
+
+                } else{
                 //npc's turn
+                console.log('Its the NPCs turn now')
                     //npc attacks
                         //play attack function
                         //reduce hero hp
                         //loop back to stage hero's turn
+
+                    
+                }
             }
 
 

@@ -163,8 +163,25 @@
                     </div>
 
                     <div class="col action-col">
-                        <div class="row fight-row"><p id="hero-attack">Attack</p></div>
-                        <div class="row fight-row"><p id="hero-heal">Heal</p></div>
+                        <div class="container action-validation-container">
+                            <!--Radio buttons start here-->
+                            <div class="row">
+                                <label for="hero-attack">
+                                    <p id="hero-text">Attack</p>
+                                    <input type="radio" id="hero-attack" name="hero-fight-action" value="1" required>
+                                </label>
+                            </div>
+                            <div class="row">
+                                <label for="hero-heal">
+                                    <p id="hero-text">Heal</p>
+                                    <input type="radio" id="hero-heal" name="hero-fight-action" value="2" required>
+                                </label>
+                            </div>
+                            <!--Submission of radio buttons-->
+                            <div class="row">
+                               <button type="button" id="submit-hero-action-button">Submit Answer</button>
+                            </div>
+                        </div>  
                     </div>
                 </div>
             </div>
@@ -220,7 +237,7 @@
                     <div class="col hero-img-col">
                         <img id="hero-img">
                     </div>
-                    <!--Script-->
+
                     <div class="col hero-text-col">
                         <div class="container conv-validation-container">
                             <!--Radio buttons start here-->
@@ -240,8 +257,7 @@
                             <div class="row">
                                <button type="button" id="submit-question-answer-button">Submit Answer</button>
                             </div>
-                        </div>
-                        
+                        </div>         
                     </div>
                     
                 </div>
