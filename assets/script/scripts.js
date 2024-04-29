@@ -23,6 +23,10 @@ console.log("connected")
                         
                         },
                     stats:{
+                        damage:{
+                            damageLow : 10,
+                            damageHigh: 50,
+                        },
                         lifePoints: 100,
                         reputation: 100,
                     },
@@ -44,6 +48,14 @@ console.log("connected")
                 sentenceTwo:'Are you looking for this piece of item?',
                 sentenceThree:'It is yours now. Farewell!',
                 sentenceFour:'Farewell then!',
+            },
+            stats:{
+                damage:{
+                    damageLow : 1,
+                    damageHigh: 5,
+                },
+                lifePoints: 25,
+                reputation: 25,
             }
             
 
@@ -392,3 +404,32 @@ console.log("connected")
     /*Third Screen*/
 
         /*Boss Fight*/
+        /**
+        *Add life points to hero
+        */
+        function healing(hero, npcOne){
+            //when hero clicks on healing potion life points increase by 25
+
+        }
+        /**
+        *Reduce life points to opponent
+        */
+        function attack(hero, npcOne){
+            //when hero or npc attack, a random math logic is generated between damageLow and damageHigh
+            //to determine actual attack value
+        }
+
+        function fight(hero, npcOne){
+
+          while(hero.stats.lifePoints > 0 && npcOne.stats.lifePoints > 0){
+            //hero's turn
+                //hero's action
+                //check if npc is defeated show alert success message
+
+            //npc's turn
+                //npc's action
+                //check if hero is defeated show alert success message
+          
+          }
+
+        }
