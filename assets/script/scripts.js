@@ -30,10 +30,11 @@ console.log("connected")
                         lifePoints: 100,
                         reputation: 100,
                     },
-                    Xposition:'337',
-                    Yposition:'300',
+                    Xposition:'220',
+                    Yposition:'200',
                     };
         console.log(hero)
+        let heroLifePoints = (hero.stats.lifePoints/hero.stats.lifePoints)*100
 
     /*NPCs*/
 
@@ -61,7 +62,7 @@ console.log("connected")
 
             };
             console.log(npcOne)
-
+            let npcLifePoints = (npcOne.stats.lifePoints/npcOne.stats.lifePoints)*100
     /*Boss*/
 
 
@@ -119,7 +120,7 @@ console.log("connected")
     * add screen 2 + 3 later
     */
     function updateScreen() {
-        if (hero.name === ''){
+        if (hero.name === '' && hero.avatar === '' ){
             $('.first-screen-div').css('display', 'flex');
             $('.second-screen-div').hide();
         } else {
@@ -178,12 +179,22 @@ console.log("connected")
             let heroName = $('#hero-name').val()
             let heroAvatar = $('input[name="hero-avatar"]:checked').val()
             console.log(`heroName: ${heroName}`)
+            console.log(`heroAvatar: ${heroAvatar}`)
+
             hero.name = heroName
             hero.avatar = heroAvatar
-            // Call another function with the updated hero object
-            //recurring problem - forget to pass argument in function
-            screenTwoGeneral(hero, npcOne);
-            updateScreen(); // Update screen after hero name is updated
+            //bug : heroAvatar was considered '' if not img selected
+            //but should be set as 'undefined' hence the use of `typeof` 
+            if (heroName !== '' && typeof heroAvatar !== 'undefined'){
+            
+                // Call another function with the updated hero object
+                //recurring problem - forget to pass argument in function
+                screenTwoGeneral(hero, npcOne);
+                updateScreen(); // Update screen after hero name is updated
+                
+            }
+
+           
         }
     
         /***
@@ -417,9 +428,7 @@ console.log("connected")
                 console.log(`Actual Damage: ${attackDamage}`)
             
             return attackDamage;
-
         }
-
         
 
         function fight(hero, npcOne){
@@ -432,17 +441,21 @@ console.log("connected")
                     /**
                     *define hero life points left in % of full bar length
                     */
-                    let heroLifePoints = (hero.stats.lifePoints/hero.stats.lifePoints)*100
+                    let heroLifePoints = hero.stats.lifePoints
                         console.log(heroLifePoints)
-                    $('#hero-life-points').css('width', heroLifePoints + '%')
+                    let heroLifePointsInPercentage = (hero.stats.lifePoints/hero.stats.lifePoints)*100
+                        console.log(heroLifePointsInPercentage)
+                    $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
 
                 //NPC
                     /**
                     *define npc life points left in % of full bar length
                     */
-                    let npcLifePoints = (npcOne.stats.lifePoints/npcOne.stats.lifePoints)*100
+                    let npcLifePoints = npcOne.stats.lifePoints
                             console.log(npcLifePoints)
-                    $('#npc-life-points').css('width', npcLifePoints + '%')
+                    let npcLifePointsInPercentage = (npcOne.stats.lifePoints/npcOne.stats.lifePoints)*100
+                            console.log(npcLifePointsInPercentage)
+                    $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
 
             //set avatar images in avatar boxes
                 //Hero
@@ -452,75 +465,115 @@ console.log("connected")
             
             //Hero Action Panel
 
+            //turn management
+            let heroTurn = true;
 
             while (hero.stats.lifePoints > 0 && npcOne.stats.lifePoints > 0){
                 console.log('you are inside the loop')
-                if (heroTurn){
-                    console.log(`heroTurn is ${heroTurn}`)
-                    //hero's turn
-                        //select value between attack and heal
-                        //show action panel:
-                        $('#submit-hero-action-button').click(function(){
-                            let action = $('input[name="hero-fight-action"]:checked').val()
-                            console.log(action)
-                            if (action == '1'){
-                            //if attack is selected
-                                
-                                console.log(`${action} is selected. Attack time!`)
-                                //play attack function
-                                const heroDamage = attack(hero, npcOne)
-                                console.log(`Damages to impact on npc life points: ${heroDamage}`)
-                                //reduce npc hp
+                console.log(`heroTurn is ${heroTurn}`)
+
+                if (heroTurn == true){
+                //hero's turn
+                    //select value between attack and heal
+                    //show action panel:
+                    $('#submit-hero-action-button').click(function(){
+                        let action = $('input[name="hero-fight-action"]:checked').val()
+                        console.log(action)
+
+                        if (action == '1'){
+
+                        //if attack is selected
+                        console.log(`NPC has ${npcLifePoints} life points left`)
+                        console.log(`${action} is selected. Attack time!`)
+
+                            //play attack function
+                            const heroDamage = attack(hero, npcOne)
+                                console.log(`Hero hits NPC with: ${heroDamage} damage`)
+
+                            //reduce npc hp in actual points
                                 npcLifePoints = npcLifePoints - heroDamage
-                                console.log(npcLifePoints)
-                                $('#npc-life-points').css('width', npcLifePoints + '%')
-                                //move on top next side of loop
+                                    console.log(`NPC has ${npcLifePoints} life points left`)
+
+                            //reduce npc hps in %of initial bar length
+                                console.log(`npcOne.stats.lifePoints: ${npcOne.stats.lifePoints}`)
+                                npcLifePointsInPercentage = (npcLifePoints/npcOne.stats.lifePoints)*100
+                                    console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
+                                $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
+
+                            //move on top next side of loop
                                 if (npcLifePoints <= 0){
                                     console.log(`${npcOne.name} is kaboom!`)
-                                    
                                 }
-    
-                            }
+                            heroTurn = false
+                            npcTurn(hero, npcOne)
+
+                        }else if(action == '2'){
+                        //if heal is selected
+                            console.log(`${action} is selected. Heal time!`)
+                            //play heal function
+                            const heroHeal = healing(hero, npcOne)
                             
-                            else if(action == '2'){
-                            //if heal is selected
-                                console.log(`${action} is selected. Heal time!`)
-                                //play heal function
-                                const heroHeal = healing(hero, npcOne)
-                                //increase hero hp
-                                
-                                
-                                heroLifePoints = heroLifePoints + heroHeal;
-                                console.log(heroLifePoints)
-                                //limits HP increase to character's max life    
-                                if (heroLifePoints > hero.stats.lifePoints){
-                                    console.log('Thats too many HP for you my friend!')
-                                    heroLifePoints = 100
-                                }
-                                console.log(`new lifepoints : ${heroLifePoints}`)
-                                //move on top next side of loop
-
-                                heroTurn = false
+                            //increase hero hp
+                            heroLifePoints = heroLifePoints + heroHeal;
+                            console.log(heroLifePoints)
+                            //limits HP increase to character's max life    
+                            if (heroLifePoints > hero.stats.lifePoints){
+                                console.log('Thats too many HP for you my friend!')
+                                heroLifePoints = 100
                             }
-                            else{
-                                console.log('Something is wrong')
-                            }
-                            console.log(`heroTurn after attack/healing action is ${heroTurn}`)
-                        })
-                        break;
+                            console.log(`new lifepoints : ${heroLifePoints}`)
 
-                } else{
-                //npc's turn
-                console.log('Its the NPCs turn now')
-                    //npc attacks
-                        //play attack function
-                        //reduce hero hp
-                        //loop back to stage hero's turn
+                            //
+                             //define remaing life points after attack in % of initial lifebar width
+                            heroLifePointsInPercentage = (heroLifePoints/hero.stats.lifePoints)*100
+                                $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
 
-                    
-                }
+                            //move on top next side of loop
+
+                            heroTurn = false
+                            npcTurn(hero, npcOne)
+                        }
+                        else{
+                            console.log('Something is wrong')
+                        }
+                        
+                    })
+                    break;
+                } else (
+                    //npc's turn
+                    console.log('Its the NPCs turn now')
+                        //npc attacks
+                            //play attack function
+                            //reduce hero hp
+                            //loop back to stage hero's turn
+                )
+
             }
 
 
+
+        }
+
+        function npcTurn(hero, npcOne){
+            console.log('Its the NPC turn now from function')
+            let npcMaxDamage = npcOne.stats.damage.damageHigh;
+            let npcLowDamage = npcOne.stats.damage.damageLow;
+            //define NPC damages
+            
+            let npcDamage = Math.floor(Math.random() * ( npcMaxDamage - npcLowDamage + 1))+ npcLowDamage;
+            console.log(`NPC attacks: ${npcDamage} damage`)
+            console.log(`The hero has ${heroLifePoints} life points`)
+
+            //update hero's life points
+                //define remaining life points after attack
+                    heroLifePoints = heroLifePoints - npcDamage
+                    console.log(`The hero has ${heroLifePoints} life points`)
+                //define remaing life points after attack in % of initial lifebar width
+                    heroLifePointsInPercentage = (heroLifePoints/hero.stats.lifePoints)*100
+                    
+                    $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
+            
+            //turn to hero's turn
+            heroTurn = true
 
         }
