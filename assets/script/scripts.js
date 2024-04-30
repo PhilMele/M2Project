@@ -27,14 +27,14 @@ console.log("connected")
                             damageLow : 10,
                             damageHigh: 50,
                         },
-                        lifePoints: 100,
+                        lifePoints: 50,
                         reputation: 100,
                     },
                     Xposition:'220',
                     Yposition:'200',
                     };
         console.log(hero)
-        let heroLifePoints = (hero.stats.lifePoints/hero.stats.lifePoints)*100
+        let heroLifePoints = hero.stats.lifePoints
 
     /*NPCs*/
 
@@ -505,23 +505,24 @@ console.log("connected")
                                     console.log(`${npcOne.name} is kaboom!`)
                                 }
                             heroTurn = false
-                            npcTurn(hero, npcOne)
+                            npcTurn(hero, npcOne, heroLifePoints);
 
                         }else if(action == '2'){
                         //if heal is selected
                             console.log(`${action} is selected. Heal time!`)
+
                             //play heal function
                             const heroHeal = healing(hero, npcOne)
                             
                             //increase hero hp
                             heroLifePoints = heroLifePoints + heroHeal;
-                            console.log(heroLifePoints)
+                                console.log(heroLifePoints)
                             //limits HP increase to character's max life    
                             if (heroLifePoints > hero.stats.lifePoints){
                                 console.log('Thats too many HP for you my friend!')
-                                heroLifePoints = 100
+                                heroLifePoints = hero.stats.lifePoints
                             }
-                            console.log(`new lifepoints : ${heroLifePoints}`)
+                                console.log(`new lifepoints : ${heroLifePoints}`)
 
                             //
                              //define remaing life points after attack in % of initial lifebar width
@@ -531,7 +532,7 @@ console.log("connected")
                             //move on top next side of loop
 
                             heroTurn = false
-                            npcTurn(hero, npcOne)
+                            npcTurn(hero, npcOne, heroLifePoints);
                         }
                         else{
                             console.log('Something is wrong')
@@ -554,7 +555,7 @@ console.log("connected")
 
         }
 
-        function npcTurn(hero, npcOne){
+        function npcTurn(hero, npcOne, heroLifePoints){
             console.log('Its the NPC turn now from function')
             let npcMaxDamage = npcOne.stats.damage.damageHigh;
             let npcLowDamage = npcOne.stats.damage.damageLow;
@@ -562,12 +563,12 @@ console.log("connected")
             
             let npcDamage = Math.floor(Math.random() * ( npcMaxDamage - npcLowDamage + 1))+ npcLowDamage;
             console.log(`NPC attacks: ${npcDamage} damage`)
-            console.log(`The hero has ${heroLifePoints} life points`)
+            console.log(`The hero has ${heroLifePoints} life points before the attack`)
 
             //update hero's life points
                 //define remaining life points after attack
                     heroLifePoints = heroLifePoints - npcDamage
-                    console.log(`The hero has ${heroLifePoints} life points`)
+                    console.log(`The hero has ${heroLifePoints} life points after the attack`)
                 //define remaing life points after attack in % of initial lifebar width
                     heroLifePointsInPercentage = (heroLifePoints/hero.stats.lifePoints)*100
                     
