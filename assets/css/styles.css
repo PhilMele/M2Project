@@ -51,6 +51,11 @@
         }
 
         #avatar2{}
+    
+    /*Restart Game*/
+        .restart-game-div{
+            display: none
+        }
 
 /*First Screen*/
 
