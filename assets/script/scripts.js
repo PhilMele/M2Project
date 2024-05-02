@@ -39,7 +39,9 @@ console.log("connected")
 
         let npcOne = { 
             name: '', 
-            avatar: 'assets/images/avatars/npc.gif',
+            avatar:{
+                avatarMap: 'assets/images/avatars/npc.gif',
+                avatarProfile:'assets/images/avatars/npc.gif'},
             Xposition:'337',
             Yposition:'300',
             radius:40,
@@ -54,7 +56,7 @@ console.log("connected")
                     damageLow : 1,
                     damageHigh: 5,
                 },
-                lifePoints: 25,
+                lifePoints: 100,
                 reputation: 25,
             }
             
@@ -62,6 +64,13 @@ console.log("connected")
             };
             console.log(npcOne)
             let npcLifePoints = (npcOne.stats.lifePoints/npcOne.stats.lifePoints)*100
+
+            let heroReputation = hero.stats.reputation
+            
+            /***
+             * defines avatar img on map once dead
+             */
+            deadNPCAvatar = 'assets/images/avatars/dead-npc.jpg'
     /*Boss*/
 
 
@@ -250,11 +259,18 @@ console.log("connected")
             //positions NPCs + clickable area 
                 //npcOne - clickable area
                 let npcOnePositionClick = $('#npcOne-position-click').attr(
-                    'coords',`${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}`);
-                $('#npcOne-position-click').click(function(event){
+                   'coords',`${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}`);
+                //$('#npcOne-position-click').click(function(event){
+                //    heroDecisionValidation('screenTwoGeneral');
+                //   heroPosition(event)
+                //})
+
+                $('#npcOne-position-avatar-image').click(function(event){
                     heroDecisionValidation('screenTwoGeneral');
                     heroPosition(event)
                 })
+
+
                 
                 //npcOne - avatar img position on map
                 let npcOnePositionImage = $('#npcOne-position-avatar-image').
@@ -330,7 +346,7 @@ console.log("connected")
 
 
                         //npc
-                        $('#npc-img').attr('src',`${npcOne.avatar}`)
+                        $('#npc-img').attr('src',`${npcOne.avatar.avatarProfile}`)
                         $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`);
 
                         //displays loop of sentences from npc
@@ -473,7 +489,7 @@ console.log("connected")
             //Hero
                 $('#hero-avatar-fight').attr('src',`${hero.avatar}`);
             //NPC
-                $('#npc-avatar-fight').attr('src',`${npcOne.avatar}`);
+                $('#npc-avatar-fight').attr('src',`${npcOne.avatar.avatarMap}`);
         
             console.log('you are inside the loop')
 
@@ -494,26 +510,28 @@ console.log("connected")
                         const heroDamage = attack(hero, npcOne)
                             console.log(`Hero hits NPC with: ${heroDamage} damage`)
 
-                        //reduce npc hp in actual points
-                        npcLifePoints = npcLifePoints - heroDamage
-                            console.log(`NPC has ${npcLifePoints} life points left`)
-
-                        //reduce npc hps in %of initial bar length
-                            console.log(`npcOne.stats.lifePoints: ${npcOne.stats.lifePoints}`)
-                            npcLifePointsInPercentage = (npcLifePoints/npcOne.stats.lifePoints)*100
-                                console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
-                            $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
-
-                        //move on top next side of loop
-                            if (npcLifePoints <= 0){
-                                console.log(`${npcOne.name} is kaboom!`)
-                                
-                            }
                         
-                        console.log(`At this stage hero has ${heroLifePoints} life points left!`)
+                            //reduce npc hp in actual points
+                            npcLifePoints = npcLifePoints - heroDamage
+                                console.log(`NPC has ${npcLifePoints} life points left`)
 
-                        //updates heroLifePoints after the npcTurn
-                        heroLifePoints = npcTurn(hero, npcOne, heroLifePoints);
+                            //reduce npc hps in %of initial bar length
+                                console.log(`npcOne.stats.lifePoints: ${npcOne.stats.lifePoints}`)
+                                npcLifePointsInPercentage = (npcLifePoints/npcOne.stats.lifePoints)*100
+                                    console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
+                                $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
+                            
+                            console.log(`At this stage hero has ${heroLifePoints} life points left!`)
+                        if (npcLifePoints > 0){
+                            //updates heroLifePoints after the npcTurn
+                            heroLifePoints = npcTurn(hero, npcOne, heroLifePoints);
+
+                        }else{
+                            console.log(`${npcOne.name} is kaboom!`)
+                            console.log(` and hero has ${heroLifePoints} life points left!`)
+                            
+                            npcOneDefeated(hero, heroLifePoints) 
+                        }
 
                     }else if(action == '2'){
                     //if heal is selected
@@ -574,4 +592,32 @@ console.log("connected")
             return heroLifePoints;
             
             
+        }
+
+        function npcOneDefeated(hero, heroLifePoints){
+            // add item to inventory (turn item to true)
+            hero.inventory.itemOne.hasItem = true;
+
+            //reduce reputation points
+           
+            hero.stats.reputation -= npcOne.stats.reputation
+
+            console.log(`this is how much heroLifePoints there is in npcOneDefeated() : ${heroLifePoints}`)
+
+            hero.stats.lifePoints = heroLifePoints
+
+
+            //change npc avatar to tombstone
+            $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+
+
+            //bring user back to screen two
+            setTimeout(function() {
+                $('.fight-screen-div').hide(function() {
+                    $('.second-screen-div').css('display', 'flex');
+                });
+            }, 2000);
+
+            screenTwoGeneral(hero, npcOne)
+
         }
