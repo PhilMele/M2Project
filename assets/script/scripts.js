@@ -30,9 +30,15 @@ console.log("connected")
                         lifePoints: 50,
                         reputation: 100,
                     },
+                    status:{
+                        idle : '',
+                        attack: '',
+
+                    },
                     Xposition:'220',
                     Yposition:'200',
                     };
+                    
         console.log(hero)
         let initialHeroLifePoints = hero.stats.lifePoints;
 
@@ -60,13 +66,14 @@ console.log("connected")
                 },
                 lifePoints: 100,
                 reputation: 25,
+                alive: true,
             }
             
 
             };
             console.log(npcOne)
             let npcLifePoints = (npcOne.stats.lifePoints/npcOne.stats.lifePoints)*100
-
+           
             
             
             /***
@@ -245,6 +252,7 @@ console.log("connected")
             let heroLifePoints = $('#life-points').text(hero.stats.lifePoints)
 
             //sets hero life bar
+            console.log(npcOne)
 
             //sets initial hero reputation
             let heroReputation = $('#reputation-points').text(hero.stats.reputation)
@@ -259,23 +267,27 @@ console.log("connected")
             
             //positions NPCs + clickable area 
                 //npcOne - clickable area
-                let npcOnePositionClick = $('#npcOne-position-click').attr(
-                   'coords',`${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}`);
-                //$('#npcOne-position-click').click(function(event){
-                //    heroDecisionValidation('screenTwoGeneral');
-                //   heroPosition(event)
-                //})
-
-                $('#npcOne-position-avatar-image').click(function(event){
-                    heroDecisionValidation('screenTwoGeneral');
-                    heroPosition(event)
-                })
-
-
                 
+                    let npcOnePositionClick = $('#npcOne-position-click').attr(
+                    'coords',`${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}`);
+
+                    $('#npcOne-position-avatar-image').click(function(event){
+                        //checks if npc is dead or alive
+                        //if dead the functions are not triggered
+                        if (npcOne.stats.alive == true){   
+                            heroDecisionValidation('screenTwoGeneral');
+                            heroPosition(event)
+                         }
+                    })  
+               
+
+
+
                 //npcOne - avatar img position on map
                 let npcOnePositionImage = $('#npcOne-position-avatar-image').
                     css({left:npcOne.Xposition + "px",top:npcOne.Yposition + "px"})
+
+                
             
             //positions hero
                 //hero - avatar img position on map
@@ -458,7 +470,6 @@ console.log("connected")
             return attackDamage;
         }
         
-
         function fight(hero, npcOne){
             console.log('fight kicks off!')
             $('.fight-screen-div').css('display', 'flex')
@@ -571,54 +582,51 @@ console.log("connected")
             console.log('Its the NPC turn now from function')
             let npcMaxDamage = npcOne.stats.damage.damageHigh;
             let npcLowDamage = npcOne.stats.damage.damageLow;
-            //define NPC damages
-            
-            let npcDamage = Math.floor(Math.random() * ( npcMaxDamage - npcLowDamage + 1))+ npcLowDamage;
-            console.log(`NPC attacks: ${npcDamage} damage`)
-            console.log(`The hero has ${heroLifePoints} life points before the attack`)
+            //define NPC damages     
+                let npcDamage = Math.floor(Math.random() * ( npcMaxDamage - npcLowDamage + 1))+ npcLowDamage;
+                    console.log(`NPC attacks: ${npcDamage} damage`)
+                    console.log(`The hero has ${heroLifePoints} life points before the attack`)
 
             //update hero's life points
                 //define remaining life points after attack
                     heroLifePoints = heroLifePoints - npcDamage
                     console.log(`The hero has ${heroLifePoints} life points after the attack`)
                 //define remaing life points after attack in % of initial lifebar width
-                    heroLifePointsInPercentage = (heroLifePoints/initialHeroLifePoints)*100
-                    
+                    heroLifePointsInPercentage = (heroLifePoints/initialHeroLifePoints)*100    
                     $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
 
             if (heroLifePoints <= 0){
                 gameover()
             }
-
-            return heroLifePoints;
-            
-            
+            return heroLifePoints;  
         }
 
         function npcOneDefeated(hero, heroLifePoints){
             // add item to inventory (turn item to true)
-            hero.inventory.itemOne.hasItem = true;
+                hero.inventory.itemOne.hasItem = true;
 
             //reduce reputation points
            
-            hero.stats.reputation -= npcOne.stats.reputation
+                hero.stats.reputation -= npcOne.stats.reputation
 
-            console.log(`this is how much heroLifePoints there is in npcOneDefeated() : ${heroLifePoints}`)
+                console.log(`this is how much heroLifePoints there is in npcOneDefeated() : ${heroLifePoints}`)
 
-            hero.stats.lifePoints = heroLifePoints
-
+                hero.stats.lifePoints = heroLifePoints
+            
+            //sets npc alive to false
+                npcOne.stats.alive = false
 
             //change npc avatar to tombstone
-            $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
-
+                $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
 
             //bring user back to screen two
-            setTimeout(function() {
-                $('.fight-screen-div').hide(function() {
-                    $('.second-screen-div').css('display', 'flex');
-                });
-            }, 2000);
+                setTimeout(function() {
+                    $('.fight-screen-div').hide(function() {
+                        $('.second-screen-div').css('display', 'flex');
+                    });
+                }, 2000);
 
-            screenTwoGeneral(hero, npcOne)
+                screenTwoGeneral(hero, npcOne)
+
 
         }
