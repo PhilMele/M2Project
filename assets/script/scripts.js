@@ -34,6 +34,8 @@ console.log("connected")
                     Yposition:'200',
                     };
         console.log(hero)
+        let initialHeroLifePoints = hero.stats.lifePoints;
+
 
     /*NPCs*/
 
@@ -65,7 +67,7 @@ console.log("connected")
             console.log(npcOne)
             let npcLifePoints = (npcOne.stats.lifePoints/npcOne.stats.lifePoints)*100
 
-            let heroReputation = hero.stats.reputation
+            
             
             /***
              * defines avatar img on map once dead
@@ -210,11 +212,8 @@ console.log("connected")
                 // Call another function with the updated hero object
                 //recurring problem - forget to pass argument in function
                 screenTwoGeneral(hero, npcOne);
-                updateScreen(); // Update screen after hero name is updated
-                
+                updateScreen(); // Update screen after hero name is updated 
             }
-
-           
         }
     
         /***
@@ -244,6 +243,8 @@ console.log("connected")
 
             //sets intial hero life points
             let heroLifePoints = $('#life-points').text(hero.stats.lifePoints)
+
+            //sets hero life bar
 
             //sets initial hero reputation
             let heroReputation = $('#reputation-points').text(hero.stats.reputation)
@@ -471,7 +472,7 @@ console.log("connected")
                 let heroLifePoints = hero.stats.lifePoints
                     console.log(heroLifePoints)
                     
-                let heroLifePointsInPercentage = (hero.stats.lifePoints/hero.stats.lifePoints)*100
+                let heroLifePointsInPercentage = (heroLifePoints/initialHeroLifePoints)*100
                     console.log(heroLifePointsInPercentage)
                 $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
 
@@ -545,9 +546,9 @@ console.log("connected")
                             console.log(heroLifePoints)
 
                         //limits HP increase to character's max life    
-                        if (heroLifePoints > hero.stats.lifePoints){
+                        if (heroLifePoints > initialHeroLifePoints){
                             console.log('Thats too many HP for you my friend!')
-                            heroLifePoints = hero.stats.lifePoints
+                            heroLifePoints = initialHeroLifePoints
                         }
                             console.log(`new lifepoints : ${heroLifePoints}`)
 
@@ -581,7 +582,7 @@ console.log("connected")
                     heroLifePoints = heroLifePoints - npcDamage
                     console.log(`The hero has ${heroLifePoints} life points after the attack`)
                 //define remaing life points after attack in % of initial lifebar width
-                    heroLifePointsInPercentage = (heroLifePoints/hero.stats.lifePoints)*100
+                    heroLifePointsInPercentage = (heroLifePoints/initialHeroLifePoints)*100
                     
                     $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
 
