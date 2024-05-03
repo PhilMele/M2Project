@@ -38,7 +38,7 @@ console.log("connected")
                     Xposition:'220',
                     Yposition:'200',
                     };
-                    
+
         console.log(hero)
         let initialHeroLifePoints = hero.stats.lifePoints;
 
@@ -58,6 +58,7 @@ console.log("connected")
                 sentenceTwo:'Are you looking for this piece of item?',
                 sentenceThree:'It is yours now. Farewell!',
                 sentenceFour:'Farewell then!',
+                sentenceFive:'I already gave you everything I had.',
             },
             stats:{
                 damage:{
@@ -178,7 +179,7 @@ console.log("connected")
             //when user click on `let npcOnePositionClick`
             //first panel appears to ask user to confirm if they want to start conversation
 
-        if (decisionOrigin==='screenTwoGeneral'){
+        if (decisionOrigin==='heroPosition'){
             console.log('this call is coming from screenTwoGeneral()')
             $('.validation-screen-div').css('display', 'flex');
             answer = $('#hero-decision').val();
@@ -266,29 +267,23 @@ console.log("connected")
                 }
             
             //positions NPCs + clickable area 
-                //npcOne - clickable area
-                
+                //npcOne - clickable area          
                     let npcOnePositionClick = $('#npcOne-position-click').attr(
-                    'coords',`${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}`);
-
-                    $('#npcOne-position-avatar-image').click(function(event){
-                        //checks if npc is dead or alive
-                        //if dead the functions are not triggered
-                        if (npcOne.stats.alive == true){   
-                            heroDecisionValidation('screenTwoGeneral');
-                            heroPosition(event)
-                         }
-                    })  
-               
-
-
-
+                        'coords',`${npcOne.Xposition},${npcOne.Yposition},${npcOne.radius}`);
+                        $('#npcOne-position-avatar-image').click(function(event){
+                            //checks if npc is dead or alive
+                            //if dead the functions are not triggered
+                            if (npcOne.stats.alive == true){   
+                                
+                                heroPosition(event)
+                            }
+                        }
+                    )  
+              
                 //npcOne - avatar img position on map
                 let npcOnePositionImage = $('#npcOne-position-avatar-image').
                     css({left:npcOne.Xposition + "px",top:npcOne.Yposition + "px"})
-
-                
-            
+           
             //positions hero
                 //hero - avatar img position on map
                 let heroPositionImage = $('#hero-position-avatar-image').
@@ -303,31 +298,51 @@ console.log("connected")
                 *Hero's position on screen
                 */
                 function heroPosition(event){
-                    //initial or current position when starts
-                    //position() gives me the position of the hero in relation to div, not document.
-                    //offset() gives me the position in relation to document. Opted for offset() is it migth be easier 
-                        //if the screen resolution changes.
-                        let heroCurrentXPosition = $('#hero-position-avatar-image').offset().left;
-                            console.log(heroCurrentXPosition)
-                        let heroCurrentYPosition = $('#hero-position-avatar-image').offset().top;
-                            console.log(heroCurrentYPosition)
-                        
-                    //new position where the hero clicked
-                    // this is facilitated by the event parameter.
-                    //I need to the offset position (which is relative to the document and not the parent div
-                        // Get the offset of the parent element of the clicked area
-                        let newHeroXPosition = event.pageX;
-                            console.log(newHeroXPosition)
-                        let newHeroYPosition = event.pageY;
-                            console.log(newHeroYPosition)
-                        hero.Xposition = newHeroXPosition
-                        hero.Yposition = newHeroYPosition
+                    //BUG and issues: initial or current position when starts
+                        //position() gives me the position of the hero in relation to div, not document.
+                        //offset() gives me the position in relation to document. Opted for offset() as it migth be easier 
+                            //if the screen resolution changes.
+                            // let heroCurrentXPosition = $('#hero-position-avatar-image').offset().left;
+                            //     console.log(`offset left:${heroCurrentXPosition}`)
+                            // let heroCurrentYPosition = $('#hero-position-avatar-image').offset().top;
+                            //     console.log(`offset top: ${heroCurrentYPosition}`)
+                            
+                        //new position where the hero clicked
+                        // this is facilitated by the event parameter.
+                        //I need to the offset position (which is relative to the document and not the parent div
+                            // Get the offset of the parent element of the clicked area
 
-                        console.log(hero)
-                        screenTwoGeneral(hero, npcOne)
+                    //define new position based on npc position
+                        let newHeroXPosition = npcOne.Xposition;
+                            console.log(`npcOne.Xposition: ${newHeroXPosition}`)
+                        let newHeroYPosition =  npcOne.Yposition
+                            console.log(`npcOne.Yposition: ${newHeroYPosition}`)
+                           
+                    //caupture current hero position    
+                        heroXPositionCurrent = hero.Xposition
+                            console.log(`heroXPositionCurrent: ${heroXPositionCurrent}`)
+                        heroYPositionCurrent = hero.Yposition
+                            console.log(`heroYPositionCurrent: ${heroYPositionCurrent}`)
 
+                    //calculate distance between current to new position in pixels
+                        xDistance = newHeroXPosition - heroXPositionCurrent
+                        yDistance = newHeroYPosition - heroYPositionCurrent
+                    
                     //animation from old to new position
+                        $("#hero-position-avatar-image").animate({ 
+                                left: `+=${xDistance}px`,
+                                top: `+=${yDistance}px`,
+                            }, 2000, function(){
+                                //update hero position object position
+                                hero.Xposition = newHeroXPosition
+                                hero.Yposition = newHeroYPosition
 
+                                console.log(hero)
+                                screenTwoGeneral(hero, npcOne)
+                                heroDecisionValidation('heroPosition');
+                            
+                            } );
+                    
 
                 }
 
@@ -362,6 +377,8 @@ console.log("connected")
                         $('#npc-img').attr('src',`${npcOne.avatar.avatarProfile}`)
                         $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`);
 
+                        //checks if hero
+                
                         //displays loop of sentences from npc
                         for (const sentence in npcOne.conversation){
                             //console.log(sentence)
