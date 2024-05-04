@@ -3,12 +3,30 @@ console.log("connected")
 
 
 /*Characters*/
+    let avatarSelection={
+                avatarOne:{
+                    profilePic : '/assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.png',
+                    idle: 'assets/images/avatars/avatar-1/hero-avatar-1-idle.gif',
+                    attack:'assets/images/avatars/avatar-1/hero-warrior-attack.gif',
+                    killed:'',
+                },
+
+                avatarTwo:{
+                    profilePic : '',
+                    idle: '',
+                    attack:'',
+                    killed:'',
+                }
+    
+    
+            }
+
     /*Hero*/
         /***
         * hero variable that stores stats
         */
         let hero = { name: '', 
-                    avatar: '',
+                    avatar: "",
                     inventory:{
                         itemOne:{
                             name: 'item1',
@@ -196,6 +214,8 @@ console.log("connected")
 
     /*First Screen*/
 
+        /*
+
         /*bug - started with a form, but I couldnt keep the data. 
         I then took it to stackoverflow with this question: https://stackoverflow.com/questions/78315736/update-object-property-after-form-submission-for-use-in-a-seperate-function?noredirect=1#comment138072099_78315736
         Which make me realise my understanding of how forms work was flawed.
@@ -208,11 +228,21 @@ console.log("connected")
         function createHero(event){
             let heroName = $('#hero-name').val()
             let heroAvatar = $('input[name="hero-avatar"]:checked').val()
-            console.log(`heroName: ${heroName}`)
             console.log(`heroAvatar: ${heroAvatar}`)
 
+            console.log(`heroName: ${heroName}`)
+
             hero.name = heroName
-            hero.avatar = heroAvatar
+
+            if (heroAvatar === 'avatarOne'){
+                hero.avatar = avatarSelection.avatarOne.profilePic
+            }else if (heroAvatar === 'avatarTwo'){
+                hero.avatar = "assets/images/avatars/hero-avatar-2.webp"
+            }else{
+                console.log('something is wrong with createHero()')
+            }
+
+            console.log(`heroAvatar: ${heroAvatar}`)
             //bug : heroAvatar was considered '' if not img selected
             //but should be set as 'undefined' hence the use of `typeof` 
             if (heroName !== '' && typeof heroAvatar !== 'undefined'){

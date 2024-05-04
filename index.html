@@ -13,6 +13,11 @@
     <!--jQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!--Google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
     <title>Hello Hero</title>
 
 </head>
@@ -40,14 +45,14 @@
                         <div class="row first-screen-row-avatar">
                             <div class="col select-avatar-col">
                                 <label for="avatar1">
-                                    <img src="assets/images/avatars/hero-avatar-1.jpg" class="avatar-img-select" alt="Avatar 1">
-                                    <input type="radio" id="avatar1" name="hero-avatar" value="assets/images/avatars/hero-avatar-1.jpg" required>
+                                    <img src="assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.png" class="avatar-img-select" alt="Avatar 1">
+                                    <input type="radio" id="avatar1" name="hero-avatar" value="avatarOne" required>
                                 </label>
                             </div>
                             <div class="col select-avatar-col">
                                 <label for="avatar2">
                                     <img src="assets/images/avatars/hero-avatar-2.webp" class="avatar-img-select" alt="Avatar 2">
-                                    <input type="radio" id="avatar2" name="hero-avatar" value="assets/images/avatars/hero-avatar-2.webp" required>
+                                    <input type="radio" id="avatar2" name="hero-avatar" value="avatarTwo" required>
                                 </label>
                             </div>
                         </div>
@@ -227,7 +232,7 @@
                     </div>
                     <!--Avatar-->
                     <div class="col npc-img-col">
-                        <img id="npc-img">
+                        <img id="npc-img" class="avatar-profile">
                     </div>
                 </div>
 
@@ -235,7 +240,7 @@
                 <div class="row conversation-row">
                     <!--Avatar-->
                     <div class="col hero-img-col">
-                        <img id="hero-img">
+                        <img id="hero-img" class="avatar-profile">
                     </div>
 
                     <div class="col hero-text-col">

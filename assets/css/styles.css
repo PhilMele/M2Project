@@ -14,17 +14,20 @@
 
     body{
         background: black;
-        color: black;
+        color: #f6d6bd;
         max-width: 100%;
         
         display: flex;
         justify-content: center; 
         margin: 0;
+        font-family: "VT323", monospace;
+        font-weight: 400;
+        font-style: normal;
 
     }
 
     h1{
-        color:white
+        color:c3a38a;
     }
 
     .width-control{
@@ -34,7 +37,8 @@
 
 
     .screen-container{
-   
+        width:100vw;
+        max-width: 800px;
     }
 
 
@@ -179,12 +183,13 @@
     }
 
     .conversation-row{
-        background-color: blue;
+        background-color:black;
         padding: 10px;
         margin: 5px;
         border-radius: 10px;
         display: flex;
         align-items: center;
+        border: white 2px solid;
     }
 
     .conv-validation-container{
@@ -193,25 +198,37 @@
         width: 100%;
     }
 
+    .avatar-profile{
+        width: 100%;
+    }
+
 
         /*Hero*/
         .hero-text-col{
             text-align: right;
+            width: 50%;
+            max-height: 300px;
+            margin: 10px;
         }
 
         .hero-img-col{
             text-align: left;
+            width: 50%;
+            max-height: 300px;
         }
 
         /*NPC*/
         .npc-text-col{
             text-align: left;
             width: 50%;
+            max-height: 300px;
+            margin: 10px;
         }
 
         .npc-img-col{
             text-align: right;
             width: 50%;
+            max-height: 300px;
         }
 
     /*Fight Screen*/
@@ -222,7 +239,7 @@
             background: blue;
             border-color: white solid;
             border-radius: 20px;
-            color: white;
+            color: f6d6bd;
             display: flex;
             margin: 20px;
             padding: 10px;
