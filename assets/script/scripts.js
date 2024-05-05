@@ -7,7 +7,7 @@ console.log("connected")
                 avatarOne:{
                     profilePic : '/assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.png',
                     idle: 'assets/images/avatars/avatar-1/hero-avatar-1-idle.gif',
-                    attack:'assets/images/avatars/avatar-1/hero-warrior-attack.gif',
+                    attack:'/assets/images/avatars/avatar-1/hero-avatar-1-attack.gif',
                     killed:'',
                 },
 
@@ -236,8 +236,12 @@ console.log("connected")
 
             if (heroAvatar === 'avatarOne'){
                 hero.avatar = avatarSelection.avatarOne.profilePic
+                hero.status.idle = avatarSelection.avatarOne.idle
+                hero.status.attack = avatarSelection.avatarOne.attack
             }else if (heroAvatar === 'avatarTwo'){
                 hero.avatar = "assets/images/avatars/hero-avatar-2.webp"
+                hero.status.idle = avatarSelection.avatarTwo.idle
+                hero.status.attack = avatarSelection.avatarTwo.attack
             }else{
                 console.log('something is wrong with createHero()')
             }
@@ -524,6 +528,25 @@ console.log("connected")
         *Reduce life points to opponent
         */
         function attack(hero, npcOne){
+
+            //define current hero idle img displayed witing #hero-avatar-fight
+            let heroIdleImg = hero.status.idle
+                console.log(`heroIdleImg: ${heroIdleImg}`)
+
+            //define new hero img to be displayed witing #hero-avatar-fight
+            let heroAttackImg = hero.status.attack
+                console.log(`heroAttackImg: ${heroAttackImg}`)
+
+            //font-end management
+                //set #hero-avatar-fight to attack status
+                $('#hero-avatar-fight').attr('src', `${heroAttackImg}`);
+
+                //hides submit button to give impression of turn based fight
+                $('#submit-hero-action-button').hide()
+            
+            //creates red layer on #npc-avatar-fight to show damage
+                $('#npc-avatar-fight').css('background-color', 'red')
+
             let heroMaxDamage = hero.stats.damage.damageHigh
                 console.log(`max damage: ${heroMaxDamage}`)
             let heroLowDamage = hero.stats.damage.damageLow
@@ -563,7 +586,7 @@ console.log("connected")
 
             //set avatar images in avatar boxes
             //Hero
-                $('#hero-avatar-fight').attr('src',`${hero.avatar}`);
+                $('#hero-avatar-fight').attr('src',`${hero.status.idle}`);
             //NPC
                 $('#npc-avatar-fight').attr('src',`${npcOne.avatar.avatarMap}`);
         
@@ -586,27 +609,39 @@ console.log("connected")
                         const heroDamage = attack(hero, npcOne)
                             console.log(`Hero hits NPC with: ${heroDamage} damage`)
 
-                        
-                            //reduce npc hp in actual points
-                            npcLifePoints = npcLifePoints - heroDamage
-                                console.log(`NPC has ${npcLifePoints} life points left`)
-
-                            //reduce npc hps in %of initial bar length
-                                console.log(`npcOne.stats.lifePoints: ${npcOne.stats.lifePoints}`)
-                                npcLifePointsInPercentage = (npcLifePoints/npcOne.stats.lifePoints)*100
-                                    console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
-                                $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
                             
-                            console.log(`At this stage hero has ${heroLifePoints} life points left!`)
+                            $('#npc-avatar-fight').css('background-color', ''); 
+
+                            setTimeout(function() {
+                                //reverts img back to idl status after 1 second
+                                $('#hero-avatar-fight').attr('src', `${hero.status.idle}`);
+                                console.log(`back to idle now after 1 second`)
+
+                                //shows submit button to give impression of turn based fight
+                                $('#submit-hero-action-button').show()
+                            }, 1500);
+                                    
+                        //reduce npc hp in actual points
+                        npcLifePoints = npcLifePoints - heroDamage
+                            console.log(`NPC has ${npcLifePoints} life points left`)
+
+                        //reduce npc hps in %of initial bar length
+                            console.log(`npcOne.stats.lifePoints: ${npcOne.stats.lifePoints}`)
+                            npcLifePointsInPercentage = (npcLifePoints/npcOne.stats.lifePoints)*100
+                                console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
+                            $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
+                        
+                        console.log(`At this stage hero has ${heroLifePoints} life points left!`)
+
                         if (npcLifePoints > 0){
                             //updates heroLifePoints after the npcTurn
                             heroLifePoints = npcTurn(hero, npcOne, heroLifePoints);
 
                         }else{
-                            console.log(`${npcOne.name} is kaboom!`)
-                            console.log(` and hero has ${heroLifePoints} life points left!`)
-                            
-                            npcOneDefeated(hero, heroLifePoints) 
+                                console.log(`${npcOne.name} is kaboom!`)
+                                console.log(` and hero has ${heroLifePoints} life points left!`)
+                                
+                                npcOneDefeated(hero, heroLifePoints) 
                         }
 
                     }else if(action == '2'){
@@ -683,7 +718,7 @@ console.log("connected")
             //change npc avatar to tombstone
                 $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
 
-            //bring user back to screen two
+            //bring user back to screen two after 2 seconds
                 setTimeout(function() {
                     $('.fight-screen-div').hide(function() {
                         $('.second-screen-div').css('display', 'flex');
