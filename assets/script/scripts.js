@@ -83,7 +83,7 @@ console.log("connected")
                     damageLow : 1,
                     damageHigh: 5,
                 },
-                lifePoints: 100,
+                lifePoints: 500,
                 reputation: 25,
                 alive: true,
             }
@@ -610,7 +610,7 @@ console.log("connected")
                             console.log(`Hero hits NPC with: ${heroDamage} damage`)
 
                         //describe attack in #comment-fight
-                        $('#comment-fight').append(`<p>${hero.name} hits with ${heroDamage} damages.</p>`)
+                        commentFightAppend(`${hero.name} hits with ${heroDamage} damages.`)
 
 
                         //sets background to red
@@ -662,7 +662,7 @@ console.log("connected")
                             console.log(heroLifePoints)
 
                         //describe heal points recieved in #comment-fight
-                        $('#comment-fight').append(`<p>${hero.name} gains ${heroHeal} life points.</p>`)
+                        commentFightAppend(`${hero.name} gains ${heroHeal} life points.`)
 
                         //limits HP increase to character's max life    
                         if (heroLifePoints > initialHeroLifePoints){
@@ -704,7 +704,7 @@ console.log("connected")
                     $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
             
             //describe attack in #comment-fight
-            $('#comment-fight').append(`<p>${npcOne.name} hits with ${npcDamage} damage. You have ${heroLifePoints} life points left.</p> `)
+            commentFightAppend(`${npcOne.name} hits with ${npcDamage} damage. You have ${heroLifePoints} life points left.`)
 
             if (heroLifePoints <= 0){
                 gameover()
@@ -740,4 +740,31 @@ console.log("connected")
                 screenTwoGeneral(hero, npcOne)
 
 
+        }
+
+        function commentFightAppend(message){
+            let comment1 = $('#fight-comment-1')
+            let comment2 = $('#fight-comment-2')
+            let comment3 = $('#fight-comment-3')
+
+            if (comment1.text() === ''){
+                comment1.text(message)
+            }else if (comment2.text() === ''){
+                comment2.text(message)
+            
+            } else if(comment3.text() === ''){
+                comment3.text(message)   
+            }else{
+                //move from fight-comment-2 to fight-comment-1
+                comment1.text(comment2.text())
+
+                //move from fight-comment-3 to fight-comment-2
+                comment2.text(comment3.text())
+
+                //add new comment
+                comment3.text(message);
+            }
+
+
+        
         }
