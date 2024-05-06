@@ -64,7 +64,7 @@ console.log("connected")
     /*NPCs*/
 
         let npcOne = { 
-            name: '', 
+            name: 'BobOne', 
             avatar:{
                 avatarMap: 'assets/images/avatars/npc.gif',
                 avatarProfile:'assets/images/avatars/npc.gif'},
@@ -83,7 +83,7 @@ console.log("connected")
                     damageLow : 1,
                     damageHigh: 5,
                 },
-                lifePoints: 500,
+                lifePoints: 50,
                 reputation: 25,
                 alive: true,
             }
@@ -521,6 +521,13 @@ console.log("connected")
         *Add life points to hero
         */
         function healing(hero, npcOne){
+
+            //font-end management
+
+                //hides submit button to give impression of turn based fight
+                $('.action-validation-container').hide()
+
+
             let healingPoints = 25;
             return healingPoints
         }
@@ -542,7 +549,7 @@ console.log("connected")
                 $('#hero-avatar-fight').attr('src', `${heroAttackImg}`);
 
                 //hides submit button to give impression of turn based fight
-                $('#submit-hero-action-button').hide()
+                $('.action-validation-container').hide()
             
             //creates red layer on #npc-avatar-fight to show damage
                 $('#npc-avatar-fight').css('background-color', 'red')
@@ -623,9 +630,11 @@ console.log("connected")
                             $('#hero-avatar-fight').attr('src', `${hero.status.idle}`);
                             console.log(`back to idle now after 1 second`)
 
-                            //shows submit button to give impression of turn based fight
-                            $('#submit-hero-action-button').show()
+                            
                         }, 1500);
+
+                        //shows submit button to give impression of turn based fight
+                            $('.action-validation-container').show()
                                     
                         //reduce npc hp in actual points
                         npcLifePoints = npcLifePoints - heroDamage
@@ -657,6 +666,9 @@ console.log("connected")
                         //play heal function
                         const heroHeal = healing(hero, npcOne)
                         
+                        //set .action-validation-container to show to give turn based impression
+                        $('.action-validation-container').show()
+                        
                         //increase hero hp
                         heroLifePoints = heroLifePoints + heroHeal;
                             console.log(heroLifePoints)
@@ -671,7 +683,7 @@ console.log("connected")
                         }
                             console.log(`new lifepoints : ${heroLifePoints}`)
 
-                            //define remaing life points after attack in % of initial lifebar width
+                        //define remaing life points after attack in % of initial lifebar width
                         heroLifePointsInPercentage = (heroLifePoints/hero.stats.lifePoints)*100
                             $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
 
@@ -713,8 +725,22 @@ console.log("connected")
         }
 
         function npcOneDefeated(hero, heroLifePoints){
+            
+            //empty comment section
+            $('#fight-comment-1').text('')
+            $('#fight-comment-2').text('')
+            $('#fight-comment-3').text('')
+
+             // add item to inventory (turn item to true)
+                $('#fight-comment-1').append(`${npcOne.name} has been defeated!`)
+
+
             // add item to inventory (turn item to true)
                 hero.inventory.itemOne.hasItem = true;
+                $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemOne.name}`)
+
+            //changes avatar picture for tombstone
+                $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
 
             //reduce reputation points
            
@@ -727,21 +753,27 @@ console.log("connected")
             //sets npc alive to false
                 npcOne.stats.alive = false
 
-            //change npc avatar to tombstone
-                $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+            //change npc avatar to tombstone and hide life bar + label
+                $('#npc-avatar-fight').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+                $('#life-bar').hide()
+                $('#npc-life-point-label').hide()
+                $('.action-validation-container').css('display','none')
+                console.log(`.action-validation-container is hidden`)
 
             //bring user back to screen two after 2 seconds
                 setTimeout(function() {
                     $('.fight-screen-div').hide(function() {
                         $('.second-screen-div').css('display', 'flex');
                     });
-                }, 2000);
+                }, 5000);
 
                 screenTwoGeneral(hero, npcOne)
 
 
         }
-
+        /**
+        *Caps the number of fight coments to 3.
+        */
         function commentFightAppend(message){
             let comment1 = $('#fight-comment-1')
             let comment2 = $('#fight-comment-2')

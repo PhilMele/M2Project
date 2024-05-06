@@ -111,12 +111,9 @@
                 <!-- Map -->
                 <div class="row">
                     <div class="canva-div">
-                        <img src="/assets/images/screens/second_screen.jpg" usemap="#worldmap">
+                        <img src="/assets/images/screens/second_screen.jpg" class="map">
                         <img  id="npcOne-position-avatar-image" usemap="#worldmap">
                         <img  id="hero-position-avatar-image" usemap="#worldmap">
-                        <map name="worldmap"> 
-                            <area id="npcOne-position-click" shape="circle">
-                        </map>
                     </div>
                 </div>
                 
@@ -144,7 +141,7 @@
                         </div> 
                         <div class="row hero-stats-row">
                            <div class="row fight-row">
-                                <label for="life-points">Life Points</label>
+                                <label for="life-points" id="npc-life-point-label">Life Points</label>
                                 <div id="life-bar" val="" max="100">
                                     <div id="npc-life-points"></div>    
                                 </div>

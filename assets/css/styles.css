@@ -45,7 +45,7 @@
 
     .second-screen-div{
         display: none;
-        height: var(--height);   
+           
     }
 
     .validation-screen-div{
@@ -150,15 +150,9 @@
         display: inline-block;
     }
 
-    .worldmap{
-        /*background-image: url('/assets/images/screens/second_screen.jpg'); */        
-        height: var(--height);
-        background-repeat: no-repeat;
-        background-size: auto; /* Set background size to auto */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-position: top;
+    .map{
+        max-width: 100%;
+        height: auto;
     }
 
     #npcOne-position-avatar-image {
