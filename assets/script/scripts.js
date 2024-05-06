@@ -609,17 +609,23 @@ console.log("connected")
                         const heroDamage = attack(hero, npcOne)
                             console.log(`Hero hits NPC with: ${heroDamage} damage`)
 
-                            
-                            $('#npc-avatar-fight').css('background-color', ''); 
+                        //describe attack in #comment-fight
+                        $('#comment-fight').append(`<p>${hero.name} hits with ${heroDamage} damages.</p>`)
 
-                            setTimeout(function() {
-                                //reverts img back to idl status after 1 second
-                                $('#hero-avatar-fight').attr('src', `${hero.status.idle}`);
-                                console.log(`back to idle now after 1 second`)
 
-                                //shows submit button to give impression of turn based fight
-                                $('#submit-hero-action-button').show()
-                            }, 1500);
+                        //sets background to red
+                        setTimeout(function() {
+                                $('#npc-avatar-fight').css('background-color', '');
+                            }, 500);    
+
+                        setTimeout(function() {
+                            //reverts img back to idl status after 1 second
+                            $('#hero-avatar-fight').attr('src', `${hero.status.idle}`);
+                            console.log(`back to idle now after 1 second`)
+
+                            //shows submit button to give impression of turn based fight
+                            $('#submit-hero-action-button').show()
+                        }, 1500);
                                     
                         //reduce npc hp in actual points
                         npcLifePoints = npcLifePoints - heroDamage
@@ -655,6 +661,9 @@ console.log("connected")
                         heroLifePoints = heroLifePoints + heroHeal;
                             console.log(heroLifePoints)
 
+                        //describe heal points recieved in #comment-fight
+                        $('#comment-fight').append(`<p>${hero.name} gains ${heroHeal} life points.</p>`)
+
                         //limits HP increase to character's max life    
                         if (heroLifePoints > initialHeroLifePoints){
                             console.log('Thats too many HP for you my friend!')
@@ -685,7 +694,7 @@ console.log("connected")
                 let npcDamage = Math.floor(Math.random() * ( npcMaxDamage - npcLowDamage + 1))+ npcLowDamage;
                     console.log(`NPC attacks: ${npcDamage} damage`)
                     console.log(`The hero has ${heroLifePoints} life points before the attack`)
-
+            
             //update hero's life points
                 //define remaining life points after attack
                     heroLifePoints = heroLifePoints - npcDamage
@@ -693,6 +702,9 @@ console.log("connected")
                 //define remaing life points after attack in % of initial lifebar width
                     heroLifePointsInPercentage = (heroLifePoints/initialHeroLifePoints)*100    
                     $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
+            
+            //describe attack in #comment-fight
+            $('#comment-fight').append(`<p>${npcOne.name} hits with ${npcDamage} damage. You have ${heroLifePoints} life points left.</p> `)
 
             if (heroLifePoints <= 0){
                 gameover()
