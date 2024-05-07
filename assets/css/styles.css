@@ -97,10 +97,13 @@
     .first-screen-row-avatar{
         display: flex;
         padding: 10px 0 10px 0;
+        align-items: flex-end; #used to align pictures at the bottom
     }
 
     .select-avatar-col{
         width:45%;
+        flex: 1; /* Distribute space equally */
+        text-align: center;
     }
 
     /*Credits : was trying to switch from grayscale 0 to 1 through javascript. Was given a much simpler way to achieve input

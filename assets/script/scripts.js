@@ -5,18 +5,19 @@ console.log("connected")
 /*Characters*/
     let avatarSelection={
                 avatarOne:{
-                    profilePic : '/assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.png',
+                    profilePic : '/assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.webp',
                     idle: 'assets/images/avatars/avatar-1/hero-avatar-1-idle.gif',
                     attack:'/assets/images/avatars/avatar-1/hero-avatar-1-attack.gif',
                     killed:'',
                 },
 
                 avatarTwo:{
-                    profilePic : '',
-                    idle: '',
-                    attack:'',
+                    profilePic : '/assets/images/avatars/avatar-2/hero-avatar-2-profile-picture.webp',
+                    idle: '/assets/images/avatars/avatar-2/hero-avatar-2-idle.gif',
+                    attack:'/assets/images/avatars/avatar-2/hero-avatar-2-attack.gif',
                     killed:'',
-                }
+                },
+                
     
     
             }
@@ -239,7 +240,7 @@ console.log("connected")
                 hero.status.idle = avatarSelection.avatarOne.idle
                 hero.status.attack = avatarSelection.avatarOne.attack
             }else if (heroAvatar === 'avatarTwo'){
-                hero.avatar = "assets/images/avatars/hero-avatar-2.webp"
+                hero.avatar = avatarSelection.avatarTwo.profilePic
                 hero.status.idle = avatarSelection.avatarTwo.idle
                 hero.status.attack = avatarSelection.avatarTwo.attack
             }else{
