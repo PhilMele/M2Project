@@ -391,6 +391,21 @@ console.log("connected")
                     
 
                 }
+        
+        /*Quest*/
+        /**
+        *Manages Quest Completion Progress Bar
+        */
+        function questProgress(){
+            //identify how many steps to complete the question
+
+            //calculate how many have been completed
+
+            //calculate how much these completed steps account has part of the quest Completion
+
+            //convert number in %
+        
+        }
 
 
 
