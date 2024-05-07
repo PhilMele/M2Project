@@ -103,6 +103,22 @@ console.log("connected")
     /*Boss*/
 
 
+/*Quest*/
+    let quest ={
+        missionOne :{
+            completed: false,
+            mission: `Collect ${hero.inventory.itemOne.name}`,
+            },
+        missionTwo :{
+            completed: false,
+            mission: `Collect ${hero.inventory.itemTwo.name}`,
+            },
+        missionThree :{
+            completed: false,
+            mission: `Eliminate the boss`,
+            },
+    }
+
 /*Event management*/
 
     /**
@@ -278,6 +294,9 @@ console.log("connected")
         * Sets elements on screen when hero starts
         */
         function screenTwoGeneral(hero, npcOne){  
+            //activate questProgress()
+            questProgress(hero)
+
             //positions h1
             let missionTitle = $('#mission-title').text(`${hero.name}'s epic adventure`);
             
@@ -396,15 +415,39 @@ console.log("connected")
         /**
         *Manages Quest Completion Progress Bar
         */
-        function questProgress(){
+        function questProgress(hero){
+
             //identify how many steps to complete the question
 
+                let heroQuest = Object.keys(quest).length
+                console.log(heroQuest)
+            
             //calculate how many have been completed
 
+                //sets if mission is completed or not
+                    if (hero.inventory.itemOne.hasItem == true){
+                        quest.missionOne.completed = true
+                    }else if(hero.inventory.itemTwo.hasItem == true){
+                        quest.missionTwo.completed = true
+                    }else{
+                        console.log(`dont forget to add the boss`)
+                    }
+                //calculte how many missions are true
+                /*credit for counting the counting loop of true keys : https://stackoverflow.com/questions/52846805/count-the-number-of-trues-in-a-javascript-object*/
+                count = 0
+                for (let key in hero.inventory){
+                    if(hero.inventory.hasOwnProperty(key) && hero.inventory[key].hasItem){
+                        count++
+                    }
+                
+                }
+                console.log(count)
+                    
             //calculate how much these completed steps account has part of the quest Completion
-
             //convert number in %
-        
+            completion = (count/heroQuest)*100
+            console.log(`quest completion: ${completion}% `)
+            $('#quest-progress').css('width', completion + '%')
         }
 
 
