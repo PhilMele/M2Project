@@ -32,12 +32,12 @@ console.log("connected")
                         itemOne:{
                             name: 'item1',
                             hasItem: false,
-                            itemOneImg: 'assets/images/items/item_one.jpg',
+                            itemImg: 'assets/images/items/itemOne.webp',
                         },
                         itemTwo:{
                             name: 'item2',
                             hasItem: false,
-                            itemOneImg: '',
+                            itemImg: 'assets/images/items/itemTwo.webp',
                         },
                         
                         },
@@ -294,12 +294,20 @@ console.log("connected")
             let heroReputation = $('#reputation-points').text(hero.stats.reputation)
 
             //sets styling of items in inventory
-            $('#item-one-img').attr('src', `${hero.inventory.itemOne.itemOneImg}`);
-                if (hero.inventory.itemOne.hasItem == false){
-                    $('#item-one-img').css('filter', 'grayscale(1)')
-                }else{
-                    $('#item-one-img').css('filter', 'grayscale(0)')
-                }
+            //ItemOne
+                $('#item-one-img').attr('src', `${hero.inventory.itemOne.itemImg}`);
+                    if (hero.inventory.itemOne.hasItem == false){
+                        $('#item-one-img').css('filter', 'grayscale(1)')
+                    }else{
+                        $('#item-one-img').css('filter', 'grayscale(0)')
+                    }
+            //ItemTwo
+                $('#item-two-img').attr('src', `${hero.inventory.itemTwo.itemImg}`);
+                    if (hero.inventory.itemTwo.hasItem == false){
+                        $('#item-two-img').css('filter', 'grayscale(1)')
+                    }else{
+                        $('#item-two-img').css('filter', 'grayscale(0)')
+                    }
             
             //positions NPCs + clickable area 
                 //npcOne - clickable area          

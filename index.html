@@ -95,15 +95,25 @@
                                         </table>
                                     </div>
                             </div>
-                            <div class="prof-inv-rows">
-                                <h2>Inventory</h2>       
-                                    <div class="row">
-                                        <div class="col"><img class="item-img" id="item-one-img" src=""></div><div class="col">item1Text</div>
+                            <div class="prof-inv-rows display-flex">
+                                <div class="row">
+                                    <h2>Inventory</h2> 
+                                </div>
+                                <div class="row">     
+                                        <div class="col col-inv"><img class="item-img" id="item-one-img" src=""></div>
+                                        <div class="col col-inv"><img class="item-img" id="item-two-img" src=""></div>   
+                                </div> 
+                                <div class="row">
+                                    <b>Quest Completion</b>
+                                    <div id="quest-bar" val="" max="100">
+                                        <div id="quest-progress"></div>  
+                                        <p id="next-action">text</p>  
                                     </div>
-                                    <div class="row">
-                                        <div class="col"><img class="item-img" id="item-two-img" src=""></div><div class="col">item2Text</div>
-                                    </div>  
-                            </div>        
+                                
+                                        
+                                    
+                                </div>  
+                            </div>   
                         </div>
                     </div>
                 </div>
@@ -213,9 +223,9 @@
                                 <option disabled="" selected="" value="">Select Option</option>
                                 <option value="1">Yes</option>
                                 <option value="2">No.</option>
-                                <option value="3">Time to kill!</option>
+                                <option value="3">Fight!</option>
                             </select>
-                        <button type="button" id="submit-answer-button">Submit Answer</button>
+                        <button type="button" id="submit-answer-button">OK</button>
                     </div>
                 </div>
             </div>

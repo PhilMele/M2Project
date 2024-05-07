@@ -137,6 +137,9 @@
 
             .prof-inv-rows{
                 width: 50%;
+                flex-direction: column;
+                display: flex;
+                padding:10px
             
             }
 
@@ -145,8 +148,33 @@
             }
 
             .item-img{
+                width: 100%;
+            }
+
+            .col-inv{
+                display: table-cell;
+                padding: 10px;
                 width: 50%;
             }
+
+            /*Quest Progress Bar*/
+            #quest-bar{
+            height: 18px;   
+            width: 100%;
+            background-color: grey;
+            border-radius: 20px; 
+            margin: 2px;;  
+            }
+            
+            #quest-progress{
+            height: 18px;
+            background-color: green;
+            border-radius: 20px;
+           
+            }
+            
+
+
 
     .canva-div {
         position: relative;
