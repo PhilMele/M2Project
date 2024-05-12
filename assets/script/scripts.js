@@ -297,6 +297,9 @@ console.log("connected")
             //activate questProgress()
             questProgress(hero)
 
+            //Advise hero on next mission to complete quest
+            questNextAction()
+
             //positions h1
             let missionTitle = $('#mission-title').text(`${hero.name}'s epic adventure`);
             
@@ -447,9 +450,36 @@ console.log("connected")
             //convert number in %
             completion = (count/heroQuest)*100
             console.log(`quest completion: ${completion}% `)
+
+            //Update #quest-progress with completion variable result
             $('#quest-progress').css('width', completion + '%')
         }
 
+
+        /**
+        *Manages display message of next mission to hero to complete quest
+        */
+        function questNextAction(){
+            
+            //loops through quest object to extract all mission
+            for (const nextAction in quest){
+
+                //extract each mission with quest object
+                if (quest.hasOwnProperty(nextAction)){
+
+                    //logs mission list
+                    console.log(`Mission ${nextAction}: ${quest[nextAction].mission}`)
+
+                    //extract first mission that is false ( still to be completed)
+                    if (quest[nextAction].completed == false){
+
+                        //append first mission  that is not completed (false) in list to #next-action
+                        $('#next-action').text(`Next Mission: ${quest[nextAction].mission}`)
+                        break;
+                    }
+                }   
+            }
+        }
 
 
 
