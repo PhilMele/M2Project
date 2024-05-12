@@ -30,7 +30,6 @@
             <div class="container blurred-box">
             <!--Select Hero Name -->
                 <div class="row first-screen-row">
-                    
                     <input type="text" id="hero-name" placeholder="Name your hero...">
                     <br>
                 </div>
@@ -41,7 +40,6 @@
                     <div class="container">
                         <div class="row">
                             <label for="hero-avatar">Select your avatar</label>
-                           
                         </div>
                         <div class="row first-screen-row-avatar">
                             <div class="col select-avatar-col">
@@ -62,7 +60,7 @@
 
                 <!-- Validate Choice -->
                 <div class="row first-screen-row">
-                    <button type="button" onclick="createHero()">Create Hero</button>
+                    <button type="button" class="create-hero-button" onclick="createHero()">Create Hero</button>
                 </div>
             </div>
         </div>
@@ -186,19 +184,19 @@
                             <!--Radio buttons start here-->
                             <div class="row">
                                 <label for="hero-attack">
-                                    <p id="hero-text">Attack</p>
+                                    <p class="selected" id="hero-text">Attack</p>
                                     <input type="radio" id="hero-attack" name="hero-fight-action" value="1" required>
                                 </label>
                             </div>
                             <div class="row">
                                 <label for="hero-heal">
-                                    <p id="hero-text">Heal</p>
+                                    <p class="selected" id="hero-text">Heal</p>
                                     <input type="radio" id="hero-heal" name="hero-fight-action" value="2" required>
                                 </label>
                             </div>
                             <!--Submission of radio buttons-->
                             <div class="row">
-                               <button type="button" id="submit-hero-action-button">Submit Answer</button>
+                               <button type="button" id="submit-hero-action-button">Confirm</button>
                             </div>
                         </div>  
                     </div>
@@ -215,7 +213,7 @@
 
                     <!--Script-->
                     <div class="col">
-                        <p>Do you want to talk to this npc?</p>
+                        <p>What do you want to do?</p>
                     </div>
                     <!--Hero Answer-->
 
@@ -223,9 +221,9 @@
                         <label for="hero-decision">Select your answer</label><br>
                             <select id="hero-decision" class="width-control" name="hero-decision" required>
                                 <option disabled="" selected="" value="">Select Option</option>
-                                <option value="1">Yes</option>
-                                <option value="2">No.</option>
-                                <option value="3">Fight!</option>
+                                <option value="1">Talk</option>
+                                <option value="2">Nothing</option>
+                                <option value="3">Fight</option>
                             </select>
                         <button type="button" id="submit-answer-button">OK</button>
                     </div>
@@ -262,19 +260,19 @@
                             <!--Radio buttons start here-->
                             <div class="row">
                                 <label for="hero-answer-yes">
-                                    <p id="hero-text">Yes!</p>
+                                    <p class="selected" id="hero-text">Yes!</p>
                                     <input type="radio" id="hero-answer-yes" name="hero-answer" value="1" required>
                                 </label>
                             </div>
                             <div class="row">
                                 <label for="hero-answer-no">
-                                    <p id="hero-text">Nope.</p>
+                                    <p class="selected" id="hero-text">Nope.</p>
                                     <input type="radio" id="hero-answer-no" name="hero-answer" value="2" required>
                                 </label>
                             </div>
                             <!--Submission of radio buttons-->
                             <div class="row">
-                               <button type="button" id="submit-question-answer-button">Submit Answer</button>
+                               <button type="button" id="submit-question-answer-button">Confirm.</button>
                             </div>
                         </div>         
                     </div>

@@ -89,8 +89,6 @@
         display: grid;
     }
 
-
-
     .blurred-box{
         background-color: #ffffff9e;
         padding: 20px;
@@ -102,6 +100,18 @@
         display: flex;
         padding: 10px 0 10px 0;
         align-items: flex-end;
+    }
+
+    #hero-name{
+        border: black 2px solid;
+        border-radius: 5px;
+        font-family: "VT323", monospace;
+        text-align: center;
+    
+    }
+
+    label[for="hero-avatar"] {
+        color:black;
     }
 
     .select-avatar-col{
@@ -124,6 +134,14 @@
     in first-screen-div for design purpose */
     input[type="radio"] {
         display: none;
+    }
+
+    .create-hero-button{
+        border: black 2px solid;
+        border-radius: 5px;
+        font-family: "VT323", monospace;
+        background: black;
+        color: white;
     }
 
 /*Second Screen*/
@@ -205,60 +223,75 @@
     }
 
     /*Conversation Screen*/
-    .conversation-screen-div{
-        display: none;
-        height: var(--height);
+        .conversation-screen-div{
+            display: none;
+            height: var(--height);
 
-    }
+        }
 
-    .conversation-row{
-        background-color:black;
-        padding: 10px;
-        margin: 5px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        border: white 2px solid;
-    }
+        .conversation-row{
+            background-color:black;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            border: white 2px solid;
+        }
 
-    .conv-validation-container{
-        
-        text-align: left;
-        width: 100%;
-    }
-
-    .avatar-profile{
-        width: 100%;
-    }
-
-
-        /*Hero*/
         .hero-text-col{
-            text-align: right;
-            width: 50%;
-            max-height: 300px;
-            margin: 10px;
+            display:none;
         }
 
-        .hero-img-col{
+        label:has(input:checked) p{
+            color: #f6d6bd;
+        }
+
+        .selected:hover{
+            color:#f6d6bd;
+        }
+
+
+
+        .conv-validation-container{
+            
             text-align: left;
-            width: 50%;
-            max-height: 300px;
+            width: 100%;
         }
 
-        /*NPC*/
-        .npc-text-col{
-            text-align: left;
-            width: 50%;
-            max-height: 300px;
-            margin: 10px;
+        .avatar-profile{
+            width: 100%;
         }
 
-        .npc-img-col{
-            text-align: right;
-            width: 50%;
-            max-height: 300px;
-        }
+
+            /*Hero*/
+            .hero-text-col{
+                text-align: right;
+                width: 50%;
+                max-height: 300px;
+                margin: 10px;
+                color:grey;
+            }
+
+            .hero-img-col{
+                text-align: left;
+                width: 50%;
+                max-height: 300px;
+            }
+
+            /*NPC*/
+            .npc-text-col{
+                text-align: left;
+                width: 50%;
+                max-height: 300px;
+                margin: 10px;
+            }
+
+            .npc-img-col{
+                text-align: right;
+                width: 50%;
+                max-height: 300px;
+            }
 
     /*Fight Screen*/
         .fight-screen-div{
@@ -286,6 +319,7 @@
             align-content: center;
             justify-content: center;
             flex-direction: row;
+            color:grey
         }
 
         .comment-col{

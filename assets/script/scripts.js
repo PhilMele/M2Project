@@ -17,9 +17,6 @@ console.log("connected")
                     attack:'/assets/images/avatars/avatar-2/hero-avatar-2-attack.gif',
                     killed:'',
                 },
-                
-    
-    
             }
 
     /*Hero*/
@@ -225,6 +222,7 @@ console.log("connected")
             console.log('this call is coming from npcOneConversation()')
             $('.conv-validation-container').css('display', 'inline-grid')
             answer = $('input[name="hero-answer"]:checked').val()
+            $('.hero-text-col').css('display','none')
             console.log(answer)
         }
     }
@@ -364,12 +362,14 @@ console.log("connected")
         */
         function grayScaleOn(){
             $('.second-screen-div').css('filter', 'grayscale(100%)');
-        
         }
 
+
+        /**
+        *Sets grayscale to 0 when hero goes back to .second-screen-div
+        */
         function grayScaleOff(){
             $('.second-screen-div').css('filter', 'grayscale(0)');
-        
         }
 
         /*Intro */
@@ -424,79 +424,75 @@ console.log("connected")
                                 heroDecisionValidation('heroPosition');
                                 
                                 screenTwoGeneral(hero, npcOne)
-                                
-                            
                             } );
-                    
-
-                }
+                    }
         
         /*Quest*/
-        /**
-        *Manages Quest Completion Progress Bar
-        */
-        function questProgress(hero){
+            /**
+            *Manages Quest Completion Progress Bar
+            */
+            function questProgress(hero){
 
-            //identify how many steps to complete the question
+                //identify how many steps to complete the question
 
-                let heroQuest = Object.keys(quest).length
-                console.log(heroQuest)
-            
-            //calculate how many have been completed
-
-                //sets if mission is completed or not
-                    if (hero.inventory.itemOne.hasItem == true){
-                        quest.missionOne.completed = true
-                    }else if(hero.inventory.itemTwo.hasItem == true){
-                        quest.missionTwo.completed = true
-                    }else{
-                        console.log(`dont forget to add the boss`)
-                    }
-                //calculte how many missions are true
-                /*credit for counting the counting loop of true keys : https://stackoverflow.com/questions/52846805/count-the-number-of-trues-in-a-javascript-object*/
-                count = 0
-                for (let key in hero.inventory){
-                    if(hero.inventory.hasOwnProperty(key) && hero.inventory[key].hasItem){
-                        count++
-                    }
+                    let heroQuest = Object.keys(quest).length
+                    console.log(heroQuest)
                 
-                }
-                console.log(count)
+                //calculate how many have been completed
+
+                    //sets if mission is completed or not
+                        if (hero.inventory.itemOne.hasItem == true){
+                            quest.missionOne.completed = true
+                        }else if(hero.inventory.itemTwo.hasItem == true){
+                            quest.missionTwo.completed = true
+                        }else{
+                            console.log(`dont forget to add the boss`)
+                        }
+                    //calculte how many missions are true
+                    /*credit for counting the counting loop of true keys : https://stackoverflow.com/questions/52846805/count-the-number-of-trues-in-a-javascript-object*/
+                    count = 0
+                    for (let key in hero.inventory){
+                        if(hero.inventory.hasOwnProperty(key) && hero.inventory[key].hasItem){
+                            count++
+                        }
                     
-            //calculate how much these completed steps account has part of the quest Completion
-            //convert number in %
-            completion = (count/heroQuest)*100
-            console.log(`quest completion: ${completion}% `)
-
-            //Update #quest-progress with completion variable result
-            $('#quest-progress').css('width', completion + '%')
-        }
-
-
-        /**
-        *Manages display message of next mission to hero to complete quest
-        */
-        function questNextAction(){
-            
-            //loops through quest object to extract all mission
-            for (const nextAction in quest){
-
-                //extract each mission with quest object
-                if (quest.hasOwnProperty(nextAction)){
-
-                    //logs mission list
-                    console.log(`Mission ${nextAction}: ${quest[nextAction].mission}`)
-
-                    //extract first mission that is false ( still to be completed)
-                    if (quest[nextAction].completed == false){
-
-                        //append first mission  that is not completed (false) in list to #next-action
-                        $('#next-action').text(`Next Mission: ${quest[nextAction].mission}`)
-                        break;
                     }
-                }   
+                    console.log(count)
+                        
+                //calculate how much these completed steps account has part of the quest Completion
+                //convert number in %
+                completion = (count/heroQuest)*100
+                console.log(`quest completion: ${completion}% `)
+
+                //Update #quest-progress with completion variable result
+                $('#quest-progress').css('width', completion + '%')
             }
-        }
+
+
+            /**
+            *Manages display message of next mission to hero to complete quest
+            */
+            function questNextAction(){
+                
+                //loops through quest object to extract all mission
+                for (const nextAction in quest){
+
+                    //extract each mission with quest object
+                    if (quest.hasOwnProperty(nextAction)){
+
+                        //logs mission list
+                        console.log(`Mission ${nextAction}: ${quest[nextAction].mission}`)
+
+                        //extract first mission that is false ( still to be completed)
+                        if (quest[nextAction].completed == false){
+
+                            //append first mission  that is not completed (false) in list to #next-action
+                            $('#next-action').text(`Next Mission: ${quest[nextAction].mission}`)
+                            break;
+                        }
+                    }   
+                }
+            }
 
 
 
@@ -530,7 +526,9 @@ console.log("connected")
 
                         //checks if hero already has itemOne:
                         if (hero.inventory.itemOne.hasItem == true){
-                            
+                            //note: could make code drying by placing this better, but cannot see where.
+                            $('.hero-text-col').css('display','none')
+
                             $('#npc-text').text(`${npcOne.conversation.sentenceFive}`);
                             setTimeout(function() {
                                 $('.conversation-screen-div').hide()
@@ -558,8 +556,10 @@ console.log("connected")
                                                 //console.log('this is sentenceOne')
                                             
                                                 //hero clicks next to progress to next part sentence 2
-                                                $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`).delay(2500).hide(function(){
-                                                    $('#npc-text').text(`${npcOne.conversation.sentenceTwo}`).delay(2500).show()
+                                                $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`).delay(1500).hide(function(){
+                                                    $('#npc-text').text(`${npcOne.conversation.sentenceTwo}`).delay('fast').show(function(){
+                                                            $('.hero-text-col').css('display','inline-grid')
+                                                        })
                                                     })
 
                                             // if sentenceNum is 2
@@ -567,6 +567,7 @@ console.log("connected")
                                                 //console.log('this is sentenceTwo')
                                                 // hero is presented a yes or no question
                                                 heroDecisionValidation('npcOneConversation')
+                                                
 
                                             } else {
                                                 //console.log('this is sentenceThree')
@@ -582,6 +583,7 @@ console.log("connected")
                                                     if (decision === '1'){
                                                         //console.log('The hero gets an item + farewell message')
                                                         //sentenceThree appears
+                                                        
                                                         $('#npc-text').text(`${npcOne.conversation.sentenceThree}`);
                                                         setTimeout(function() {
                                                             $('.conversation-screen-div').hide(function() {
@@ -633,7 +635,6 @@ console.log("connected")
         /*Mission 2*/
 
 
-
     /*Third Screen*/
 
         /*Boss Fight*/
@@ -646,11 +647,10 @@ console.log("connected")
 
                 //hides submit button to give impression of turn based fight
                 $('.action-validation-container').hide()
-
-
             let healingPoints = 25;
             return healingPoints
         }
+
         /**
         *Reduce life points to opponent
         */
@@ -891,6 +891,7 @@ console.log("connected")
 
 
         }
+
         /**
         *Caps the number of fight coments to 3.
         */
