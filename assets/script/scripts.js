@@ -140,6 +140,7 @@ console.log("connected")
                 if (decision === '2') {
                     // Hide the validation screen
                     $('.validation-screen-div').hide();
+                    grayScaleOff()
                 } else if (decision === '1') {
                     // Value 1 has been selected and the conversation function can start
                     $('.validation-screen-div').hide();
@@ -216,6 +217,7 @@ console.log("connected")
 
         if (decisionOrigin==='heroPosition'){
             console.log('this call is coming from screenTwoGeneral()')
+            grayScaleOn()
             $('.validation-screen-div').css('display', 'flex');
             answer = $('#hero-decision').val();
             console.log(answer)
@@ -316,14 +318,14 @@ console.log("connected")
             let heroReputation = $('#reputation-points').text(hero.stats.reputation)
 
             //sets styling of items in inventory
-            //ItemOne
+                //ItemOne
                 $('#item-one-img').attr('src', `${hero.inventory.itemOne.itemImg}`);
                     if (hero.inventory.itemOne.hasItem == false){
                         $('#item-one-img').css('filter', 'grayscale(1)')
                     }else{
                         $('#item-one-img').css('filter', 'grayscale(0)')
                     }
-            //ItemTwo
+                //ItemTwo
                 $('#item-two-img').attr('src', `${hero.inventory.itemTwo.itemImg}`);
                     if (hero.inventory.itemTwo.hasItem == false){
                         $('#item-two-img').css('filter', 'grayscale(1)')
@@ -355,6 +357,19 @@ console.log("connected")
                 let heroPositionImage = $('#hero-position-avatar-image').
                     css({left:hero.Xposition + "px",top:hero.Yposition + "px", }).attr('src',hero.avatar)
       
+        }
+
+        /**
+        *Sets grayscale to 100% when hero talks to npc
+        */
+        function grayScaleOn(){
+            $('.second-screen-div').css('filter', 'grayscale(100%)');
+        
+        }
+
+        function grayScaleOff(){
+            $('.second-screen-div').css('filter', 'grayscale(0)');
+        
         }
 
         /*Intro */
@@ -405,7 +420,9 @@ console.log("connected")
 
                                 console.log('the hero is in position')
                                 //console.log(hero)
+                               
                                 heroDecisionValidation('heroPosition');
+                                
                                 screenTwoGeneral(hero, npcOne)
                                 
                             
@@ -519,6 +536,8 @@ console.log("connected")
                                 $('.conversation-screen-div').hide()
                                 $('.second-screen-div').css('display', 'flex'); 
                                 $('.validation-screen-div').hide();
+                                grayScaleOff()
+                                
                                         
                                
                             }, 2500);
@@ -571,8 +590,11 @@ console.log("connected")
                                                         }, 2000);
                                                     
                                                         //add item to hero object logic
-
                                                         hero.inventory.itemOne.hasItem = true;
+
+                                                        
+                                                        grayScaleOff()
+                                                        
                                                         screenTwoGeneral(hero, npcOne)
                                                     
 
@@ -585,6 +607,7 @@ console.log("connected")
                                                         //I used setTimeout() which worked.
                                                         //credit: https://stackoverflow.com/questions/7407935/delay-and-settimeout#:~:text=The%20.,appropriate%20for%20certain%20use%20cases.
                                                         $('#npc-text').text(`${npcOne.conversation.sentenceFour}`);
+                                                        grayScaleOff()
                                                         setTimeout(function() {
                                                             $('.conversation-screen-div').hide(function() {
                                                                 $('.second-screen-div').css('display', 'flex');
@@ -863,7 +886,7 @@ console.log("connected")
                         $('.second-screen-div').css('display', 'flex');
                     });
                 }, 5000);
-
+                grayScaleOff()
                 screenTwoGeneral(hero, npcOne)
 
 

@@ -52,6 +52,10 @@
         display: none;
         position: relative;
         background-color: blue;
+        border: white 1px solid;
+        top: -50%;
+        margin: 10%;
+        padding: 5px;
     }
 
     /*Avatars*/
@@ -97,7 +101,7 @@
     .first-screen-row-avatar{
         display: flex;
         padding: 10px 0 10px 0;
-        align-items: flex-end; #used to align pictures at the bottom
+        align-items: flex-end;
     }
 
     .select-avatar-col{
