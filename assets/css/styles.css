@@ -150,6 +150,7 @@
         /*Manages profile and inventory display*/
             .hero-profile-container{
                 color: white;
+                display: inline-flex;
             }
 
             .hero-profile-rows{
@@ -181,19 +182,43 @@
 
             /*Quest Progress Bar*/
             #quest-bar{
-            height: 18px;   
-            width: 100%;
-            background-color: grey;
-            border-radius: 20px; 
-            margin: 2px;;  
+                height: 18px;   
+                width: 100%;
+                background-color: grey;
+                border-radius: 20px; 
+                margin: 2px;;  
             }
             
             #quest-progress{
-            height: 18px;
-            background-color: green;
-            border-radius: 20px;
-           
+                height: 18px;
+                background-color: green;
+                border-radius: 20px;
             }
+
+    .submit-action-button{
+    border: black 2px solid;
+    border-radius: 5px;
+    font-family: "VT323", monospace;
+    background: white;
+    color: black;
+    margin: 5px;
+    font-size: medium;
+    }
+
+    .submit-button{
+    border: black 2px solid;
+    border-radius: 5px;
+    font-family: "VT323", monospace;
+    background: white;
+    color: black;
+    margin: 5px;
+    width: 50%;
+    font-size: medium;
+    }
+
+    .select-styling{
+        font-family: "VT323", monospace;
+    }
             
 
 
@@ -358,8 +383,17 @@
         #hero-avatar-fight{
         }
 
+/*Media Queries*/
+@media only screen and (max-width: 512px) {
+    body {
+        max-width: 320px;
+        margin: 0 auto;
+    }
+}
+
+
 /*Code taken from web*/
 
- /*Pixel Art Button*/
+
 
  

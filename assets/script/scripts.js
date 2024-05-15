@@ -51,9 +51,15 @@ console.log("connected")
                         attack: '',
 
                     },
-                    Xposition:'220',
+                    //under 512 px
+                    Xposition:'100',
                     Yposition:'200',
+                    //over xx px 
+                    // Xposition:'220',
+                    // Yposition:'200',
                     };
+
+                    
 
         console.log(hero)
         let initialHeroLifePoints = hero.stats.lifePoints;
@@ -66,8 +72,14 @@ console.log("connected")
             avatar:{
                 avatarMap: 'assets/images/avatars/npc.gif',
                 avatarProfile:'assets/images/avatars/npc.gif'},
-            Xposition:'337',
-            Yposition:'300',
+
+            //under 512px
+            Xposition:'65',
+            Yposition:'130',
+
+            //over 512px
+            // Xposition:'337',
+            // Yposition:'300',
             radius:40,
             conversation:{
                 sentenceOne:'Hello',
