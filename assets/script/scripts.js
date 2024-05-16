@@ -97,7 +97,7 @@ console.log("connected")
                     reputation: 25,
                     alive: true,
                 },
-                has_item= true,
+                hasItem: true,
             };
 
             console.log(npcOne)
@@ -133,7 +133,7 @@ console.log("connected")
                     reputation: 25,
                     alive: true,
                 },
-                has_item= true,
+                hasItem: true,
             };
             console.log(npcOne)
 
@@ -749,11 +749,10 @@ console.log("connected")
                         //npc
                         $('#npc-img').attr('src',`${currentNPC.avatar.avatarProfile}`)
                         $('#npc-text').text(`${currentNPC.conversation.sentenceOne} ${hero.name}!`);
+                    console.log(`current NPC has item = ${currentNPC.hasItem}`)
 
-                        //checks which npc the hero is talking to
-                        if (){}else if (){} else{}
-                        //checks if hero already has itemOne:
-                        if (hero.inventory.itemOne.hasItem == true){
+                    //checks which npc the hero is talking to
+                        if (currentNPC.hasItem == false){
                             //note: could make code drying by placing this better, but cannot see where.
                             $('.hero-text-col').css('display','none')
 
@@ -764,9 +763,9 @@ console.log("connected")
                                 $('.validation-screen-div').hide();
                                 grayScaleOff()
                             }, 2500);
+                        
+                        }else if (currentNPC.hasItem == true){
                             
-                        }else{
-
                             //displays loop of sentences from npc
                             for (const sentence in currentNPC.conversation){
                                 //console.log(sentence)
@@ -861,8 +860,121 @@ console.log("connected")
                                     }
                             
                             } 
+                        
+                        } else{
+                            console.log('something is wrong with currentNPC.hasItem  logic')
+                        }
+                    //checks if hero already has itemOne:
+                    // if (hero.inventory.itemOne.hasItem == true){
+                    //     //note: could make code drying by placing this better, but cannot see where.
+                    //     $('.hero-text-col').css('display','none')
 
-                        }           
+                    //     $('#npc-text').text(`${currentNPC.conversation.sentenceFive}`);
+                    //     setTimeout(function() {
+                    //         $('.conversation-screen-div').hide()
+                    //         $('.second-screen-div').css('display', 'flex'); 
+                    //         $('.validation-screen-div').hide();
+                    //         grayScaleOff()
+                    //     }, 2500);
+                        
+                    // }else{
+
+                    //     //displays loop of sentences from npc
+                    //     for (const sentence in currentNPC.conversation){
+                    //         //console.log(sentence)
+
+                    //             if (currentNPC.conversation.hasOwnProperty(sentence)){
+                    //                 //console.log(npc.conversation[sentence])
+                    //                 //create sentence number variable: sentenceNum
+                    //                 let sentenceNum = currentNPC.conversation[sentence]
+                                    
+                    //                     //if sentenceNum is 1
+                    //                     if (sentenceNum == currentNPC.conversation.sentenceOne){
+                    //                         //console.log('this is sentenceOne')
+                                        
+                    //                         //hero clicks next to progress to next part sentence 2
+                    //                         $('#npc-text').text(`${currentNPC.conversation.sentenceOne} ${hero.name}!`).delay(1500).hide(function(){
+                    //                             $('#npc-text').text(`${currentNPC.conversation.sentenceTwo}`).delay('fast').show(function(){
+                    //                                     $('.hero-text-col').css('display','inline-grid')
+                    //                                 })
+                    //                             })
+
+                    //                     // if sentenceNum is 2
+                    //                     }else if(sentenceNum == currentNPC.conversation.sentenceTwo){
+                    //                         //console.log('this is sentenceTwo')
+                    //                         // hero is presented a yes or no question
+                    //                         heroDecisionValidation('npcConversation', currentNPC)
+                                            
+
+                    //                     } else {
+                    //                         //console.log('this is sentenceThree')
+                                        
+                    //                         //console.log(`This is the hero decision value ${decision}`)
+                    //                         // fix: if decision is not none show this.
+                    //                         // remove existing text. and Add sentence3
+                    //                         //BUG : After the end of sentenceThree or sentenceFour, the loop goes back to first if statement
+                    //                             //I tried `break` at the end of the function, but this is unresponsive
+                    //                             //also tried to add a boolean field at the end of sentenceThree and sentenceFour and turn it to true
+                    //                             //and add an if statement at the top of the for loop : if boolean is true then dont loop: but it didnt work.
+                    //                             //as a workaround I reduced the timeout so that the user doesnt see the loop starting again as the div is turns to `hide` before the loop restarts.
+                    //                             if (decision === '1'){
+                    //                                 //console.log('The hero gets an item + farewell message')
+                    //                                 //sentenceThree appears
+                                                    
+                    //                                 $('#npc-text').text(`${currentNPC.conversation.sentenceThree}`);
+                    //                                 setTimeout(function() {
+                    //                                     $('.conversation-screen-div').hide(function() {
+                    //                                         $('.second-screen-div').css('display', 'flex');
+                    //                                     });
+                    //                                 }, 2000);
+                                                
+                    //                                 //add item to hero object logic
+                    //                                     //could improve logic in future to make it more dynamic
+                    //                                     //would require a change in how items are handled and attach each item to an npc
+                    //                                 if (currentNPC === npcOne){
+                    //                                     console.log('item is given by npcOne')
+                    //                                     hero.inventory.itemOne.hasItem = true;
+                    //                                 }else if (currentNPC === npcTwo){
+                    //                                     console.log('item is given by npcTwo') 
+                    //                                     hero.inventory.itemTwo.hasItem = true;  
+                    //                                 }else{
+                    //                                     console.log('something is not right')   
+                    //                                 }
+
+                    //                                 grayScaleOff()
+                                                    
+                    //                                 screenTwoGeneral(hero, currentNPC)
+                                                
+
+                    //                                 //conversation panel is moved to hidden.
+                    //                             }
+                    //                             else if (decision === '2') {
+                    //                                 //console.log('The hero gets farewell message and no item');
+                    //                                 //sentenceThree appears
+                    //                                 //issue with delay: delay() didnt seem to have any effect in this context
+                    //                                 //I used setTimeout() which worked.
+                    //                                 //credit: https://stackoverflow.com/questions/7407935/delay-and-settimeout#:~:text=The%20.,appropriate%20for%20certain%20use%20cases.
+                    //                                 $('#npc-text').text(`${currentNPC.conversation.sentenceFour}`);
+                    //                                 grayScaleOff()
+                    //                                 setTimeout(function() {
+                    //                                     $('.conversation-screen-div').hide(function() {
+                    //                                         $('.second-screen-div').css('display', 'flex');
+                    //                                     });
+                    //                                 }, 2000);
+
+                    //                             }
+                    //                             else{
+                    //                                 console.log('something is wrong with conversation sentence three logic. Or the hero is not at the stage yet.')
+                    //                             }
+                    //                             //npc renders sentenceNum 3 
+                    //                             //hero returns to second screen div
+                    //                     } 
+                                                                
+                    //             }
+                        
+                    //     } 
+
+                    // }           
             }
 
 
