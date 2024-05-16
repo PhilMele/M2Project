@@ -68,73 +68,72 @@ console.log("connected")
     /*NPCs*/
 
         let npcOne = { 
-            name: 'BobOne', 
-            avatar:{
-                avatarMap: 'assets/images/avatars/npc.gif',
-                avatarProfile:'assets/images/avatars/npc.gif'},
+                name: 'BobOne', 
+                avatar:{
+                    avatarMap: 'assets/images/avatars/npc.gif',
+                    avatarProfile:'assets/images/avatars/npc.gif'},
 
-            //under 512px
-            Xposition:'65',
-            Yposition:'130',
+                //under 512px
+                Xposition:'65',
+                Yposition:'130',
 
-            //over 512px
-            // Xposition:'337',
-            // Yposition:'300',
-            radius:40,
-            conversation:{
-                sentenceOne:'Hello',
-                sentenceTwo:'Are you looking for this piece of item?',
-                sentenceThree:'It is yours now. Farewell!',
-                sentenceFour:'Farewell then!',
-                sentenceFive:'I already gave you everything I had.',
-            },
-            stats:{
-                damage:{
-                    damageLow : 1,
-                    damageHigh: 5,
+                //over 512px
+                // Xposition:'337',
+                // Yposition:'300',
+                radius:40,
+                conversation:{
+                    sentenceOne:'Hello',
+                    sentenceTwo:'Are you looking for this piece of item?',
+                    sentenceThree:'It is yours now. Farewell!',
+                    sentenceFour:'Farewell then!',
+                    sentenceFive:'I already gave you everything I had.',
                 },
-                lifePoints: 50,
-                reputation: 25,
-                alive: true,
-            }
-            
-
+                stats:{
+                    damage:{
+                        damageLow : 1,
+                        damageHigh: 5,
+                    },
+                    lifePoints: 50,
+                    reputation: 25,
+                    alive: true,
+                },
+                has_item= true,
             };
+
             console.log(npcOne)
             let npcLifePoints = (npcOne.stats.lifePoints/npcOne.stats.lifePoints)*100
 
         let npcTwo = { 
-            name: 'The Pirate', 
-            avatar:{
-                avatarMap: 'assets/images/avatars/npc.gif',
-                avatarProfile:'assets/images/avatars/npc.gif'},
+                name: 'The Pirate', 
+                avatar:{
+                    avatarMap: 'assets/images/avatars/npc.gif',
+                    avatarProfile:'assets/images/avatars/npc.gif'},
 
-            //under 512px
-            Xposition:'150',
-            Yposition:'220',
+                //under 512px
+                Xposition:'150',
+                Yposition:'220',
 
-            //over 512px
-            // Xposition:'337',
-            // Yposition:'300',
-            radius:40,
-            conversation:{
-                sentenceOne:'Hello',
-                sentenceTwo:'Are you looking for this piece of item?',
-                sentenceThree:'It is yours now. Farewell!',
-                sentenceFour:'Farewell then!',
-                sentenceFive:'I already gave you everything I had.',
-            },
-            stats:{
-                damage:{
-                    damageLow : 1,
-                    damageHigh: 5,
+                //over 512px
+                // Xposition:'337',
+                // Yposition:'300',
+                radius:40,
+                conversation:{
+                    sentenceOne:'Hi',
+                    sentenceTwo:'Are you looking for this piece of item?',
+                    sentenceThree:'It is yours now. Farewell!',
+                    sentenceFour:'Farewell then!',
+                    sentenceFive:'I already gave you everything I had.',
                 },
-                lifePoints: 50,
-                reputation: 25,
-                alive: true,
-            }
-            
-
+                stats:{
+                    damage:{
+                        damageLow : 1,
+                        damageHigh: 5,
+                    },
+                    lifePoints: 50,
+                    reputation: 25,
+                    alive: true,
+                },
+                has_item= true,
             };
             console.log(npcOne)
 
@@ -145,6 +144,12 @@ console.log("connected")
              * defines avatar img on map once dead
              */
             deadNPCAvatar = 'assets/images/avatars/dead-npc.jpg'
+
+            /**
+            *global variable used to identify current NPC involved in action
+            */
+            let currentNPC
+
     /*Boss*/
 
 
@@ -188,9 +193,15 @@ console.log("connected")
                     grayScaleOff()
                 } else if (decision === '1') {
                     // Value 1 has been selected and the conversation function can start
+                    // !!!!!this needs to be changed to handle which npc is conversation is redirected to:
                     $('.validation-screen-div').hide();
-                    npcOneConversation(hero, npcOne)
+                    //npcOneConversation(hero, npcOne)
+                    //I could code out npcOneConversation and create npcConversation and see what happens
+                    console.log('next line shows currentNPC')
+                    console.log(currentNPC)
+                    npcConversation(hero, currentNPC)
                 } else if (decision === '3'){
+                    // !!! this needs to be changed to handle which npc is conversation is redirected to:
                     $('.validation-screen-div').hide()
                     fight(hero, npcOne)
                 }
@@ -202,7 +213,8 @@ console.log("connected")
             $('#submit-question-answer-button').click(function(){
                 let decision = $('input[name="hero-answer"]:checked').val()
                 console.log(`hero decision is ${decision}`)
-                npcOneConversation(hero, npcOne, decision)
+                //npcOneConversation(hero, npcOne, decision)
+                npcConversation(hero, currentNPC, decision)
 
                 
             })
@@ -255,7 +267,7 @@ console.log("connected")
      * parameter `decisionOrigin` allows function to be called by other function
      *the if statement processes the call differently based on the function that call it
      */
-    function heroDecisionValidation(decisionOrigin){
+    function heroDecisionValidation(decisionOrigin, currentNPC){
         //when user is in range of npc (if)
             //when user click on `let npcOnePositionClick`
             //first panel appears to ask user to confirm if they want to start conversation
@@ -266,6 +278,9 @@ console.log("connected")
             $('.validation-screen-div').css('display', 'flex');
             answer = $('#hero-decision').val();
             console.log(answer)
+
+            
+
         } else if (decisionOrigin==='npcOneConversation'){
             console.log('this call is coming from npcOneConversation()')
             $('.conv-validation-container').css('display', 'inline-grid')
@@ -341,7 +356,7 @@ console.log("connected")
         /**
         * Sets elements on screen when hero starts
         */
-        function screenTwoGeneral(hero, npcOne){  
+        function screenTwoGeneral(hero, currentNPC){  
             //activate questProgress()
             questProgress(hero)
 
@@ -358,7 +373,7 @@ console.log("connected")
             let heroLifePoints = $('#life-points').text(hero.stats.lifePoints)
 
             //sets hero life bar
-            console.log(npcOne)
+            console.log(currentNPC)
 
             //sets initial hero reputation
             let heroReputation = $('#reputation-points').text(hero.stats.reputation)
@@ -411,9 +426,9 @@ console.log("connected")
                                 npcTwoClicked = true
                                 heroPosition(event, npcTwo)
                                 
+                                }
                             }
-                        }
-                    ) 
+                        ) 
 
                 
                     //npcOne - avatar img position on map
@@ -465,12 +480,14 @@ console.log("connected")
 
                     //log npc argument
                         console.log(npc)
+                        currentNPC = npc
+                        console.log(currentNPC)
 
                     //define new position based on npc position
                     //
-                        let newHeroXPosition = npc.Xposition;
+                        let newHeroXPosition = currentNPC.Xposition;
                             console.log(`npc.Xposition: ${newHeroXPosition}`)
-                        let newHeroYPosition =  npc.Yposition
+                        let newHeroYPosition =  currentNPC.Yposition
                             console.log(`npc.Yposition: ${newHeroYPosition}`)
                            
                     //caupture current hero position    
@@ -500,9 +517,9 @@ console.log("connected")
                                 console.log('the hero is in position')
                                 //console.log(hero)
                                
-                                heroDecisionValidation('heroPosition');
+                                heroDecisionValidation('heroPosition',currentNPC);
                                 
-                                screenTwoGeneral(hero, npcOne)
+                                screenTwoGeneral(hero, currentNPC)
                             } );
                     }
         
@@ -582,7 +599,138 @@ console.log("connected")
             /**
             *When user click on location, a conversation starts
             */
-            function npcOneConversation(hero, npcOne, decision){
+            // function npcOneConversation(hero, npcOne, decision){
+            //     console.log('convo starts')
+            //     //At this stage, the hero answered Yes (1)
+            //     //alert("npcOneConversation()starts!")
+            //     //logs npcOne.question. Currently doesnt return hero.name
+            //     //console.log(`${npcOne.conversation.sentenceOne} ${hero.name}!`)
+            //         //if yes conversation screen div opens
+
+            //         //set up conversation div
+            //         $('.conversation-screen-div').css('display', 'flex')
+            //         $('.second-screen-div').hide()
+
+            //         //set up rows and cols content for hero and npc
+            //             //hero
+            //             $('#hero-img').attr('src',`${hero.avatar}`);
+            //             $('#hero-text')
+
+
+            //             //npc
+            //             $('#npc-img').attr('src',`${npcOne.avatar.avatarProfile}`)
+            //             $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`);
+
+            //             //checks if hero already has itemOne:
+            //             if (hero.inventory.itemOne.hasItem == true){
+            //                 //note: could make code drying by placing this better, but cannot see where.
+            //                 $('.hero-text-col').css('display','none')
+
+            //                 $('#npc-text').text(`${npcOne.conversation.sentenceFive}`);
+            //                 setTimeout(function() {
+            //                     $('.conversation-screen-div').hide()
+            //                     $('.second-screen-div').css('display', 'flex'); 
+            //                     $('.validation-screen-div').hide();
+            //                     grayScaleOff()
+                                
+                                        
+                               
+            //                 }, 2500);
+                            
+            //             }else{
+
+            //                 //displays loop of sentences from npc
+            //                 for (const sentence in npcOne.conversation){
+            //                     //console.log(sentence)
+
+            //                         if (npcOne.conversation.hasOwnProperty(sentence)){
+            //                             //console.log(npcOne.conversation[sentence])
+            //                             //create sentence number variable: sentenceNum
+            //                             let sentenceNum = npcOne.conversation[sentence]
+                                        
+            //                                 //if sentenceNum is 1
+            //                                 if (sentenceNum == npcOne.conversation.sentenceOne){
+            //                                     //console.log('this is sentenceOne')
+                                            
+            //                                     //hero clicks next to progress to next part sentence 2
+            //                                     $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`).delay(1500).hide(function(){
+            //                                         $('#npc-text').text(`${npcOne.conversation.sentenceTwo}`).delay('fast').show(function(){
+            //                                                 $('.hero-text-col').css('display','inline-grid')
+            //                                             })
+            //                                         })
+
+            //                                 // if sentenceNum is 2
+            //                                 }else if(sentenceNum == npcOne.conversation.sentenceTwo){
+            //                                     //console.log('this is sentenceTwo')
+            //                                     // hero is presented a yes or no question
+            //                                     heroDecisionValidation('npcOneConversation')
+                                                
+
+            //                                 } else {
+            //                                     //console.log('this is sentenceThree')
+                                            
+            //                                     //console.log(`This is the hero decision value ${decision}`)
+            //                                     // fix: if decision is not none show this.
+            //                                     // remove existing text. and Add sentence3
+            //                                     //BUG : After the end of sentenceThree or sentenceFour, the loop goes back to first if statement
+            //                                         //I tried `break` at the end of the function, but this is unresponsive
+            //                                         //also tried to add a boolean field at the end of sentenceThree and sentenceFour and turn it to true
+            //                                         //and add an if statement at the top of the for loop : if boolean is true then dont loop: but it didnt work.
+            //                                         //as a workaround I reduced the timeout so that the user doesnt see the loop starting again as the div is turns to `hide` before the loop restarts.
+            //                                         if (decision === '1'){
+            //                                             //console.log('The hero gets an item + farewell message')
+            //                                             //sentenceThree appears
+                                                        
+            //                                             $('#npc-text').text(`${npcOne.conversation.sentenceThree}`);
+            //                                             setTimeout(function() {
+            //                                                 $('.conversation-screen-div').hide(function() {
+            //                                                     $('.second-screen-div').css('display', 'flex');
+            //                                                 });
+            //                                             }, 2000);
+                                                    
+            //                                             //add item to hero object logic
+            //                                             hero.inventory.itemOne.hasItem = true;
+
+                                                        
+            //                                             grayScaleOff()
+                                                        
+            //                                             screenTwoGeneral(hero, npcOne)
+                                                    
+
+            //                                             //conversation panel is moved to hidden.
+            //                                         }
+            //                                         else if (decision === '2') {
+            //                                             //console.log('The hero gets farewell message and no item');
+            //                                             //sentenceThree appears
+            //                                             //issue with delay: delay() didnt seem to have any effect in this context
+            //                                             //I used setTimeout() which worked.
+            //                                             //credit: https://stackoverflow.com/questions/7407935/delay-and-settimeout#:~:text=The%20.,appropriate%20for%20certain%20use%20cases.
+            //                                             $('#npc-text').text(`${npcOne.conversation.sentenceFour}`);
+            //                                             grayScaleOff()
+            //                                             setTimeout(function() {
+            //                                                 $('.conversation-screen-div').hide(function() {
+            //                                                     $('.second-screen-div').css('display', 'flex');
+            //                                                 });
+            //                                             }, 2000);
+
+            //                                         }
+            //                                         else{
+            //                                             console.log('something is wrong with conversation sentence three logic. Or the hero is not at the stage yet.')
+            //                                         }
+            //                                         //npc renders sentenceNum 3 
+            //                                         //hero returns to second screen div
+            //                                 } 
+                                                                    
+            //                         }
+                            
+            //                 } 
+
+            //             }           
+            // }
+
+            function npcConversation(hero, currentNPC, decision){
+                console.log('convo starts')
+                console.log(currentNPC)
                 //At this stage, the hero answered Yes (1)
                 //alert("npcOneConversation()starts!")
                 //logs npcOne.question. Currently doesnt return hero.name
@@ -598,54 +746,52 @@ console.log("connected")
                         $('#hero-img').attr('src',`${hero.avatar}`);
                         $('#hero-text')
 
-
                         //npc
-                        $('#npc-img').attr('src',`${npcOne.avatar.avatarProfile}`)
-                        $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`);
+                        $('#npc-img').attr('src',`${currentNPC.avatar.avatarProfile}`)
+                        $('#npc-text').text(`${currentNPC.conversation.sentenceOne} ${hero.name}!`);
 
+                        //checks which npc the hero is talking to
+                        if (){}else if (){} else{}
                         //checks if hero already has itemOne:
                         if (hero.inventory.itemOne.hasItem == true){
                             //note: could make code drying by placing this better, but cannot see where.
                             $('.hero-text-col').css('display','none')
 
-                            $('#npc-text').text(`${npcOne.conversation.sentenceFive}`);
+                            $('#npc-text').text(`${currentNPC.conversation.sentenceFive}`);
                             setTimeout(function() {
                                 $('.conversation-screen-div').hide()
                                 $('.second-screen-div').css('display', 'flex'); 
                                 $('.validation-screen-div').hide();
                                 grayScaleOff()
-                                
-                                        
-                               
                             }, 2500);
                             
                         }else{
 
                             //displays loop of sentences from npc
-                            for (const sentence in npcOne.conversation){
+                            for (const sentence in currentNPC.conversation){
                                 //console.log(sentence)
 
-                                    if (npcOne.conversation.hasOwnProperty(sentence)){
-                                        //console.log(npcOne.conversation[sentence])
+                                    if (currentNPC.conversation.hasOwnProperty(sentence)){
+                                        //console.log(npc.conversation[sentence])
                                         //create sentence number variable: sentenceNum
-                                        let sentenceNum = npcOne.conversation[sentence]
+                                        let sentenceNum = currentNPC.conversation[sentence]
                                         
                                             //if sentenceNum is 1
-                                            if (sentenceNum == npcOne.conversation.sentenceOne){
+                                            if (sentenceNum == currentNPC.conversation.sentenceOne){
                                                 //console.log('this is sentenceOne')
                                             
                                                 //hero clicks next to progress to next part sentence 2
-                                                $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`).delay(1500).hide(function(){
-                                                    $('#npc-text').text(`${npcOne.conversation.sentenceTwo}`).delay('fast').show(function(){
+                                                $('#npc-text').text(`${currentNPC.conversation.sentenceOne} ${hero.name}!`).delay(1500).hide(function(){
+                                                    $('#npc-text').text(`${currentNPC.conversation.sentenceTwo}`).delay('fast').show(function(){
                                                             $('.hero-text-col').css('display','inline-grid')
                                                         })
                                                     })
 
                                             // if sentenceNum is 2
-                                            }else if(sentenceNum == npcOne.conversation.sentenceTwo){
+                                            }else if(sentenceNum == currentNPC.conversation.sentenceTwo){
                                                 //console.log('this is sentenceTwo')
                                                 // hero is presented a yes or no question
-                                                heroDecisionValidation('npcOneConversation')
+                                                heroDecisionValidation('npcConversation', currentNPC)
                                                 
 
                                             } else {
@@ -663,7 +809,7 @@ console.log("connected")
                                                         //console.log('The hero gets an item + farewell message')
                                                         //sentenceThree appears
                                                         
-                                                        $('#npc-text').text(`${npcOne.conversation.sentenceThree}`);
+                                                        $('#npc-text').text(`${currentNPC.conversation.sentenceThree}`);
                                                         setTimeout(function() {
                                                             $('.conversation-screen-div').hide(function() {
                                                                 $('.second-screen-div').css('display', 'flex');
@@ -671,12 +817,21 @@ console.log("connected")
                                                         }, 2000);
                                                     
                                                         //add item to hero object logic
-                                                        hero.inventory.itemOne.hasItem = true;
+                                                            //could improve logic in future to make it more dynamic
+                                                            //would require a change in how items are handled and attach each item to an npc
+                                                        if (currentNPC === npcOne){
+                                                            console.log('item is given by npcOne')
+                                                            hero.inventory.itemOne.hasItem = true;
+                                                        }else if (currentNPC === npcTwo){
+                                                            console.log('item is given by npcTwo') 
+                                                            hero.inventory.itemTwo.hasItem = true;  
+                                                        }else{
+                                                            console.log('something is not right')   
+                                                        }
 
-                                                        
                                                         grayScaleOff()
                                                         
-                                                        screenTwoGeneral(hero, npcOne)
+                                                        screenTwoGeneral(hero, currentNPC)
                                                     
 
                                                         //conversation panel is moved to hidden.
@@ -687,7 +842,7 @@ console.log("connected")
                                                         //issue with delay: delay() didnt seem to have any effect in this context
                                                         //I used setTimeout() which worked.
                                                         //credit: https://stackoverflow.com/questions/7407935/delay-and-settimeout#:~:text=The%20.,appropriate%20for%20certain%20use%20cases.
-                                                        $('#npc-text').text(`${npcOne.conversation.sentenceFour}`);
+                                                        $('#npc-text').text(`${currentNPC.conversation.sentenceFour}`);
                                                         grayScaleOff()
                                                         setTimeout(function() {
                                                             $('.conversation-screen-div').hide(function() {
