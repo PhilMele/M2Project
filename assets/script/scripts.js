@@ -55,8 +55,8 @@ console.log("connected")
                     Xposition:'100',
                     Yposition:'200',
                     //over xx px 
-                    // Xposition:'220',
-                    // Yposition:'200',
+                    // XpositionFullImage:'220',
+                    // YpositionFullImage:'200',
                     };
 
                     
@@ -102,7 +102,43 @@ console.log("connected")
             };
             console.log(npcOne)
             let npcLifePoints = (npcOne.stats.lifePoints/npcOne.stats.lifePoints)*100
-           
+
+        let npcTwo = { 
+            name: 'The Pirate', 
+            avatar:{
+                avatarMap: 'assets/images/avatars/npc.gif',
+                avatarProfile:'assets/images/avatars/npc.gif'},
+
+            //under 512px
+            Xposition:'150',
+            Yposition:'220',
+
+            //over 512px
+            // Xposition:'337',
+            // Yposition:'300',
+            radius:40,
+            conversation:{
+                sentenceOne:'Hello',
+                sentenceTwo:'Are you looking for this piece of item?',
+                sentenceThree:'It is yours now. Farewell!',
+                sentenceFour:'Farewell then!',
+                sentenceFive:'I already gave you everything I had.',
+            },
+            stats:{
+                damage:{
+                    damageLow : 1,
+                    damageHigh: 5,
+                },
+                lifePoints: 50,
+                reputation: 25,
+                alive: true,
+            }
+            
+
+            };
+            console.log(npcOne)
+
+            let npcTwoLifePoints = (npcTwo.stats.lifePoints/npcTwo.stats.lifePoints)*100  
             
             
             /***
@@ -343,8 +379,9 @@ console.log("connected")
                         $('#item-two-img').css('filter', 'grayscale(0)')
                     }
             
-            //positions NPCs + clickable area 
-                //npcOne - clickable area          
+            //positions NPCs + clickable area
+                //npcOne
+                    //npcOne - clickable area          
                     npcOneClicked = false
                         $('#npcOne-position-avatar-image').click(function(event){
                             //checks if npc is dead or alive
@@ -352,20 +389,41 @@ console.log("connected")
                             if (npcOne.stats.alive == true && !npcOneClicked){   
                                 
                                 npcOneClicked = true
-                                heroPosition(event)
+                                heroPosition(event, npcOne)
                                 
                             }
                         }
-                    )  
-              
-                //npcOne - avatar img position on map
-                let npcOnePositionImage = $('#npcOne-position-avatar-image').
-                    css({left:npcOne.Xposition + "px",top:npcOne.Yposition + "px"})
-           
-            //positions hero
-                //hero - avatar img position on map
-                let heroPositionImage = $('#hero-position-avatar-image').
-                    css({left:hero.Xposition + "px",top:hero.Yposition + "px", }).attr('src',hero.avatar)
+                    ) 
+
+                
+                    //npcOne - avatar img position on map
+                    let npcOnePositionImage = $('#npcOne-position-avatar-image').
+                        css({left:npcOne.Xposition + "px",top:npcOne.Yposition + "px"})
+
+                //npcTwo
+                    //npcOne - clickable area          
+                    npcTwoClicked = false
+                        $('#npcTwo-position-avatar-image').click(function(event){
+                            //checks if npc is dead or alive
+                            //if dead the functions are not triggered
+                            if (npcTwo.stats.alive == true && !npcTwoClicked){   
+                                
+                                npcTwoClicked = true
+                                heroPosition(event, npcTwo)
+                                
+                            }
+                        }
+                    ) 
+
+                
+                    //npcOne - avatar img position on map
+                    let npcTwoPositionImage = $('#npcTwo-position-avatar-image').
+                        css({left:npcTwo.Xposition + "px",top:npcTwo.Yposition + "px"})
+            
+                //positions hero
+                    //hero - avatar img position on map
+                    let heroPositionImage = $('#hero-position-avatar-image').
+                        css({left:hero.Xposition + "px",top:hero.Yposition + "px", }).attr('src',hero.avatar)
       
         }
 
@@ -390,7 +448,7 @@ console.log("connected")
                 /**
                 *Hero's position on screen
                 */
-                function heroPosition(event){
+                function heroPosition(event, npc){
                     //BUG and issues: initial or current position when starts
                         //position() gives me the position of the hero in relation to div, not document.
                         //offset() gives me the position in relation to document. Opted for offset() as it migth be easier 
@@ -405,11 +463,15 @@ console.log("connected")
                         //I need to the offset position (which is relative to the document and not the parent div
                             // Get the offset of the parent element of the clicked area
 
+                    //log npc argument
+                        console.log(npc)
+
                     //define new position based on npc position
-                        let newHeroXPosition = npcOne.Xposition;
-                            console.log(`npcOne.Xposition: ${newHeroXPosition}`)
-                        let newHeroYPosition =  npcOne.Yposition
-                            console.log(`npcOne.Yposition: ${newHeroYPosition}`)
+                    //
+                        let newHeroXPosition = npc.Xposition;
+                            console.log(`npc.Xposition: ${newHeroXPosition}`)
+                        let newHeroYPosition =  npc.Yposition
+                            console.log(`npc.Yposition: ${newHeroYPosition}`)
                            
                     //caupture current hero position    
                         heroXPositionCurrent = hero.Xposition

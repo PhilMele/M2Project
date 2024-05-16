@@ -245,6 +245,15 @@
 
     }
 
+
+    #npcTwo-position-avatar-image {
+
+        content: url('/assets/images/avatars/npc.gif');
+        width:52px;
+        position: absolute;
+
+    }
+
     #hero-position-avatar-image {
         width:52px;
         position: absolute;
