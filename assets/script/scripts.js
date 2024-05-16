@@ -101,13 +101,16 @@ console.log("connected")
             };
 
             console.log(npcOne)
-            let npcLifePoints = (npcOne.stats.lifePoints/npcOne.stats.lifePoints)*100
+            /**
+            *sets npcOneLifePoints in %
+            */
+           
 
         let npcTwo = { 
                 name: 'The Pirate', 
                 avatar:{
-                    avatarMap: 'assets/images/avatars/npc.gif',
-                    avatarProfile:'assets/images/avatars/npc.gif'},
+                    avatarMap: 'assets/images/avatars/npc-2/kate-vashke-gifgif.gif',
+                    avatarProfile:'assets/images/avatars/npc-2/kate-vashke-gifgif.gif'},
 
                 //under 512px
                 Xposition:'150',
@@ -136,8 +139,10 @@ console.log("connected")
                 hasItem: true,
             };
             console.log(npcTwo)
-
-            let npcTwoLifePoints = (npcTwo.stats.lifePoints/npcTwo.stats.lifePoints)*100  
+            /**
+            *sets npcTwoLifePoints in %
+            */
+            
             
             
             /***
@@ -332,7 +337,7 @@ console.log("connected")
             
                 // Call another function with the updated hero object
                 //recurring problem - forget to pass argument in function
-                screenTwoGeneral(hero, npcOne);
+                screenTwoGeneral(hero);
                 updateScreen(); // Update screen after hero name is updated 
             }
         }
@@ -455,7 +460,7 @@ console.log("connected")
         function grayScaleOff(){
             $('.second-screen-div').css('filter', 'grayscale(0)');
         }
-
+        
         /*Intro */
             /*Hero arrives on Screen 2*/
                 /*credit - https://stackoverflow.com/questions/11722400/programmatically-change-the-src-of-an-img-tag*/
@@ -606,135 +611,6 @@ console.log("connected")
             /**
             *When user click on location, a conversation starts
             */
-            // function npcOneConversation(hero, npcOne, decision){
-            //     console.log('convo starts')
-            //     //At this stage, the hero answered Yes (1)
-            //     //alert("npcOneConversation()starts!")
-            //     //logs npcOne.question. Currently doesnt return hero.name
-            //     //console.log(`${npcOne.conversation.sentenceOne} ${hero.name}!`)
-            //         //if yes conversation screen div opens
-
-            //         //set up conversation div
-            //         $('.conversation-screen-div').css('display', 'flex')
-            //         $('.second-screen-div').hide()
-
-            //         //set up rows and cols content for hero and npc
-            //             //hero
-            //             $('#hero-img').attr('src',`${hero.avatar}`);
-            //             $('#hero-text')
-
-
-            //             //npc
-            //             $('#npc-img').attr('src',`${npcOne.avatar.avatarProfile}`)
-            //             $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`);
-
-            //             //checks if hero already has itemOne:
-            //             if (hero.inventory.itemOne.hasItem == true){
-            //                 //note: could make code drying by placing this better, but cannot see where.
-            //                 $('.hero-text-col').css('display','none')
-
-            //                 $('#npc-text').text(`${npcOne.conversation.sentenceFive}`);
-            //                 setTimeout(function() {
-            //                     $('.conversation-screen-div').hide()
-            //                     $('.second-screen-div').css('display', 'flex'); 
-            //                     $('.validation-screen-div').hide();
-            //                     grayScaleOff()
-                                
-                                        
-                               
-            //                 }, 2500);
-                            
-            //             }else{
-
-            //                 //displays loop of sentences from npc
-            //                 for (const sentence in npcOne.conversation){
-            //                     //console.log(sentence)
-
-            //                         if (npcOne.conversation.hasOwnProperty(sentence)){
-            //                             //console.log(npcOne.conversation[sentence])
-            //                             //create sentence number variable: sentenceNum
-            //                             let sentenceNum = npcOne.conversation[sentence]
-                                        
-            //                                 //if sentenceNum is 1
-            //                                 if (sentenceNum == npcOne.conversation.sentenceOne){
-            //                                     //console.log('this is sentenceOne')
-                                            
-            //                                     //hero clicks next to progress to next part sentence 2
-            //                                     $('#npc-text').text(`${npcOne.conversation.sentenceOne} ${hero.name}!`).delay(1500).hide(function(){
-            //                                         $('#npc-text').text(`${npcOne.conversation.sentenceTwo}`).delay('fast').show(function(){
-            //                                                 $('.hero-text-col').css('display','inline-grid')
-            //                                             })
-            //                                         })
-
-            //                                 // if sentenceNum is 2
-            //                                 }else if(sentenceNum == npcOne.conversation.sentenceTwo){
-            //                                     //console.log('this is sentenceTwo')
-            //                                     // hero is presented a yes or no question
-            //                                     heroDecisionValidation('npcOneConversation')
-                                                
-
-            //                                 } else {
-            //                                     //console.log('this is sentenceThree')
-                                            
-            //                                     //console.log(`This is the hero decision value ${decision}`)
-            //                                     // fix: if decision is not none show this.
-            //                                     // remove existing text. and Add sentence3
-            //                                     //BUG : After the end of sentenceThree or sentenceFour, the loop goes back to first if statement
-            //                                         //I tried `break` at the end of the function, but this is unresponsive
-            //                                         //also tried to add a boolean field at the end of sentenceThree and sentenceFour and turn it to true
-            //                                         //and add an if statement at the top of the for loop : if boolean is true then dont loop: but it didnt work.
-            //                                         //as a workaround I reduced the timeout so that the user doesnt see the loop starting again as the div is turns to `hide` before the loop restarts.
-            //                                         if (decision === '1'){
-            //                                             //console.log('The hero gets an item + farewell message')
-            //                                             //sentenceThree appears
-                                                        
-            //                                             $('#npc-text').text(`${npcOne.conversation.sentenceThree}`);
-            //                                             setTimeout(function() {
-            //                                                 $('.conversation-screen-div').hide(function() {
-            //                                                     $('.second-screen-div').css('display', 'flex');
-            //                                                 });
-            //                                             }, 2000);
-                                                    
-            //                                             //add item to hero object logic
-            //                                             hero.inventory.itemOne.hasItem = true;
-
-                                                        
-            //                                             grayScaleOff()
-                                                        
-            //                                             screenTwoGeneral(hero, npcOne)
-                                                    
-
-            //                                             //conversation panel is moved to hidden.
-            //                                         }
-            //                                         else if (decision === '2') {
-            //                                             //console.log('The hero gets farewell message and no item');
-            //                                             //sentenceThree appears
-            //                                             //issue with delay: delay() didnt seem to have any effect in this context
-            //                                             //I used setTimeout() which worked.
-            //                                             //credit: https://stackoverflow.com/questions/7407935/delay-and-settimeout#:~:text=The%20.,appropriate%20for%20certain%20use%20cases.
-            //                                             $('#npc-text').text(`${npcOne.conversation.sentenceFour}`);
-            //                                             grayScaleOff()
-            //                                             setTimeout(function() {
-            //                                                 $('.conversation-screen-div').hide(function() {
-            //                                                     $('.second-screen-div').css('display', 'flex');
-            //                                                 });
-            //                                             }, 2000);
-
-            //                                         }
-            //                                         else{
-            //                                             console.log('something is wrong with conversation sentence three logic. Or the hero is not at the stage yet.')
-            //                                         }
-            //                                         //npc renders sentenceNum 3 
-            //                                         //hero returns to second screen div
-            //                                 } 
-                                                                    
-            //                         }
-                            
-            //                 } 
-
-            //             }           
-            // }
-
             function npcConversation(hero, currentNPC, decision){
                 console.log('convo starts')
                 console.log(currentNPC)
@@ -873,117 +749,7 @@ console.log("connected")
                         } else{
                             console.log('something is wrong with currentNPC.hasItem  logic')
                         }
-                    //checks if hero already has itemOne:
-                    // if (hero.inventory.itemOne.hasItem == true){
-                    //     //note: could make code drying by placing this better, but cannot see where.
-                    //     $('.hero-text-col').css('display','none')
-
-                    //     $('#npc-text').text(`${currentNPC.conversation.sentenceFive}`);
-                    //     setTimeout(function() {
-                    //         $('.conversation-screen-div').hide()
-                    //         $('.second-screen-div').css('display', 'flex'); 
-                    //         $('.validation-screen-div').hide();
-                    //         grayScaleOff()
-                    //     }, 2500);
-                        
-                    // }else{
-
-                    //     //displays loop of sentences from npc
-                    //     for (const sentence in currentNPC.conversation){
-                    //         //console.log(sentence)
-
-                    //             if (currentNPC.conversation.hasOwnProperty(sentence)){
-                    //                 //console.log(npc.conversation[sentence])
-                    //                 //create sentence number variable: sentenceNum
-                    //                 let sentenceNum = currentNPC.conversation[sentence]
-                                    
-                    //                     //if sentenceNum is 1
-                    //                     if (sentenceNum == currentNPC.conversation.sentenceOne){
-                    //                         //console.log('this is sentenceOne')
-                                        
-                    //                         //hero clicks next to progress to next part sentence 2
-                    //                         $('#npc-text').text(`${currentNPC.conversation.sentenceOne} ${hero.name}!`).delay(1500).hide(function(){
-                    //                             $('#npc-text').text(`${currentNPC.conversation.sentenceTwo}`).delay('fast').show(function(){
-                    //                                     $('.hero-text-col').css('display','inline-grid')
-                    //                                 })
-                    //                             })
-
-                    //                     // if sentenceNum is 2
-                    //                     }else if(sentenceNum == currentNPC.conversation.sentenceTwo){
-                    //                         //console.log('this is sentenceTwo')
-                    //                         // hero is presented a yes or no question
-                    //                         heroDecisionValidation('npcConversation', currentNPC)
-                                            
-
-                    //                     } else {
-                    //                         //console.log('this is sentenceThree')
-                                        
-                    //                         //console.log(`This is the hero decision value ${decision}`)
-                    //                         // fix: if decision is not none show this.
-                    //                         // remove existing text. and Add sentence3
-                    //                         //BUG : After the end of sentenceThree or sentenceFour, the loop goes back to first if statement
-                    //                             //I tried `break` at the end of the function, but this is unresponsive
-                    //                             //also tried to add a boolean field at the end of sentenceThree and sentenceFour and turn it to true
-                    //                             //and add an if statement at the top of the for loop : if boolean is true then dont loop: but it didnt work.
-                    //                             //as a workaround I reduced the timeout so that the user doesnt see the loop starting again as the div is turns to `hide` before the loop restarts.
-                    //                             if (decision === '1'){
-                    //                                 //console.log('The hero gets an item + farewell message')
-                    //                                 //sentenceThree appears
-                                                    
-                    //                                 $('#npc-text').text(`${currentNPC.conversation.sentenceThree}`);
-                    //                                 setTimeout(function() {
-                    //                                     $('.conversation-screen-div').hide(function() {
-                    //                                         $('.second-screen-div').css('display', 'flex');
-                    //                                     });
-                    //                                 }, 2000);
-                                                
-                    //                                 //add item to hero object logic
-                    //                                     //could improve logic in future to make it more dynamic
-                    //                                     //would require a change in how items are handled and attach each item to an npc
-                    //                                 if (currentNPC === npcOne){
-                    //                                     console.log('item is given by npcOne')
-                    //                                     hero.inventory.itemOne.hasItem = true;
-                    //                                 }else if (currentNPC === npcTwo){
-                    //                                     console.log('item is given by npcTwo') 
-                    //                                     hero.inventory.itemTwo.hasItem = true;  
-                    //                                 }else{
-                    //                                     console.log('something is not right')   
-                    //                                 }
-
-                    //                                 grayScaleOff()
-                                                    
-                    //                                 screenTwoGeneral(hero, currentNPC)
-                                                
-
-                    //                                 //conversation panel is moved to hidden.
-                    //                             }
-                    //                             else if (decision === '2') {
-                    //                                 //console.log('The hero gets farewell message and no item');
-                    //                                 //sentenceThree appears
-                    //                                 //issue with delay: delay() didnt seem to have any effect in this context
-                    //                                 //I used setTimeout() which worked.
-                    //                                 //credit: https://stackoverflow.com/questions/7407935/delay-and-settimeout#:~:text=The%20.,appropriate%20for%20certain%20use%20cases.
-                    //                                 $('#npc-text').text(`${currentNPC.conversation.sentenceFour}`);
-                    //                                 grayScaleOff()
-                    //                                 setTimeout(function() {
-                    //                                     $('.conversation-screen-div').hide(function() {
-                    //                                         $('.second-screen-div').css('display', 'flex');
-                    //                                     });
-                    //                                 }, 2000);
-
-                    //                             }
-                    //                             else{
-                    //                                 console.log('something is wrong with conversation sentence three logic. Or the hero is not at the stage yet.')
-                    //                             }
-                    //                             //npc renders sentenceNum 3 
-                    //                             //hero returns to second screen div
-                    //                     } 
-                                                                
-                    //             }
-                        
-                    //     } 
-
-                    // }           
+            
             }
 
 
@@ -1042,6 +808,7 @@ console.log("connected")
         function fight(hero, currentNPC){
             console.log('fight kicks off!')
             console.log(currentNPC.avatar.avatarMap)
+            console.log(currentNPC.name)
             $('.fight-screen-div').css('display', 'flex')
             $('.second-screen-div').hide()
             //the below section reset is needed for a second fight
@@ -1084,104 +851,125 @@ console.log("connected")
         
             console.log('you are inside the loop')
 
+                        console.log(currentNPC.name)
+                        console.log(currentNPC.stats.lifePoints)
+                        console.log(npcLifePoints)
+
             //hero's turn
                 //select value between attack and heal
                 //show action panel:
-                $('#submit-hero-action-button').click(function(){
-                    let action = $('input[name="hero-fight-action"]:checked').val()
-                    console.log(action)
 
-                    if (action == '1'){
+                    $('#submit-hero-action-button').click(function(){
+                        console.log("Button clicked - Current NPC:", currentNPC ? currentNPC.name : 'None')
+                        let action = $('input[name="hero-fight-action"]:checked').val()
+                        console.log(action)
 
-                        //if attack is selected
-                        console.log(`NPC has ${npcLifePoints} life points left`)
-                        console.log(`${action} is selected. Attack time!`)
+                        if (action == '1'){
+                        console.log(currentNPC.name)
+                        console.log(currentNPC.stats.lifePoints)
+                        console.log(npcLifePoints)
 
-                        //play attack function
-                        const heroDamage = attack(hero, currentNPC)
-                            console.log(`Hero hits NPC with: ${heroDamage} damage`)
-
-                        //describe attack in #comment-fight
-                        commentFightAppend(`${hero.name} hits with ${heroDamage} damages.`)
-
-
-                        //sets background to red
-                        setTimeout(function() {
-                                $('#npc-avatar-fight').css('background-color', '');
-                            }, 500);    
-
-                        setTimeout(function() {
-                            //reverts img back to idl status after 1 second
-                            $('#hero-avatar-fight').attr('src', `${hero.status.idle}`);
-                            console.log(`back to idle now after 1 second`)
-
-                            
-                        }, 1500);
-
-                        //shows submit button to give impression of turn based fight
-                            $('.action-validation-container').show()
-                                    
-                        //reduce npc hp in actual points
-                        npcLifePoints = npcLifePoints - heroDamage
+                            //if attack is selected
                             console.log(`NPC has ${npcLifePoints} life points left`)
+                            console.log(`${action} is selected. Attack time!`)
 
-                        //reduce npc hps in %of initial bar length
-                            console.log(`currentNPC.stats.lifePoints: ${currentNPC.stats.lifePoints}`)
-                            npcLifePointsInPercentage = (npcLifePoints/currentNPC.stats.lifePoints)*100
-                                console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
-                            $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
-                        
-                        console.log(`At this stage hero has ${heroLifePoints} life points left!`)
+                            //play attack function
+                            const heroDamage = attack(hero, currentNPC)
+                                console.log(`Hero hits NPC with: ${heroDamage} damage`)
 
-                        if (npcLifePoints > 0){
+                            //describe attack in #comment-fight
+                            commentFightAppend(`${hero.name} hits with ${heroDamage} damages.`)
+
+
+                            //sets background to red
+                            setTimeout(function() {
+                                    $('#npc-avatar-fight').css('background-color', '');
+                                }, 500);    
+
+                            setTimeout(function() {
+                                //reverts img back to idl status after 1 second
+                                $('#hero-avatar-fight').attr('src', `${hero.status.idle}`);
+                                console.log(`back to idle now after 1 second`)
+
+                                
+                            }, 1500);
+
+                            //shows submit button to give impression of turn based fight
+                                $('.action-validation-container').show()
+                                        
+                            //reduce npc hp in actual points
+                            npcLifePoints = npcLifePoints - heroDamage
+                                console.log(`NPC has ${npcLifePoints} life points left`)
+
+                            //reduce npc hps in %of initial bar length
+                                console.log(`currentNPC.stats.lifePoints: ${currentNPC.stats.lifePoints}`)
+                                npcLifePointsInPercentage = (npcLifePoints/currentNPC.stats.lifePoints)*100
+                                    console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
+                                $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
+                            
+                            console.log(`At this stage hero has ${heroLifePoints} life points left!`)
+
+                            if (npcLifePoints > 0){
+                                //updates heroLifePoints after the npcTurn
+                                heroLifePoints = npcTurn(hero, currentNPC, heroLifePoints);
+                                console.log('npc has more than 0 points')
+                                
+
+                            }else{
+                                    console.log(`${currentNPC.name} is kaboom!`)
+                                    console.log(` and hero has ${heroLifePoints} life points left!`)
+                                    
+                                    //bug: after first fight currentNPC was getting reloaded as the first npc defeated
+                                    //this is because  $('#submit-hero-action-button').click(function()
+                                    //kept the memory of the first npc defeated and added it as soon as I triggered the event
+                                    //documentation: https://api.jquery.com/off/ (plus a lot of other sources including stackover flow posts)
+                                    //reset currentNPC for next fight
+                                    $('#submit-hero-action-button').off('click'); 
+
+                                    //npcOneDefeated(hero, heroLifePoints)
+                                    npcDefeated(hero, heroLifePoints)
+                            }
+
+                        }else if(action == '2'){
+                        //if heal is selected
+                            console.log(`${action} is selected. Heal time!`)
+
+                            //play heal function
+                            const heroHeal = healing(hero, currentNPC)
+                            
+                            //set .action-validation-container to show to give turn based impression
+                            $('.action-validation-container').show()
+                            
+                            //increase hero hp
+                            heroLifePoints = heroLifePoints + heroHeal;
+                                console.log(heroLifePoints)
+
+                            //describe heal points recieved in #comment-fight
+                            commentFightAppend(`${hero.name} gains ${heroHeal} life points.`)
+
+                            //limits HP increase to character's max life    
+                            if (heroLifePoints > initialHeroLifePoints){
+                                console.log('Thats too many HP for you my friend!')
+                                heroLifePoints = initialHeroLifePoints
+                            }
+                                console.log(`new lifepoints : ${heroLifePoints}`)
+
+                            //define remaing life points after attack in % of initial lifebar width
+                            heroLifePointsInPercentage = (heroLifePoints/hero.stats.lifePoints)*100
+                                $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
+
                             //updates heroLifePoints after the npcTurn
                             heroLifePoints = npcTurn(hero, currentNPC, heroLifePoints);
 
-                        }else{
-                                console.log(`${currentNPC.name} is kaboom!`)
-                                console.log(` and hero has ${heroLifePoints} life points left!`)
-                                
-                                //npcOneDefeated(hero, heroLifePoints)
-                                npcDefeated(hero, heroLifePoints)
+
                         }
 
-                    }else if(action == '2'){
-                    //if heal is selected
-                        console.log(`${action} is selected. Heal time!`)
+                        else{
+                            console.log('Something is wrong')
+                        }  
+                              
+                    })
 
-                        //play heal function
-                        const heroHeal = healing(hero, currentNPC)
-                        
-                        //set .action-validation-container to show to give turn based impression
-                        $('.action-validation-container').show()
-                        
-                        //increase hero hp
-                        heroLifePoints = heroLifePoints + heroHeal;
-                            console.log(heroLifePoints)
-
-                        //describe heal points recieved in #comment-fight
-                        commentFightAppend(`${hero.name} gains ${heroHeal} life points.`)
-
-                        //limits HP increase to character's max life    
-                        if (heroLifePoints > initialHeroLifePoints){
-                            console.log('Thats too many HP for you my friend!')
-                            heroLifePoints = initialHeroLifePoints
-                        }
-                            console.log(`new lifepoints : ${heroLifePoints}`)
-
-                        //define remaing life points after attack in % of initial lifebar width
-                        heroLifePointsInPercentage = (heroLifePoints/hero.stats.lifePoints)*100
-                            $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
-
-                        //updates heroLifePoints after the npcTurn
-                        heroLifePoints = npcTurn(hero, currentNPC, heroLifePoints);
-
-
-                    }
-                    else{
-                        console.log('Something is wrong')
-                    }         
-                })
         }
 
         function npcTurn(hero, currentNPC, heroLifePoints){
@@ -1210,55 +998,8 @@ console.log("connected")
             return heroLifePoints;  
         }
 
-        // function npcOneDefeated(hero, heroLifePoints){
-            
-        //     //empty comment section
-        //     $('#fight-comment-1').text('')
-        //     $('#fight-comment-2').text('')
-        //     $('#fight-comment-3').text('')
-
-        //      // add item to inventory (turn item to true)
-        //         $('#fight-comment-1').append(`${npcOne.name} has been defeated!`)
-
-
-        //     // add item to inventory (turn item to true)
-        //         hero.inventory.itemOne.hasItem = true;
-        //         $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemOne.name}`)
-
-        //     //changes avatar picture for tombstone
-        //         $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
-
-        //     //reduce reputation points
-           
-        //         hero.stats.reputation -= npcOne.stats.reputation
-
-        //         console.log(`this is how much heroLifePoints there is in npcOneDefeated() : ${heroLifePoints}`)
-
-        //         hero.stats.lifePoints = heroLifePoints
-            
-        //     //sets npc alive to false
-        //         npcOne.stats.alive = false
-
-        //     //change npc avatar to tombstone and hide life bar + label
-        //         $('#npc-avatar-fight').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
-        //         $('#life-bar').hide()
-        //         $('#npc-life-point-label').hide()
-        //         $('.action-validation-container').css('display','none')
-        //         console.log(`.action-validation-container is hidden`)
-
-        //     //bring user back to screen two after 2 seconds
-        //         setTimeout(function() {
-        //             $('.fight-screen-div').hide(function() {
-        //                 $('.second-screen-div').css('display', 'flex');
-        //             });
-        //         }, 5000);
-        //         grayScaleOff()
-        //         screenTwoGeneral(hero, npcOne)
-
-
-        // }
-
         function npcDefeated(hero, heroLifePoints){
+            
             
             //empty comment section
             $('#fight-comment-1').text('')
@@ -1268,9 +1009,6 @@ console.log("connected")
              // add item to inventory (turn item to true)
                 $('#fight-comment-1').append(`${currentNPC.name} has been defeated!`)
 
-
-            
-
             //changes avatar picture for tombstone
                 if (currentNPC=== npcOne){
                     // add item to inventory (turn item to true)
@@ -1278,6 +1016,7 @@ console.log("connected")
                     $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemOne.name}`)
                     $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
                     }
+
                 if (currentNPC=== npcTwo){
                     // add item to inventory (turn item to true)
                         hero.inventory.itemTwo.hasItem = true;
