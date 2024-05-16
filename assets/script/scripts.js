@@ -194,17 +194,15 @@ console.log("connected")
                     grayScaleOff()
                 } else if (decision === '1') {
                     // Value 1 has been selected and the conversation function can start
-                    // !!!!!this needs to be changed to handle which npc is conversation is redirected to:
+                    
                     $('.validation-screen-div').hide();
-                    //npcOneConversation(hero, npcOne)
-                    //I could code out npcOneConversation and create npcConversation and see what happens
                     console.log('next line shows currentNPC')
                     console.log(currentNPC)
                     npcConversation(hero, currentNPC)
                 } else if (decision === '3'){
                     // !!! this needs to be changed to handle which npc is conversation is redirected to:
                     $('.validation-screen-div').hide()
-                    fight(hero, npcOne)
+                    fight(hero, currentNPC)
                 }
             });
 
@@ -544,7 +542,7 @@ console.log("connected")
                         }else{
                             console.log(`dont forget to add the boss`)
                         }
-                        
+
                         if(hero.inventory.itemTwo.hasItem == true){
                             quest.missionTwo.completed = true
                             console.log(`quest.missionTwo.completed = ${quest.missionTwo.completed}`)
@@ -998,7 +996,7 @@ console.log("connected")
         /**
         *Add life points to hero
         */
-        function healing(hero, npcOne){
+        function healing(hero, currentNPC){
 
             //font-end management
 
@@ -1011,7 +1009,7 @@ console.log("connected")
         /**
         *Reduce life points to opponent
         */
-        function attack(hero, npcOne){
+        function attack(hero, currentNPC){
 
             //define current hero idle img displayed witing #hero-avatar-fight
             let heroIdleImg = hero.status.idle
@@ -1041,10 +1039,20 @@ console.log("connected")
             return attackDamage;
         }
         
-        function fight(hero, npcOne){
+        function fight(hero, currentNPC){
             console.log('fight kicks off!')
+            console.log(currentNPC.avatar.avatarMap)
             $('.fight-screen-div').css('display', 'flex')
             $('.second-screen-div').hide()
+            //the below section reset is needed for a second fight
+            //it resets the message boxes to empty
+            //and move all id and classes moved to hide by to show() from npcDefeated()
+                $('#life-bar').show()
+                $('#npc-life-point-label').show()
+                $('.action-validation-container').show()
+                $('#fight-comment-1').text('')
+                $('#fight-comment-2').text('')
+                $('#fight-comment-3').text('')
             
             //fill progress bar with lifepoints
             //Hero
@@ -1062,9 +1070,9 @@ console.log("connected")
                 /**
                 *define npc life points left in % of full bar length
                 */
-                let npcLifePoints = npcOne.stats.lifePoints
+                let npcLifePoints = currentNPC.stats.lifePoints
                         console.log(npcLifePoints)
-                let npcLifePointsInPercentage = (npcOne.stats.lifePoints/npcOne.stats.lifePoints)*100
+                let npcLifePointsInPercentage = (currentNPC.stats.lifePoints/currentNPC.stats.lifePoints)*100
                         console.log(npcLifePointsInPercentage)
                 $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
 
@@ -1072,7 +1080,7 @@ console.log("connected")
             //Hero
                 $('#hero-avatar-fight').attr('src',`${hero.status.idle}`);
             //NPC
-                $('#npc-avatar-fight').attr('src',`${npcOne.avatar.avatarMap}`);
+                $('#npc-avatar-fight').attr('src',`${currentNPC.avatar.avatarMap}`);
         
             console.log('you are inside the loop')
 
@@ -1090,7 +1098,7 @@ console.log("connected")
                         console.log(`${action} is selected. Attack time!`)
 
                         //play attack function
-                        const heroDamage = attack(hero, npcOne)
+                        const heroDamage = attack(hero, currentNPC)
                             console.log(`Hero hits NPC with: ${heroDamage} damage`)
 
                         //describe attack in #comment-fight
@@ -1118,8 +1126,8 @@ console.log("connected")
                             console.log(`NPC has ${npcLifePoints} life points left`)
 
                         //reduce npc hps in %of initial bar length
-                            console.log(`npcOne.stats.lifePoints: ${npcOne.stats.lifePoints}`)
-                            npcLifePointsInPercentage = (npcLifePoints/npcOne.stats.lifePoints)*100
+                            console.log(`currentNPC.stats.lifePoints: ${currentNPC.stats.lifePoints}`)
+                            npcLifePointsInPercentage = (npcLifePoints/currentNPC.stats.lifePoints)*100
                                 console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
                             $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
                         
@@ -1127,13 +1135,14 @@ console.log("connected")
 
                         if (npcLifePoints > 0){
                             //updates heroLifePoints after the npcTurn
-                            heroLifePoints = npcTurn(hero, npcOne, heroLifePoints);
+                            heroLifePoints = npcTurn(hero, currentNPC, heroLifePoints);
 
                         }else{
-                                console.log(`${npcOne.name} is kaboom!`)
+                                console.log(`${currentNPC.name} is kaboom!`)
                                 console.log(` and hero has ${heroLifePoints} life points left!`)
                                 
-                                npcOneDefeated(hero, heroLifePoints) 
+                                //npcOneDefeated(hero, heroLifePoints)
+                                npcDefeated(hero, heroLifePoints)
                         }
 
                     }else if(action == '2'){
@@ -1141,7 +1150,7 @@ console.log("connected")
                         console.log(`${action} is selected. Heal time!`)
 
                         //play heal function
-                        const heroHeal = healing(hero, npcOne)
+                        const heroHeal = healing(hero, currentNPC)
                         
                         //set .action-validation-container to show to give turn based impression
                         $('.action-validation-container').show()
@@ -1165,7 +1174,7 @@ console.log("connected")
                             $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
 
                         //updates heroLifePoints after the npcTurn
-                        heroLifePoints = npcTurn(hero, npcOne, heroLifePoints);
+                        heroLifePoints = npcTurn(hero, currentNPC, heroLifePoints);
 
 
                     }
@@ -1175,10 +1184,10 @@ console.log("connected")
                 })
         }
 
-        function npcTurn(hero, npcOne, heroLifePoints){
+        function npcTurn(hero, currentNPC, heroLifePoints){
             console.log('Its the NPC turn now from function')
-            let npcMaxDamage = npcOne.stats.damage.damageHigh;
-            let npcLowDamage = npcOne.stats.damage.damageLow;
+            let npcMaxDamage = currentNPC.stats.damage.damageHigh;
+            let npcLowDamage = currentNPC.stats.damage.damageLow;
             //define NPC damages     
                 let npcDamage = Math.floor(Math.random() * ( npcMaxDamage - npcLowDamage + 1))+ npcLowDamage;
                     console.log(`NPC attacks: ${npcDamage} damage`)
@@ -1193,7 +1202,7 @@ console.log("connected")
                     $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
             
             //describe attack in #comment-fight
-            commentFightAppend(`${npcOne.name} hits with ${npcDamage} damage. You have ${heroLifePoints} life points left.`)
+            commentFightAppend(`${currentNPC.name} hits with ${npcDamage} damage. You have ${heroLifePoints} life points left.`)
 
             if (heroLifePoints <= 0){
                 gameover()
@@ -1201,7 +1210,55 @@ console.log("connected")
             return heroLifePoints;  
         }
 
-        function npcOneDefeated(hero, heroLifePoints){
+        // function npcOneDefeated(hero, heroLifePoints){
+            
+        //     //empty comment section
+        //     $('#fight-comment-1').text('')
+        //     $('#fight-comment-2').text('')
+        //     $('#fight-comment-3').text('')
+
+        //      // add item to inventory (turn item to true)
+        //         $('#fight-comment-1').append(`${npcOne.name} has been defeated!`)
+
+
+        //     // add item to inventory (turn item to true)
+        //         hero.inventory.itemOne.hasItem = true;
+        //         $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemOne.name}`)
+
+        //     //changes avatar picture for tombstone
+        //         $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+
+        //     //reduce reputation points
+           
+        //         hero.stats.reputation -= npcOne.stats.reputation
+
+        //         console.log(`this is how much heroLifePoints there is in npcOneDefeated() : ${heroLifePoints}`)
+
+        //         hero.stats.lifePoints = heroLifePoints
+            
+        //     //sets npc alive to false
+        //         npcOne.stats.alive = false
+
+        //     //change npc avatar to tombstone and hide life bar + label
+        //         $('#npc-avatar-fight').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+        //         $('#life-bar').hide()
+        //         $('#npc-life-point-label').hide()
+        //         $('.action-validation-container').css('display','none')
+        //         console.log(`.action-validation-container is hidden`)
+
+        //     //bring user back to screen two after 2 seconds
+        //         setTimeout(function() {
+        //             $('.fight-screen-div').hide(function() {
+        //                 $('.second-screen-div').css('display', 'flex');
+        //             });
+        //         }, 5000);
+        //         grayScaleOff()
+        //         screenTwoGeneral(hero, npcOne)
+
+
+        // }
+
+        function npcDefeated(hero, heroLifePoints){
             
             //empty comment section
             $('#fight-comment-1').text('')
@@ -1209,29 +1266,39 @@ console.log("connected")
             $('#fight-comment-3').text('')
 
              // add item to inventory (turn item to true)
-                $('#fight-comment-1').append(`${npcOne.name} has been defeated!`)
+                $('#fight-comment-1').append(`${currentNPC.name} has been defeated!`)
 
 
-            // add item to inventory (turn item to true)
-                hero.inventory.itemOne.hasItem = true;
-                $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemOne.name}`)
+            
 
             //changes avatar picture for tombstone
-                $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+                if (currentNPC=== npcOne){
+                    // add item to inventory (turn item to true)
+                        hero.inventory.itemOne.hasItem = true;
+                    $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemOne.name}`)
+                    $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+                    }
+                if (currentNPC=== npcTwo){
+                    // add item to inventory (turn item to true)
+                        hero.inventory.itemTwo.hasItem = true;
+                    $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemTwo.name}`)
+                    $('#npcTwo-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+                    }
+                
 
             //reduce reputation points
            
-                hero.stats.reputation -= npcOne.stats.reputation
+                hero.stats.reputation -= currentNPC.stats.reputation
 
                 console.log(`this is how much heroLifePoints there is in npcOneDefeated() : ${heroLifePoints}`)
 
                 hero.stats.lifePoints = heroLifePoints
             
             //sets npc alive to false
-                npcOne.stats.alive = false
+                currentNPC.stats.alive = false
 
             //change npc avatar to tombstone and hide life bar + label
-                $('#npc-avatar-fight').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+                $('#npc-avatar-fight').attr('src', '/assets/images/avatars/dead-npc.jpg');
                 $('#life-bar').hide()
                 $('#npc-life-point-label').hide()
                 $('.action-validation-container').css('display','none')
@@ -1244,7 +1311,7 @@ console.log("connected")
                     });
                 }, 5000);
                 grayScaleOff()
-                screenTwoGeneral(hero, npcOne)
+                screenTwoGeneral(hero, currentNPC)
 
 
         }
