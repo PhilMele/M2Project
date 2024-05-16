@@ -135,7 +135,7 @@ console.log("connected")
                 },
                 hasItem: true,
             };
-            console.log(npcOne)
+            console.log(npcTwo)
 
             let npcTwoLifePoints = (npcTwo.stats.lifePoints/npcTwo.stats.lifePoints)*100  
             
@@ -168,6 +168,7 @@ console.log("connected")
             mission: `Eliminate the boss`,
             },
     }
+    console.log(quest)
 
 /*Event management*/
 
@@ -361,7 +362,7 @@ console.log("connected")
             questProgress(hero)
 
             //Advise hero on next mission to complete quest
-            questNextAction()
+            questNextAction(quest)
 
             //positions h1
             let missionTitle = $('#mission-title').text(`${hero.name}'s epic adventure`);
@@ -539,8 +540,14 @@ console.log("connected")
                     //sets if mission is completed or not
                         if (hero.inventory.itemOne.hasItem == true){
                             quest.missionOne.completed = true
-                        }else if(hero.inventory.itemTwo.hasItem == true){
+                            console.log(`quest.missionOne.completed = ${quest.missionOne.completed}`)
+                        }else{
+                            console.log(`dont forget to add the boss`)
+                        }
+                        
+                        if(hero.inventory.itemTwo.hasItem == true){
                             quest.missionTwo.completed = true
+                            console.log(`quest.missionTwo.completed = ${quest.missionTwo.completed}`)
                         }else{
                             console.log(`dont forget to add the boss`)
                         }
@@ -568,7 +575,7 @@ console.log("connected")
             /**
             *Manages display message of next mission to hero to complete quest
             */
-            function questNextAction(){
+            function questNextAction(quest){
                 
                 //loops through quest object to extract all mission
                 for (const nextAction in quest){
@@ -584,7 +591,9 @@ console.log("connected")
 
                             //append first mission  that is not completed (false) in list to #next-action
                             $('#next-action').text(`Next Mission: ${quest[nextAction].mission}`)
+                            
                             break;
+                            
                         }
                     }   
                 }
@@ -821,9 +830,11 @@ console.log("connected")
                                                         if (currentNPC === npcOne){
                                                             console.log('item is given by npcOne')
                                                             hero.inventory.itemOne.hasItem = true;
+                                                            currentNPC.hasItem = false
                                                         }else if (currentNPC === npcTwo){
                                                             console.log('item is given by npcTwo') 
-                                                            hero.inventory.itemTwo.hasItem = true;  
+                                                            hero.inventory.itemTwo.hasItem = true; 
+                                                            currentNPC.hasItem = false 
                                                         }else{
                                                             console.log('something is not right')   
                                                         }
