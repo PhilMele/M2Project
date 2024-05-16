@@ -48,6 +48,10 @@
            
     }
 
+    .inline-grid{
+        display: inline-grid;
+    }
+
     .validation-screen-div{
         display: none;
         position: relative;
@@ -253,6 +257,8 @@
             height: var(--height);
 
         }
+
+        
 
         .conversation-row{
             background-color:black;

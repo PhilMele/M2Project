@@ -417,8 +417,12 @@ console.log("connected")
                         heroYPositionCurrent = hero.Yposition
                             console.log(`heroYPositionCurrent: ${heroYPositionCurrent}`)
 
+                    //create variable to generate space between npc and hero
+                    let npcHeroDistance = 50
+
                     //calculate distance between current to new position in pixels
-                        xDistance = newHeroXPosition - heroXPositionCurrent
+                    //and deduct {npcHeroDistance} left to avoid two images being on top of each other
+                        xDistance = newHeroXPosition - heroXPositionCurrent - npcHeroDistance
                         yDistance = newHeroYPosition - heroYPositionCurrent
                     
                     //animation from old to new position
@@ -427,7 +431,8 @@ console.log("connected")
                                 top: `+=${yDistance}px`,
                             }, 1000, function(){
                                 //update hero position object position
-                                hero.Xposition = newHeroXPosition
+                                //and deduct {npcHeroDistance} left to avoid two images being on top of each other
+                                hero.Xposition = newHeroXPosition - npcHeroDistance
                                 hero.Yposition = newHeroYPosition
 
                                 console.log('the hero is in position')
