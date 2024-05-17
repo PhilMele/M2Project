@@ -158,11 +158,12 @@ console.log("connected")
             // Yposition:'300',
             radius:40,
             conversation:{
-                sentenceOne:'oi!',
-                sentenceTwo:'Are you looking for this piece of item?',
-                sentenceThree:'It is yours now. Farewell!',
-                sentenceFour:'Farewell then!',
-                sentenceFive:'I already gave you everything I had.',
+                sentenceOne:'I see you have what I asked.',
+                sentenceTwo:'Give these to me, and I will make you stronger',
+                sentenceThree:'You are now ready for battle. Farewell',
+                sentenceFour:'Come back, if you change your mind.',
+                sentenceFive:`Go on ${hero.name}, time to face your enemy.`,
+                sentenceSix:`Bring me ${hero.inventory.itemOne.name} and ${hero.inventory.itemTwo.name}, I will make you strong.`,
             },
             stats:{
                 damage:{
@@ -174,6 +175,8 @@ console.log("connected")
                 alive: true,
             },
             hasItem: true,
+
+            
         };
         console.log(npcThree)    
             
@@ -202,6 +205,10 @@ console.log("connected")
             mission: `Collect ${hero.inventory.itemTwo.name}`,
             },
         missionThree :{
+            completed: false,
+            mission: `Talk to ${npcThree.name}`,
+            },
+        missionFour :{
             completed: false,
             mission: `Eliminate the boss`,
             },
@@ -610,6 +617,14 @@ console.log("connected")
                         }else{
                             console.log(`dont forget to add the boss`)
                         }
+
+                        if(hero.inventory.itemThree.hasItem == true){
+                            quest.missionThree.completed = true
+                            console.log(`quest.missionTwo.completed = ${quest.missionThree.completed}`)
+                        }else{
+                            console.log(`dont forget to add the boss`)
+                        }
+
                     //calculte how many missions are true
                     /*credit for counting the counting loop of true keys : https://stackoverflow.com/questions/52846805/count-the-number-of-trues-in-a-javascript-object*/
                     count = 0
@@ -660,7 +675,7 @@ console.log("connected")
 
 
 
-        /*Mission 1*/
+        /*Mission 1 & 2*/
             /*Credits - for .hasOwnProperty used to loop through sentences - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty*/
             /*Credits - extra credits for sentence loops : https://stackoverflow.com/questions/8312459/iterate-through-object-properties*/
             /*Credits - change one sentence to another : https://stackoverflow.com/questions/37809591/jquery-how-can-showint-text-and-hide-then-showing-another */
@@ -691,6 +706,7 @@ console.log("connected")
                     console.log(`current NPC has item = ${currentNPC.hasItem}`)
 
                     //checks which npc the hero is talking to
+                        //if npc is npcOne or npcTwo 
                         if (currentNPC.hasItem == false){
                             //note: could make code drying by placing this better, but cannot see where.
                             $('.hero-text-col').css('display','none')
@@ -703,7 +719,16 @@ console.log("connected")
                                 grayScaleOff()
                             }, 2500);
                         
-                        }else if (currentNPC.hasItem == true){
+                        }
+                        //if hero does not have itemOne and itemTwo and currentNPC is npcThree
+   
+                        //add if statement if npcThree gave itemThree
+
+                        //handles conversation with npc for hero to recieve object
+                            //if hero talks to npcOne and npcTwo and npc has item
+                            //Or
+                            //if f hero talks to npcThree and npc has item and hero has itemOne and itemTwo
+                        else if (currentNPC.hasItem == true){
                             
                             //displays loop of sentences from npc
                             for (const sentence in currentNPC.conversation){
@@ -809,7 +834,7 @@ console.log("connected")
             }
 
 
-        /*Mission 2*/
+        /*Mission 3*/
 
 
     /*Third Screen*/
