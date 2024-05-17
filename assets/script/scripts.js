@@ -36,6 +36,11 @@ console.log("connected")
                             hasItem: false,
                             itemImg: 'assets/images/items/itemTwo.webp',
                         },
+                        itemThree:{
+                            name: 'item3',
+                            hasItem: false,
+                            itemImg: '',
+                        },
                         
                         },
                     stats:{
@@ -101,16 +106,14 @@ console.log("connected")
             };
 
             console.log(npcOne)
-            /**
-            *sets npcOneLifePoints in %
-            */
+
            
 
         let npcTwo = { 
                 name: 'The Pirate', 
                 avatar:{
-                    avatarMap: 'assets/images/avatars/npc-2/kate-vashke-gifgif.gif',
-                    avatarProfile:'assets/images/avatars/npc-2/kate-vashke-gifgif.gif'},
+                    avatarMap: 'assets/images/avatars/npc-2/npc-2-idle.gif',
+                    avatarProfile:'assets/images/avatars/npc-2/npc-2-idle.gif'},
 
                 //under 512px
                 Xposition:'150',
@@ -139,10 +142,40 @@ console.log("connected")
                 hasItem: true,
             };
             console.log(npcTwo)
-            /**
-            *sets npcTwoLifePoints in %
-            */
-            
+
+        let npcThree = { 
+            name: 'The Mage', 
+            avatar:{
+                avatarMap: 'assets/images/avatars/npc-3/npc-3-idle.gif',
+                avatarProfile:'assets/images/avatars/npc-3/npc-3-idle.gif'},
+
+            //under 512px
+            Xposition:'250',
+            Yposition:'120',
+
+            //over 512px
+            // Xposition:'337',
+            // Yposition:'300',
+            radius:40,
+            conversation:{
+                sentenceOne:'oi!',
+                sentenceTwo:'Are you looking for this piece of item?',
+                sentenceThree:'It is yours now. Farewell!',
+                sentenceFour:'Farewell then!',
+                sentenceFive:'I already gave you everything I had.',
+            },
+            stats:{
+                damage:{
+                    damageLow : 100,
+                    damageHigh: 500,
+                },
+                lifePoints: 500,
+                reputation: 250,
+                alive: true,
+            },
+            hasItem: true,
+        };
+        console.log(npcThree)    
             
             
             /***
@@ -420,7 +453,7 @@ console.log("connected")
                         css({left:npcOne.Xposition + "px",top:npcOne.Yposition + "px"})
 
                 //npcTwo
-                    //npcOne - clickable area          
+                    //npcTwo - clickable area          
                     npcTwoClicked = false
                         $('#npcTwo-position-avatar-image').click(function(event){
                             //checks if npc is dead or alive
@@ -435,10 +468,33 @@ console.log("connected")
                         ) 
 
                 
-                    //npcOne - avatar img position on map
+                    //npcTwo - avatar img position on map
                     let npcTwoPositionImage = $('#npcTwo-position-avatar-image').
                         css({left:npcTwo.Xposition + "px",top:npcTwo.Yposition + "px"})
             
+
+                //npcThree
+                    //npcThree - clickable area          
+                    npcThreeClicked = false
+                        $('#npcThree-position-avatar-image').click(function(event){
+                            //checks if npc is dead or alive
+                            //if dead the functions are not triggered
+                            if (npcThree.stats.alive == true && !npcThreeClicked){   
+                                
+                                npcThreeClicked = true
+                                heroPosition(event, npcThree)
+                                
+                                }
+                            }
+                        ) 
+
+                
+                    //npcThree - avatar img position on map
+                    let npcThreePositionImage = $('#npcThree-position-avatar-image').
+                        css({left:npcThree.Xposition + "px",top:npcThree.Yposition + "px"})
+            
+
+
                 //positions hero
                     //hero - avatar img position on map
                     let heroPositionImage = $('#hero-position-avatar-image').
@@ -1022,6 +1078,13 @@ console.log("connected")
                         hero.inventory.itemTwo.hasItem = true;
                     $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemTwo.name}`)
                     $('#npcTwo-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+                    }
+
+                if (currentNPC=== npcThree){
+                    // add item to inventory (turn item to true)
+                        hero.inventory.itemThree.hasItem = true;
+                    $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemThree.name}`)
+                    $('#npcThree-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
                     }
                 
 

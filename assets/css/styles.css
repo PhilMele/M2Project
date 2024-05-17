@@ -73,7 +73,8 @@
     
     /*Restart Game*/
         .restart-game-div{
-            display: none
+            display: none;
+            text-align: center;
         }
 
 /*First Screen*/
@@ -248,8 +249,16 @@
 
     #npcTwo-position-avatar-image {
 
-        content: url('/assets/images/avatars/npc-2/kate-vashke-gifgif.gif');
+        content: url('/assets/images/avatars/npc-2/npc-2-idle.gif');
         width:52px;
+        position: absolute;
+
+    }
+
+    #npcThree-position-avatar-image {
+
+        content: url('/assets/images/avatars/npc-3/npc-3-idle.gif');
+        width:70px;
         position: absolute;
 
     }
