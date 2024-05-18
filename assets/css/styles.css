@@ -263,6 +263,14 @@
 
     }
 
+    #npcFour-position-avatar-image {
+
+        content: url('/assets/images/avatars/npc-4/npc-4-idle.gif');
+        width:70px;
+        position: absolute;
+
+    }
+
     #hero-position-avatar-image {
         width:52px;
         position: absolute;

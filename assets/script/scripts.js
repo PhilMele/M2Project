@@ -184,12 +184,12 @@ console.log("connected")
         let npcFour = { 
             name: 'The Boss', 
             avatar:{
-                avatarMap: '',
-                avatarProfile:''},
+                avatarMap: 'assets/images/avatars/npc-4/npc-4-idle.gif',
+                avatarProfile:'assets/images/avatars/npc-4/npc-4-idle.gif'},
 
             //under 512px
-            Xposition:'250',
-            Yposition:'120',
+            Xposition:'130',
+            Yposition:'75',
 
             //over 512px
             // Xposition:'337',
@@ -538,6 +538,27 @@ console.log("connected")
                     let npcThreePositionImage = $('#npcThree-position-avatar-image').
                         css({left:npcThree.Xposition + "px",top:npcThree.Yposition + "px"})
             
+
+                //npcFour
+                    //npcFour - clickable area          
+                    npcFourClicked = false
+                        $('#npcFour-position-avatar-image').click(function(event){
+                            //checks if npc is dead or alive
+                            //if dead the functions are not triggered
+                            if (npcFour.stats.alive == true && !npcFourClicked){   
+                                
+                                npcFourClicked = true
+                                heroPosition(event, npcFour)
+                                
+                                }
+                            }
+                        ) 
+
+                
+                    //npcFour - avatar img position on map
+                    let npcFourPositionImage = $('#npcFour-position-avatar-image').
+                        css({left:npcFour.Xposition + "px",top:npcFour.Yposition + "px"})
+
 
 
                 //positions hero
@@ -934,10 +955,18 @@ console.log("connected")
             
             //creates red layer on #npc-avatar-fight to show damage
                 $('#npc-avatar-fight').css('background-color', 'red')
+            
+            //defines multiplier of damages if hero has itemThree or not
 
-            let heroMaxDamage = hero.stats.damage.damageHigh
+            let damageMultiplier = 1
+
+            if (hero.inventory.itemThree.hasItem == true ){
+                damageMultiplier = 2
+            }
+
+            let heroMaxDamage = hero.stats.damage.damageHigh*damageMultiplier
                 console.log(`max damage: ${heroMaxDamage}`)
-            let heroLowDamage = hero.stats.damage.damageLow
+            let heroLowDamage = hero.stats.damage.damageLow*damageMultiplier
                 console.log(`min damage: ${heroLowDamage}`)
             let attackDamage = Math.floor(Math.random() * (heroMaxDamage - heroLowDamage + 1)) + heroLowDamage;
                 console.log(`Actual Damage: ${attackDamage}`)
