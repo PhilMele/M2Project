@@ -178,7 +178,45 @@ console.log("connected")
 
             
         };
-        console.log(npcThree)    
+        console.log(npcThree) 
+
+
+        let npcFour = { 
+            name: 'The Boss', 
+            avatar:{
+                avatarMap: '',
+                avatarProfile:''},
+
+            //under 512px
+            Xposition:'250',
+            Yposition:'120',
+
+            //over 512px
+            // Xposition:'337',
+            // Yposition:'300',
+            radius:40,
+            conversation:{
+                sentenceOne:'',
+                sentenceTwo:'',
+                sentenceThree:'',
+                sentenceFour:'',
+                sentenceFive:``,
+                sentenceSix:``,
+            },
+            stats:{
+                damage:{
+                    damageLow : 25,
+                    damageHigh: 60,
+                },
+                lifePoints: 110,
+                reputation: 0,
+                alive: true,
+            },
+            hasItem: true,
+
+            
+        };
+        console.log(npcFour)   
             
             
             /***
@@ -630,8 +668,8 @@ console.log("connected")
                     //calculte how many missions are true
                     /*credit for counting the counting loop of true keys : https://stackoverflow.com/questions/52846805/count-the-number-of-trues-in-a-javascript-object*/
                     count = 0
-                    for (let key in hero.inventory){
-                        if(hero.inventory.hasOwnProperty(key) && hero.inventory[key].hasItem){
+                    for (let key in quest){
+                        if(quest.hasOwnProperty(key) && quest[key].completed){
                             count++
                         }
                     
@@ -808,6 +846,7 @@ console.log("connected")
                                                             console.log('item is given by npcThree') 
                                                             hero.inventory.itemOne.hasItem = false;
                                                             hero.inventory.itemTwo.hasItem = false; 
+                                                            hero.inventory.itemThree.hasItem = true; 
                                                             currentNPC.hasItem = false 
                                                         }
                                                         else{
