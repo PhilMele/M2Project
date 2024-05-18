@@ -620,6 +620,8 @@ console.log("connected")
 
                         if(hero.inventory.itemThree.hasItem == true){
                             quest.missionThree.completed = true
+                            quest.missionOne.completed = true
+                            quest.missionTwo.completed = true
                             console.log(`quest.missionTwo.completed = ${quest.missionThree.completed}`)
                         }else{
                             console.log(`dont forget to add the boss`)
@@ -721,8 +723,20 @@ console.log("connected")
                         
                         }
                         //if hero does not have itemOne and itemTwo and currentNPC is npcThree
-   
-                        //add if statement if npcThree gave itemThree
+                        else if (hero.inventory.itemOne.hasItem == false && 
+                                    hero.inventory.itemTwo.hasItem == false && 
+                                    currentNPC === npcThree) {
+                                        $('.hero-text-col').css('display','none')
+                                        $('#npc-text').text(`${currentNPC.conversation.sentenceSix}`);
+                                        setTimeout(function() {
+                                            $('.conversation-screen-div').hide()
+                                            $('.second-screen-div').css('display', 'flex'); 
+                                            $('.validation-screen-div').hide();
+                                            grayScaleOff()
+                                        }, 2500);
+                                    }
+                        
+
 
                         //handles conversation with npc for hero to recieve object
                             //if hero talks to npcOne and npcTwo and npc has item
@@ -790,7 +804,13 @@ console.log("connected")
                                                             console.log('item is given by npcTwo') 
                                                             hero.inventory.itemTwo.hasItem = true; 
                                                             currentNPC.hasItem = false 
-                                                        }else{
+                                                        }else if (currentNPC === npcThree){
+                                                            console.log('item is given by npcThree') 
+                                                            hero.inventory.itemOne.hasItem = false;
+                                                            hero.inventory.itemTwo.hasItem = false; 
+                                                            currentNPC.hasItem = false 
+                                                        }
+                                                        else{
                                                             console.log('something is not right')   
                                                         }
 
