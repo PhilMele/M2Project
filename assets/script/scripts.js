@@ -196,10 +196,10 @@ console.log("connected")
             // Yposition:'300',
             radius:40,
             conversation:{
-                sentenceOne:'',
-                sentenceTwo:'',
-                sentenceThree:'',
-                sentenceFour:'',
+                sentenceOne:'My next victim, ',
+                sentenceTwo:'Are you here to avenge your friends?',
+                sentenceThree:'Show me what you have!',
+                sentenceFour:'Ha ha! Here goes the hero!',
                 sentenceFive:``,
                 sentenceSix:``,
             },
@@ -848,9 +848,15 @@ console.log("connected")
                                                         $('#npc-text').text(`${currentNPC.conversation.sentenceThree}`);
                                                         setTimeout(function() {
                                                             $('.conversation-screen-div').hide(function() {
-                                                                $('.second-screen-div').css('display', 'flex');
+                                                                if (currentNPC === npcFour){
+                                                                        fight(hero,currentNPC)
+                                                        
+                                                                    }else{
+                                                                        $('.second-screen-div').css('display', 'flex');
+                                                                    }
                                                             });
                                                         }, 2000);
+                                                        
                                                     
                                                         //add item to hero object logic
                                                             //could improve logic in future to make it more dynamic
@@ -869,8 +875,7 @@ console.log("connected")
                                                             hero.inventory.itemTwo.hasItem = false; 
                                                             hero.inventory.itemThree.hasItem = true; 
                                                             currentNPC.hasItem = false 
-                                                        }
-                                                        else{
+                                                        }else{
                                                             console.log('something is not right')   
                                                         }
 
