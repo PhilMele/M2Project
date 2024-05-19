@@ -185,7 +185,9 @@ console.log("connected")
             name: 'The Boss', 
             avatar:{
                 avatarMap: 'assets/images/avatars/npc-4/npc-4-idle.gif',
-                avatarProfile:'assets/images/avatars/npc-4/npc-4-idle.gif'},
+                avatarProfile:'assets/images/avatars/npc-4/npc-4-idle.gif',
+                avatarAttack:'assets/images/avatars/npc-4/npc-4-attack.gif',
+                },
 
             //under 512px
             Xposition:'130',
@@ -966,12 +968,11 @@ console.log("connected")
                 $('#npc-avatar-fight').css('background-color', 'red')
             
             //defines multiplier of damages if hero has itemThree or not
-
             let damageMultiplier = 1
 
             if (hero.inventory.itemThree.hasItem == true ){
-                damageMultiplier = 2
-            }
+                    damageMultiplier = 2
+                }
 
             let heroMaxDamage = hero.stats.damage.damageHigh*damageMultiplier
                 console.log(`max damage: ${heroMaxDamage}`)
@@ -1044,8 +1045,10 @@ console.log("connected")
             //hero's turn
                 //select value between attack and heal
                 //show action panel:
-
-                    $('#submit-hero-action-button').click(function(){
+                    //BUG: boss was hitting 3 times in a row. This seems to be related to the same issue
+                        //I had when previous npc clicked was kept in "memory" of the submit button because of how jquery works.
+                        //adding `.off('click').on('click', function()` solved the problem
+                    $('#submit-hero-action-button').off('click').on('click', function(){
                         console.log("Button clicked - Current NPC:", currentNPC ? currentNPC.name : 'None')
                         let action = $('input[name="hero-fight-action"]:checked').val()
                         console.log(action)
@@ -1077,44 +1080,42 @@ console.log("connected")
                                 $('#hero-avatar-fight').attr('src', `${hero.status.idle}`);
                                 console.log(`back to idle now after 1 second`)
 
-                                
-                            }, 1500);
+                                    //shows submit button to give impression of turn based fight
+                                        $('.action-validation-container').show()
+                                                
+                                    //reduce npc hp in actual points
+                                    npcLifePoints = npcLifePoints - heroDamage
+                                        console.log(`NPC has ${npcLifePoints} life points left`)
 
-                            //shows submit button to give impression of turn based fight
-                                $('.action-validation-container').show()
-                                        
-                            //reduce npc hp in actual points
-                            npcLifePoints = npcLifePoints - heroDamage
-                                console.log(`NPC has ${npcLifePoints} life points left`)
-
-                            //reduce npc hps in %of initial bar length
-                                console.log(`currentNPC.stats.lifePoints: ${currentNPC.stats.lifePoints}`)
-                                npcLifePointsInPercentage = (npcLifePoints/currentNPC.stats.lifePoints)*100
-                                    console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
-                                $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
-                            
-                            console.log(`At this stage hero has ${heroLifePoints} life points left!`)
-
-                            if (npcLifePoints > 0){
-                                //updates heroLifePoints after the npcTurn
-                                heroLifePoints = npcTurn(hero, currentNPC, heroLifePoints);
-                                console.log('npc has more than 0 points')
-                                
-
-                            }else{
-                                    console.log(`${currentNPC.name} is kaboom!`)
-                                    console.log(` and hero has ${heroLifePoints} life points left!`)
+                                    //reduce npc hps in %of initial bar length
+                                        console.log(`currentNPC.stats.lifePoints: ${currentNPC.stats.lifePoints}`)
+                                        npcLifePointsInPercentage = (npcLifePoints/currentNPC.stats.lifePoints)*100
+                                            console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
+                                        $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
                                     
-                                    //bug: after first fight currentNPC was getting reloaded as the first npc defeated
-                                    //this is because  $('#submit-hero-action-button').click(function()
-                                    //kept the memory of the first npc defeated and added it as soon as I triggered the event
-                                    //documentation: https://api.jquery.com/off/ (plus a lot of other sources including stackover flow posts)
-                                    //reset currentNPC for next fight
-                                    $('#submit-hero-action-button').off('click'); 
+                                    console.log(`At this stage hero has ${heroLifePoints} life points left!`)
 
-                                    //npcOneDefeated(hero, heroLifePoints)
-                                    npcDefeated(hero, heroLifePoints)
-                            }
+                                    if (npcLifePoints > 0){
+                                        //updates heroLifePoints after the npcTurn
+                                        heroLifePoints = npcTurn(hero, currentNPC, heroLifePoints);
+                                        console.log('npc has more than 0 points')
+                                        
+
+                                    }else{
+                                            console.log(`${currentNPC.name} is kaboom!`)
+                                            console.log(` and hero has ${heroLifePoints} life points left!`)
+                                            
+                                            //bug: after first fight currentNPC was getting reloaded as the first npc defeated
+                                            //this is because  $('#submit-hero-action-button').click(function()
+                                            //kept the memory of the first npc defeated and added it as soon as I triggered the event
+                                            //documentation: https://api.jquery.com/off/ (plus a lot of other sources including stackover flow posts)
+                                            //reset currentNPC for next fight
+                                            $('#submit-hero-action-button').off('click'); 
+
+                                            //npcOneDefeated(hero, heroLifePoints)
+                                            npcDefeated(hero, heroLifePoints)
+                                    }
+                            }, 1500);
 
                         }else if(action == '2'){
                         //if heal is selected
@@ -1167,6 +1168,39 @@ console.log("connected")
                     console.log(`NPC attacks: ${npcDamage} damage`)
                     console.log(`The hero has ${heroLifePoints} life points before the attack`)
             
+            
+            //define current hero idle img displayed witing #hero-avatar-fight
+            let npcIdleImg = currentNPC.avatar.avatarProfile
+                console.log(`heroIdleImg: ${npcIdleImg}`)
+
+            //define new hero img to be displayed witing #hero-avatar-fight
+            let npcAttackImg = currentNPC.avatar.avatarAttack
+                console.log(`npcAttackImg: ${npcAttackImg}`)
+
+            if (currentNPC?.avatar?.avatarAttack){
+            //font-end management
+                //set #npc-avatar-fight to attack status
+                $('#npc-avatar-fight').attr('src', `${npcAttackImg}`);
+
+                //hides submit button to give impression of turn based fight
+                $('.action-validation-container').hide()
+            
+            
+
+            //attack animation
+            setTimeout(function() {
+                //reverts img back to idl status after 1 second
+                $('#npc-avatar-fight').attr('src', `${npcIdleImg}`);
+                console.log(`back to idle now after 1 second`)
+
+            }, 1500);
+            
+            }else{
+                console.log(`currentNPC?.avatar?.avatarAttack does not exists`)
+            }
+            $('.action-validation-container').show()
+
+
             //update hero's life points
                 //define remaining life points after attack
                     heroLifePoints = heroLifePoints - npcDamage
@@ -1177,7 +1211,7 @@ console.log("connected")
             
             //describe attack in #comment-fight
             commentFightAppend(`${currentNPC.name} hits with ${npcDamage} damage. You have ${heroLifePoints} life points left.`)
-
+           
             if (heroLifePoints <= 0){
                 gameover()
             }
