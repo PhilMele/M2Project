@@ -295,6 +295,7 @@ console.log("connected")
             $('#submit-question-answer-button').click(function(){
                 let decision = $('input[name="hero-answer"]:checked').val()
                 console.log(`hero decision is ${decision}`)
+                $('.hero-text-col').css('display','none');
                 //npcOneConversation(hero, npcOne, decision)
                 npcConversation(hero, currentNPC, decision)
 
@@ -360,8 +361,6 @@ console.log("connected")
             $('.validation-screen-div').css('display', 'flex');
             answer = $('#hero-decision').val();
             console.log(answer)
-
-            
 
         } else if (decisionOrigin==='npcOneConversation'){
             console.log('this call is coming from npcOneConversation()')
@@ -755,6 +754,7 @@ console.log("connected")
                     //set up conversation div
                     $('.conversation-screen-div').css('display', 'flex')
                     $('.second-screen-div').hide()
+                    $('.hero-text-col').css('display','none');
 
                     //set up rows and cols content for hero and npc
                         //hero
@@ -852,8 +852,11 @@ console.log("connected")
                                                                         fight(hero,currentNPC)
                                                         
                                                                     }else{
+                                                                        
                                                                         $('.second-screen-div').css('display', 'flex');
+                                                                        
                                                                     }
+                                                                   
                                                             });
                                                         }, 2000);
                                                         
@@ -879,6 +882,7 @@ console.log("connected")
                                                             console.log('something is not right')   
                                                         }
 
+                                                        $('.hero-text-col').css('display','none')
                                                         grayScaleOff()
                                                         
                                                         screenTwoGeneral(hero, currentNPC)
@@ -997,10 +1001,18 @@ console.log("connected")
             
             //fill progress bar with lifepoints
             //Hero
+                //defines multiplier of damages if hero has itemThree or not
+
+                let lifeMultiplier = 1
+
+                if (hero.inventory.itemThree.hasItem == true ){
+                    lifeMultiplier = 2
+                }
+
                 /**
                 *define hero life points left in % of full bar length
                 */
-                let heroLifePoints = hero.stats.lifePoints
+                let heroLifePoints = hero.stats.lifePoints*lifeMultiplier
                     console.log(heroLifePoints)
                     
                 let heroLifePointsInPercentage = (heroLifePoints/initialHeroLifePoints)*100
