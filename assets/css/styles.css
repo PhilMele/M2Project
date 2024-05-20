@@ -76,6 +76,11 @@
             display: none;
             text-align: center;
         }
+    /*Game ending*/
+        .game-ending{
+            display: none;
+            text-align: center;
+        }
 
 /*First Screen*/
 

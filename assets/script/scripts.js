@@ -1297,7 +1297,12 @@ console.log("connected")
                     });
                 }, 5000);
                 grayScaleOff()
-                screenTwoGeneral(hero, currentNPC)
+                if (currentNPC === npcFour){
+                    gameEnding(hero)
+                
+                }else{
+                    screenTwoGeneral(hero, currentNPC)
+                }
 
 
         }
@@ -1331,3 +1336,16 @@ console.log("connected")
 
         
         }
+
+
+/*Game Ending Management*/
+
+function gameEnding(hero){
+    //if hero reputation is more than 0
+    $('.fight-screen-div').hide();
+    $('.game-ending').show()
+
+    //if hero reputation is 0
+
+
+}
