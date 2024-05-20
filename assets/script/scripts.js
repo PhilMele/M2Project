@@ -57,8 +57,8 @@ console.log("connected")
 
                     },
                     //under 512 px
-                    Xposition:'100',
-                    Yposition:'200',
+                    Xposition:'210',
+                    Yposition:'120',
                     //over xx px 
                     // XpositionFullImage:'220',
                     // YpositionFullImage:'200',
@@ -67,7 +67,15 @@ console.log("connected")
                     
 
         console.log(hero)
-        let initialHeroLifePoints = hero.stats.lifePoints;
+        let lifeMultiplier = 1
+
+                if (hero.inventory.itemThree.hasItem == true ){
+                    lifeMultiplier = 2
+                }
+
+        let initialHeroLifePoints = hero.stats.lifePoints*lifeMultiplier;
+
+
 
 
     /*NPCs*/
@@ -116,8 +124,8 @@ console.log("connected")
                     avatarProfile:'assets/images/avatars/npc-2/npc-2-idle.gif'},
 
                 //under 512px
-                Xposition:'150',
-                Yposition:'220',
+                Xposition:'90',
+                Yposition:'210',
 
                 //over 512px
                 // Xposition:'337',
@@ -453,7 +461,15 @@ console.log("connected")
             let heroAvatarImg = $('#hero-avatar-selected').attr('src',hero.avatar);
 
             //sets intial hero life points
-            let heroLifePoints = $('#life-points').text(hero.stats.lifePoints)
+                //sets multiplier
+                let lifeMultiplier = 1
+
+                if (hero.inventory.itemThree.hasItem == true ){
+                    lifeMultiplier = 2
+                }
+
+                //calculate hero life points
+                let heroLifePoints = $('#life-points').text(hero.stats.lifePoints*lifeMultiplier)
 
             //sets hero life bar
             console.log(currentNPC)
@@ -1002,6 +1018,8 @@ console.log("connected")
             
             //fill progress bar with lifepoints
             //Hero
+                //note: a lot of repeat with the multplier. Worried it might take too long to redo the logic with a single variable.
+                    //this could really be improved.  
                 //defines multiplier of damages if hero has itemThree or not
 
                 let lifeMultiplier = 1
@@ -1014,9 +1032,11 @@ console.log("connected")
                 *define hero life points left in % of full bar length
                 */
                 let heroLifePoints = hero.stats.lifePoints*lifeMultiplier
-                    console.log(heroLifePoints)
+                    console.log(`heroLifePoints: ${heroLifePoints}`)
+                    console.log(`initialHeroLifePoints: ${initialHeroLifePoints}`)
+                    console.log(`initialHeroLifePoints*lifeMultiplier: ${initialHeroLifePoints*lifeMultiplier}`)
                     
-                let heroLifePointsInPercentage = (heroLifePoints/initialHeroLifePoints)*100
+                let heroLifePointsInPercentage = (heroLifePoints/(initialHeroLifePoints*lifeMultiplier))*100
                     console.log(heroLifePointsInPercentage)
                 $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
 
@@ -1135,9 +1155,9 @@ console.log("connected")
                             commentFightAppend(`${hero.name} gains ${heroHeal} life points.`)
 
                             //limits HP increase to character's max life    
-                            if (heroLifePoints > initialHeroLifePoints){
+                            if (heroLifePoints > initialHeroLifePoints*lifeMultiplier){
                                 console.log('Thats too many HP for you my friend!')
-                                heroLifePoints = initialHeroLifePoints
+                                heroLifePoints = initialHeroLifePoints*lifeMultiplier
                             }
                                 console.log(`new lifepoints : ${heroLifePoints}`)
 
