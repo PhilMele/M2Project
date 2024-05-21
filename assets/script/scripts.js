@@ -107,7 +107,7 @@ console.log("connected")
                         damageHigh: 5,
                     },
                     lifePoints: 50,
-                    reputation: 25,
+                    reputation: 50,
                     alive: true,
                 },
                 hasItem: true,
@@ -144,7 +144,7 @@ console.log("connected")
                         damageHigh: 5,
                     },
                     lifePoints: 50,
-                    reputation: 25,
+                    reputation: 50,
                     alive: true,
                 },
                 hasItem: true,
@@ -317,12 +317,42 @@ console.log("connected")
         });
     });
 
+/*Game Ending Management*/
     /**
-    *gameover function. user is presented a buton to restart game from beginning.
+    *gameover function. user is presented a button to restart game from beginning.
     */
-    function gameover(){
+    function gameOver(origin){
+
         $('.fight-screen-div').hide();
         $('.restart-game-div').show();
+        console.log(`origin is ${origin}`)
+
+        if (origin === 'npcDefeated'){
+        
+            let heroReputation = hero.stats.reputation
+            console.log(`hero reputation is ${heroReputation}`)
+            $('#ending-h2').append('Congratulations!')
+
+            //if hero reputation is more than 75
+            if (heroReputation === 100){
+
+                $('#game-ending-comment').append('You defeated the boss. Your mom is proud.')
+            
+            }else if(heroReputation >= 51){
+
+                $('#game-ending-comment').append('You defeated the boss. Your mom is proud... Care to explain why you killed that NPC???')
+            
+            }else{
+                $('#game-ending-comment').append("You defeated the boss... that's a lot of tomstones in the village. Your mom is concerned.")
+            }
+
+
+        }else if (origin === 'heroDefeated'){
+            $('#ending-h2').append('What a loser!')
+            $('#game-ending-comment').append("Your mom says she doesn't know you. The village is not proud.")
+        }else{
+            console.log('Something is wrong with the ending logic')
+        }
     }
 
 
@@ -1144,8 +1174,7 @@ console.log("connected")
                             //play heal function
                             const heroHeal = healing(hero, currentNPC)
                             
-                            //set .action-validation-container to show to give turn based impression
-                            $('.action-validation-container').show()
+                            
                             
                             //increase hero hp
                             heroLifePoints = heroLifePoints + heroHeal;
@@ -1204,24 +1233,24 @@ console.log("connected")
             let npcAttackImg = currentNPC.avatar.avatarAttack
                 console.log(`npcAttackImg: ${npcAttackImg}`)
 
+            //create specific rule: if current npc has `avatarAttack` (animated gif of npc attacking is available)
             if (currentNPC?.avatar?.avatarAttack){
-            //font-end management
-                //set #npc-avatar-fight to attack status
-                $('#npc-avatar-fight').attr('src', `${npcAttackImg}`);
+                //font-end management
+                    //set #npc-avatar-fight to attack status
+                    $('#npc-avatar-fight').attr('src', `${npcAttackImg}`);
 
-                //hides submit button to give impression of turn based fight
-                $('.action-validation-container').hide()
-            
-            
+                    //hides submit button to give impression of turn based fight
+                    $('.action-validation-container').hide()
+                
+                
 
-            //attack animation
-            setTimeout(function() {
-                //reverts img back to idl status after 1 second
-                $('#npc-avatar-fight').attr('src', `${npcIdleImg}`);
-                console.log(`back to idle now after 1 second`)
+                //attack animation
+                setTimeout(function() {
+                    //reverts img back to idl status after 1 second
+                    $('#npc-avatar-fight').attr('src', `${npcIdleImg}`);
+                    console.log(`back to idle now after 1 second`)
 
-            }, 1500);
-            
+                }, 1500);  
             }else{
                 console.log(`currentNPC?.avatar?.avatarAttack does not exists`)
             }
@@ -1246,9 +1275,9 @@ console.log("connected")
                     
                     //creates delay after hero is defeated for user to see life bar going to 0
                     setTimeout(function() {
-                        gameover();
+                        gameOver('heroDefeated');
                     }, 1000);
-                }, 2500);   
+                }, 1500);   
             }
             return heroLifePoints;  
         }
@@ -1308,7 +1337,8 @@ console.log("connected")
             
                 grayScaleOff()
                 if (currentNPC === npcFour){
-                    gameEnding(hero)
+                    gameOver('npcDefeated')
+                    // gameEnding(hero)
                 
                 }else{
                     //bring user back to screen two after 2 seconds
@@ -1355,16 +1385,3 @@ console.log("connected")
         }
 
 
-/*Game Ending Management*/
-
-    //Note: could have made gameOver() and gameEnding the same function and create different scenarios
-    //however it seems having both in different functions makes the code easier to digest.
-    function gameEnding(hero){
-        //if hero reputation is more than 0
-        $('.fight-screen-div').hide();
-        $('.game-ending').show()
-
-        //if hero reputation is 0
-
-
-    }
