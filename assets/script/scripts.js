@@ -1164,9 +1164,16 @@ console.log("connected")
                             //define remaing life points after attack in % of initial lifebar width
                             heroLifePointsInPercentage = (heroLifePoints/hero.stats.lifePoints)*100
                                 $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
-
-                            //updates heroLifePoints after the npcTurn
-                            heroLifePoints = npcTurn(hero, currentNPC, heroLifePoints);
+                            
+                            //sets delay between points being added and the NPC turn to show the life bar going up
+                            setTimeout(function() {
+                            $('#hero-life-points').css(('width', heroLifePointsInPercentage + '%'),function() {
+                                
+                                //updates heroLifePoints after the npcTurn
+                                heroLifePoints = npcTurn(hero, currentNPC, heroLifePoints);
+                                    });
+                                }, 2500);
+                            
 
 
                         }
@@ -1233,7 +1240,15 @@ console.log("connected")
             commentFightAppend(`${currentNPC.name} hits with ${npcDamage} damage. You have ${heroLifePoints} life points left.`)
            
             if (heroLifePoints <= 0){
-                gameover()
+                setTimeout(function() {
+                //transforms hero img in tombstone before redirection to gameOver()
+                    $('#hero-avatar-fight').attr('src', deadNPCAvatar);
+                    
+                    //creates delay after hero is defeated for user to see life bar going to 0
+                    setTimeout(function() {
+                        gameover();
+                    }, 1000);
+                }, 2500);   
             }
             return heroLifePoints;  
         }
@@ -1290,17 +1305,19 @@ console.log("connected")
                 $('.action-validation-container').css('display','none')
                 console.log(`.action-validation-container is hidden`)
 
-            //bring user back to screen two after 2 seconds
-                setTimeout(function() {
-                    $('.fight-screen-div').hide(function() {
-                        $('.second-screen-div').css('display', 'flex');
-                    });
-                }, 5000);
+            
                 grayScaleOff()
                 if (currentNPC === npcFour){
                     gameEnding(hero)
                 
                 }else{
+                    //bring user back to screen two after 2 seconds
+                    setTimeout(function() {
+                        $('.fight-screen-div').hide(function() {
+                            $('.second-screen-div').css('display', 'flex');
+                        });
+                    }, 5000);
+
                     screenTwoGeneral(hero, currentNPC)
                 }
 
@@ -1340,12 +1357,14 @@ console.log("connected")
 
 /*Game Ending Management*/
 
-function gameEnding(hero){
-    //if hero reputation is more than 0
-    $('.fight-screen-div').hide();
-    $('.game-ending').show()
+    //Note: could have made gameOver() and gameEnding the same function and create different scenarios
+    //however it seems having both in different functions makes the code easier to digest.
+    function gameEnding(hero){
+        //if hero reputation is more than 0
+        $('.fight-screen-div').hide();
+        $('.game-ending').show()
 
-    //if hero reputation is 0
+        //if hero reputation is 0
 
 
-}
+    }
