@@ -48,6 +48,7 @@
     }
 
     .mission-intro-screen-div{
+        display: none; 
         position: fixed;
         top: 50%;
         left: 50%;
@@ -158,6 +159,16 @@
         background: black;
         color: white;
     }
+
+/* Mission Introduction Screen */
+    .close-intro-button{
+        border: white 2px solid;
+        border-radius: 5px;
+        font-family: "VT323", monospace;
+        background: black;
+        color: white;
+    }
+
 
 /*Second Screen*/
 

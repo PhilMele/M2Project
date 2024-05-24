@@ -65,12 +65,9 @@ console.log("connected")
                     // YpositionFullImage:'200',
                     };
 
-                    
-
         console.log(hero)
 
         let initialHeroLifePoints = hero.stats.lifePoints
-
 
     /*NPCs*/
 
@@ -108,8 +105,6 @@ console.log("connected")
             };
 
             console.log(npcOne)
-
-           
 
         let npcTwo = { 
                 name: 'The Pirate', 
@@ -367,8 +362,12 @@ console.log("connected")
             console.log(`we have a name! the name is ${hero.name}`);
             console.log(`the avatar is ${hero.avatar}`);
             $('.first-screen-div').hide();
-            $('.second-screen-div').css('display', 'flex');
+            
             $('.mission-intro-screen-div').css('display', 'flex')
+            //if .mission-intro-screen-div is display flex .second-screen-div is grayscale (1)           
+            if ( $('.mission-intro-screen-div').css('display') === 'flex'){
+                $('.second-screen-div').css('display', 'flex').css('filter', 'grayscale(1)');
+            }
         }
     }
 
@@ -454,7 +453,29 @@ console.log("connected")
                 updateScreen(); // Update screen after hero name is updated 
             }
         }
-    
+
+    /* Mission Introduction Screen */
+        function startAdventure(event){
+            //list content
+                //1st content
+                    //content image
+
+                    //content text
+
+                //2nd content
+                    //content image
+
+                    //content text
+            //content management
+                //first content is display when the window opens
+
+                //second content is open when user click on button
+                    //when the button is clicked display next content
+
+            //at the end of content, set $('.mission-intro-screen-div').css('display', 'none')
+ 
+        }
+
     /*Second Screen*/
         /*General*/
         /*credit - https://www.w3schools.com/html/tryit.asp?filename=tryhtml_images_map5*/
