@@ -70,9 +70,6 @@ console.log("connected")
         console.log(hero)
 
         let initialHeroLifePoints = hero.stats.lifePoints
-        let currentHeroLifePoints
-
-
 
 
     /*NPCs*/
@@ -371,8 +368,10 @@ console.log("connected")
             console.log(`the avatar is ${hero.avatar}`);
             $('.first-screen-div').hide();
             $('.second-screen-div').css('display', 'flex');
+            $('.mission-intro-screen-div').css('display', 'flex')
         }
     }
+
     /*Comment - it feels like there should just be one function for decision validation.
     *
     */

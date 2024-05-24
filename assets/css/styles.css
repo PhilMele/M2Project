@@ -44,8 +44,18 @@
 
 
     .second-screen-div{
-        display: none;
-           
+        display: none;      
+    }
+
+    .mission-intro-screen-div{
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 75%;
+        z-index: 1000;
+        height: 50vh;
+
     }
 
     .inline-grid{
