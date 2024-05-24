@@ -40,6 +40,7 @@ console.log("connected")
                             name: 'item3',
                             hasItem: false,
                             itemImg: '',
+                            multiplierApplied:false,
                         },
                         
                         },
@@ -67,13 +68,9 @@ console.log("connected")
                     
 
         console.log(hero)
-        let lifeMultiplier = 1
 
-                if (hero.inventory.itemThree.hasItem == true ){
-                    lifeMultiplier = 2
-                }
-
-        let initialHeroLifePoints = hero.stats.lifePoints*lifeMultiplier;
+        let initialHeroLifePoints = hero.stats.lifePoints
+        let currentHeroLifePoints
 
 
 
@@ -459,14 +456,6 @@ console.log("connected")
             }
         }
     
-        /***
-        * Another function that uses the hero object
-        */
-        function newHeroName(hero){
-            // Use the updated hero object here
-            console.log(`The hero's name in another function is: ${hero.name}`);
-        }
-
     /*Second Screen*/
         /*General*/
         /*credit - https://www.w3schools.com/html/tryit.asp?filename=tryhtml_images_map5*/
@@ -491,15 +480,16 @@ console.log("connected")
             let heroAvatarImg = $('#hero-avatar-selected').attr('src',hero.avatar);
 
             //sets intial hero life points
-                //sets multiplier
-                let lifeMultiplier = 1
+                heroLifePoints = hero.stats.lifePoints
+  
 
-                if (hero.inventory.itemThree.hasItem == true ){
-                    lifeMultiplier = 2
-                }
+                //let lifeMultiplier = 1
+                // if (hero.inventory.itemThree.hasItem == true ){
+                //     lifeMultiplier = 2
+                // }
 
                 //calculate hero life points
-                let heroLifePoints = $('#life-points').text(hero.stats.lifePoints*lifeMultiplier)
+                $('#life-points').text(heroLifePoints)
 
             //sets hero life bar
             console.log(currentNPC)
@@ -926,6 +916,18 @@ console.log("connected")
                                                             hero.inventory.itemTwo.hasItem = false; 
                                                             hero.inventory.itemThree.hasItem = true; 
                                                             currentNPC.hasItem = false 
+                                                            
+                                                            //applies multplier logic
+                                                            //increase hero life point by *2 to fight boss
+                                                            //note: this is a work around. For some reason npcConversation() loops over itself
+                                                            //without this if statement and the use of multiplierApplied, lifepoints would be *2 three times.
+                                                            console.log(`hero.stats.lifePoints before multplier : ${hero.stats.lifePoints}`)
+                                                            if (hero.inventory.itemThree.multiplierApplied == false){
+                                                                hero.stats.lifePoints = hero.stats.lifePoints*2
+                                                                hero.inventory.itemThree.multiplierApplied = true
+                                                            }
+                                                            console.log(`hero.stats.lifePoints after multplier : ${hero.stats.lifePoints}`)
+
                                                         }else{
                                                             console.log('something is not right')   
                                                         }
@@ -1054,14 +1056,16 @@ console.log("connected")
 
                 let lifeMultiplier = 1
 
-                if (hero.inventory.itemThree.hasItem == true ){
+                if (hero.inventory.itemThree.hasItem == true){
                     lifeMultiplier = 2
                 }
+                
+                
 
                 /**
                 *define hero life points left in % of full bar length
                 */
-                let heroLifePoints = hero.stats.lifePoints*lifeMultiplier
+                let heroLifePoints = hero.stats.lifePoints
                     console.log(`heroLifePoints: ${heroLifePoints}`)
                     console.log(`initialHeroLifePoints: ${initialHeroLifePoints}`)
                     console.log(`initialHeroLifePoints*lifeMultiplier: ${initialHeroLifePoints*lifeMultiplier}`)
@@ -1140,7 +1144,8 @@ console.log("connected")
                                     //reduce npc hps in %of initial bar length
                                         console.log(`currentNPC.stats.lifePoints: ${currentNPC.stats.lifePoints}`)
                                         npcLifePointsInPercentage = (npcLifePoints/currentNPC.stats.lifePoints)*100
-                                            console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
+
+                                        console.log(`NPC has ${npcLifePoints} left which represents ${npcLifePointsInPercentage}% of bar length`)
                                         $('#npc-life-points').css('width', npcLifePointsInPercentage + '%')
                                     
                                     console.log(`At this stage hero has ${heroLifePoints} life points left!`)
@@ -1174,8 +1179,6 @@ console.log("connected")
                             //play heal function
                             const heroHeal = healing(hero, currentNPC)
                             
-                            
-                            
                             //increase hero hp
                             heroLifePoints = heroLifePoints + heroHeal;
                                 console.log(heroLifePoints)
@@ -1191,7 +1194,7 @@ console.log("connected")
                                 console.log(`new lifepoints : ${heroLifePoints}`)
 
                             //define remaing life points after attack in % of initial lifebar width
-                            heroLifePointsInPercentage = (heroLifePoints/hero.stats.lifePoints)*100
+                            let heroLifePointsInPercentage = (heroLifePoints/(initialHeroLifePoints*lifeMultiplier))*100
                                 $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
                             
                             //sets delay between points being added and the NPC turn to show the life bar going up
@@ -1256,13 +1259,20 @@ console.log("connected")
             }
             $('.action-validation-container').show()
 
-
             //update hero's life points
+                //define multiplier
+                    let lifeMultiplier = 1
+
+                    if (hero.inventory.itemThree.hasItem == true){
+                        lifeMultiplier = 2
+                    }
+
+
                 //define remaining life points after attack
                     heroLifePoints = heroLifePoints - npcDamage
                     console.log(`The hero has ${heroLifePoints} life points after the attack`)
                 //define remaing life points after attack in % of initial lifebar width
-                    heroLifePointsInPercentage = (heroLifePoints/initialHeroLifePoints)*100    
+                    let heroLifePointsInPercentage = (heroLifePoints/(initialHeroLifePoints*lifeMultiplier))*100
                     $('#hero-life-points').css('width', heroLifePointsInPercentage + '%')
             
             //describe attack in #comment-fight
