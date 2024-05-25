@@ -23,16 +23,17 @@ console.log("connected")
         /***
         * hero variable that stores stats
         */
-        let hero = { name: '', 
+        let hero = {
+                    name: '', 
                     avatar: "",
                     inventory:{
                         itemOne:{
-                            name: 'item1',
+                            name: 'some magic metal',
                             hasItem: false,
                             itemImg: 'assets/images/items/itemOne.webp',
                         },
                         itemTwo:{
-                            name: 'item2',
+                            name: 'some mysterious liquid',
                             hasItem: false,
                             itemImg: 'assets/images/items/itemTwo.webp',
                         },
@@ -63,7 +64,7 @@ console.log("connected")
                     //over xx px 
                     // XpositionFullImage:'220',
                     // YpositionFullImage:'200',
-                    };
+            };
 
         console.log(hero)
 
@@ -72,7 +73,7 @@ console.log("connected")
     /*NPCs*/
 
         let npcOne = { 
-                name: 'BobOne', 
+                name: 'The Ugly Gremlin', 
                 avatar:{
                     avatarMap: 'assets/images/avatars/npc.gif',
                     avatarProfile:'assets/images/avatars/npc.gif'},
@@ -87,7 +88,7 @@ console.log("connected")
                 radius:40,
                 conversation:{
                     sentenceOne:'Hello',
-                    sentenceTwo:'Are you looking for this piece of item?',
+                    sentenceTwo:`Are you looking for ${hero.inventory.itemOne.name}?`,
                     sentenceThree:'It is yours now. Farewell!',
                     sentenceFour:'Farewell then!',
                     sentenceFive:'I already gave you everything I had.',
@@ -103,7 +104,6 @@ console.log("connected")
                 },
                 hasItem: true,
             };
-
             console.log(npcOne)
 
         let npcTwo = { 
@@ -122,7 +122,7 @@ console.log("connected")
                 radius:40,
                 conversation:{
                     sentenceOne:'Hi',
-                    sentenceTwo:'Are you looking for this piece of item?',
+                    sentenceTwo:`Are you looking for ${hero.inventory.itemTwo.name}?`,
                     sentenceThree:'It is yours now. Farewell!',
                     sentenceFour:'Farewell then!',
                     sentenceFive:'I already gave you everything I had.',
@@ -175,7 +175,7 @@ console.log("connected")
 
             
         };
-        console.log(npcThree) 
+            console.log(npcThree) 
 
 
         let npcFour = { 
@@ -215,7 +215,7 @@ console.log("connected")
 
             
         };
-        console.log(npcFour)   
+            console.log(npcFour)   
             
             
             /***
@@ -275,12 +275,12 @@ console.log("connected")
             image: npcThree.avatar.avatarProfile,
         },
          sequenceSix:{
-            text:`He promises to make your strong, if you bring him ${hero.inventory.itemOne.name} and ${hero.inventory.itemOne.name}.`,
+            text:`He promises to make your strong, if you bring him ${hero.inventory.itemOne.name} and ${hero.inventory.itemTwo.name}.`,
             image: npcThree.avatar.avatarProfile,
         },
         sequenceSeven:{
             text:'You know what to do now.',
-            image:'',
+            image: npcThree.avatar.avatarProfile,
         },
     
     }
@@ -327,15 +327,15 @@ let sequencesArray = Object.values(introSequences);
         /**
         *This section cover the submit button for #submit-question-answer-button
         */ 
-            $('#submit-question-answer-button').click(function(){
-                let decision = $('input[name="hero-answer"]:checked').val()
-                console.log(`hero decision is ${decision}`)
-                $('.hero-text-col').css('display','none');
-                //npcOneConversation(hero, npcOne, decision)
-                npcConversation(hero, currentNPC, decision)
+        $('#submit-question-answer-button').click(function(){
+            let decision = $('input[name="hero-answer"]:checked').val()
+            console.log(`hero decision is ${decision}`)
+            $('.hero-text-col').css('display','none');
+            //npcOneConversation(hero, npcOne, decision)
+            npcConversation(hero, currentNPC, decision)
 
-                
-            })
+            
+        })
 
         /**
         *This section updates the sequences in .mission-intro-screen-div
@@ -348,6 +348,8 @@ let sequencesArray = Object.values(introSequences);
             } else {
                 console.log('arrays has ended');
                 //close div and show second screen div
+                $('.mission-intro-screen-div').css('display', 'none')
+                $('.second-screen-div').css('display', 'flex').css('filter', 'grayscale(0)')
             }
         });
         
@@ -415,7 +417,8 @@ let sequencesArray = Object.values(introSequences);
             $('.first-screen-div').hide();
             
             $('.mission-intro-screen-div').css('display', 'flex')
-            //if .mission-intro-screen-div is display flex .second-screen-div is grayscale (1)           
+            //if .mission-intro-screen-div is display flex .second-screen-div is grayscale (1)
+                //grayscale is turned to (0) in `$('.close-intro-button').click(function()`        
             if ( $('.mission-intro-screen-div').css('display') === 'flex'){
                 $('.second-screen-div').css('display', 'flex').css('filter', 'grayscale(1)');
             }
@@ -510,19 +513,15 @@ let sequencesArray = Object.values(introSequences);
         *Manages the display of messages and images during intro
         */
         function updateSequence() {
-            if (sequenceIndex < sequencesArray.length) {
-                $('#mission-intro-text').text(sequencesArray[sequenceIndex].text);
-                $('#mission-intro-img').attr('src', sequencesArray[sequenceIndex].image);
-                if (sequenceIndex === 6){
-                    $('#close-intro-button-text').text('Close')
-                }else{
-                    $('#close-intro-button-text').text('Next')
+                if (sequenceIndex < sequencesArray.length) {
+                    $('#mission-intro-text').text(sequencesArray[sequenceIndex].text);
+                    $('#mission-intro-img').attr('src', sequencesArray[sequenceIndex].image);
+                    if (sequenceIndex === 6){
+                        $('#close-intro-button-text').text('Close')
+                    }else{
+                        $('#close-intro-button-text').text('Next')
+                    }
                 }
-             
-            }
-
-            
-
             }
 
     /*Second Screen*/
