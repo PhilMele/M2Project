@@ -510,24 +510,9 @@ let sequencesArray = Object.values(introSequences);
             if (sequenceIndex < sequencesArray.length) {
                 $('#mission-intro-text').text(sequencesArray[sequenceIndex].text);
                 $('#mission-intro-img').attr('src', sequencesArray[sequenceIndex].image);
+             
             }
-        }
-
-        function startAdventure(event){
-            
-
-
-                //first content is display when the window opens
-                $('#mission-intro-text').text('')
-
-                //second content is open when user click on button
-                    //when the button is clicked display next content
-
-            //at the end of content, set $('.mission-intro-screen-div').css('display', 'none')
-
-            //find a way to disable click on screenTwoGeneral() when this div is on display
- 
-        }
+            }
 
     /*Second Screen*/
         /*General*/
