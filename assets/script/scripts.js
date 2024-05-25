@@ -506,12 +506,23 @@ let sequencesArray = Object.values(introSequences);
         }
 
     /* Mission Introduction Screen */
+        /**
+        *Manages the display of messages and images during intro
+        */
         function updateSequence() {
             if (sequenceIndex < sequencesArray.length) {
                 $('#mission-intro-text').text(sequencesArray[sequenceIndex].text);
                 $('#mission-intro-img').attr('src', sequencesArray[sequenceIndex].image);
+                if (sequenceIndex === 6){
+                    $('#close-intro-button-text').text('Close')
+                }else{
+                    $('#close-intro-button-text').text('Next')
+                }
              
             }
+
+            
+
             }
 
     /*Second Screen*/
