@@ -285,6 +285,9 @@ console.log("connected")
     
     }
 
+let sequenceIndex = 0;
+let sequencesArray = Object.values(introSequences);
+
 /*Event management*/
 
     /**
@@ -333,6 +336,21 @@ console.log("connected")
 
                 
             })
+
+        /**
+        *This section updates the sequences in .mission-intro-screen-div
+        */
+        updateSequence();
+        $('.close-intro-button').click(function() {
+            sequenceIndex++;
+            if (sequenceIndex < sequencesArray.length) {
+                updateSequence();
+            } else {
+                console.log('arrays has ended');
+                //close div and show second screen div
+            }
+        });
+        
 
          $('#restart-game').click(function() {
             location.reload();
@@ -488,11 +506,17 @@ console.log("connected")
         }
 
     /* Mission Introduction Screen */
-        function startAdventure(event){
-            //list content
+        function updateSequence() {
+            if (sequenceIndex < sequencesArray.length) {
+                $('#mission-intro-text').text(sequencesArray[sequenceIndex].text);
+                $('#mission-intro-img').attr('src', sequencesArray[sequenceIndex].image);
+            }
+        }
 
-                
-            //content management
+        function startAdventure(event){
+            
+
+
                 //first content is display when the window opens
                 $('#mission-intro-text').text('')
 
