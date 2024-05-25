@@ -252,6 +252,39 @@ console.log("connected")
     }
     console.log(quest)
 
+/*Intro Text & Images*/
+    let introSequences ={
+        sequenceOne:{
+            text:'There is a new baddie in town.',
+            image: npcFour.avatar.avatarProfile,
+        },
+        sequenceTwo:{
+            text:'He did not treat your freinds right, and your mom is concerned.',
+            image:npcFour.avatar.avatarProfile,
+        },
+        sequenceThree:{
+            text:'As a typical hero you want to help.',
+            image: npcFour.avatar.avatarProfile,
+        },
+        sequenceFour:{
+            text:'However, you know you are not strong enough.',
+            image: npcFour.avatar.avatarProfile,
+        },
+        sequenceFive:{
+            text:'Luckily, there is a mage in the village.',
+            image: npcThree.avatar.avatarProfile,
+        },
+         sequenceSix:{
+            text:`He promises to make your strong, if you bring him ${hero.inventory.itemOne.name} and ${hero.inventory.itemOne.name}.`,
+            image: npcThree.avatar.avatarProfile,
+        },
+        sequenceSeven:{
+            text:'You know what to do now.',
+            image:'',
+        },
+    
+    }
+
 /*Event management*/
 
     /**
@@ -457,22 +490,18 @@ console.log("connected")
     /* Mission Introduction Screen */
         function startAdventure(event){
             //list content
-                //1st content
-                    //content image
 
-                    //content text
-
-                //2nd content
-                    //content image
-
-                    //content text
+                
             //content management
                 //first content is display when the window opens
+                $('#mission-intro-text').text('')
 
                 //second content is open when user click on button
                     //when the button is clicked display next content
 
             //at the end of content, set $('.mission-intro-screen-div').css('display', 'none')
+
+            //find a way to disable click on screenTwoGeneral() when this div is on display
  
         }
 
