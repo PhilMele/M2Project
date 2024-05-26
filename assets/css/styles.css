@@ -103,7 +103,7 @@
 
     .first-screen-div{
         display:none;
-        background-image: url('../assets/images/screens/first_screen.jpg');
+        background-image: url('../images/screens/first_screen.jpg');
         height: var(--height);
         background-repeat: no-repeat;
         background-size: auto; /* Set background size to auto */
