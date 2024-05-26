@@ -50,7 +50,7 @@
     .mission-intro-screen-div{
         display: none; 
         position: fixed;
-        top: 50%;
+        top: 40%;
         left: 50%;
         transform: translate(-50%, -50%);
         width: 75%;
@@ -174,10 +174,11 @@
 /* Mission Introduction Screen */
     .close-intro-button{
         border: white 2px solid;
-        border-radius: 5px;
+        border-radius: 10px;
         font-family: "VT323", monospace;
         background: black;
         color: white;
+        width: 80%;
     }
 
 
@@ -455,6 +456,12 @@
     }
 }
 
+@media only screen and (min-width: 512px) {
+    body {
+        max-width: 512px;
+        margin: 0 auto;
+    }
+}
 
 /*Code taken from web*/
 

@@ -255,11 +255,11 @@ console.log("connected")
             image: npcFour.avatar.avatarProfile,
         },
         sequenceTwo:{
-            text:'He did not treat your freinds right, and your mom is concerned.',
-            image:npcFour.avatar.avatarProfile,
+            text:'He attacked the village, and you want to impress your mom.',
+            image: npcFour.avatar.avatarProfile,
         },
         sequenceThree:{
-            text:'As a typical hero you want to help.',
+            text:'As a typical hero, you think this is your moment.',
             image: npcFour.avatar.avatarProfile,
         },
         sequenceFour:{
@@ -275,7 +275,7 @@ console.log("connected")
             image: npcThree.avatar.avatarProfile,
         },
         sequenceSeven:{
-            text:'You know what to do now.',
+            text:'You know what to do now. Make your mom proud.',
             image: npcThree.avatar.avatarProfile,
         },
     
