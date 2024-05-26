@@ -220,7 +220,7 @@ console.log("connected")
             /***
              * defines avatar img on map once dead
              */
-            deadNPCAvatar = '/assets/images/avatars/dead-npc.jpg'
+            deadNPCAvatar = 'assets/images/avatars/dead-npc.jpg'
 
             /**
             *global variable used to identify current NPC involved in action
@@ -1427,7 +1427,7 @@ let sequencesArray = Object.values(introSequences);
                 currentNPC.stats.alive = false
 
             //change npc avatar to tombstone and hide life bar + label
-                $('#npc-avatar-fight').attr('src', '../images/avatars/dead-npc.jpg');
+                $('#npc-avatar-fight').attr('src', 'assets/images/avatars/dead-npc.jpg');
                 $('#life-bar').hide()
                 $('#npc-life-point-label').hide()
                 $('.action-validation-container').css('display','none')
