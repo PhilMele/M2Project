@@ -1397,21 +1397,21 @@ let sequencesArray = Object.values(introSequences);
                     // add item to inventory (turn item to true)
                         hero.inventory.itemOne.hasItem = true;
                     $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemOne.name}`)
-                    $('#npcOne-position-avatar-image').css('content', 'url("../images/avatars/dead-npc.jpg")');
+                    $('#npcOne-position-avatar-image').css('content', `url(${deadNPCAvatar})`);
                     }
 
                 if (currentNPC=== npcTwo){
                     // add item to inventory (turn item to true)
                         hero.inventory.itemTwo.hasItem = true;
                     $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemTwo.name}`)
-                    $('#npcTwo-position-avatar-image').css('content', 'url("../images/avatars/dead-npc.jpg")');
+                    $('#npcTwo-position-avatar-image').css('content', `url(${deadNPCAvatar})`);
                     }
 
                 if (currentNPC=== npcThree){
                     // add item to inventory (turn item to true)
                         hero.inventory.itemThree.hasItem = true;
                     $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemThree.name}`)
-                    $('#npcThree-position-avatar-image').css('content', 'url("../images/avatars/dead-npc.jpg")');
+                    $('#npcThree-position-avatar-image').css('content', `url(${deadNPCAvatar})`);
                     }
                 
 
