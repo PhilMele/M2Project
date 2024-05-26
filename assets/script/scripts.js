@@ -5,16 +5,16 @@ console.log("connected")
 /*Characters*/
     let avatarSelection={
                 avatarOne:{
-                    profilePic : '/assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.webp',
+                    profilePic : 'assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.webp',
                     idle: 'assets/images/avatars/avatar-1/hero-avatar-1-idle.gif',
-                    attack:'/assets/images/avatars/avatar-1/hero-avatar-1-attack.gif',
+                    attack:'assets/images/avatars/avatar-1/hero-avatar-1-attack.gif',
                     killed:'',
                 },
 
                 avatarTwo:{
-                    profilePic : '/assets/images/avatars/avatar-2/hero-avatar-2-profile-picture.webp',
-                    idle: '/assets/images/avatars/avatar-2/hero-avatar-2-idle.gif',
-                    attack:'/assets/images/avatars/avatar-2/hero-avatar-2-attack.gif',
+                    profilePic : 'assets/images/avatars/avatar-2/hero-avatar-2-profile-picture.webp',
+                    idle: 'assets/images/avatars/avatar-2/hero-avatar-2-idle.gif',
+                    attack:'assets/images/avatars/avatar-2/hero-avatar-2-attack.gif',
                     killed:'',
                 },
             }
@@ -1397,21 +1397,21 @@ let sequencesArray = Object.values(introSequences);
                     // add item to inventory (turn item to true)
                         hero.inventory.itemOne.hasItem = true;
                     $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemOne.name}`)
-                    $('#npcOne-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+                    $('#npcOne-position-avatar-image').css('content', 'url("assets/images/avatars/dead-npc.jpg")');
                     }
 
                 if (currentNPC=== npcTwo){
                     // add item to inventory (turn item to true)
                         hero.inventory.itemTwo.hasItem = true;
                     $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemTwo.name}`)
-                    $('#npcTwo-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+                    $('#npcTwo-position-avatar-image').css('content', 'url("assets/images/avatars/dead-npc.jpg")');
                     }
 
                 if (currentNPC=== npcThree){
                     // add item to inventory (turn item to true)
                         hero.inventory.itemThree.hasItem = true;
                     $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemThree.name}`)
-                    $('#npcThree-position-avatar-image').css('content', 'url("/assets/images/avatars/dead-npc.jpg")');
+                    $('#npcThree-position-avatar-image').css('content', 'url("assets/images/avatars/dead-npc.jpg")');
                     }
                 
 
@@ -1427,7 +1427,7 @@ let sequencesArray = Object.values(introSequences);
                 currentNPC.stats.alive = false
 
             //change npc avatar to tombstone and hide life bar + label
-                $('#npc-avatar-fight').attr('src', '/assets/images/avatars/dead-npc.jpg');
+                $('#npc-avatar-fight').attr('src', 'assets/images/avatars/dead-npc.jpg');
                 $('#life-bar').hide()
                 $('#npc-life-point-label').hide()
                 $('.action-validation-container').css('display','none')

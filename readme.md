@@ -6,7 +6,7 @@ Title - Your Hero Journey
 
 xxx
 
-View the live site : xx
+View the live site : https://philmele.github.io/M2Project/
 
 # Table of Contents
 
