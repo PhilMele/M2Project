@@ -306,16 +306,19 @@ let sequencesArray = Object.values(introSequences);
                     // Hide the validation screen
                     $('.validation-screen-div').hide();
                     grayScaleOff()
+                    enableClickDiv()
                 } else if (decision === '1') {
                     // Value 1 has been selected and the conversation function can start
                     
                     $('.validation-screen-div').hide();
+                    enableClickDiv()
                     console.log('next line shows currentNPC')
                     console.log(currentNPC)
                     npcConversation(hero, currentNPC)
                 } else if (decision === '3'){
                     // !!! this needs to be changed to handle which npc is conversation is redirected to:
                     $('.validation-screen-div').hide()
+                    enableClickDiv()
                     fight(hero, currentNPC)
                 }
             });
@@ -463,6 +466,7 @@ let sequencesArray = Object.values(introSequences);
 
         if (decisionOrigin==='heroPosition'){
             console.log('this call is coming from screenTwoGeneral()')
+            disableClickDiv()
             grayScaleOn()
             $('.validation-screen-div').css('display', 'flex');
             answer = $('#hero-decision').val();
