@@ -74,7 +74,7 @@ console.log("connected")
         let npcOne = { 
                 name: 'The Ugly Gremlin', 
                 avatar:{
-                    avatarMap: '/assets/images/avatars/npc.gif',
+                    avatarMap: '../images/avatars/npc.gif',
                     avatarProfile:'/assets/images/avatars/npc.gif'},
 
                 //under 512px
