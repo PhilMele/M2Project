@@ -65,7 +65,6 @@ console.log("connected")
                     // XpositionFullImage:'220',
                     // YpositionFullImage:'200',
             };
-
         console.log(hero)
 
         let initialHeroLifePoints = hero.stats.lifePoints
@@ -228,9 +227,6 @@ console.log("connected")
             */
             let currentNPC
 
-    /*Boss*/
-
-
 /*Quest*/
     let quest ={
         missionOne :{
@@ -341,6 +337,7 @@ let sequencesArray = Object.values(introSequences);
         *This section updates the sequences in .mission-intro-screen-div
         */
         updateSequence();
+
         $('.close-intro-button').click(function() {
             sequenceIndex++;
             if (sequenceIndex < sequencesArray.length) {
@@ -350,6 +347,7 @@ let sequencesArray = Object.values(introSequences);
                 //close div and show second screen div
                 $('.mission-intro-screen-div').css('display', 'none')
                 $('.second-screen-div').css('display', 'flex').css('filter', 'grayscale(0)')
+                enableClickDiv()
             }
         });
         
@@ -359,7 +357,7 @@ let sequencesArray = Object.values(introSequences);
         });
     });
 
-/*Game Ending Management*/
+    /*Game Ending Management*/
     /**
     *gameover function. user is presented a button to restart game from beginning.
     */
@@ -403,7 +401,7 @@ let sequencesArray = Object.values(introSequences);
     * https://stackoverflow.com/questions/38491653/jquery-show-a-flex-box
     */
 
-    /***
+    /**
     * Function to update screen based on hero's progress
     * add screen 2 + 3 later
     */
@@ -420,9 +418,28 @@ let sequencesArray = Object.values(introSequences);
             //if .mission-intro-screen-div is display flex .second-screen-div is grayscale (1)
                 //grayscale is turned to (0) in `$('.close-intro-button').click(function()`        
             if ( $('.mission-intro-screen-div').css('display') === 'flex'){
+                disableClickDiv()
                 $('.second-screen-div').css('display', 'flex').css('filter', 'grayscale(1)');
             }
         }
+    }
+
+
+    /*Credits - https://stackoverflow.com/questions/44152202/how-to-disable-click-outside-a-particular-div*/
+    /**
+    *Makes clicking outside pop up div impossible by adding a div between pop up and background screen.
+    */
+    function disableClickDiv(){
+        $('.clicks-disabled').show()
+    }
+
+
+    /**
+    *Makes clicking outside pop up div impossible by adding a div between pop up and background screen.
+    */
+    function enableClickDiv(){
+        $('.clicks-disabled').hide()
+    
     }
 
     /*Comment - it feels like there should just be one function for decision validation.
