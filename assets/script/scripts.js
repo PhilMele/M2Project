@@ -5,16 +5,16 @@ console.log("connected")
 /*Characters*/
     let avatarSelection={
                 avatarOne:{
-                    profilePic : '/assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.webp',
-                    idle: '/assets/images/avatars/avatar-1/hero-avatar-1-idle.gif',
+                    profilePic : 'assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.webp',
+                    idle: 'assets/images/avatars/avatar-1/hero-avatar-1-idle.gif',
                     attack:'assets/images/avatars/avatar-1/hero-avatar-1-attack.gif',
                     killed:'',
                 },
 
                 avatarTwo:{
-                    profilePic : '/assets/images/avatars/avatar-2/hero-avatar-2-profile-picture.webp',
-                    idle: '/assets/images/avatars/avatar-2/hero-avatar-2-idle.gif',
-                    attack:'/assets/images/avatars/avatar-2/hero-avatar-2-attack.gif',
+                    profilePic : 'assets/images/avatars/avatar-2/hero-avatar-2-profile-picture.webp',
+                    idle: 'assets/images/avatars/avatar-2/hero-avatar-2-idle.gif',
+                    attack:'assets/images/avatars/avatar-2/hero-avatar-2-attack.gif',
                     killed:'',
                 },
             }
@@ -30,12 +30,12 @@ console.log("connected")
                         itemOne:{
                             name: 'some magic metal',
                             hasItem: false,
-                            itemImg: '/assets/images/items/itemOne.webp',
+                            itemImg: 'assets/images/items/itemOne.webp',
                         },
                         itemTwo:{
                             name: 'some mysterious liquid',
                             hasItem: false,
-                            itemImg: '/assets/images/items/itemTwo.webp',
+                            itemImg: 'assets/images/items/itemTwo.webp',
                         },
                         itemThree:{
                             name: 'item3',
@@ -74,8 +74,8 @@ console.log("connected")
         let npcOne = { 
                 name: 'The Ugly Gremlin', 
                 avatar:{
-                    avatarMap: '../images/avatars/npc.gif',
-                    avatarProfile:'/assets/images/avatars/npc.gif'},
+                    avatarMap: 'assets/images/avatars/npc.gif',
+                    avatarProfile:'assets/images/avatars/npc.gif'},
 
                 //under 512px
                 Xposition:'65',
@@ -108,8 +108,8 @@ console.log("connected")
         let npcTwo = { 
                 name: 'The Pirate', 
                 avatar:{
-                    avatarMap: '/assets/images/avatars/npc-2/npc-2-idle.gif',
-                    avatarProfile:'/assets/images/avatars/npc-2/npc-2-idle.gif'},
+                    avatarMap: 'assets/images/avatars/npc-2/npc-2-idle.gif',
+                    avatarProfile:'assets/images/avatars/npc-2/npc-2-idle.gif'},
 
                 //under 512px
                 Xposition:'90',
@@ -142,8 +142,8 @@ console.log("connected")
         let npcThree = { 
             name: 'The Mage', 
             avatar:{
-                avatarMap: '/assets/images/avatars/npc-3/npc-3-idle.gif',
-                avatarProfile:'/assets/images/avatars/npc-3/npc-3-idle.gif'},
+                avatarMap: 'assets/images/avatars/npc-3/npc-3-idle.gif',
+                avatarProfile:'assets/images/avatars/npc-3/npc-3-idle.gif'},
 
             //under 512px
             Xposition:'250',
@@ -180,9 +180,9 @@ console.log("connected")
         let npcFour = { 
             name: 'The Boss', 
             avatar:{
-                avatarMap: '/assets/images/avatars/npc-4/npc-4-idle.gif',
-                avatarProfile:'/assets/images/avatars/npc-4/npc-4-idle.gif',
-                avatarAttack:'/assets/images/avatars/npc-4/npc-4-attack.gif',
+                avatarMap: 'assets/images/avatars/npc-4/npc-4-idle.gif',
+                avatarProfile:'assets/images/avatars/npc-4/npc-4-idle.gif',
+                avatarAttack:'assets/images/avatars/npc-4/npc-4-attack.gif',
                 },
 
             //under 512px
