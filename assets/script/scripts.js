@@ -488,7 +488,8 @@ function heroDecisionValidation(decisionOrigin, currentNPC) {
 
 /*First Screen*/
 
-/*
+//sets avatar1 as default choice.
+    $('#avatar1').prop('checked', true);
 
 /*bug - started with a form, but I couldnt keep the data. 
 I then took it to stackoverflow with this question: https://stackoverflow.com/questions/78315736/update-object-property-after-form-submission-for-use-in-a-seperate-function?noredirect=1#comment138072099_78315736
@@ -502,12 +503,18 @@ The solution I found works, but feels clunky.*/
 function createHero(event) {
     let heroName = $('#hero-name').val()
     let heroAvatar = $('input[name="hero-avatar"]:checked').val()
+
+    
+
     console.log(`heroAvatar: ${heroAvatar}`)
 
     console.log(`heroName: ${heroName}`)
 
     hero.name = heroName
 
+    //Checks if hero name is provided
+        //bug: `required` attribute does not display prompt of user to fill input
+        //workaround: added javascript below to display message
     if (heroName === '') {
             $('#name-alert').text('Please enter a name for your hero.')
             
