@@ -508,6 +508,12 @@ function createHero(event) {
 
     hero.name = heroName
 
+    if (heroName === '') {
+            $('#name-alert').text('Please enter a name for your hero.')
+            
+            return; // Exit the function if the hero name is not provided
+        }
+
     if (heroAvatar === 'avatarOne') {
         hero.avatar = avatarSelection.avatarOne.profilePic
         hero.status.idle = avatarSelection.avatarOne.idle
