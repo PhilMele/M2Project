@@ -48,7 +48,7 @@
                             <div class="col select-avatar-col">
                                 <label for="avatar1">
                                     <img src="assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.webp" class="avatar-img-select" alt="Avatar 1">
-                                    <input type="radio" id="avatar1" name="hero-avatar" value="avatarOne" required>
+                                    <input type="radio" id="avatar1" name="hero-avatar" value="avatarOne" required cheked>
                                 </label>
                             </div>
                             <div class="col select-avatar-col">
@@ -342,6 +342,7 @@
             document.addEventListener('mousemove', updateCoordinates);
         });
 
+        $('#avatar1').prop('checked', true);
 
 </script>
 
