@@ -34,6 +34,7 @@ View the live site : https://philmele.github.io/M2Project/
    - [Clicks disabled outside of div element](#clicks-disabled)
    - [Cap max screen resolution & responsivness](#max-screen)
    - [Hero Movements](#hero-movements)
+   - [Introduction](#intro)
 
 4. [Technologies](#tech)
 
@@ -303,7 +304,60 @@ In order to limit the number of messages displayed to a maximum of 3 at a given 
 * add new input to `comment3`
 
    ### 3.5 Quest System <a name="quest-system"></a>
-   ..
+   This feature is made up of two function and mainly serve a rendering purpose: `questProgress()` and `questNextAction()`.
+
+ **questNextAction()`** provides information to the hero on the next potential mission they should accomplish. Although an alternative route could be taken.
+
+  This function loops through `quest` object and checks if each mission has been completed. The function will `break` as soon as the mission it is looping through is set as `completed : false`.
+
+  As soon as the loop breaks, `#next-action` is updated with the description of the `mission` for the user to know what to do next. This is displayed in `.second-screen-div`.
+
+  **`questProgress()`** lists the number of mission the hero needs to complete before finishing the game.
+
+  The number of mission is defined in variable `heroQuest`, which counts the number of keys included within the object:
+
+     let heroQuest = Object.keys(quest).length
+
+  Once this variable is defined, `questProgress()` looks to identify how many of these missions have been completed. A mission is considered completed if the item attached to the succesful complion of this mission is collected. For example:
+
+     if (hero.inventory.itemOne.hasItem == true) {
+           quest.missionOne.completed = true
+       }
+
+  Considering that the collection of `itemThree` requires the loss of `itemOne` and `itemTwo` a seperate logic addresses the completion of missionThree.
+
+     if (hero.inventory.itemThree.hasItem == true) {
+           quest.missionThree.completed = true
+           quest.missionOne.completed = true
+           quest.missionTwo.completed = true
+           console.log(`quest.missionTwo.completed = ${quest.missionThree.completed}`)
+       }
+
+
+   Once the missions are set to completed or no, we create a variable `count` and set it to `0` initially. We then update the variable through a `for loop` which counts the number of mission set to completed = true.
+
+      count = 0
+      for (let key in quest) {
+           if (quest.hasOwnProperty(key) && quest[key].completed) {
+               count++
+           }
+   
+      }
+
+      note: this solution was taken from GerryLon response to this post: https://stackoverflow.com/questions/52846805/count-the-number-of-trues-in-a-javascript-object
+
+Once `count` is defined, we can compare to the total number of mission and return the a percentage value in `completion` variable which can be used to set the value of the progress bar in `##quest-progress`:
+
+    //calculate how much these completed steps account has part of the quest Completion
+    //convert number in %
+    completion = (count / heroQuest) * 100
+    
+    //Update #quest-progress with completion variable result
+    $('#quest-progress').css('width', completion + '%')
+
+Future improvement: `questNextAction()` could be broken down into 2 seperate function for better readability: one setting up quests are compeleted, and another one dealing with the actual calulation of how many misions need completing before reaching 100%.
+
+  
 
    ### 3.6 Alternative Endings <a name="alternative-endings"></a>
    gameOver
@@ -317,6 +371,9 @@ In order to limit the number of messages displayed to a maximum of 3 at a given 
    .. 
 
    ### 3.9 Hero Movements <a name="hero-movements"></a>
+   ..
+
+  ### 3.10 Introduction <a name="intro"></a>
    .. 
 
 ## 4. Technologies <a name="tech"></a>
