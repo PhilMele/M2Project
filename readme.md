@@ -136,17 +136,25 @@ These fonts can be found on: https://fonts.google.com/
 ## 3. Features <a name="features"></a>
 
    ### 3.1 Hero Customisation <a name="hero-customisaion"></a>
-    The customisation is handled in the front end through `.first-screen-div`.
+ The customisation is handled in the front end through .first-screen-div.
 
-    It contains an input field prompting the user to select the name of their hero, and 2 radio buttons for the user to select the avatar of their hero.
+ It contains an input field prompting the user to select the name of their hero, and 2 radio buttons for the user to select the avatar of their hero.
 
-    Both input field and radio buttons are required.
+ Both input field and radio buttons are required.
 
-    Validation (mentioned <p>)
+ When both mandatory element are filled, the user can click on "Create Hero" which is triggered by `createHero()`
 
-    Function
+ This function checks if the hero has been given a name and an avatar has been selected.
 
-    Bug with validation html5 not working.
+ If it returns true, the game starts and `screenTwoGeneral()` is triggered. `.first-screen-div` is hidden and `.second-screen-div` is displayed.
+ 
+ Note: the display management of the transition between `.first-screen-div` and `.second-screen-div` is handled through  `updateScreen()`.
+
+ If  `createHero()` returns false, the user will be prompted with a message displayed through `#name-alert` asking the user to enter the name of their hero before progressing.
+
+ Note: the use of `required` attribute is not possible as the hero creation section is not a form and therefore html5 would not ask the user to populate the missing field.
+
+ The radio button has a default choice selected, so no error could be generated from this section.
 
    ### 3.2 Dialogue with Non Playing Characters (NPC) <a name="dialogue-with-npc"></a>
    ..
