@@ -344,7 +344,7 @@ In order to limit the number of messages displayed to a maximum of 3 at a given 
    
       }
 
-      note: this solution was taken from GerryLon response to this post: https://stackoverflow.com/questions/52846805/count-the-number-of-trues-in-a-javascript-object
+      credits: this solution was taken from GerryLon response to this post: https://stackoverflow.com/questions/52846805/count-the-number-of-trues-in-a-javascript-object
 
 Once `count` is defined, we can compare to the total number of mission and return the a percentage value in `completion` variable which can be used to set the value of the progress bar in `##quest-progress`:
 
@@ -395,7 +395,38 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
    
 
    ### 3.7 Clicks disabled outside of div element <a name="clicks-disabled"></a>
-   .. 
+   
+   During the events involving the use of `.mission-intro-screen-div` and `.validation-screen-div`, `.second-screen-div` is displayed in the background.
+
+   To avoid the user clicking on another NPC whilst the hero is interacting with another NPC, `.clicks-disabled` is introduced.
+
+      .clicks-disabled{
+           display: none;
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 100%;
+           z-index:1000;
+          }
+
+   `.clicks-disabled` takes full width and height of the body and is inserted in between `.second-screen-div` and the pop up window (`.mission-intro-screen-div` and `.validation-screen-div`) with the use of the `z-index` property.
+
+   In order to to manage the display attribute of the div, two functions are used:
+   *  `disableClickDiv()()` sets `.clicks-disabled` to `show`
+   *  `enableClickDiv()` sets `.clicks-disabled` to `hide`
+
+      function disableClickDiv() {
+          $('.clicks-disabled').show()
+      }
+      
+      function enableClickDiv() {
+          $('.clicks-disabled').hide()
+      }
+
+
+   Credits: this solution is inspired from Bruno Lucena's answer to this stackoverflow post: https://stackoverflow.com/questions/44152202/how-to-disable-click-outside-a-particular-div.
+
 
    ### 3.8 Cap max screen resolution & responsivness <a name="max-screen"></a>
    .. 
