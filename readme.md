@@ -170,9 +170,37 @@ These fonts can be found on: https://fonts.google.com/
 
    Depending on the user intention, a different function will trigger.
 
-   Talk (Option 1) and nothing (Option 2) are covered through `npcConversation()` and fight (Option 3) is handled through `fight()`. 
+   Talk (Option 1) covered through `npcConversation()` and fight (Option 3) is handled through `fight()`. 
+
+   The selection of "nothing" (option 2) hides `.validation-screen-div` and the hero is back to `.second-screen-div`, handled by screenTwoGeneral().
 
    ### 3.3 NPC interaction: talk or nothing <a name="talk"></a>  
+
+   This set of interactions is handled through `npcConversation()`.
+
+   It passes parameter: `currentNPC` which is defined through the previous function heroPosition() and designate the NPC the hero is currently interacting with. This parameter allows to scale the function and avoid having to create a different function for each NPC.
+
+   note: in this current structure, the function has the flaw to require the NPC conversation format to always be the same: first two sentences are an introduction, the third sentence is a a validation question and sentence four and 5 are displayed depending on the value of the hero answer to question 3. 
+
+   This function starts by a number of front end management: it sets previous div from show() to hide(), and display the font end element that will render the conversation and the characters (hero and NPC) respective avatars).
+
+   **Logic element:**
+
+   The first element of logic of this function checks if `currentNPC` has the item the hero desire on their inventory (`currentNPC.hasItem == false`): if it doesnt, it means the hero has already acquired the item and this item cannot be given again. This will trigger `currentNPC.conversation.sentenceFive`.
+
+   If `currentNPC.hasItem` is `true` the second part of the logic starts.
+
+   This second part of the logic consists in a `for loop` which goes through the `currentNPC` object and return a sequence of sentences asigning a specific logic to each sequence:
+   Sentence 1 & 2 : this is the introduction of the NPC. At the end of this phase, the hero is presented with a choice presented through `.hero-text-col`, which is now displayed as `flex`. Upon making its choice, the user trigger `heroDecisionValidation()`, which we have covered previoulsy in section **Interactions with Non Playing Characters**.  This time we pass paramters 'npcConversation', which allows the `heroDecisionValidation()` to understand the call comes from `npcConversation()`. `#submit-question-answer-button` collects the decision and attach it to `decision` variable which we pass back to `npcConversation()` as a parameter.
+   Sentence 3: This sentence is displayed if `decision` parameter is equal to `2`. The NPC says farewell and the hero is sent back to `.second-screen-div`.
+   Sentence 4: This sentence is displayed if `decision` parameter is equal to `1`. The NPC says farewell and the hero is sent back to `.second-screen-div` and recieve a new item (`hero.inventory.item.hasItem = true`), and the NPC inventory (`currentNPC.hasItem = false`). This sentence has a a few sub if statement that handles what item is given based on `currentNPC` identity.
+
+
+   There is an exception to this. This exception covers the interaction with npcThree (the mage). This specific logic adds the use of sentenceSix (which is specific to this NPC) and checks that if the hero does not have both item. If the hero has one item, or is missing both, npcThree will ask the hero to come back when both items have been collected, for npcThree to give the hero something in exchange. This logic is container within the else if `else if ((hero.inventory.itemOne.hasItem === false || hero.inventory.itemTwo.hasItem === false) && currentNPC === npcThree)`
+
+   note: for future development the function could be divided into smaller functions to enhance readibility. Seperating in different functions could also increasing the scalability by creating more options of conversations. An Item object could have been created to handle the process of giving items to user more smooth. There is a few repeat with the multplier after talking to npcThree: this could have been better hanlded with better planning ahead of building the project, but considering the time constraint left to deliver the project I could only implement a workaround to deliver on time as it required to review a lot of logic with a lot of dependencies.
+
+   
 
    ### 3.4 NPC interaction: Fight <a name="fight"></a>
    ... (attack, healing, npc defeated, hero defeated, animations)
