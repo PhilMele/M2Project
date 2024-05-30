@@ -202,9 +202,9 @@ note: for future development the function could be divided into smaller function
 
    ### 3.4 NPC interaction: Fight <a name="fight"></a>
    
-   This function is at the junction of 4 different functions.
+   This function is at the junction of 5 different functions.
 
-  **** Fight Function (`fight()`)****
+   **Fight Function (`fight()`)**
   
    This function is handled by `fight()` and passes `hero` (referring to the object) and `currentNPC` parameter (referring to the definition `npc` attached during `heroPosition()`).
 
@@ -221,6 +221,7 @@ note: for future development the function could be divided into smaller function
    The choice is captured from `hero-fight-action` by listening to a click for the user on either one of the two choices. Based on the choice's value (`1`) or (`2`) one of the two function is triggered.
    
    **Attack Function (`attack()`)**
+   
    By selecting attack, a variable `heroDamage` returns the result from `attack(hero, currentNPC)`.
 
    `heroDamage` is calculated by taking a random number between `heroMaxDamage` and `heroLowDamage`: these two variables are through the minimum and the maximum damages the hero can afflict, which are both defined in `hero.stats.damage`
@@ -230,6 +231,7 @@ note: for future development the function could be divided into smaller function
    Once `attack()` has returned `heroDamage` the function let the gif complete the attack animation by setting a `timeOut` of 1.5 seconds before moving on the the `npcTurn()` or if `currentNPC` has `0` life points or less activate `npcDefeated()`.  `currentNPC` life points are updated accordingly based on the returned value from `heroDamage`.
 
    **Healing Function (`healing()`)**
+   
 By selecting healing, a variable `heroHeal` returns the result from `healing(hero, currentNPC)`.
 
    The value of `healingPoints` is hard coded in the function which is 25. This could be improved in the future by taking into consideration the hero total life points.
@@ -244,6 +246,7 @@ By selecting healing, a variable `heroHeal` returns the result from `healing(her
                }  
 
    **NPC Turn (`npcTurn()`)**
+   
    After the hero had their turn, it's not to `currentNPC` to do something. This phase is managed through `npcTurn()`
 
    The only action possible available to the NPC is attack.
@@ -252,7 +255,7 @@ By selecting healing, a variable `heroHeal` returns the result from `healing(her
 
    Once the damages are defined they are substracted from the hero life points through the returned value of `heroLifePoints`.
 
-   In the event `heroLifePoints` would be equal to `0` to less, heroDefeated() is triggered.
+   In the event `heroLifePoints` would be equal to `0` to less, gameOver() is triggered.
 
    Otherwise, the function reverts back to `fight()` leading to the hero's turn to attack or heal.
 
@@ -279,13 +282,27 @@ By selecting healing, a variable `heroHeal` returns the result from `healing(her
 
    If `currentNPC` is not npcFour the user is the user is sent back to `.second-screen-div` after 5 seconds by leveraging `setTimeout`.
    
-**Hero Defeated Function (`heroDefeated()`)**
-   
+**Fight comments (`commentFightAppend()`)**
+   This function manages the display of messages during the fight.
+
+   It uses 3 variables, each attach a specific id:
+      let comment1 = $('#fight-comment-1')
+      let comment2 = $('#fight-comment-2')
+      let comment3 = $('#fight-comment-3')
+
+In order to limit the number of messages displayed to a maximum of 3 at a given time, the logic is as follows:
+*checks if `comment1` is empty: if empty populates `comment1`
+*if `comment1` is not empty, populate `comment2`
+*if `comment2` is not empty, populate `comment3`
+*if `comment3` is not empty move content of `comment2` to `comment1` and `comment3` to `comment2`
+*add new input to `comment3`
 
    ### 3.5 Quest System <a name="quest-system"></a>
    ..
 
    ### 3.6 Alternative Endings <a name="alternative-endings"></a>
+   gameOver
+   3 endings
    ...
 
    ### 3.7 Clicks disabled outside of div element <a name="clicks-disabled"></a>
