@@ -203,7 +203,7 @@ note: for future development the function could be divided into smaller function
    ### 3.4 NPC interaction: Fight <a name="fight"></a>
    This function is at the junction of 4 different functions.
 
-  ** Fight Function**
+  **** Fight Function (`fight()`)****
    This function is handled by `fight()` and passes `hero` (referring to the object) and `currentNPC` parameter (referring to the definition `npc` attached during `heroPosition()`).
 
    This function starts by managing the display of some front end element:
@@ -218,15 +218,17 @@ note: for future development the function could be divided into smaller function
 
    The choice is captured from `hero-fight-action` by listening to a click for the user on either one of the two choices. Based on the choice's value (`1`) or (`2`) one of the two function is triggered.
    
-   Attack Function (`attack()`)
+   **Attack Function (`attack()`)**
    By selecting attack, a variable `heroDamage` returns the result from `attack(hero, currentNPC)`.
+
+   `heroDamage` is calculated by taking a random number between `heroMaxDamage` and `heroLowDamage`: these two variables are through the minimum and the maximum damages the hero can afflict, which are both defined in `hero.stats.damage`
 
    `attack()` not only manages the damages inflicted by the hero to `currentNPC` by returning `attackDamage`, but also manages the display of the attack animation by changing the gif image contained in `#hero-avatar-fight` to `hero.status.attack`.
 
    Once `attack()` has returned `heroDamage` the function let the gif complete the attack animation by setting a `timeOut` of 1.5 seconds before moving on the the `npcTurn()` or if `currentNPC` has `0` life points or less activate `npcDefeated()`.  `currentNPC` life points are updated accordingly based on the returned value from `heroDamage`.
 
-   Healing Function
-   By selecting healing, a variable `heroHeal` returns the result from `healing(hero, currentNPC)`.
+   **Healing Function (`healing()`)**
+By selecting healing, a variable `heroHeal` returns the result from `healing(hero, currentNPC)`.
 
    The value of `healingPoints` is hard coded in the function which is 25. This could be improved in the future by taking into consideration the hero total life points.
 
@@ -239,12 +241,24 @@ note: for future development the function could be divided into smaller function
                    heroLifePoints = initialHeroLifePoints * lifeMultiplier
                }  
 
-   NPC Turn
-   
-   
-   NPC Defeated Function
+   **NPC Turn (`npcTurn()`)**
+   After the hero had their turn, it's not to `currentNPC` to do something. This phase is managed through `npcTurn()`
 
-   Hero Defeated Function
+   The only action possible available to the NPC is attack.
+
+   Similarly to attack(), the damages inflicted by the `currentNPC` to the hero are returned by taking a random number between the minimum and the maximum damages the `currentNPC` can inflict, which is defined in object `currentNPC.stats.damage`.
+
+   Once the damages are defined they are substracted from the hero life points through the returned value of `heroLifePoints`.
+
+   In the event `heroLifePoints` would be equal to `0` to less, heroDefeated() is triggered.
+
+   Otherwise, the function reverts back to `fight()` leading to the hero's turn to attack or heal.
+
+   Finally, this function has a special logic if `currentNPC` has an attack animation attached in its object (`if (currentNPC?.avatar?.avatarAttack)`). If this logic is true, `currentNPC` avatar will be changed to an attacking animation before reverting back to `idle` status. This is faciliated through `setTimeout`.
+   
+   **NPC Defeated Function (`npcDefeated()`)**
+
+**Hero Defeated Function (`heroDefeated()`)**
    
 
    ### 3.5 Quest System <a name="quest-system"></a>
