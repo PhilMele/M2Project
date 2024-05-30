@@ -201,9 +201,11 @@ There is an exception to this. This exception covers the interaction with npcThr
 note: for future development the function could be divided into smaller functions to enhance readibility. Seperating in different functions could also increasing the scalability by creating more options of conversations. An Item object could have been created to handle the process of giving items to user more smooth. There is a few repeat with the multplier after talking to npcThree: this could have been better hanlded with better planning ahead of building the project, but considering the time constraint left to deliver the project I could only implement a workaround to deliver on time as it required to review a lot of logic with a lot of dependencies.
 
    ### 3.4 NPC interaction: Fight <a name="fight"></a>
+   
    This function is at the junction of 4 different functions.
 
   **** Fight Function (`fight()`)****
+  
    This function is handled by `fight()` and passes `hero` (referring to the object) and `currentNPC` parameter (referring to the definition `npc` attached during `heroPosition()`).
 
    This function starts by managing the display of some front end element:
@@ -258,6 +260,25 @@ By selecting healing, a variable `heroHeal` returns the result from `healing(her
    
    **NPC Defeated Function (`npcDefeated()`)**
 
+   If `currentNPC`'s lifepoints are equal to `0`, this function is triggered.
+
+   It starts by resetting the 3 `#fight-comment` ids to empty and populate them with new information, informing:
+   * `currentNPC has been defeated
+   * hero has acquired the item attached to the death of `currentNPC`
+
+   It sets `currentNPC` 's avatar as a tombstone by assigning the variable `deadNPCAvatar`.
+
+   From a logic perspective, it also updates the herolife points together with its reputation (each NPC has a reputation attached, and if defeated the hero reputation is updated accordingly):
+   
+      hero.stats.reputation -= currentNPC.stats.reputation
+      hero.stats.lifePoints = heroLifePoints
+
+   The logic also sets `currentNPC` as dead (`currentNPC.stats.alive = false`). This logic prevents the user from clicking on the dead npc position and is handled in `screenTwoGeneral()`.
+
+   Finally, if `currentNPC` is npcFour (the boss), `gameOver()` is activate and the user finish the game.
+
+   If `currentNPC` is not npcFour the user is the user is sent back to `.second-screen-div` after 5 seconds by leveraging `setTimeout`.
+   
 **Hero Defeated Function (`heroDefeated()`)**
    
 
