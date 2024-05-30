@@ -286,16 +286,21 @@ By selecting healing, a variable `heroHeal` returns the result from `healing(her
    This function manages the display of messages during the fight.
 
    It uses 3 variables, each attach a specific id:
+   
       let comment1 = $('#fight-comment-1')
       let comment2 = $('#fight-comment-2')
       let comment3 = $('#fight-comment-3')
 
 In order to limit the number of messages displayed to a maximum of 3 at a given time, the logic is as follows:
-*checks if `comment1` is empty: if empty populates `comment1`
-*if `comment1` is not empty, populate `comment2`
-*if `comment2` is not empty, populate `comment3`
-*if `comment3` is not empty move content of `comment2` to `comment1` and `comment3` to `comment2`
-*add new input to `comment3`
+
+* checks if `comment1` is empty: if empty populates `comment1`
+
+* if `comment1` is not empty, populate `comment2`
+
+* if `comment2` is not empty, populate `comment3`
+
+* if `comment3` is not empty move content of `comment2` to `comment1` and `comment3` to `comment2`
+* add new input to `comment3`
 
    ### 3.5 Quest System <a name="quest-system"></a>
    ..
