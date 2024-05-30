@@ -31,7 +31,7 @@ View the live site : https://philmele.github.io/M2Project/
    - [Fight NPC](#fight)
    - [Alternative Endings](#alternative-endings)
    - [Clicks disabled outside of div element](#clicks-disabled)
-   - [Cap max screen resolution](#max-screen)
+   - [Cap max screen resolution & responsivness](#max-screen)
    - [Hero Movements](#hero-movements)
 
 4. [Technologies](#tech)
@@ -52,18 +52,50 @@ View the live site : https://philmele.github.io/M2Project/
 
 ## 1. User Experience <a name="ux"></a>
 
+There is two types of users for this product. The actual user of the product and the owner of the product.
+
 ### 1.1 Project Goals <a name="project-goals"></a>
+
 
 #### 1.1.1 User Goals & Expectations <a name="user-goals"></a>
 
-**People (Users)**: xxx
+The goal of this product is to offer users to replicate the experience of playing old console video games, in particular japanese RPG (role playing games) like Secret of Mana on SNES.
 
-#### 1.1.2 Site Owner Goals <a name="site-owner-goals"></a>
-As the site owner, our goal is ....
+As a result, the story is not linear and leave a number of choices to the user on how the game can be completed.
+
+To complete the story, the final boss needs to be defeated. To defeat the boss, the user (hero) needs to collect 2 items from non playing characters (NPCs).
+
+How these items are collected is down to the user: the item can be given by the NPC by asking, or collected from the NPC by killing it.
+
+The hero can also decide to kill the NPC it has collected the item.
+
+Depending on the decisions made during the collection of these items, the ending will differ.
 
 ### 1.2 User Stories <a name="user-goals"></a>
-As a user...
 
+As a user I want to create a hero with a certain level of customisation by giving my hero a name of my choice and attribute it an avatar.
+As the site owner I want to let the hero enter a name of their choice and offer a selection of 2 avatars to choose from
+
+As a user I want to recieve an end goal and have total freedom in how I achieve this end goal
+As the site owner I want to set an overall mission without any validation checkpoints in between to unlock the next stage and leave the hero to possibility to make bad choices
+
+As a user I want to recieve guidance, or hints, on what I should do next just in case I get lost in my quest
+As the site owner I want to set an overall quest divided into seperate mission
+These missions can be completed in any order, however the hero can decide to follow the order of missions provided through the guidance
+
+As a user I want to be able to talk the NPCs and make decision during the conversation process to collect the items needed for the next mission
+As the site owner I want to be able to provide validation before and during conversation to leave the hero the choice to finish the conversation with the NPC, or leave it to decide to acquire the mission item in a different way
+
+As a user I want to be able to fight the NPC to collect the item
+As the site owner I want to be able to provide the hero an option to fight the NPC
+
+As a the user I want to know how much life points I have and how many damages I inflict to the NPC
+As the site owner I want to provide the hero visibility over their stats so they know when to attack or heal
+As the site owner I want to provide the hero visibility over the NPC stats so they know when to attack or heal
+
+As the site owner I want to incentive the user to replay the game more than once
+As the site owner I want to implement a reputation system that takes into account the hero's actions
+As the site owner I want to trigger different ending based on the score attached to the hero reputation
 
 
 ## 2. Design <a name="ui"></a>
@@ -104,7 +136,17 @@ These fonts can be found on: https://fonts.google.com/
 ## 3. Features <a name="features"></a>
 
    ### 3.1 Hero Customisation <a name="hero-customisaion"></a>
-    ..
+    The customisation is handled in the front end through `.first-screen-div`.
+
+    It contains an input field prompting the user to select the name of their hero, and 2 radio buttons for the user to select the avatar of their hero.
+
+    Both input field and radio buttons are required.
+
+    Validation (mentioned <p>)
+
+    Function
+
+    Bug with validation html5 not working.
 
    ### 3.2 Dialogue with Non Playing Characters (NPC) <a name="dialogue-with-npc"></a>
    ..
@@ -121,7 +163,7 @@ These fonts can be found on: https://fonts.google.com/
    ### 3.6 Clicks disabled outside of div element <a name="clicks-disabled"></a>
    .. 
 
-   ### 3.7 Cap max screen resolution <a name="max-screen"></a>
+   ### 3.7 Cap max screen resolution & responsivness <a name="max-screen"></a>
    .. 
 
    ### 3.8 Hero Movements <a name="hero-movements"></a>
