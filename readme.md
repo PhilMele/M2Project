@@ -360,9 +360,39 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
   
 
    ### 3.6 Alternative Endings <a name="alternative-endings"></a>
-   gameOver
-   3 endings
-   ...
+
+   The user can end the game in different ways. These different ways are handled with `gameOver()`.
+
+   In this function with pass `origin` parameter. This origin parameter is linked to 2 different functions that lead to the game ending: `npcDefeated()` and `npcTurn()`.
+
+   From a front end perspective, the display is managed through `.restart-game-div`
+
+  **When `origin` = `npcDeFeated`** this parameter is passed when `calling gameOver()`:
+   
+       if (currentNPC === npcFour) {
+        gameOver('npcDefeated')
+         }
+
+   The use of `npcDefeated` allows gameOver() to know the origin of the function call and handle the correct scenario.
+
+   In the case of `npcDefeated` being the origin of the call, depending on the reputation score of the hero different endings are presented. Currently these different ending are represented by a different ending message.
+
+   These messages are displayed through `#game-ending-comment` prompting to click the button `#restart-game`.
+
+   Pressing this button activate the below function, which reloads the page and allows the user to restart from the hero creation screen.
+
+      $('#restart-game').click(function () {
+           location.reload();
+       });
+
+   For future developments: each of these ending message could be replaced by another function. We could imagine that if the hero had a very low reputation, the hero would have to face the mage as an ultimate challenge. This has not been implemented as the current way stats multplier work is not ideal. It would be preferrable to use an experience and level up system attached to stats multplier to scale this properly.
+
+   **When `origin` = `npcturn`** this parameter is passed when `calling npcTurn()`:
+
+   The use of `npcturn` allows gameOver() to know the origin of the function call and handle the correct scenario.
+
+   In the case of `npcturn` being the origin of the call, the user recieves a message displaying within `#game-ending-comment` prompting to click the button `#restart-game` which triggers the reload of the page.
+   
 
    ### 3.7 Clicks disabled outside of div element <a name="clicks-disabled"></a>
    .. 
