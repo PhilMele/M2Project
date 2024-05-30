@@ -432,7 +432,95 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
    .. 
 
    ### 3.9 Hero Movements <a name="hero-movements"></a>
-   ..
+
+   The hero's movement between NPCs is managed between `screenTwoGeneral()` and `heroPosition()`.
+
+  **Starting from `screenTwoGeneral()`**
+  
+  The assignation of each npc's position is covered from the line marked as `//positions NPCs + clickable area`.
+
+   If assignation is managed through an `if statement` which checks the npc is alive and if the npc is not clicked. 
+
+   Example for npcOne: in this example below, we set a variable `npcOneClicked` to false, and list to a click on `#npcOne-position-avatar-image`. If clicked by the user, the function checks of the NPC is alive and that the NPC has not been clicked before. If these checks are `true`, `heroPosition()` is triggered and `npcOneClicked` is turned to true to avoid an infinite loop. (npcOneClicked is turned back to false as soon as the user clicked again on the NPC). Finally `npcOne` is passed as a parameter into heroPosition().
+
+      //npcOne
+       //npcOne - clickable area          
+       npcOneClicked = false
+       $('#npcOne-position-avatar-image').click(function (event) {
+           //checks if npc is dead or alive
+           //if dead the functions are not triggered
+           if (npcOne.stats.alive == true && !npcOneClicked) {
+   
+               npcOneClicked = true
+               heroPosition(event, npcOne)
+   
+              }
+          }
+       )
+
+   **Progressing to `heroPosition()`**
+
+   `heroPosition()` passes the click `event` parameter together with `npc` and defines:
+   * the new hero position
+   * its transition animation from its current position to the next position.
+
+   The first action of this function is to define `currentNPC` as `npc` for scalability of the function, allowing it to be re-used for every npc. 
+
+   note: `currentNPC` is defined globally.
+   
+   With reflection writing this readme, it could be question if the use of `currentNPC` was necessary of if `npc` could have been used throughout the function.
+
+   **The new hero position** is defined through the use of variables `newHeroXPosition` and `newHeroYPosition`. 
+
+   **The transition animation** is more complex: 
+   * it, first, requires to define the current hero position (`heroXPositionCurrent` and `heroYPositionCurrent`)
+   * second, it requires to calculate the distance between `currentNPC` and the hero, which are defined with `xDistance` and `yDistance`. Note that `xDistance` includes the use of variable `npcHeroDistance` to substract 50 pixel from the `newHeroXPosition` in order to avoid both character images being on top of each other.
+
+      //define new position based on npc position
+      let newHeroXPosition = currentNPC.Xposition;
+      console.log(`npc.Xposition: ${newHeroXPosition}`)
+      let newHeroYPosition = currentNPC.Yposition
+      console.log(`npc.Yposition: ${newHeroYPosition}`)
+      
+      //caupture current hero position    
+      heroXPositionCurrent = hero.Xposition
+      console.log(`heroXPositionCurrent: ${heroXPositionCurrent}`)
+      heroYPositionCurrent = hero.Yposition
+      console.log(`heroYPositionCurrent: ${heroYPositionCurrent}`)
+      
+      //create variable to generate space between npc and hero
+      let npcHeroDistance = 50
+      
+      //calculate distance between current to new position in pixels
+      //and deduct {npcHeroDistance} left to avoid two images being on top of each other
+      xDistance = newHeroXPosition - heroXPositionCurrent - npcHeroDistance
+      yDistance = newHeroYPosition - heroYPositionCurrent
+
+   Once these variables are defined, we can then use `animate()` (https://api.jquery.com/animate/) to create the transition of the `#hero-position-avatar-image` from its origin to its destination coordinates.
+
+   Finally, in order to avoid the hero going back to its origin point as soon as the function ends, we need to update the hero object coordinates.
+
+   Overall the animation function should look like this:
+
+      //animation from old to new position
+       $("#hero-position-avatar-image").animate({
+           left: `+=${xDistance}px`,
+           top: `+=${yDistance}px`,
+       }, 1000, function () {
+           //update hero position object position
+           //and deduct {npcHeroDistance} left to avoid two images being on top of each other
+           hero.Xposition = newHeroXPosition - npcHeroDistance
+           hero.Yposition = newHeroYPosition
+   
+           console.log('the hero is in position')
+           //console.log(hero)
+   
+           heroDecisionValidation('heroPosition', currentNPC);
+   
+           screenTwoGeneral(hero, currentNPC)
+       });
+
+   Future improvement: this readability of this section could be improved by beakdown this function into smaller function. It would make sense the handle the position of the NPC in a different function. Also, the creation of NPC could be made more scalable if all NPC where concatenated under a single object `npc`. The assignation of position of the NPC and its avatar could have been generated through a simple `for loop` and reduce the repetition of code. Also, with reflection writing this readme, it could be question if the use of `currentNPC` was necessary of if `npc` could have been used throughout the function.
 
   ### 3.10 Introduction <a name="intro"></a>
    .. 
