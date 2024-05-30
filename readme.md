@@ -196,14 +196,56 @@ These fonts can be found on: https://fonts.google.com/
 * Sentence 4: This sentence is displayed if `decision` parameter is equal to `1`. The NPC says farewell and the hero is sent back to `.second-screen-div` and recieve a new item (`hero.inventory.item.hasItem = true`), and the NPC inventory (`currentNPC.hasItem = false`). This sentence has a a few sub if statement that handles what item is given based on `currentNPC` identity.
 
 
-   There is an exception to this. This exception covers the interaction with npcThree (the mage). This specific logic adds the use of sentenceSix (which is specific to this NPC) and checks that if the hero does not have both item. If the hero has one item, or is missing both, npcThree will ask the hero to come back when both items have been collected, for npcThree to give the hero something in exchange. This logic is container within the else if `else if ((hero.inventory.itemOne.hasItem === false || hero.inventory.itemTwo.hasItem === false) && currentNPC === npcThree)`
+There is an exception to this. This exception covers the interaction with npcThree (the mage). This specific logic adds the use of sentenceSix (which is specific to this NPC) and checks that if the hero does not have both item. If the hero has one item, or is missing both, npcThree will ask the hero to come back when both items have been collected, for npcThree to give the hero something in exchange. This logic is container within the else if `else if ((hero.inventory.itemOne.hasItem === false || hero.inventory.itemTwo.hasItem === false) && currentNPC === npcThree)`
 
-   note: for future development the function could be divided into smaller functions to enhance readibility. Seperating in different functions could also increasing the scalability by creating more options of conversations. An Item object could have been created to handle the process of giving items to user more smooth. There is a few repeat with the multplier after talking to npcThree: this could have been better hanlded with better planning ahead of building the project, but considering the time constraint left to deliver the project I could only implement a workaround to deliver on time as it required to review a lot of logic with a lot of dependencies.
-
-   
+note: for future development the function could be divided into smaller functions to enhance readibility. Seperating in different functions could also increasing the scalability by creating more options of conversations. An Item object could have been created to handle the process of giving items to user more smooth. There is a few repeat with the multplier after talking to npcThree: this could have been better hanlded with better planning ahead of building the project, but considering the time constraint left to deliver the project I could only implement a workaround to deliver on time as it required to review a lot of logic with a lot of dependencies.
 
    ### 3.4 NPC interaction: Fight <a name="fight"></a>
-   ... (attack, healing, npc defeated, hero defeated, animations)
+   This function is at the junction of 4 different functions.
+
+  ** Fight Function**
+   This function is handled by `fight()` and passes `hero` (referring to the object) and `currentNPC` parameter (referring to the definition `npc` attached during `heroPosition()`).
+
+   This function starts by managing the display of some front end element:
+   *NPC related row: `currentNPC` avatar and a text column displaying a script of the fight (damages, healing points...).
+   *hero related row: `hero` avatar and a text column giving the hero a choice between attack (triggering `attack()`) and healing (activating `healing()`).
+
+   The function sets a multplier, which has a value of `1` by default, and switched to two if the hero collected itemThree which is granted by the mage in exchange of itemOne and itemTwo.
+
+   The function also calculates hero and npc life points to be displayed on the life bar and returns this points as a percentage of the bar length.
+
+   In terms of logic, through `fight()` the hero is essentially provided by 2 choices: healing and attack until one of the two characters runs out of `lifePoints`.
+
+   The choice is captured from `hero-fight-action` by listening to a click for the user on either one of the two choices. Based on the choice's value (`1`) or (`2`) one of the two function is triggered.
+   
+   Attack Function (`attack()`)
+   By selecting attack, a variable `heroDamage` returns the result from `attack(hero, currentNPC)`.
+
+   `attack()` not only manages the damages inflicted by the hero to `currentNPC` by returning `attackDamage`, but also manages the display of the attack animation by changing the gif image contained in `#hero-avatar-fight` to `hero.status.attack`.
+
+   Once `attack()` has returned `heroDamage` the function let the gif complete the attack animation by setting a `timeOut` of 1.5 seconds before moving on the the `npcTurn()` or if `currentNPC` has `0` life points or less activate `npcDefeated()`.  `currentNPC` life points are updated accordingly based on the returned value from `heroDamage`.
+
+   Healing Function
+   By selecting healing, a variable `heroHeal` returns the result from `healing(hero, currentNPC)`.
+
+   The value of `healingPoints` is hard coded in the function which is 25. This could be improved in the future by taking into consideration the hero total life points.
+
+   After returning `healingPoints`, `fight()` adds the returned value of `healingPoints` to the hero life points. It also checks if the new value of the hero life points does not exceed the maxmimum.
+
+   Should this check result as true the total hero life points are set back to its the defined maximum.
+
+      if (heroLifePoints > initialHeroLifePoints * lifeMultiplier) {
+                   console.log('Thats too many HP for you my friend!')
+                   heroLifePoints = initialHeroLifePoints * lifeMultiplier
+               }  
+
+   NPC Turn
+   
+   
+   NPC Defeated Function
+
+   Hero Defeated Function
+   
 
    ### 3.5 Quest System <a name="quest-system"></a>
    ..
