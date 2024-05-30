@@ -27,8 +27,9 @@ View the live site : https://philmele.github.io/M2Project/
 
 3. [Features](#features)
    - [Hero Customisation](#hero-customisaion)
-   - [Dialogue with Non Playing Characters (NPC)](#dialogue-with-npc)
-   - [Fight NPC](#fight)
+   - [Interactions with Non Playing Characters (NPC)](#interactions-with-npc)
+   - [NPC interaction: talk or nothing](#talk)
+   - [NPC interaction: fight](#fight)
    - [Alternative Endings](#alternative-endings)
    - [Clicks disabled outside of div element](#clicks-disabled)
    - [Cap max screen resolution & responsivness](#max-screen)
@@ -156,25 +157,39 @@ These fonts can be found on: https://fonts.google.com/
 
  The radio button has a default choice selected, so no error could be generated from this section.
 
-   ### 3.2 Dialogue with Non Playing Characters (NPC) <a name="dialogue-with-npc"></a>
-   ..
+   ### 3.2 Interactions with Non Playing Characters (NPC) <a name="interactions-with-npc"></a>
+   Interactions with NPC can be of three different options: talk, fight and nothing. These interactions are triggered by clicking on the NPC the hero wants to interact with.
 
-   ### 3.3 Fight NPC <a name="fight"></a>
+   By clicking on the NPC, `heroPosition()` is triggered which has for effect to move the hero avatar next to the NPC's position. This function is covered in <a name="hero-movements"></a>.
+
+  Once the hero is postioned next to the desired NPC a first validator is activated and prompts the user to confirm if they want to talk, do nothing or fight. 
+  
+  The validation of the user's intention is handled through `heroDecisionValidation()`: captured through `#hero-decision` and validated by `#submit-answer-button`.
+
+  Note: because this function is used for different validation, we use the parameter `decisionOrigin` to identify where the request is coming from. In the case of the case of this paragraph, we are looking to validate that the `decisionOrigin` is coming from `heroPosition`.
+
+   Depending on the user intention, a different function will trigger.
+
+   Talk (Option 1) and nothing (Option 2) are covered through `npcConversation()` and fight (Option 3) is handled through `fight()`. 
+
+   ### 3.3 NPC interaction: talk or nothing <a name="talk"></a>  
+
+   ### 3.4 NPC interaction: Fight <a name="fight"></a>
    ... (attack, healing, npc defeated, hero defeated, animations)
 
-   ### 3.4 Quest System <a name="quest-system"></a>
+   ### 3.5 Quest System <a name="quest-system"></a>
    ..
 
-   ### 3.5 Alternative Endings <a name="alternative-endings"></a>
+   ### 3.6 Alternative Endings <a name="alternative-endings"></a>
    ...
 
-   ### 3.6 Clicks disabled outside of div element <a name="clicks-disabled"></a>
+   ### 3.7 Clicks disabled outside of div element <a name="clicks-disabled"></a>
    .. 
 
-   ### 3.7 Cap max screen resolution & responsivness <a name="max-screen"></a>
+   ### 3.8 Cap max screen resolution & responsivness <a name="max-screen"></a>
    .. 
 
-   ### 3.8 Hero Movements <a name="hero-movements"></a>
+   ### 3.9 Hero Movements <a name="hero-movements"></a>
    .. 
 
 ## 4. Technologies <a name="tech"></a>
