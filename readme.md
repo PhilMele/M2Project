@@ -523,7 +523,71 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
    Future improvement: this readability of this section could be improved by beakdown this function into smaller function. It would make sense the handle the position of the NPC in a different function. Also, the creation of NPC could be made more scalable if all NPC where concatenated under a single object `npc`. The assignation of position of the NPC and its avatar could have been generated through a simple `for loop` and reduce the repetition of code. Also, with reflection writing this readme, it could be question if the use of `currentNPC` was necessary of if `npc` could have been used throughout the function.
 
   ### 3.10 Introduction <a name="intro"></a>
-   .. 
+  
+   The introduction is handled in `.mission-intro-screen-div`.
+
+   From a logic perspective, we are using object `introSequences`, which contains a list of nested objects called `sequenceOne`, `SequenceTwo` ... Each of these nested objects contain an `image` and `text` property.
+   
+      let introSequences = {
+          sequenceOne: {
+              text: 'There is a new baddie in town.',
+              image: npcFour.avatar.avatarProfile,
+          },
+          sequenceTwo: {
+              text: 'He attacked the village, and you want to impress your mom.',
+              image: npcFour.avatar.avatarProfile,
+          },
+          ...
+      }
+
+We declare two variables, which we will use to display the sequences in a loop during the introduction:
+
+   let sequenceIndex = 0;
+   let sequencesArray = Object.values(introSequences);
+
+These two variables can now be used within `updatedSequence()`, which is used to display each nested object one after another every time the user clicks on button `#close-intro-button-text`.
+
+For each sequence a sentence is displayed within #mission-intro-text and the associated image is displayed in #mission-intro-img.
+
+Using the two variables mentioned above, we compare them through an if statement: to display a different message on `#close-intro-button-text` depending on what sentence the user is at.
+
+When the user reaches the last sentence, which is sequenceSix `#close-intro-button-text` will display `close` instead of `next`.
+
+   function updateSequence() {
+       if (sequenceIndex < sequencesArray.length) {
+           $('#mission-intro-text').text(sequencesArray[sequenceIndex].text);
+           $('#mission-intro-img').attr('src', sequencesArray[sequenceIndex].image);
+           if (sequenceIndex === 6) {
+               $('#close-intro-button-text').text('Close')
+           } else {
+               $('#close-intro-button-text').text('Next')
+           }
+       }
+   }
+
+Once this function is in place, we need to create a mechanism to loop over `introSequences` object eveyrtime the user click on `#close-intro-button-text`.
+
+In our `$( document ).ready()` we add `updateSequence()` and create a `click()` that listens to the clicks made on button `.close-intro-button`.
+
+For every click on the button, the button activates `updateSequence()` which displays the next sentence on the sequence. When the user is at the last sentence the if statement logic will close the window and allow the user to interact with `.mission-intro-screen-div`
+
+   /**
+       *This section updates the sequences in .mission-intro-screen-div
+       */
+       updateSequence();
+   
+       $('.close-intro-button').click(function () {
+           sequenceIndex++;
+           if (sequenceIndex < sequencesArray.length) {
+               updateSequence();
+           } else {
+               console.log('arrays has ended');
+               //close div and show second screen div
+               $('.mission-intro-screen-div').css('display', 'none')
+               $('.second-screen-div').css('display', 'flex').css('filter', 'grayscale(0)')
+               enableClickDiv()
+           }
+       });
 
 ## 4. Technologies <a name="tech"></a>
 
