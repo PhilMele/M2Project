@@ -553,6 +553,9 @@ Using the two variables mentioned above, we compare them through an if statement
 
 When the user reaches the last sentence, which is sequenceSix `#close-intro-button-text` will display `close` instead of `next`.
 
+   /**
+   *Manages the display of messages and images during intro
+   */
    function updateSequence() {
        if (sequenceIndex < sequencesArray.length) {
            $('#mission-intro-text').text(sequencesArray[sequenceIndex].text);
