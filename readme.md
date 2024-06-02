@@ -26,6 +26,7 @@ View the live site : https://philmele.github.io/M2Project/
    - [Wireframes](#wireframes)
 
 3. [Features](#features)
+   - [Objects & HTML Layout](#objects)
    - [Hero Customisation](#hero-customisaion)
    - [Interactions with Non Playing Characters (NPC)](#interactions-with-npc)
    - [NPC interaction: talk or nothing](#talk)
@@ -75,29 +76,28 @@ Depending on the decisions made during the collection of these items, the ending
 
 ### 1.2 User Stories <a name="user-goals"></a>
 
-As a user I want to create a hero with a certain level of customisation by giving my hero a name of my choice and attribute it an avatar.
-As the site owner I want to let the hero enter a name of their choice and offer a selection of 2 avatars to choose from
+* As a user I want to create a hero with a certain level of customisation by giving my hero a name of my choice and attribute it an avatar.
+* As the site owner I want to let the hero enter a name of their choice and offer a selection of 2 avatars to choose from
 
-As a user I want to recieve an end goal and have total freedom in how I achieve this end goal
-As the site owner I want to set an overall mission without any validation checkpoints in between to unlock the next stage and leave the hero to possibility to make bad choices
+* As a user I want to recieve an end goal and have total freedom in how I achieve this end goal
+* As the site owner I want to set an overall mission without any validation checkpoints in between to unlock the next stage and leave the hero to possibility to make bad choices
 
-As a user I want to recieve guidance, or hints, on what I should do next just in case I get lost in my quest
-As the site owner I want to set an overall quest divided into seperate mission
-These missions can be completed in any order, however the hero can decide to follow the order of missions provided through the guidance
+* As a user I want to recieve guidance, or hints, on what I should do next just in case I get lost in my quest
+* As the site owner I want to set an overall quest divided into seperate mission. These missions can be completed in any order, however the hero can decide to follow the order of missions provided through the guidance
 
-As a user I want to be able to talk the NPCs and make decision during the conversation process to collect the items needed for the next mission
-As the site owner I want to be able to provide validation before and during conversation to leave the hero the choice to finish the conversation with the NPC, or leave it to decide to acquire the mission item in a different way
+* As a user I want to be able to talk the NPCs and make decision during the conversation process to collect the items needed for the next mission
+* As the site owner I want to be able to provide validation before and during conversation to leave the hero the choice to finish the conversation with the NPC, or leave it to decide to acquire the mission item in a different way
 
-As a user I want to be able to fight the NPC to collect the item
-As the site owner I want to be able to provide the hero an option to fight the NPC
+* As a user I want to be able to fight the NPC to collect the item
+* As the site owner I want to be able to provide the hero an option to fight the NPC
 
-As a the user I want to know how much life points I have and how many damages I inflict to the NPC
-As the site owner I want to provide the hero visibility over their stats so they know when to attack or heal
-As the site owner I want to provide the hero visibility over the NPC stats so they know when to attack or heal
+* As a the user I want to know how much life points I have and how many damages I inflict to the NPC
+* As the site owner I want to provide the hero visibility over their stats so they know when to attack or heal
+* As the site owner I want to provide the hero visibility over the NPC stats so they know when to attack or heal
 
-As the site owner I want to incentive the user to replay the game more than once
-As the site owner I want to implement a reputation system that takes into account the hero's actions
-As the site owner I want to trigger different ending based on the score attached to the hero reputation
+* As the site owner I want to incentive the user to replay the game more than once
+* As the site owner I want to implement a reputation system that takes into account the hero's actions
+* As the site owner I want to trigger different ending based on the score attached to the hero reputation
 
 
 ## 2. Design <a name="ui"></a>
@@ -137,6 +137,26 @@ These fonts can be found on: https://fonts.google.com/
 
 ## 3. Features <a name="features"></a>
 
+   ### 3.0 Objects & HTML Layout <a name="objects"></a>
+
+   **From a rendering perspective**, the project is based on a single page and is organised across multiple `div`. This section presents an overview, and I presented into more details later on:
+   * `body` element which defines the width of the game screen.
+   * `.clicks-disabled`, when activated, allows the web site owner to only allow the user to click on certain elements on the screen, for certain event.
+   * `.first-screen-div` displays the first part of the game: inviting the hero to select and name their avatar.
+   * `.mission-intro-screen-div` is responsible for introducing the quest to the hero and the next steps.
+   * `.second-screen-div` is arguably the most used class and displays the map and character location. It also shows the user inventory, life and reputation points.
+   * `.fight-screen-div` this class is used extensively to render any fight between characters.
+   * `.validation-screen-div` handles the validation of the hero decision when it comes to the interaction with the NPC (non playing character) that has been clicked on.
+   * `.conversation-screen-div` handles the display of conversations between the hero and NPCs.
+   * `restart-game-div` provide the user to restart the game.
+
+   From a logic perspective, the game leverages a use of functions, which are covered in the next sections. At the roof of these functions, the following objects are used:
+   * `avatarSelection` lists each avatar the user can choose from and their respective animations (attack, idle, profile pictures...)
+   * `hero` contains all propreties that will be used during the hero journey (name, avatar, inventory, life points...)
+   * `npcOne` to `npcFour` contains all properties relating to the NPCs characterstics (name, avatar, inventory, life points...)
+   * `quest` lists all four missions, their name and their status (completed or not completed) the hero needs to accomplish to finish the game
+   * `introSequences` contains a series of sequences that contain both a text and images. These sequences will be displayed during the introduction to give context to the story and the missions the next steps for the hero to progress in the game.
+    
    ### 3.1 Hero Customisation <a name="hero-customisaion"></a>
  The customisation is handled in the front end through .first-screen-div.
 
