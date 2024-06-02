@@ -707,7 +707,21 @@ Using your code editor, such as VS Code, click on `open folder` and click on the
 
 ## 8. Credits <a name="credits"></a>
 
-
+* Changing from grayscale(0) to (1): https://stackoverflow.com/questions/78355169/accessing-parent-div-from-child-element?noredirect=1#comment138138297_78355169*/
+* Cannot use display `flex` with JQuery show(), and how to achieve it: https://stackoverflow.com/questions/38491653/jquery-show-a-flex-box
+* Prevent user from clicking outside of pop up: https://stackoverflow.com/questions/44152202/how-to-disable-click-outside-a-particular-div*/
+* Position character on screen: https://stackoverflow.com/questions/28598910/position-an-html-element-at-any-x-y-coordinate-in-a-page*/
+* `content:url("image.jpg")`: https://stackoverflow.com/questions/2182716/is-it-possible-to-set-a-src-attribute-of-an-img-tag-in-css*/
+* Use left & top in JQuery : https://stackoverflow.com/questions/12744928/in-jquery-how-can-i-set-top-left-properties-of-an-element-with-position-values*/
+* Change `src` of `img` tag : https://stackoverflow.com/questions/11722400/programmatically-change-the-src-of-an-img-tag
+* Count `true` keys in object : https://stackoverflow.com/questions/52846805/count-the-number-of-trues-in-a-javascript-object*/
+* Use of `.hasOwnProperty` used to loop through sentences - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty*/
+* Iterate through object properties : https://stackoverflow.com/questions/8312459/iterate-through-object-properties*/
+* Dislay one sentence after another : https://stackoverflow.com/questions/37809591/jquery-how-can-showint-text-and-hide-then-showing-another */
+* Use of `timeOut` : https://stackoverflow.com/questions/7407935/delay-and-settimeout#:~:text=The%20.,appropriate%20for%20certain%20use%20cases
+* ui.dev for the renders in different formats: https://ui.dev/amiresponsive
+* Stable Diffusion and Bing AI for the generation of Pixel Art Images
+* Gareth Mc Girr who guided me through this project
 
 
 
