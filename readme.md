@@ -47,11 +47,13 @@ View the live site : https://philmele.github.io/M2Project/
    - [User Testing](#user-testing)
 
 6. [Bugs](#bugs)
-
+   - [Current bugs](#current-bugs)
+   - [Design & User Experience improvements](#design-improvements)
+   - [Logic improvements](#logic-improvements)
+     
 7. [Deployment](#deployment)
 
 8. [Credits](#credits)
-
 
 ## 1. User Experience <a name="ux"></a>
 
@@ -689,7 +691,43 @@ For every click on the button, the button activates `updateSequence()` which dis
 
 ## 6. Bugs & Considerations for the future <a name="bugs"></a>
 
+### 6.0 Current bugs <a name="current-bugs"></a>
+The only known bug at this time is within `npcConversation()`: for some reason the logic loops over itself 3 times before moving on to the next function.
 
+This bug can be seen in the console by adding a print statement with `npcConversation()`
+
+This resulted in the the hero recieving the muplier value timed by 3.
+
+**As a workaround** `hero.inventory.itemThree.multiplierApplied` was implemented. It it set to `false` when the hero starts the game.
+
+When recieving the multuplier, the property is set to `true` so it cannot be added again, even if the logic loops.
+
+```js
+       if (hero.inventory.itemThree.multiplierApplied == false) {
+        hero.stats.lifePoints = hero.stats.lifePoints * 2
+        hero.inventory.itemThree.multiplierApplied = true
+    }
+```
+
+ ### 6.1 Design & User Experience improvements <a name="design-improvements"></a>
+
+To improve the user experience, we could **avoid the user having to scroll up and down** when on `.screen-two-div` by making the `.row` responsible for the Profile Section a collapsible panel.
+
+This way, we could easily fit the the entire image of the map on the screen height without having the scroll up and down to check in information such as life points or quest progress.
+
+This could be easily implemented with a nav bar system, either using boostrap or full javascript: inserting  the profile section row in collapse pannel to make it fit into a single single height.
+
+Another area of work, which could not be implemented is to **switch from the use of .GIF animated images to spritesheets**, as the use of spritesheet appears to be more scalable and customisable. There is a number of youtube tutorial that could be used for testing and potentially implementing.
+
+### 6.2 Logic improvements <a name="logic-improvements"></a>
+
+As mentiond in the previous section about features, there is an number of imporements that could be implemented. With the final project now built, it is easy to see what could be done better in particular to improve the scalability and the readability of the code.
+* **Objects** : Objects could have been consolidated. As an example, all NPCs could have been consolidated within the same object `npc` and each of them nested within the object. This would have helped the scalability of the NPC creation (from setting up the npc avatar, assigning a position to placing them on a map: these could have been generated through a loop instead of writting them seperately with `screenTwoGeneral()`.
+* **Divide function into smaller functions for improved readability**: this is the case in particuar with function like `npConversation()` and `fight()`
+* **Reduce repeat code**: with a better overview of the code, some repeats in particular when it comes to use of the multplier (when npcThree gives itemThree to the hero). Although these issues were spotted, they only became visibe at the end of the project when I started adding more NPCs and slight feature details. Changing the architecture of the logic at this time would have required to many changes, due to dependencies between function, for me to bring corrections on time.
+* **Implement a "level up" and experience system**: the current system to increase the hero stats by adding a multiplier is good for the purpose of this mini game but has its limit. It would make more sense in the future, to simply attach the increase of stat point to an item itself (and add the stats within the item object property) and also increase stats based on the value of experience collected: this experience could be attach to as a property of a given npc (like the current reputation system).
+* **Commits** : I struggled to exlain myself in simple terms, when doing some commits. This resulted in exceeding the best practice number of characters.
+* **Use of forms**: should the game be extended, and the use of databases not being an option, the hero actions and decisions could be validated through forms to update a URL. This URL could then be copied by the user, if they wanted to pause the game and come back to the point where they left it.
 
 ## 7. Deployment <a name="deployment"></a>
 
