@@ -1393,6 +1393,11 @@ function npcTurn(hero, currentNPC, heroLifePoints) {
     return heroLifePoints;
 }
 
+function giveItem(){
+    
+
+}
+
 function npcDefeated(hero, heroLifePoints) {
 
 
@@ -1407,22 +1412,34 @@ function npcDefeated(hero, heroLifePoints) {
     //changes avatar picture for tombstone
     if (currentNPC === npcOne) {
         // add item to inventory (turn item to true)
-        hero.inventory.itemOne.hasItem = true;
-        $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemOne.name}`)
+        if (currentNPC.hasItem == true){
+            hero.inventory.itemOne.hasItem = true;
+            $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemOne.name}`)
+            currentNPC.hasItem = false
+        }
+        
         $('#npcOne-position-avatar-image').css('content', `url(${deadNPCAvatar})`);
     }
 
     if (currentNPC === npcTwo) {
         // add item to inventory (turn item to true)
-        hero.inventory.itemTwo.hasItem = true;
-        $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemTwo.name}`)
+        if (currentNPC.hasItem == true){
+            hero.inventory.itemTwo.hasItem = true;
+            $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemTwo.name}`)
+            currentNPC.hasItem = false
+        }
+
         $('#npcTwo-position-avatar-image').css('content', `url(${deadNPCAvatar})`);
     }
 
     if (currentNPC === npcThree) {
         // add item to inventory (turn item to true)
-        hero.inventory.itemThree.hasItem = true;
-        $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemThree.name}`)
+        if (currentNPC.hasItem == true){
+            hero.inventory.itemThree.hasItem = true;
+            $('#fight-comment-2').append(`You just recieved ${hero.inventory.itemThree.name}`)
+            currentNPC.hasItem = false
+        }
+
         $('#npcThree-position-avatar-image').css('content', `url(${deadNPCAvatar})`);
     }
 
