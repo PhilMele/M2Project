@@ -62,12 +62,14 @@ let hero = {
     Xposition: '210',
     Yposition: '120',
     //over xx px 
-    // XpositionFullImage:'220',
-    // YpositionFullImage:'200',
+    XpositionFullScreen:'220',
+    XpositionFullScreen:'200',
 };
 console.log(hero)
 
 let initialHeroLifePoints = hero.stats.lifePoints
+let heroPositionOnMapX
+let heroPositionOnMapY
 
 /*NPCs*/
 
@@ -224,6 +226,13 @@ console.log(npcFour)
  * defines avatar img on map once dead
  */
 deadNPCAvatar = 'assets/images/avatars/dead-npc.jpg'
+
+/**
+ * Returns screen current screen width
+ */
+let screenWidth = $(window).width()
+
+console.log(`screenWidth: ${screenWidth}`)
 
 /**
 *global variable used to identify current NPC involved in action
@@ -705,9 +714,19 @@ function screenTwoGeneral(hero, currentNPC) {
 
     //positions hero
     //hero - avatar img position on map
-    let heroPositionImage = $('#hero-position-avatar-image').
-        css({ left: hero.Xposition + "px", top: hero.Yposition + "px", }).attr('src', hero.avatar)
+    //let heroPositionImage = $('#hero-position-avatar-image').
+    //   css({ left: hero.Xposition + "px", top: hero.Yposition + "px", }).attr('src', hero.avatar)
 
+    
+    if ($(window).width() < 512 ){
+            let heroPositionImage = $('#hero-position-avatar-image').
+            css({ left: hero.Xposition + "px", top: hero.Yposition + "px", }).attr('src', hero.avatar)
+
+        }else{
+            let heroPositionImage = $('#hero-position-avatar-image').
+            css({ left: hero.XpositionFullScreen + "px", top: hero.XpositionFullScreen + "px", }).attr('src', hero.avatar)
+        }
+    
 }
 
 /**
