@@ -110,7 +110,7 @@ The main product is aimed at bringing users back to memory lane when playing jap
 
 As a result, we have used a colour palette inspired from  old 16 bits video game consoles. 
 
-![Colour Palette](assets\readme-assets\colour-palette.png)
+![Colour Palette](assets/readme-assets/colour-palette.png)
 
 ### 2.2 Typography <a name="typography"></a>
 Typography will follow the theme taken by the colour pallette, uses fonts that remind users of old 16 bits video game consoles.
@@ -126,13 +126,33 @@ Text: xx
 These fonts can be found on: https://fonts.google.com/
 
 ### 2.3 Icons & Images <a name="icons-images"></a>
-(where are the images and icons stored)
 
-   #### 2.3.1 Icons <a name="icons"></a>
-    (where are the images and icons stored)
+**Icons** are stored in the following paths:
+    * `itemOne` can be found in `assets\images\items\itemOne.webp`
+    * `itemTwo` can be found in `assets\images\items\itemTwo.webp`
 
-   #### 2.3.2 Imagees <a name="images"></a>
+**Images** can be background or character images. 
+   
+Background images can be found in the following path: `assets\images\screens`
 
+NPCs and Hero's avatars are stored in: `assets\images\avatars`
+
+The **hero** has a choice of 2 different avatars. Both avatars have a profile picture, and two `.gif` images: attack and idle.
+
+Example:
+<img src="assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.webp" alt="hero-avatar-1-profile-picture" width="52px">
+<img src="assets/images/avatars/avatar-1/hero-avatar-1-idle.gif" alt="hero-avatar-idle" width="52px">
+<img src="assets/images/avatars/avatar-1/hero-avatar-1-attack.gif" alt="hero-avatar-attack" width="52px">
+
+The **NPCs** have at list an idle `.gif` image. Some have (npcThree and npcFour) have an animation when they attack. Other NPCs dont, simply because I could not find a gif with a satisfying attacking version. 
+
+Example:
+<img src="assets/images/avatars/npc-4/npc-4-idle.gif" alt="npc-4-idle" width="52px">
+<img src="assets/images/avatars/npc-4/npc-4-attack.gif" alt="npc-4-attack" width="52px">
+
+Finally a tombstone is displayed when an character is killed. The path to the file is: `assets\images\avatars\dead-npc.jpg`
+
+<img src="assets/images/avatars/dead-npc.jpg" alt="tombstone" width="52px">
 
 ### 2.4 Wireframes <a name="wireframes"></a>
   ![index](..)

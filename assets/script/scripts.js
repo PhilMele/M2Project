@@ -70,8 +70,8 @@ let initialHeroLifePoints = hero.stats.lifePoints;
 let npcOne = {
     name: 'The Ugly Gremlin',
     avatar: {
-        avatarMap: 'assets/images/avatars/npc.gif',
-        avatarProfile: 'assets/images/avatars/npc.gif'
+        avatarMap: 'assets/images/avatars/npc-1/npc-1.gif',
+        avatarProfile: 'assets/images/avatars/npc-1/npc-1.gif'
     },
 
     //under 512px
@@ -141,7 +141,8 @@ let npcThree = {
     name: 'The Mage',
     avatar: {
         avatarMap: 'assets/images/avatars/npc-3/npc-3-idle.gif',
-        avatarProfile: 'assets/images/avatars/npc-3/npc-3-idle.gif'
+        avatarProfile: 'assets/images/avatars/npc-3/npc-3-idle.gif',
+        avatarAttack: 'assets/images/avatars/npc-3/npc-3-attack.gif',
     },
 
     //under 512px
@@ -1325,11 +1326,11 @@ function npcTurn(hero, currentNPC, heroLifePoints) {
     console.log(`The hero has ${heroLifePoints} life points before the attack`);
 
 
-    //define current hero idle img displayed witing #hero-avatar-fight
+    //define current npc idle img displayed witing #hero-avatar-fight
     let npcIdleImg = currentNPC.avatar.avatarProfile;
     console.log(`heroIdleImg: ${npcIdleImg}`);
 
-    //define new hero img to be displayed witing #hero-avatar-fight
+    //define new npc img to be displayed witing #hero-avatar-fight
     let npcAttackImg = currentNPC.avatar.avatarAttack;
     console.log(`npcAttackImg: ${npcAttackImg}`);
 
@@ -1499,8 +1500,4 @@ function commentFightAppend(message) {
         //add new comment
         comment3.text(message);
     }
-
-
-
 }
-
