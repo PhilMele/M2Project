@@ -111,7 +111,6 @@
         justify-content: center;
         align-items: center;
         background-position: top;
-        margin-top: 25%;
     }
 
     .first-screen-row{
@@ -461,6 +460,10 @@
         }
 
 /*Media Queries*/
+
+
+
+
 @media only screen and (min-width: 320px) {
     body {
         max-width: 320px;
@@ -468,8 +471,11 @@
     }
 }
 
-
-
+@media only screen and (min-width:512px){
+    .first-screen-div{
+        margin-top: 25%;
+    }
+}
 
 /*Code taken from web*/
 
