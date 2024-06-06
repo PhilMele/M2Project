@@ -110,7 +110,7 @@ The main product is aimed at bringing users back to memory lane when playing jap
 
 As a result, we have used a colour palette inspired from  old 16 bits video game consoles. 
 
-![Colour Palette]([])
+![Colour Palette](assets\readme-assets\colour-palette.png)
 
 ### 2.2 Typography <a name="typography"></a>
 Typography will follow the theme taken by the colour pallette, uses fonts that remind users of old 16 bits video game consoles.
