@@ -674,18 +674,18 @@ For every click on the button, the button activates `updateSequence()` which dis
       </p>
    </details>
 
-      #### 5.1.3 Javascript <a name="js"></a>
+   #### 5.1.3 Javascript <a name="js"></a>
    <details>
-      <summary>CSS Testing</summary>
+      <summary>JS Testing</summary>
       <p>
          <img src="" alt="scripts.js" />
       </p>
 
-      Note: 
-      * `npcOneClicked` and other similar variables considered as `undefined` by JSHint, cannot be changed to `let npcOneClicked` as it creates a loop where the hero avatar keeps moving up and down. It was therefore decided to ignore JSHint recommendation and leave the variable as is.
-      * `createHero` is considered a variable, even though it is a function. I am not sure why JSHint is returning this result
-      * `Functions declared within loops referencing an outer scoped variable may lead to confusing semantics.`: this warning comes as the logic is updating a few global variables, which are not a problem for the scope of this project
-      * `'Optional chaining' is only available in ES11 (use 'esversion: 11').`: I cannot seem to find a resolution to this message. A few posts I found on stackoverflow seem to advise, this is not an important message.
+   Note: 
+   * `npcOneClicked` and other similar variables considered as `undefined` by JSHint, cannot be changed to `let npcOneClicked` as it creates a loop where the hero avatar keeps moving up and down. It was therefore decided to ignore JSHint recommendation and leave the variable as is.
+   * `createHero` is considered a variable, even though it is a function. I am not sure why JSHint is returning this result
+   * `Functions declared within loops referencing an outer scoped variable may lead to confusing semantics.`: this warning comes as the logic is updating a few global variables, which are not a problem for the scope of this project
+   * `'Optional chaining' is only available in ES11 (use 'esversion: 11').`: I cannot seem to find a resolution to this message. A few posts I found on stackoverflow seem to advise, this is not an important message.
 
    </details>
 

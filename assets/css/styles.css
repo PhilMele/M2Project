@@ -53,9 +53,10 @@
         top: 40%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 75%;
+        width: 100%;
         z-index: 1000;
         height: 50vh;
+        max-width: 320px;
 
     }
 
@@ -110,6 +111,7 @@
         justify-content: center;
         align-items: center;
         background-position: top;
+        transform: translate(0%, 25%);
     }
 
     .first-screen-row{
