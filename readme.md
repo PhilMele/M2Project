@@ -128,8 +128,8 @@ These fonts can be found on: https://fonts.google.com/
 ### 2.3 Icons & Images <a name="icons-images"></a>
 
 **Icons** are stored in the following paths:
-    * `itemOne` can be found in `assets\images\items\itemOne.webp`
-    * `itemTwo` can be found in `assets\images\items\itemTwo.webp`
+   * `itemOne` can be found in `assets\images\items\itemOne.webp`
+   * `itemTwo` can be found in `assets\images\items\itemTwo.webp`
 
 **Images** can be background or character images. 
    
@@ -140,6 +140,7 @@ NPCs and Hero's avatars are stored in: `assets\images\avatars`
 The **hero** has a choice of 2 different avatars. Both avatars have a profile picture, and two `.gif` images: attack and idle.
 
 Example:
+
 <img src="assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.webp" alt="hero-avatar-1-profile-picture" width="52px">
 <img src="assets/images/avatars/avatar-1/hero-avatar-1-idle.gif" alt="hero-avatar-idle" width="52px">
 <img src="assets/images/avatars/avatar-1/hero-avatar-1-attack.gif" alt="hero-avatar-attack" width="52px">
@@ -147,6 +148,7 @@ Example:
 The **NPCs** have at list an idle `.gif` image. Some have (npcThree and npcFour) have an animation when they attack. Other NPCs dont, simply because I could not find a gif with a satisfying attacking version. 
 
 Example:
+
 <img src="assets/images/avatars/npc-4/npc-4-idle.gif" alt="npc-4-idle" width="52px">
 <img src="assets/images/avatars/npc-4/npc-4-attack.gif" alt="npc-4-attack" width="52px">
 
@@ -725,11 +727,11 @@ For every click on the button, the button activates `updateSequence()` which dis
       <summary>INDEX</summary>
       <p>
          <h3>Mobile</h3>
-         <img src="" alt="index mobile" />
+         <img src="assets/readme-assets/lighthouse-testing/lighthouse-testing-mobile.png" alt="index mobile" />
       </p>
       <p>
          <h3>Desktop</h3>
-         <img src="" alt="index desktop" />
+         <img src="assets/readme-assets/lighthouse-testing/lighthouse-testing-desktop.png" alt="index desktop" />
       </p>
    </details>
 
