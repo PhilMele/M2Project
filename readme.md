@@ -1,6 +1,6 @@
 # Code_Institute_P2
 
-![rendering]()
+![Front Page Rendering](assets/readme-assets/front-page-rendering.png)
 
 Title - Your Hero Journey
 
@@ -453,6 +453,16 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
 
    ### 3.8 Cap max screen resolution & responsivness <a name="max-screen"></a>
    .. 
+
+   use of `margin-top: 25%;` for `.first-screen-div` to give avoid image stuck at the top of browser.
+
+   However this does not work for mobile view. As a result, we use `margin-top: 25%;` in a media query for screens wider than 512px:
+
+      @media only screen and (min-width:512px){
+      .first-screen-div{
+         margin-top: 25%;
+      }
+   }
 
    ### 3.9 Hero Movements <a name="hero-movements"></a>
 
