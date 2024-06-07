@@ -689,7 +689,7 @@ For every click on the button, the button activates `updateSequence()` which dis
    <details>
       <summary>index.html</summary>
       <p>
-         <img src="" alt="index.html" />
+         <img src="assets/readme-assets/nu-html-checker/nu-html-checker.png" alt="index.html" />
       </p>
    </details>
 

@@ -275,7 +275,7 @@ let introSequences = {
         image: npcThree.avatar.avatarProfile,
     },
     sequenceSeven: {
-        text: 'You know what to do now. Make your mom proud.',
+        text: 'You know what to do now. Go make your mom proud.',
         image: npcThree.avatar.avatarProfile,
     },
 
