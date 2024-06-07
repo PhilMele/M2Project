@@ -1142,7 +1142,7 @@ function fight(hero, currentNPC) {
     //the below section reset is needed for a second fight
     //it resets the message boxes to empty
     //and move all id and classes moved to hide by to show() from npcDefeated()
-    $('#life-bar').show();
+    $('.life-bar').show();
     $('#npc-life-point-label').show();
     $('.action-validation-container').show();
     $('#fight-comment-1').text('');
@@ -1450,7 +1450,7 @@ function npcDefeated(hero, heroLifePoints) {
 
     //change npc avatar to tombstone and hide life bar + label
     $('#npc-avatar-fight').attr('src', 'assets/images/avatars/dead-npc.jpg');
-    $('#life-bar').hide();
+    $('.life-bar').hide();
     $('#npc-life-point-label').hide();
     $('.action-validation-container').css('display', 'none');
     console.log(`.action-validation-container is hidden`);

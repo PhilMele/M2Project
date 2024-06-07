@@ -451,7 +451,7 @@
             width: 100%;
         }
 
-        #life-bar{
+        .life-bar{
             width: 100%;
             background-color: grey;   
         }
