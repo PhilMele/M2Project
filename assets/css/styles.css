@@ -343,8 +343,13 @@
         .hero-text-col{
             display:none;
         }
-
+        
+        /* remove this with p element */
         label:has(input:checked) p{
+            color: #f6d6bd;
+        }
+
+        label:has(input:checked) span{
             color: #f6d6bd;
         }
 
