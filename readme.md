@@ -117,13 +117,11 @@ Typography will follow the theme taken by the colour pallette, uses fonts that r
 
 We have selected Google Fonts, instead of custom fonts, to benefit from better support.
 
-The fonts selected are:
+The fonts selected is: `VT323`
 
-For Logo: xx
+   font-family: "VT323", monospace;
 
-Text: xx
-
-These fonts can be found on: https://fonts.google.com/
+This font can be found on: https://fonts.google.com/
 
 ### 2.3 Icons & Images <a name="icons-images"></a>
 
@@ -141,16 +139,13 @@ The **hero** has a choice of 2 different avatars. Both avatars have a profile pi
 
 Example:
 
-<img src="assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.webp" alt="hero-avatar-1-profile-picture" width="52px">
-<img src="assets/images/avatars/avatar-1/hero-avatar-1-idle.gif" alt="hero-avatar-idle" width="52px">
-<img src="assets/images/avatars/avatar-1/hero-avatar-1-attack.gif" alt="hero-avatar-attack" width="52px">
+<img src="assets/images/avatars/avatar-1/hero-avatar-1-profile-picture.webp" alt="hero-avatar-1-profile-picture" width="52px"><img src="assets/images/avatars/avatar-1/hero-avatar-1-idle.gif" alt="hero-avatar-idle" width="52px"><img src="assets/images/avatars/avatar-1/hero-avatar-1-attack.gif" alt="hero-avatar-attack" width="52px">
 
 The **NPCs** have at list an idle `.gif` image. Some have (npcThree and npcFour) have an animation when they attack. Other NPCs dont, simply because I could not find a gif with a satisfying attacking version. 
 
 Example:
 
-<img src="assets/images/avatars/npc-4/npc-4-idle.gif" alt="npc-4-idle" width="52px">
-<img src="assets/images/avatars/npc-4/npc-4-attack.gif" alt="npc-4-attack" width="52px">
+<img src="assets/images/avatars/npc-4/npc-4-idle.gif" alt="npc-4-idle" width="52px"><img src="assets/images/avatars/npc-4/npc-4-attack.gif" alt="npc-4-attack" width="52px">
 
 Finally a tombstone is displayed when an character is killed. The path to the file is: `assets\images\avatars\dead-npc.jpg`
 
