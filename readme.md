@@ -777,7 +777,9 @@ As mentiond in the previous section about features, there is an number of impore
 * **Commits** : I struggled to exlain myself in simple terms, when doing some commits. This resulted in exceeding the best practice number of characters.
 * **Use of forms**: should the game be extended, and the use of databases not being an option, the hero actions and decisions could be validated through forms to update a URL. This URL could then be copied by the user, if they wanted to pause the game and come back to the point where they left it.
 
-   Final note: on some occasions, the browser refreshes by itself during the game. I have not been able to identify if this is due to my laptop, or related to the code. It did not happen when using the github page link.
+* **Local Storage**: Alternatively to the `use of forms` paragraph above, local storage could also be used. However the data would disapear if the user was to change browser. I think using URL would be a better option, without databases.
+
+   **Final note**: on some occasions, the browser refreshes by itself during the game. I have not been able to identify if this is due to my laptop, or related to the code. It did not happen when using the github page link.
 
 ## 7. Deployment <a name="deployment"></a>
 
