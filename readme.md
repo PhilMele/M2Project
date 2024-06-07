@@ -702,7 +702,7 @@ For every click on the button, the button activates `updateSequence()` which dis
    <details>
       <summary>CSS Testing</summary>
       <p>
-         <img src="" alt="styles.css" />
+         <img src="assets/readme-assets/jigsaw-validator/jigsaw-validator.png" alt="styles.css" />
       </p>
    </details>
 
