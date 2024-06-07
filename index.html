@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button type="button" class="close-intro-button"><p id="close-intro-button-text"></p></button>
+                    <button type="button" class="close-intro-button"><span id="close-intro-button-text"></span></button>
                 </div>
 
             </div>
@@ -101,8 +101,6 @@
                     <!--Mission Title-->
                     <h1 id="mission-title"></h1>
                     <!--Avatar Image-->
-                    
-                    <img id="npcOne-avatar-selected" alt="image of hero avatar selected">
                 </div>
 
                 <!-- Profile Section -->
@@ -212,13 +210,13 @@
                     <div class="col action-col">
                         <div class="container action-validation-container">
                             <!--Radio buttons start here-->
-                            <div class="row">
+                            <div class="row choice-row">
                                 <label for="hero-attack">
                                     <span class="selected" id="hero-text">Attack</span>
                                     <input type="radio" id="hero-attack" name="hero-fight-action" value="1" required>
                                 </label>
                             </div>
-                            <div class="row">
+                            <div class="row choice-row">
                                 <label for="hero-heal">
                                     <span class="selected" id="hero-text">Heal</span>
                                     <input type="radio" id="hero-heal" name="hero-fight-action" value="2" required>
@@ -288,15 +286,15 @@
                     <div class="col hero-text-col">
                         <div class="container conv-validation-container">
                             <!--Radio buttons start here-->
-                            <div class="row">
+                            <div class="row choice-row">
                                 <label for="hero-answer-yes">
-                                    <p class="selected" id="hero-text">Yes!</p>
+                                    <span class="selected" id="hero-text">Yes!</span>
                                     <input type="radio" id="hero-answer-yes" name="hero-answer" value="1" required>
                                 </label>
                             </div>
-                            <div class="row">
+                            <div class="row choice-row">
                                 <label for="hero-answer-no">
-                                    <p class="selected" id="hero-text">Nope.</p>
+                                    <span class="selected" id="hero-text">Nope.</span>
                                     <input type="radio" id="hero-answer-no" name="hero-answer" value="2" required>
                                 </label>
                             </div>

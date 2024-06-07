@@ -27,6 +27,8 @@
 
     }
 
+    span{}
+
     h1{
         color:c3a38a;
     }
@@ -83,6 +85,11 @@
         width: 100%;
         height: 100%;
         z-index:1000;
+    }
+
+    .choice-row{
+        padding: 10px;
+
     }
 
     /*Avatars*/
@@ -190,6 +197,7 @@
         background: black;
         color: white;
         width: 80%;
+        height: 25%;
     }
 
 
