@@ -899,7 +899,7 @@ function npcConversation(hero, currentNPC, decision) {
     //set up rows and cols content for hero and npc
     //hero
     $('#hero-img').attr('src', `${hero.avatar}`);
-    $('#hero-text');
+   
 
     //npc
     $('#npc-img').attr('src', `${currentNPC.avatar.avatarProfile}`);
