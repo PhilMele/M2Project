@@ -691,6 +691,9 @@ For every click on the button, the button activates `updateSequence()` which dis
       <p>
          <img src="assets/readme-assets/nu-html-checker/nu-html-checker.png" alt="index.html" />
       </p>
+
+      Note: the checker lists two warnings, relating to some `h1` and `h2` tags being empty. These are populated through the javascript file, which is why the checker is not picking this up.
+      
    </details>
 
    #### 5.1.2 CSS <a name="css"></a>
