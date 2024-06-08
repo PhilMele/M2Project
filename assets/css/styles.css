@@ -504,6 +504,19 @@
     .first-screen-div{
         margin-top: 25%;
     }
+
+    .conversation-screen-div{
+        margin-top: 25%;
+    }
+
+    .fight-screen-div{
+        margin-top: 25%;
+
+    }
+
+    .restart-game-div{
+        margin-top: 25%;
+    }
 }
 
 
