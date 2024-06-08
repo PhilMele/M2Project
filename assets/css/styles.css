@@ -1,282 +1,265 @@
 /*General*/
-#coordinates {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 5px;
-    border-radius: 5px;
-}
-    :root {
+:root {
     --height: 512px;
-    
+}
 
-    }
+body {
+    background: black;
+    color: #f6d6bd;
+    width: 320px;
+    display: flex;
+    justify-content: center;
+    font-family: "VT323", monospace;
+    font-weight: 400;
+    font-style: normal;
 
-    body{
-        background: black;
-        color: #f6d6bd;
-        width: 320px;
-        display: flex;
-        justify-content: center; 
-        font-family: "VT323", monospace;
-        font-weight: 400;
-        font-style: normal;
+    max-width: 320px;
+    margin: 0 auto;
+}
 
-        max-width: 320px;
-        margin: 0 auto;
+.black-color {
+    color: black
+}
 
-    }
+h1 {
+    color: #c3a38a;
+}
 
-    .black-color{
-        color:black
-    }
-
-    h1{
-        color:#c3a38a;
-    }
-
-    .width-control{
-        width:100%;
-        text-align: center;
-    }
+.width-control {
+    width: 100%;
+    text-align: center;
+}
 
 
-    .screen-container{
-        width:100vw;
-    }
+.screen-container {
+    width: 100vw;
+}
 
 
 
-    .second-screen-div{
-        display: none;      
-    }
+.second-screen-div {
+    display: none;
+}
 
-    .mission-intro-screen-div{
-        display: none; 
-        position: fixed;
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        z-index: 1000;
-        height: 50vh;
-        max-width: 320px;
+.mission-intro-screen-div {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 1000;
+    height: 50vh;
+    max-width: 320px;
 
-    }
+}
 
-    .inline-grid{
-        display: inline-grid;
-    }
+.inline-grid {
+    display: inline-grid;
+}
 
-    .validation-screen-div{
-        display: none;
-        position: relative;
-        background-color: blue;
-        border: white 1px solid;
-        top: -50%;
-        margin: 10%;
-        padding: 5px;
-        z-index: 9999;
-    }
+.validation-screen-div {
+    display: none;
+    position: relative;
+    background-color: blue;
+    border: white 1px solid;
+    top: -50%;
+    margin: 10%;
+    padding: 5px;
+    z-index: 9999;
+}
 
-    .clicks-disabled{
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index:1000;
-    }
+.clicks-disabled {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
 
-    .choice-row{
-        padding: 10px;
+.choice-row {
+    padding: 10px;
 
-    }
+}
 
-    /*Avatars*/
+/*Restart Game*/
+/*Used to restart game after gameover: hero is defeated or boss is defeated*/
+.restart-game-div {
+    display: none;
+    text-align: center;
+}
 
-        /*Hero*/
-        #avatar1{
-            
-        }
+/*Use to restart game from .second-screen-div*/
+.restart-game-in-game-div {
+    text-align: center;
+    padding: 20px;
+}
 
-        #avatar2{}
-    
-    /*Restart Game*/
-        /*Used to restart game after gameover: hero is defeated or boss is defeated*/
-        .restart-game-div{
-            display: none;
-            text-align: center;
-        }
+/*Covers styling for both restart buttons*/
+.restart-button {
+    font-family: "VT323", monospace;
 
-        /*Use to restart game from .second-screen-div*/
-        .restart-game-in-game-div{
-            text-align: center;
-            padding: 20px;
-        }
-
-        /*Covers styling for both restart buttons*/
-        .restart-button{
-            font-family: "VT323", monospace;
-            
-        }
+}
 
 /*First Screen*/
 
-    .first-screen-div{
-        display:none;
-        background-image: url('../images/screens/first_screen.jpg');
-        height: var(--height);
-        background-repeat: no-repeat;
-        background-size: auto; /* Set background size to auto */
-        justify-content: center;
-        align-items: center;
-        background-position: top;
-    }
+.first-screen-div {
+    display: none;
+    background-image: url('../images/screens/first_screen.jpg');
+    height: var(--height);
+    background-repeat: no-repeat;
+    background-size: auto;
+    /* Set background size to auto */
+    justify-content: center;
+    align-items: center;
+    background-position: top;
+}
 
-    .first-screen-row{
-        display: grid;
-    }
+.first-screen-row {
+    display: grid;
+}
 
-    .blurred-box{
-        background-color: #ffffff9e;
-        padding: 20px;
-        border-radius: 15px;
-        text-align: center;
-        min-width: 232px;
-        
-    }
+.blurred-box {
+    background-color: #ffffff9e;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    min-width: 232px;
 
-    .first-screen-row-avatar{
-        display: flex;
-        padding: 10px 0 10px 0;
-        align-items: flex-end;
-    }
+}
 
-    #hero-name{
-        border: black 2px solid;
-        border-radius: 5px;
-        font-family: "VT323", monospace;
-        text-align: center;
-        height: 100%;
-    
-    }
+.first-screen-row-avatar {
+    display: flex;
+    padding: 10px 0 10px 0;
+    align-items: flex-end;
+}
 
-    label[for="hero-avatar"] {
-        color:black;
-    }
+#hero-name {
+    border: black 2px solid;
+    border-radius: 5px;
+    font-family: "VT323", monospace;
+    text-align: center;
+    height: 100%;
 
-    .select-avatar-col{
-        width:45%;
-        flex: 1; /* Distribute space equally */
-        text-align: center;
-    }
+}
 
-    /*Credits : was trying to switch from grayscale 0 to 1 through javascript. Was given a much simpler way to achieve input
+label[for="hero-avatar"] {
+    color: black;
+}
+
+.select-avatar-col {
+    width: 45%;
+    flex: 1;
+    /* Distribute space equally */
+    text-align: center;
+}
+
+/*Credits : was trying to switch from grayscale 0 to 1 through javascript. Was given a much simpler way to achieve input
     - https://stackoverflow.com/questions/78355169/accessing-parent-div-from-child-element?noredirect=1#comment138138297_78355169*/
-    label:has(input:checked) img {
+label:has(input:checked) img {
     filter: grayscale(0);
-    }
-    .avatar-img-select {
+}
+
+.avatar-img-select {
     height: 52px;
     filter: grayscale(1);
-    }
+}
 
-    /*hides radio buttons in index.html 
+/*hides radio buttons in index.html 
     in first-screen-div for design purpose */
-    input[type="radio"] {
-        display: none;
-    }
+input[type="radio"] {
+    display: none;
+}
 
-    .create-hero-button{
-        border: black 2px solid;
-        border-radius: 5px;
-        font-family: "VT323", monospace;
-        background: black;
-        color: white;
-    }
+.create-hero-button {
+    border: black 2px solid;
+    border-radius: 5px;
+    font-family: "VT323", monospace;
+    background: black;
+    color: white;
+}
 
-    #name-alert{
-        color: red;
-        background: black;
-        border-radius: 20px;
-        text-align: center;
-    }
+#name-alert {
+    color: red;
+    background: black;
+    border-radius: 20px;
+    text-align: center;
+}
 
 /* Mission Introduction Screen */
-    .close-intro-button{
-        border: white 2px solid;
-        border-radius: 10px;
-        font-family: "VT323", monospace;
-        background: black;
-        color: white;
-        width: 80%;
-        height: 80%;
-    }
+.close-intro-button {
+    border: white 2px solid;
+    border-radius: 10px;
+    font-family: "VT323", monospace;
+    background: black;
+    color: white;
+    width: 80%;
+    height: 80%;
+}
 
 
 /*Second Screen*/
 
-    /*General*/
-        /*Manages profile and inventory display*/
-            .hero-profile-container{
-                color: white;
-                display: inline-flex;
-            }
+/*General*/
+/*Manages profile and inventory display*/
+.hero-profile-container {
+    color: white;
+    display: inline-flex;
+}
 
-            .hero-profile-rows{
-            display: inline-flex;
-            
-            }
+.hero-profile-rows {
+    display: inline-flex;
 
-            .prof-inv-rows{
-                width: 50%;
-                flex-direction: column;
-                display: flex;
-                padding:10px
-            
-            }
+}
 
-            #hero-avatar-selected{
-                width:50%
-            }
+.prof-inv-rows {
+    width: 50%;
+    flex-direction: column;
+    display: flex;
+    padding: 10px
+}
 
-            .item-img{
-                width: 100%;
-            }
+#hero-avatar-selected {
+    width: 50%
+}
 
-            .col-inv{
-                display: table-cell;
-                padding: 10px;
-                width: 50%;
-            }
+.item-img {
+    width: 100%;
+}
 
-            #has-item-three{
+.col-inv {
+    display: table-cell;
+    padding: 10px;
+    width: 50%;
+}
 
-                color:#06e206;
-                margin-top: 0;
-                display:none;
-                text-align: center;
-            }
+#has-item-three {
 
-            /*Quest Progress Bar*/
-            #quest-bar{
-                height: 18px;   
-                width: 100%;
-                background-color: grey;
-                border-radius: 20px; 
-                margin: 2px;;  
-            }
-            
-            #quest-progress{
-                height: 18px;
-                background-color: green;
-                border-radius: 20px;
-            }
+    color: #06e206;
+    margin-top: 0;
+    display: none;
+    text-align: center;
+}
 
-    .submit-action-button{
+/*Quest Progress Bar*/
+#quest-bar {
+    height: 18px;
+    width: 100%;
+    background-color: grey;
+    border-radius: 20px;
+    margin: 2px;
+    ;
+}
+
+#quest-progress {
+    height: 18px;
+    background-color: green;
+    border-radius: 20px;
+}
+
+.submit-action-button {
     border: black 2px solid;
     border-radius: 5px;
     font-family: "VT323", monospace;
@@ -284,9 +267,9 @@
     color: black;
     margin: 5px;
     font-size: medium;
-    }
+}
 
-    .submit-button{
+.submit-button {
     border: black 2px solid;
     border-radius: 5px;
     font-family: "VT323", monospace;
@@ -295,230 +278,214 @@
     margin: 5px;
     width: 50%;
     font-size: medium;
-    }
+}
 
-    .select-styling{
-        font-family: "VT323", monospace;
-    }
-            
-
-
-
-    .canva-div {
-        position: relative;
-        display: inline-block;
-    }
-
-    .map{
-        max-width: 100%;
-        height: auto;
-    }
-
-    #npcOne-position-avatar-image {
-
-        content: url('../images/avatars/npc-1/npc-1.gif');
-        width:52px;
-        position: absolute;
-
-    }
-
-
-    #npcTwo-position-avatar-image {
-
-        content: url('../images/avatars/npc-2/npc-2-idle.gif');
-        width:52px;
-        position: absolute;
-
-    }
-
-    #npcThree-position-avatar-image {
-
-        content: url('../images/avatars/npc-3/npc-3-idle.gif');
-        width:70px;
-        position: absolute;
-
-    }
-
-    #npcFour-position-avatar-image {
-
-        content: url('../images/avatars/npc-4/npc-4-idle.gif');
-        width:70px;
-        position: absolute;
-
-    }
-
-    #hero-position-avatar-image {
-        width:52px;
-        position: absolute;
-
-    }
-
-    /*Conversation Screen*/
-        .conversation-screen-div{
-            display: none;
-            height: var(--height);
-
-        }
-
-        
-
-        .conversation-row{
-            background-color:black;
-            padding: 10px;
-            margin: 5px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            border: white 2px solid;
-            height: 255px;
-        }
-
-        .hero-text-col{
-            display:none;
-        }
-        
-        /* remove this with p element */
-        label:has(input:checked) p{
-            color: #f6d6bd;
-        }
-
-        label:has(input:checked) span{
-            color: #f6d6bd;
-        }
-
-        .selected:hover{
-            color:#f6d6bd;
-        }
-
-
-
-        .conv-validation-container{
-            
-            text-align: left;
-            width: 100%;
-        }
-
-        .avatar-profile{
-            width: 100%;
-        }
-
-
-            /*Hero*/
-            .hero-text-col{
-                text-align: right;
-                width: 50%;
-                max-height: 300px;
-                margin: 10px;
-                color:grey;
-            }
-
-            .hero-img-col{
-                text-align: left;
-                width: 50%;
-                max-height: 300px;
-            }
-
-            /*NPC*/
-            .npc-text-col{
-                text-align: left;
-                width: 50%;
-                max-height: 300px;
-                margin: 10px;
-            }
-
-            .npc-img-col{
-                text-align: right;
-                width: 50%;
-                max-height: 300px;
-            }
-
-    /*Fight Screen*/
-        .fight-screen-div{
-            display: none;
-        }
-
-        .fighter-row{
-            background-color:black;
-            padding: 10px;
-            margin: 5px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            border: white 2px solid;
-        }
-
-        .profile-col{
-            text-align: left;
-            width: 50%;
-            max-height: 300px;
-        }
-        .action-col{
-            width: 50%;
-            text-align: center;
-            align-content: center;
-            justify-content: center;
-            flex-direction: row;
-            color:grey
-        }
-
-        .comment-col{
-            width: 50%;
-            text-align: center;
-            align-content: center;
-        }
-
-        #life-points{
-            width: 90%;
-        
-        }
-
-        .fighter-avatar-img{
-            width: 100%;
-        }
-
-        .life-bar{
-            width: 100%;
-            background-color: grey;   
-        }
-
-        #hero-life-points{
-            height: 30px;
-            background-color: green;
-        }
-
-        #npc-life-points{
-            height: 30px;
-            background-color: green;
-        }
-
-        #npc-avatar-fight{
-        }
-
-        #hero-avatar-fight{
-        }
-
-/*Media Queries*/
-
-
-@media only screen and (min-width:512px){
-    .first-screen-div{
-        margin-top: 25%;
-    }
-
-    .conversation-screen-div{
-        margin-top: 25%;
-    }
-
-    .fight-screen-div{
-        margin-top: 25%;
-
-    }
-
-    .restart-game-div{
-        margin-top: 25%;
-    }
+.select-styling {
+    font-family: "VT323", monospace;
 }
 
 
 
- 
+
+.canva-div {
+    position: relative;
+    display: inline-block;
+}
+
+.map {
+    max-width: 100%;
+    height: auto;
+}
+
+#npcOne-position-avatar-image {
+
+    content: url('../images/avatars/npc-1/npc-1.gif');
+    width: 52px;
+    position: absolute;
+
+}
+
+
+#npcTwo-position-avatar-image {
+
+    content: url('../images/avatars/npc-2/npc-2-idle.gif');
+    width: 52px;
+    position: absolute;
+
+}
+
+#npcThree-position-avatar-image {
+
+    content: url('../images/avatars/npc-3/npc-3-idle.gif');
+    width: 70px;
+    position: absolute;
+
+}
+
+#npcFour-position-avatar-image {
+
+    content: url('../images/avatars/npc-4/npc-4-idle.gif');
+    width: 70px;
+    position: absolute;
+
+}
+
+#hero-position-avatar-image {
+    width: 52px;
+    position: absolute;
+
+}
+
+/*Conversation Screen*/
+.conversation-screen-div {
+    display: none;
+    height: var(--height);
+
+}
+
+
+
+.conversation-row {
+    background-color: black;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    border: white 2px solid;
+    height: 255px;
+}
+
+.hero-text-col {
+    display: none;
+}
+
+label:has(input:checked) span {
+    color: #f6d6bd;
+}
+
+.selected:hover {
+    color: #f6d6bd;
+}
+
+.conv-validation-container {
+
+    text-align: left;
+    width: 100%;
+}
+
+.avatar-profile {
+    width: 100%;
+}
+
+
+/*Hero*/
+.hero-text-col {
+    text-align: right;
+    width: 50%;
+    max-height: 300px;
+    margin: 10px;
+    color: grey;
+}
+
+.hero-img-col {
+    text-align: left;
+    width: 50%;
+    max-height: 300px;
+}
+
+/*NPC*/
+.npc-text-col {
+    text-align: left;
+    width: 50%;
+    max-height: 300px;
+    margin: 10px;
+}
+
+.npc-img-col {
+    text-align: right;
+    width: 50%;
+    max-height: 300px;
+}
+
+/*Fight Screen*/
+.fight-screen-div {
+    display: none;
+}
+
+.fighter-row {
+    background-color: black;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    border: white 2px solid;
+}
+
+.profile-col {
+    text-align: left;
+    width: 50%;
+    max-height: 300px;
+}
+
+.action-col {
+    width: 50%;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    flex-direction: row;
+    color: grey
+}
+
+.comment-col {
+    width: 50%;
+    text-align: center;
+    align-content: center;
+}
+
+#life-points {
+    width: 90%;
+
+}
+
+.fighter-avatar-img {
+    width: 100%;
+}
+
+.life-bar {
+    width: 100%;
+    background-color: grey;
+}
+
+#hero-life-points {
+    height: 30px;
+    background-color: green;
+}
+
+#npc-life-points {
+    height: 30px;
+    background-color: green;
+}
+
+/*Media Queries*/
+
+
+@media only screen and (min-width:512px) {
+    .first-screen-div {
+        margin-top: 25%;
+    }
+
+    .conversation-screen-div {
+        margin-top: 25%;
+    }
+
+    .fight-screen-div {
+        margin-top: 25%;
+
+    }
+
+    .restart-game-div {
+        margin-top: 25%;
+    }
+}

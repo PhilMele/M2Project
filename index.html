@@ -328,27 +328,7 @@
         </div>
 
     </div>
-    <div id="coordinates">X: 0, Y: 0</div>
     <script src="assets/script/scripts.js"></script>
-
- <script>
-        //used to capture coordinates as I move the mouse
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            var coordinatesDiv = document.getElementById('coordinates');
-
-            function updateCoordinates(event) {
-                var x = event.clientX;
-                var y = event.clientY;
-                coordinatesDiv.textContent = 'X: ' + x + ', Y: ' + y;
-            }
-       
-            document.addEventListener('mousemove', updateCoordinates);
-        });
-
-        
-
-</script>
 
 </body>
 </html>
