@@ -1355,12 +1355,13 @@ function npcTurn(hero, currentNPC, heroLifePoints) {
             //reverts img back to idl status after 1 second
             $('#npc-avatar-fight').attr('src', `${npcIdleImg}`);
             console.log(`back to idle now after 1 second`);
+            $('.action-validation-container').show();
 
         }, 1500);
     } else {
         console.log(`currentNPC?.avatar?.avatarAttack does not exists`);
     }
-    $('.action-validation-container').show();
+    
 
     //update hero's life points
     //define multiplier
@@ -1385,13 +1386,15 @@ function npcTurn(hero, currentNPC, heroLifePoints) {
         setTimeout(function () {
             //transforms hero img in tombstone before redirection to gameOver()
             $('#hero-avatar-fight').attr('src', deadNPCAvatar);
-
+            $('.action-validation-container').hide();
             //creates delay after hero is defeated for user to see life bar going to 0
             setTimeout(function () {
                 gameOver('heroDefeated');
             }, 1000);
         }, 1500);
     }
+
+    
     return heroLifePoints;
 }
 

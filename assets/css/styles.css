@@ -16,8 +16,7 @@
     body{
         background: black;
         color: #f6d6bd;
-        max-width: 320px;
-        
+        width: 320px;
         display: flex;
         justify-content: center; 
         margin: 0;
