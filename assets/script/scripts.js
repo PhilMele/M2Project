@@ -358,6 +358,9 @@ $(document).ready(function () {
     $('#restart-game').click(function () {
         location.reload();
     });
+    $('#restart-game-in-game-button').click(function () {
+        location.reload();
+    });
 });
 
 /*Game Ending Management*/
@@ -434,6 +437,7 @@ function updateScreen() {
 */
 function disableClickDiv() {
     $('.clicks-disabled').show();
+    $('#restart-game-in-game-button').hide()
 }
 
 
@@ -442,6 +446,7 @@ function disableClickDiv() {
 */
 function enableClickDiv() {
     $('.clicks-disabled').hide();
+    $('#restart-game-in-game-button').show()
 
 }
 

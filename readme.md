@@ -526,6 +526,7 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
    * it, first, requires to define the current hero position (`heroXPositionCurrent` and `heroYPositionCurrent`)
    * second, it requires to calculate the distance between `currentNPC` and the hero, which are defined with `xDistance` and `yDistance`. Note that `xDistance` includes the use of variable `npcHeroDistance` to substract 50 pixel from the `newHeroXPosition` in order to avoid both character images being on top of each other.
 
+      ```js
       //define new position based on npc position
       let newHeroXPosition = currentNPC.Xposition;
       console.log(`npc.Xposition: ${newHeroXPosition}`)
@@ -545,6 +546,7 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
       //and deduct {npcHeroDistance} left to avoid two images being on top of each other
       xDistance = newHeroXPosition - heroXPositionCurrent - npcHeroDistance
       yDistance = newHeroYPosition - heroYPositionCurrent
+    ```
 
    Once these variables are defined, we can then use `animate()` (https://api.jquery.com/animate/) to create the transition of the `#hero-position-avatar-image` from its origin to its destination coordinates.
 
@@ -692,8 +694,8 @@ For every click on the button, the button activates `updateSequence()` which dis
          <img src="assets/readme-assets/nu-html-checker/nu-html-checker.png" alt="index.html" />
       </p>
 
-      Note: the checker lists two warnings, relating to some `h1` and `h2` tags being empty. These are populated through the javascript file, which is why the checker is not picking this up.
-      
+   Note: the checker lists two warnings, relating to some `h1` and `h2` tags being empty. These are populated through the javascript file, which is why the checker is not picking this up.
+
    </details>
 
    #### 5.1.2 CSS <a name="css"></a>

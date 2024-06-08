@@ -104,9 +104,22 @@
         #avatar2{}
     
     /*Restart Game*/
+        /*Used to restart game after gameover: hero is defeated or boss is defeated*/
         .restart-game-div{
             display: none;
             text-align: center;
+        }
+
+        /*Use to restart game from .second-screen-div*/
+        .restart-game-in-game-div{
+            text-align: center;
+            padding: 20px;
+        }
+
+        /*Covers styling for both restart buttons*/
+        .restart-button{
+            font-family: "VT323", monospace;
+            
         }
 
 /*First Screen*/
@@ -199,7 +212,7 @@
         background: black;
         color: white;
         width: 80%;
-        height: 25%;
+        height: 80%;
     }
 
 
@@ -348,6 +361,7 @@
             display: flex;
             align-items: center;
             border: white 2px solid;
+            height: 255px;
         }
 
         .hero-text-col{
