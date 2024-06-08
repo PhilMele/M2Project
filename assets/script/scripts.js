@@ -384,7 +384,7 @@ function gameOver(origin) {
 
             $('#game-ending-comment').append('You defeated the boss. Your mom is proud.');
 
-        } else if (heroReputation >= 51) {
+        } else if (heroReputation >= 50) {
 
             $('#game-ending-comment').append('You defeated the boss. Your mom is proud... Care to explain why you killed that NPC???');
 
