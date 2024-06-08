@@ -590,11 +590,6 @@ function screenTwoGeneral(hero, currentNPC) {
     let heroLifePoints = hero.stats.lifePoints;
 
 
-    //let lifeMultiplier = 1
-    // if (hero.inventory.itemThree.hasItem == true ){
-    //     lifeMultiplier = 2
-    // }
-
     //calculate hero life points
     $('#life-points').text(heroLifePoints);
 
@@ -605,19 +600,25 @@ function screenTwoGeneral(hero, currentNPC) {
     $('#reputation-points').text(hero.stats.reputation);
 
     //sets styling of items in inventory
-    //ItemOne
+    //itemOne
     $('#item-one-img').attr('src', `${hero.inventory.itemOne.itemImg}`);
     if (hero.inventory.itemOne.hasItem == false) {
         $('#item-one-img').css('filter', 'grayscale(1)');
     } else {
         $('#item-one-img').css('filter', 'grayscale(0)');
     }
-    //ItemTwo
+    //itemTwo
     $('#item-two-img').attr('src', `${hero.inventory.itemTwo.itemImg}`);
     if (hero.inventory.itemTwo.hasItem == false) {
         $('#item-two-img').css('filter', 'grayscale(1)');
     } else {
         $('#item-two-img').css('filter', 'grayscale(0)');
+    }
+
+    //itemThree
+    if (hero.inventory.itemThree.hasItem == true){
+        $('#has-item-three').css('display', 'flex')
+
     }
 
     //positions NPCs + clickable area

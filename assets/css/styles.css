@@ -253,6 +253,14 @@
                 width: 50%;
             }
 
+            #has-item-three{
+
+                color:#06e206;
+                margin-top: 0;
+                display:none;
+                text-align: center;
+            }
+
             /*Quest Progress Bar*/
             #quest-bar{
                 height: 18px;   
