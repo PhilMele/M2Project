@@ -879,6 +879,7 @@ For every click on the button, the button activates `updateSequence()` which dis
 | 67 | Text displayed during conversation with npcFour with timeout() stay for long enough so that the user can read them | Text displayed during interaction with npcFour is displayed at a pace that allows user to read. | User can read the two sentences displayed after one another. | User can read the two sentences displayed after one another. | Pass |
 | 68 | Mobile view | Extend screen from 360px to 512px | Body tag remains within width of 320px | Body tag remains within width of 320px. | Pass |
 | 69 | Desktop view | Extend screen from 512px to full width. | Body tag remains within width of 320px + all screens (except `.second-screen-div`) has a margin of 25% preventing the image to be stuck on top of the browser. | Body tag remains within width of 320px + the first screen has a margin of 25% preventing the image to be stuck on top of the browser. | Pass |
+| 70 | Hide and show action | Attack mage and heal to let him attack next | When mage attacks and kills hero, `$('.action-validation-container')` remains hidden until the hero dies | During a short period of time the hero can select an action between the mage's action and the transition to `heroDefeated()` | Fail |
 
 
 
