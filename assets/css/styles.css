@@ -205,7 +205,7 @@ input[type="radio"] {
 /*General*/
 /*Manages profile and inventory display*/
 .hero-profile-container {
-    color: white;
+    color: #c3a38a;
     display: inline-flex;
 }
 
