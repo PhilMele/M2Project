@@ -117,7 +117,7 @@ We have selected Google Fonts, instead of custom fonts, to benefit from better s
 
 The fonts selected is: `VT323`
 
-   font-family: "VT323", monospace;
+      font-family: "VT323", monospace;
 
 This font can be found on: https://fonts.google.com/
 
@@ -152,15 +152,19 @@ Finally a tombstone is displayed when an character is killed. The path to the fi
 ### 2.4 Wireframes <a name="wireframes"></a>
 
 **First screen**
+
 <img src="assets/readme-assets/wireframes/screen-1.png" alt="screen-1-wireframe" width="320px">
 
 **Second screen (main screen with map and inventory)**
+
 <img src="assets/readme-assets/wireframes/screen-2.png" alt="screen-2-wireframe" width="320px">
 
 **Conversation screen**
+
 <img src="assets/readme-assets/wireframes/conversation-screen.png" alt="conversation-screen-wireframe" width="320px">
 
 **Fight screen**
+
 <img src="assets/readme-assets/wireframes/fight-screen.png" alt="fight-screen-wireframe" width="320px">
 
 ## 3. Features <a name="features"></a>
@@ -704,7 +708,7 @@ For every click on the button, the button activates `updateSequence()` which dis
 
 **Google Chrome Developer Tools** - Used to debug front end.
 
-**Pixso** - Used to design wireframes. XXXX
+**Pixso** - Used to design wireframes.
 
 **Stable Diffusion** - Used to generate images.
 
