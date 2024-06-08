@@ -401,7 +401,7 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
 
    ### 3.6 Alternative Endings <a name="alternative-endings"></a>
 
-   Within `second-screen-div`, `restart-game-in-game-div` is used to offer the user to restart the game by cliking `#restart-game-in-game-button`. This feature is only available at certain moment of the game, and is not accessible during dialogues and fights. Most RPG of the time did not allow users to restart game during these sequences, and the decision was taken to do the same.
+   Within `.second-screen-div`, `.restart-game-in-game-div` is used to offer the user to restart the game by cliking `#restart-game-in-game-button`. This feature is only available at certain moment of the game, and is not accessible during dialogues and fights. Most RPG of the time did not allow users to restart game during these sequences, and the decision was taken to do the same.
    
    Regarding game endings, the user can end the game in different ways. These different ways are handled with `gameOver()`.
 
@@ -471,17 +471,44 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
 
 
    ### 3.8 Cap max screen resolution & responsivness <a name="max-screen"></a>
-   .. 
+   
+   This project was designed with the "mobile" first approach.
 
-   use of `margin-top: 25%;` for `.first-screen-div` to give avoid image stuck at the top of browser.
+   Up until commit `#66d6d0bbda7a212b3d7643b5ded20414e0231f79`, the intention was to offer two designs: 
+      * Mobile design: capping the width of the body to 320px
+      * Tablet & Desktop design: caping the body width to 512px, which is the maximum size of the image.
 
-   However this does not work for mobile view. As a result, we use `margin-top: 25%;` in a media query for screens wider than 512px:
+   These designs offered a possibility to control the coordinates of the characters on the map. This control was enabled by limiting the number of scenarios impacting the characters coordinates: if the user has a screen smaller than 512px, a first scenario of coordinates would apply, and if the user screen was equal of larger than 512px a second scenario would be triggered.
+
+   As the coordinates are not handled through css, but with Javascript, the following solution was implemented (this is an example for the hero position):
+
+   ```js
+    if ($(window).width() < 512 ){
+            heroPositionImage = $('#hero-position-avatar-image').
+            css({ left: hero.Xposition + "px", top: hero.Yposition + "px", }).attr('src', hero.avatar)
+        }else{
+            heroPositionImage = $('#hero-position-avatar-image').
+            css({ left: hero.XpositionFullImage + "px", top: hero.YpositionFullImage + "px", }).attr('src', hero.avatar)
+        }
+   ```
+
+   In this example, we also created additional propreties wihin the hero object, to address both screen width scenarios: for screen under 512 px `hero.Xposition` and `hero.Yposition`, and for screen above 512px `hero.XpositionFullImage` and `hero.YpositionFullImage`.
+
+   Although the responsivness worked when the screen was loaded, the logic was fiddly if the user was to resize during the game: sometimes the character was getting to the right position, and other times it did not work.
+
+   As a result, it was decided adding some additional responsivness to the current logic was going to affect the user experience and decided against it.
+
+   Since the requirement of the project was that "All page elements look well on screens as small as 360 pixels wide and as big as 3840 pixels wide (4K).", it was considered that a single screen width was satisfying.
+   
+   For larger screen, a media query was used to leave some margin between the top of the screen and `.first-screen-div`. This margin has not been applied to mobile view, as it seems preferrable avoid having the user scrolling up and down.
 
       @media only screen and (min-width:512px){
       .first-screen-div{
          margin-top: 25%;
       }
    }
+
+   Note: with more time, I would review the code and implement a solution like presented in this post: https://stackoverflow.com/questions/47957633/how-can-i-dynamically-get-browser-height-and-width
 
    ### 3.9 Hero Movements <a name="hero-movements"></a>
 
