@@ -617,8 +617,7 @@ function screenTwoGeneral(hero, currentNPC) {
 
     //itemThree
     if (hero.inventory.itemThree.hasItem == true){
-        $('#has-item-three').css('display', 'flex')
-
+        $('#has-item-three').css('display', 'flex');
     }
 
     //positions NPCs + clickable area

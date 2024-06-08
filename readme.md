@@ -496,7 +496,7 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
 
    Although the responsivness worked when the screen was loaded, the logic was fiddly if the user was to resize during the game: sometimes the character was getting to the right position, and other times it did not work.
 
-   As a result, it was decided adding some additional responsivness to the current logic was going to affect the user experience and decided against it.
+   As a result, it was decided adding some additional responsivness to the current logic was going to affect negatively the user experience, and the above logic sample was not implemented.
 
    Since the requirement of the project was that "All page elements look well on screens as small as 360 pixels wide and as big as 3840 pixels wide (4K).", it was considered that a single screen width was satisfying.
    
@@ -807,6 +807,7 @@ As mentiond in the previous section about features, there is an number of impore
 * **Commits** : I struggled to exlain myself in simple terms, when doing some commits. This resulted in exceeding the best practice number of characters.
 * **Use of forms**: should the game be extended, and the use of databases not being an option, the hero actions and decisions could be validated through forms to update a URL. This URL could then be copied by the user, if they wanted to pause the game and come back to the point where they left it.
 * **Local Storage**: Alternatively to the `use of forms` paragraph above, local storage could also be used. However the data would disapear if the user was to change browser. I think using URL would be a better option, without databases.
+* **Responsivness**: It would make sense to have at least 2 different designs depending on the user screen. A quick win could simply to not alter the map size, but simply move the hero inventory section to the right. In a mobile version, this inventory section could be displayed through a panel, similar to a `navbar` only this time the panel animation would appear from right to left. A more ambitious project could be to look at making the javascript dynamically responsive. For this more ambitious option the following code could be iterated: https://stackoverflow.com/questions/47957633/how-can-i-dynamically-get-browser-height-and-width
 
    **Final note**: on some occasions, the browser refreshes by itself during the game. I have not been able to identify if this is due to my laptop, or related to the code. It did not happen when using the github page link.
 
