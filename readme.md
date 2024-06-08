@@ -4,8 +4,6 @@
 
 Title - Your Hero Journey
 
-xxx
-
 View the live site : https://philmele.github.io/M2Project/
 
 # Table of Contents
@@ -152,8 +150,18 @@ Finally a tombstone is displayed when an character is killed. The path to the fi
 <img src="assets/images/avatars/dead-npc.jpg" alt="tombstone" width="52px">
 
 ### 2.4 Wireframes <a name="wireframes"></a>
-  ![index](..)
 
+**First screen**
+<img src="assets/readme-assets/wireframes/screen-1.png" alt="screen-1-wireframe" width="320px">
+
+**Second screen (main screen with map and inventory)**
+<img src="assets/readme-assets/wireframes/screen-2.png" alt="screen-2-wireframe" width="320px">
+
+**Conversation screen**
+<img src="assets/readme-assets/wireframes/conversation-screen.png" alt="conversation-screen-wireframe" width="320px">
+
+**Fight screen**
+<img src="assets/readme-assets/wireframes/fight-screen.png" alt="fight-screen-wireframe" width="320px">
 
 ## 3. Features <a name="features"></a>
 
