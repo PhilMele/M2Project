@@ -437,7 +437,7 @@ function updateScreen() {
 */
 function disableClickDiv() {
     $('.clicks-disabled').show();
-    $('#restart-game-in-game-button').hide()
+    $('#restart-game-in-game-button').hide();
 }
 
 
@@ -446,7 +446,7 @@ function disableClickDiv() {
 */
 function enableClickDiv() {
     $('.clicks-disabled').hide();
-    $('#restart-game-in-game-button').show()
+    $('#restart-game-in-game-button').show();
 
 }
 
