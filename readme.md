@@ -401,7 +401,9 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
 
    ### 3.6 Alternative Endings <a name="alternative-endings"></a>
 
-   The user can end the game in different ways. These different ways are handled with `gameOver()`.
+   Within `second-screen-div`, `restart-game-in-game-div` is used to offer the user to restart the game by cliking `#restart-game-in-game-button`. This feature is only available at certain moment of the game, and is not accessible during dialogues and fights. Most RPG of the time did not allow users to restart game during these sequences, and the decision was taken to do the same.
+   
+   Regarding game endings, the user can end the game in different ways. These different ways are handled with `gameOver()`.
 
    In this function with pass `origin` parameter. This origin parameter is linked to 2 different functions that lead to the game ending: `npcDefeated()` and `npcTurn()`.
 
@@ -770,8 +772,9 @@ Another area of work, which could not be implemented is to **switch from the use
 ### 6.2 Logic improvements <a name="logic-improvements"></a>
 
 As mentiond in the previous section about features, there is an number of imporements that could be implemented. With the final project now built, it is easy to see what could be done better in particular to improve the scalability and the readability of the code.
+
 * **Objects** : Objects could have been consolidated. As an example, all NPCs could have been consolidated within the same object `npc` and each of them nested within the object. This would have helped the scalability of the NPC creation (from setting up the npc avatar, assigning a position to placing them on a map: these could have been generated through a loop instead of writting them seperately with `screenTwoGeneral()`.
-* **Divide function into smaller functions for improved readability**: this is the case in particuar with function like `npConversation()` and `fight()`
+* **Divide function into smaller functions for improved readability**: this is the case in particuar with function like `npConversation()` and `fight()`.
 * **Reduce repeat code**: with a better overview of the code, some repeats in particular when it comes to use of the multplier (when npcThree gives itemThree to the hero) or when an NPC has an attack animation vs those that don't. Although these issues were spotted, they only became visibe at the end of the project when I started adding more NPCs and slight feature details. Changing the architecture of the logic at this time would have required to many changes, due to dependencies between function, for me to bring corrections on time.
 * **Implement a "level up" and experience system**: the current system to increase the hero stats by adding a multiplier is good for the purpose of this mini game but has its limit. It would make more sense in the future, to simply attach the increase of stat point to an item itself (and add the stats within the item object property) and also increase stats based on the value of experience collected: this experience could be attach to as a property of a given npc (like the current reputation system).
 * **Commits** : I struggled to exlain myself in simple terms, when doing some commits. This resulted in exceeding the best practice number of characters.
