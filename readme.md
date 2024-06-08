@@ -56,7 +56,7 @@ View the live site : https://philmele.github.io/M2Project/
 
 ## 1. User Experience <a name="ux"></a>
 
-There is two types of users for this product. The actual user of the product and the owner of the product.
+There are two types of users for this product. The actual user of the product and the owner of the product.
 
 ### 1.1 Project Goals <a name="project-goals"></a>
 
@@ -71,7 +71,7 @@ To complete the story, the final boss needs to be defeated. To defeat the boss, 
 
 How these items are collected is down to the user: the item can be given by the NPC by asking, or collected from the NPC by killing it.
 
-The hero can also decide to kill the NPC it has collected the item.
+The hero can also decide to kill the NPC it has collected the item from.
 
 Depending on the decisions made during the collection of these items, the ending will differ.
 
@@ -84,7 +84,7 @@ Depending on the decisions made during the collection of these items, the ending
 * As the site owner I want to set an overall mission without any validation checkpoints in between to unlock the next stage and leave the hero to possibility to make bad choices
 
 * As a user I want to recieve guidance, or hints, on what I should do next just in case I get lost in my quest
-* As the site owner I want to set an overall quest divided into seperate mission. These missions can be completed in any order, however the hero can decide to follow the order of missions provided through the guidance
+* As the site owner I want to set an overall quest divided into seperate missions. These missions can be completed in any order, however the hero can decide to follow the order of missions provided through the guidance
 
 * As a user I want to be able to talk the NPCs and make decision during the conversation process to collect the items needed for the next mission
 * As the site owner I want to be able to provide validation before and during conversation to leave the hero the choice to finish the conversation with the NPC, or leave it to decide to acquire the mission item in a different way
@@ -96,7 +96,7 @@ Depending on the decisions made during the collection of these items, the ending
 * As the site owner I want to provide the hero visibility over their stats so they know when to attack or heal
 * As the site owner I want to provide the hero visibility over the NPC stats so they know when to attack or heal
 
-* As the site owner I want to incentive the user to replay the game more than once
+* As the site owner I want to incentivise the user to replay the game more than once
 * As the site owner I want to implement a reputation system that takes into account the hero's actions
 * As the site owner I want to trigger different ending based on the score attached to the hero reputation
 
@@ -171,9 +171,9 @@ Finally a tombstone is displayed when an character is killed. The path to the fi
 
    ### 3.0 Objects & HTML Layout <a name="objects"></a>
 
-   **From a rendering perspective**, the project is based on a single page and is organised across multiple `div`. This section presents an overview, and I presented into more details later on:
+   **From a rendering perspective**, the project is based on a single page and is organised across multiple `div`. This section presents an overview and more details are provided later on:
    * `body` element which defines the width of the game screen.
-   * `.clicks-disabled`, when activated, allows the web site owner to only allow the user to click on certain elements on the screen, for certain event.
+   * `.clicks-disabled`, when activated, allows the web site owner to only allow the user to click on certain elements on the screen, for certain events.
    * `.first-screen-div` displays the first part of the game: inviting the hero to select and name their avatar.
    * `.mission-intro-screen-div` is responsible for introducing the quest to the hero and the next steps.
    * `.second-screen-div` is arguably the most used class and displays the map and character location. It also shows the user inventory, life and reputation points.
@@ -182,15 +182,15 @@ Finally a tombstone is displayed when an character is killed. The path to the fi
    * `.conversation-screen-div` handles the display of conversations between the hero and NPCs.
    * `restart-game-div` provide the user to restart the game.
 
-   From a logic perspective, the game leverages a use of functions, which are covered in the next sections. At the roof of these functions, the following objects are used:
+   From a logic perspective, the game leverages a use of functions, which are covered in the next sections. At the root of these functions, the following objects are used:
    * `avatarSelection` lists each avatar the user can choose from and their respective animations (attack, idle, profile pictures...)
    * `hero` contains all propreties that will be used during the hero journey (name, avatar, inventory, life points...)
    * `npcOne` to `npcFour` contains all properties relating to the NPCs characterstics (name, avatar, inventory, life points...)
    * `quest` lists all four missions, their name and their status (completed or not completed) the hero needs to accomplish to finish the game
-   * `introSequences` contains a series of sequences that contain both a text and images. These sequences will be displayed during the introduction to give context to the story and the missions the next steps for the hero to progress in the game.
+   * `introSequences` contains a series of sequences that contain both texts and images. These sequences will be displayed during the introduction to give context to the story, the missions and the next steps for the hero to progress in the game.
     
    ### 3.1 Hero Customisation <a name="hero-customisaion"></a>
- The customisation is handled in the front end through .first-screen-div.
+ The customisation is handled in the front end through `.first-screen-div`.
 
  It contains an input field prompting the user to select the name of their hero, and 2 radio buttons for the user to select the avatar of their hero.
 
@@ -200,11 +200,11 @@ Finally a tombstone is displayed when an character is killed. The path to the fi
 
  This function checks if the hero has been given a name and an avatar has been selected.
 
- If it returns true, the game starts and `screenTwoGeneral()` is triggered. `.first-screen-div` is hidden and `.second-screen-div` is displayed.
+ If it returns `true`, the game starts and `screenTwoGeneral()` is triggered. `.first-screen-div` is hidden and `.second-screen-div` is displayed.
  
  Note: the display management of the transition between `.first-screen-div` and `.second-screen-div` is handled through  `updateScreen()`.
 
- If  `createHero()` returns false, the user will be prompted with a message displayed through `#name-alert` asking the user to enter the name of their hero before progressing.
+ If  `createHero()` returns `false`, the user will be prompted with a message displayed through `#name-alert` asking the user to enter the name of their hero before progressing.
 
  Note: the use of `required` attribute is not possible as the hero creation section is not a form and therefore html5 would not ask the user to populate the missing field.
 
@@ -231,20 +231,20 @@ Finally a tombstone is displayed when an character is killed. The path to the fi
 
    This set of interactions is handled through `npcConversation()`.
 
-   It passes parameter: `currentNPC` which is defined through the previous function heroPosition() and designate the NPC the hero is currently interacting with. This parameter allows to scale the function and avoid having to create a different function for each NPC.
+   It passes parameter `currentNPC` which is defined through the previous function `heroPosition()` and designate the NPC the hero is currently interacting with. This parameter allows to scale the function and avoid having to create a different function for each NPC.
 
    note: in this current structure, the function has the flaw to require the NPC conversation format to always be the same: first two sentences are an introduction, the third sentence is a a validation question and sentence four and 5 are displayed depending on the value of the hero answer to question 3. 
 
-   This function starts by a number of front end management: it sets previous div from show() to hide(), and display the font end element that will render the conversation and the characters (hero and NPC) respective avatars).
+   This function starts by a number of front end management: it sets previous div from `show()` to `hide()`, and display the font end element that will render the conversation and the characters (hero and NPC) respective avatars.
 
    **Logic element:**
 
-   The first element of logic of this function checks if `currentNPC` has the item the hero desire on their inventory (`currentNPC.hasItem == false`): if it doesnt, it means the hero has already acquired the item and this item cannot be given again. This will trigger `currentNPC.conversation.sentenceFive`.
+   The first element of logic of this function checks if `currentNPC` has the item the hero desire on their inventory (`currentNPC.hasItem == false`): if it doesn't, it means the hero has already acquired the item and this item cannot be given again. This will trigger `currentNPC.conversation.sentenceFive`.
 
    If `currentNPC.hasItem` is `true` the second part of the logic starts.
 
-   This second part of the logic consists in a `for loop` which goes through the `currentNPC` object and return a sequence of sentences asigning a specific logic to each sequence:
-  * Sentence 1 & 2 : this is the introduction of the NPC. At the end of this phase, the hero is presented with a choice presented through `.hero-text-col`, which is now displayed as `flex`. Upon making its choice, the user trigger `heroDecisionValidation()`, which we have covered previoulsy in section **Interactions with Non Playing Characters**.  This time we pass paramters 'npcConversation', which allows the `heroDecisionValidation()` to understand the call comes from `npcConversation()`. `#submit-question-answer-button` collects the decision and attach it to `decision` variable which we pass back to `npcConversation()` as a parameter.
+   This second part of the logic consists in a `for loop` which goes through the `currentNPC` object and return a sequence of sentences assigning a specific logic to each sequence:
+  * Sentence 1 & 2 : this is the introduction of the NPC. At the end of this phase, the hero is presented with a choice presented through `.hero-text-col`, which is now displayed as `flex`. Upon making its choice, the user trigger `heroDecisionValidation()`, which we have covered previoulsy in section **Interactions with Non Playing Characters**.  This time we pass paramters `npcConversation`, which allows the `heroDecisionValidation()` to understand the call comes from `npcConversation()`. `#submit-question-answer-button` collects the decision and attach it to `decision` variable which we pass back to `npcConversation()` as a parameter.
  *  Sentence 3: This sentence is displayed if `decision` parameter is equal to `2`. The NPC says farewell and the hero is sent back to `.second-screen-div`.
 * Sentence 4: This sentence is displayed if `decision` parameter is equal to `1`. The NPC says farewell and the hero is sent back to `.second-screen-div` and recieve a new item (`hero.inventory.item.hasItem = true`), and the NPC inventory (`currentNPC.hasItem = false`). This sentence has a a few sub if statement that handles what item is given based on `currentNPC` identity.
 
@@ -259,17 +259,17 @@ note: for future development the function could be divided into smaller function
 
    **Fight Function (`fight()`)**
   
-   This function is handled by `fight()` and passes `hero` (referring to the object) and `currentNPC` parameter (referring to the definition `npc` attached during `heroPosition()`).
+   This function is handled by `fight()` and passes `hero` (referring to the object) and `currentNPC` parameters (referring to the definition `npc` attached during `heroPosition()`).
 
    This function starts by managing the display of some front end element:
-   *NPC related row: `currentNPC` avatar and a text column displaying a script of the fight (damages, healing points...).
-   *hero related row: `hero` avatar and a text column giving the hero a choice between attack (triggering `attack()`) and healing (activating `healing()`).
+   * NPC related row: `currentNPC` avatar and a text column displaying a script of the fight (damages, healing points...).
+   * hero related row: `hero` avatar and a text column giving the hero a choice between attack (triggering `attack()`) and healing (activating `healing()`).
 
-   The function sets a multplier, which has a value of `1` by default, and switched to two if the hero collected itemThree which is granted by the mage in exchange of itemOne and itemTwo.
+   The function sets a multplier, which has a value of `1` by default, and switches to `2` if the hero has collected itemThree which is granted by the mage in exchange of itemOne and itemTwo.
 
    The function also calculates hero and npc life points to be displayed on the life bar and returns this points as a percentage of the bar length.
 
-   In terms of logic, through `fight()` the hero is essentially provided by 2 choices: healing and attack until one of the two characters runs out of `lifePoints`.
+   In terms of logic, through `fight()` the hero is essentially provided with 2 choices: healing and attack until one of the two characters runs out of `lifePoints`.
 
    The choice is captured from `hero-fight-action` by listening to a click for the user on either one of the two choices. Based on the choice's value (`1`) or (`2`) one of the two function is triggered.
    
@@ -281,7 +281,7 @@ note: for future development the function could be divided into smaller function
 
    `attack()` not only manages the damages inflicted by the hero to `currentNPC` by returning `attackDamage`, but also manages the display of the attack animation by changing the gif image contained in `#hero-avatar-fight` to `hero.status.attack`.
 
-   Once `attack()` has returned `heroDamage` the function let the gif complete the attack animation by setting a `timeOut` of 1.5 seconds before moving on the the `npcTurn()` or if `currentNPC` has `0` life points or less activate `npcDefeated()`.  `currentNPC` life points are updated accordingly based on the returned value from `heroDamage`.
+   Once `attack()` has returned `heroDamage` the function let the `.gif` complete the attack animation by setting a `timeOut` of 1.5 seconds before moving on the the `npcTurn()` or if `currentNPC` has `0` life points or less activate `npcDefeated()`.  `currentNPC` life points are updated accordingly based on the returned value from `heroDamage`.
 
    **Healing Function (`healing()`)**
    
@@ -293,18 +293,20 @@ By selecting healing, a variable `heroHeal` returns the result from `healing(her
 
    Should this check result as true the total hero life points are set back to its the defined maximum.
 
-      if (heroLifePoints > initialHeroLifePoints * lifeMultiplier) {
-                   console.log('Thats too many HP for you my friend!')
-                   heroLifePoints = initialHeroLifePoints * lifeMultiplier
-               }  
+   ```js
+   if (heroLifePoints > initialHeroLifePoints * lifeMultiplier) {
+                  console.log('Thats too many HP for you my friend!')
+                  heroLifePoints = initialHeroLifePoints * lifeMultiplier
+            }  
+   ```
 
    **NPC Turn (`npcTurn()`)**
    
-   After the hero had their turn, it's not to `currentNPC` to do something. This phase is managed through `npcTurn()`
+   After the hero had their turn, it's now to `currentNPC` to do something. This phase is managed through `npcTurn()`
 
    The only action possible available to the NPC is attack.
 
-   Similarly to attack(), the damages inflicted by the `currentNPC` to the hero are returned by taking a random number between the minimum and the maximum damages the `currentNPC` can inflict, which is defined in object `currentNPC.stats.damage`.
+   Similarly to `attack()`, the damages inflicted by the `currentNPC` to the hero are returned by taking a random number between the minimum and the maximum damages the `currentNPC` can inflict, which is defined in object `currentNPC.stats.damage`.
 
    Once the damages are defined they are substracted from the hero life points through the returned value of `heroLifePoints`.
 
@@ -318,7 +320,7 @@ By selecting healing, a variable `heroHeal` returns the result from `healing(her
 
    If `currentNPC`'s lifepoints are equal to `0`, this function is triggered.
 
-   It starts by resetting the 3 `#fight-comment` ids to empty and populate them with new information, informing:
+   It starts by resetting the three `#fight-comment` IDs to empty and populate them with new information, informing:
    * `currentNPC has been defeated
    * hero has acquired the item attached to the death of `currentNPC`
 
@@ -326,8 +328,10 @@ By selecting healing, a variable `heroHeal` returns the result from `healing(her
 
    From a logic perspective, it also updates the herolife points together with its reputation (each NPC has a reputation attached, and if defeated the hero reputation is updated accordingly):
    
+   ```js
       hero.stats.reputation -= currentNPC.stats.reputation
       hero.stats.lifePoints = heroLifePoints
+   ```
 
    The logic also sets `currentNPC` as dead (`currentNPC.stats.alive = false`). This logic prevents the user from clicking on the dead npc position and is handled in `screenTwoGeneral()`.
 
@@ -339,10 +343,13 @@ By selecting healing, a variable `heroHeal` returns the result from `healing(her
    This function manages the display of messages during the fight.
 
    It uses 3 variables, each attach a specific id:
+
+   ```js
    
       let comment1 = $('#fight-comment-1')
       let comment2 = $('#fight-comment-2')
       let comment3 = $('#fight-comment-3')
+   ```
 
 In order to limit the number of messages displayed to a maximum of 3 at a given time, the logic is as follows:
 
@@ -355,8 +362,8 @@ In order to limit the number of messages displayed to a maximum of 3 at a given 
 * if `comment3` is not empty move content of `comment2` to `comment1` and `comment3` to `comment2`
 * add new input to `comment3`
 
-   ### 3.5 Quest System <a name="quest-system"></a>
-   This feature is made up of two function and mainly serve a rendering purpose: `questProgress()` and `questNextAction()`.
+### 3.5 Quest System <a name="quest-system"></a>
+This feature is made up of two function and mainly serve a rendering purpose: `questProgress()` and `questNextAction()`.
 
  **questNextAction()`** provides information to the hero on the next potential mission they should accomplish. Although an alternative route could be taken.
 
@@ -372,11 +379,16 @@ In order to limit the number of messages displayed to a maximum of 3 at a given 
 
   Once this variable is defined, `questProgress()` looks to identify how many of these missions have been completed. A mission is considered completed if the item attached to the succesful complion of this mission is collected. For example:
 
+  ```js
+
      if (hero.inventory.itemOne.hasItem == true) {
            quest.missionOne.completed = true
        }
+   ```
 
   Considering that the collection of `itemThree` requires the loss of `itemOne` and `itemTwo` a seperate logic addresses the completion of missionThree.
+
+  ```js
 
      if (hero.inventory.itemThree.hasItem == true) {
            quest.missionThree.completed = true
@@ -384,10 +396,11 @@ In order to limit the number of messages displayed to a maximum of 3 at a given 
            quest.missionTwo.completed = true
            console.log(`quest.missionTwo.completed = ${quest.missionThree.completed}`)
        }
-
+   ```
 
    Once the missions are set to completed or no, we create a variable `count` and set it to `0` initially. We then update the variable through a `for loop` which counts the number of mission set to completed = true.
 
+   ```js
       count = 0
       for (let key in quest) {
            if (quest.hasOwnProperty(key) && quest[key].completed) {
@@ -395,10 +408,13 @@ In order to limit the number of messages displayed to a maximum of 3 at a given 
            }
    
       }
+   ```
 
-      credits: this solution was taken from GerryLon response to this post: https://stackoverflow.com/questions/52846805/count-the-number-of-trues-in-a-javascript-object
+   credits: this solution was taken from GerryLon response to this post: https://stackoverflow.com/questions/52846805/count-the-number-of-trues-in-a-javascript-object
 
 Once `count` is defined, we can compare to the total number of mission and return the a percentage value in `completion` variable which can be used to set the value of the progress bar in `##quest-progress`:
+
+   ```js
 
     //calculate how much these completed steps account has part of the quest Completion
     //convert number in %
@@ -406,8 +422,9 @@ Once `count` is defined, we can compare to the total number of mission and retur
     
     //Update #quest-progress with completion variable result
     $('#quest-progress').css('width', completion + '%')
+   ```
 
-Future improvement: `questNextAction()` could be broken down into 2 seperate function for better readability: one setting up quests are compeleted, and another one dealing with the actual calulation of how many misions need completing before reaching 100%.
+Future improvement: `questNextAction()` could be broken down into 2 seperate functions for better readability: one setting up quests as compeleted, and another one dealing with the actual calulation of how many misions need completing before reaching 100%.
 
   
 
@@ -427,7 +444,7 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
         gameOver('npcDefeated')
          }
 
-   The use of `npcDefeated` allows gameOver() to know the origin of the function call and handle the correct scenario.
+   The use of `npcDefeated` allows `gameOver()` to know the origin of the function call and handle the correct scenario.
 
    In the case of `npcDefeated` being the origin of the call, depending on the reputation score of the hero different endings are presented. Currently these different ending are represented by a different ending message.
 
@@ -435,15 +452,19 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
 
    Pressing this button activate the below function, which reloads the page and allows the user to restart from the hero creation screen.
 
+   ```js
+
       $('#restart-game').click(function () {
            location.reload();
        });
+
+   ```
 
    For future developments: each of these ending message could be replaced by another function. We could imagine that if the hero had a very low reputation, the hero would have to face the mage as an ultimate challenge. This has not been implemented as the current way stats multplier work is not ideal. It would be preferrable to use an experience and level up system attached to stats multplier to scale this properly.
 
    **When `origin` = `npcturn`** this parameter is passed when `calling npcTurn()`:
 
-   The use of `npcturn` allows gameOver() to know the origin of the function call and handle the correct scenario.
+   The use of `npcturn` allows `gameOver()` to know the origin of the function call and handle the correct scenario.
 
    In the case of `npcturn` being the origin of the call, the user recieves a message displaying within `#game-ending-comment` prompting to click the button `#restart-game` which triggers the reload of the page.
    
@@ -466,9 +487,11 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
 
    `.clicks-disabled` takes full width and height of the body and is inserted in between `.second-screen-div` and the pop up window (`.mission-intro-screen-div` and `.validation-screen-div`) with the use of the `z-index` property.
 
-   In order to to manage the display attribute of the div, two functions are used:
+   In order to  manage the display attribute of the div, two functions are used:
    *  `disableClickDiv()()` sets `.clicks-disabled` to `show`
    *  `enableClickDiv()` sets `.clicks-disabled` to `hide`
+
+   ```js
 
       function disableClickDiv() {
           $('.clicks-disabled').show()
@@ -477,6 +500,8 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
       function enableClickDiv() {
           $('.clicks-disabled').hide()
       }
+
+   ```
 
 
    Credits: this solution is inspired from Bruno Lucena's answer to this stackoverflow post: https://stackoverflow.com/questions/44152202/how-to-disable-click-outside-a-particular-div.
@@ -506,9 +531,9 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
 
    In this example, we also created additional propreties wihin the hero object, to address both screen width scenarios: for screen under 512 px `hero.Xposition` and `hero.Yposition`, and for screen above 512px `hero.XpositionFullImage` and `hero.YpositionFullImage`.
 
-   Although the responsivness worked when the screen was loaded, the logic was fiddly if the user was to resize during the game: sometimes the character was getting to the right position, and other times it did not work.
+   Although the responsivness worked when the screen is loaded, the logic was fiddly if the user was to resize during the game: sometimes the character was getting to the right position, and other times it did not work.
 
-   As a result, it was decided adding some additional responsivness to the current logic was going to affect negatively the user experience, and the above logic sample was not implemented.
+   As a result, it was decided adding additional responsivness to the current logic was going to affect negatively the user experience, and the above logic sample was not implemented.
 
    Since the requirement of the project was that "All page elements look well on screens as small as 360 pixels wide and as big as 3840 pixels wide (4K).", it was considered that a single screen width was satisfying.
    
@@ -532,7 +557,9 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
 
    If assignation is managed through an `if statement` which checks the npc is alive and if the npc is not clicked. 
 
-   Example for npcOne: in this example below, we set a variable `npcOneClicked` to false, and list to a click on `#npcOne-position-avatar-image`. If clicked by the user, the function checks of the NPC is alive and that the NPC has not been clicked before. If these checks are `true`, `heroPosition()` is triggered and `npcOneClicked` is turned to true to avoid an infinite loop. (npcOneClicked is turned back to false as soon as the user clicked again on the NPC). Finally `npcOne` is passed as a parameter into heroPosition().
+   Example for npcOne: in this example below, we set a variable `npcOneClicked` to false, and listen to a click on `#npcOne-position-avatar-image`. If clicked by the user, the function checks of the NPC is alive and that the NPC has not been clicked before. If these checks are `true`, `heroPosition()` is triggered and `npcOneClicked` is turned to true to avoid an infinite loop. (npcOneClicked is turned back to false as soon as the user clicked again on the NPC). Finally `npcOne` is passed as a parameter into `heroPosition()`.
+
+   ```js
 
       //npcOne
        //npcOne - clickable area          
@@ -549,6 +576,8 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
           }
        )
 
+   ```
+
    **Progressing to `heroPosition()`**
 
    `heroPosition()` passes the click `event` parameter together with `npc` and defines:
@@ -558,8 +587,6 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
    The first action of this function is to define `currentNPC` as `npc` for scalability of the function, allowing it to be re-used for every npc. 
 
    note: `currentNPC` is defined globally.
-   
-   With reflection writing this readme, it could be question if the use of `currentNPC` was necessary of if `npc` could have been used throughout the function.
 
    **The new hero position** is defined through the use of variables `newHeroXPosition` and `newHeroYPosition`. 
 
@@ -570,15 +597,11 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
       ```js
       //define new position based on npc position
       let newHeroXPosition = currentNPC.Xposition;
-      console.log(`npc.Xposition: ${newHeroXPosition}`)
       let newHeroYPosition = currentNPC.Yposition
-      console.log(`npc.Yposition: ${newHeroYPosition}`)
       
       //caupture current hero position    
       heroXPositionCurrent = hero.Xposition
-      console.log(`heroXPositionCurrent: ${heroXPositionCurrent}`)
       heroYPositionCurrent = hero.Yposition
-      console.log(`heroYPositionCurrent: ${heroYPositionCurrent}`)
       
       //create variable to generate space between npc and hero
       let npcHeroDistance = 50
@@ -587,6 +610,7 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
       //and deduct {npcHeroDistance} left to avoid two images being on top of each other
       xDistance = newHeroXPosition - heroXPositionCurrent - npcHeroDistance
       yDistance = newHeroYPosition - heroYPositionCurrent
+
     ```
 
    Once these variables are defined, we can then use `animate()` (https://api.jquery.com/animate/) to create the transition of the `#hero-position-avatar-image` from its origin to its destination coordinates.
@@ -595,23 +619,19 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
 
    Overall the animation function should look like this:
 
-      //animation from old to new position
-       $("#hero-position-avatar-image").animate({
-           left: `+=${xDistance}px`,
-           top: `+=${yDistance}px`,
-       }, 1000, function () {
-           //update hero position object position
-           //and deduct {npcHeroDistance} left to avoid two images being on top of each other
-           hero.Xposition = newHeroXPosition - npcHeroDistance
-           hero.Yposition = newHeroYPosition
-   
-           console.log('the hero is in position')
-           //console.log(hero)
-   
-           heroDecisionValidation('heroPosition', currentNPC);
-   
-           screenTwoGeneral(hero, currentNPC)
-       });
+      ```js
+         $("#hero-position-avatar-image").animate({
+            left: `+=${xDistance}px`,
+            top: `+=${yDistance}px`,
+         }, 1000, function () {
+            //update hero position object position
+            //and deduct {npcHeroDistance} left to avoid two images being on top of each other
+            hero.Xposition = newHeroXPosition - npcHeroDistance
+            hero.Yposition = newHeroYPosition
+            heroDecisionValidation('heroPosition', currentNPC);
+            screenTwoGeneral(hero, currentNPC)
+         });
+      ```
 
    Future improvement: this readability of this section could be improved by beakdown this function into smaller function. It would make sense the handle the position of the NPC in a different function. Also, the creation of NPC could be made more scalable if all NPC where concatenated under a single object `npc`. The assignation of position of the NPC and its avatar could have been generated through a simple `for loop` and reduce the repetition of code. Also, with reflection writing this readme, it could be question if the use of `currentNPC` was necessary of if `npc` could have been used throughout the function.
 
@@ -620,6 +640,8 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
    The introduction is handled in `.mission-intro-screen-div`.
 
    From a logic perspective, we are using object `introSequences`, which contains a list of nested objects called `sequenceOne`, `SequenceTwo` ... Each of these nested objects contain an `image` and `text` property.
+
+      ```js
    
       let introSequences = {
           sequenceOne: {
@@ -632,15 +654,20 @@ Future improvement: `questNextAction()` could be broken down into 2 seperate fun
           },
           ...
       }
+      ```
 
 We declare two variables, which we will use to display the sequences in a loop during the introduction:
+
+   ```js
 
    let sequenceIndex = 0;
    let sequencesArray = Object.values(introSequences);
 
+   ```
+
 These two variables can now be used within `updatedSequence()`, which is used to display each nested object one after another every time the user clicks on button `#close-intro-button-text`.
 
-For each sequence a sentence is displayed within #mission-intro-text and the associated image is displayed in #mission-intro-img.
+For each sequence a sentence is displayed within `#mission-intro-text` and the associated image is displayed in #mission-intro-img.
 
 Using the two variables mentioned above, we compare them through an if statement: to display a different message on `#close-intro-button-text` depending on what sentence the user is at.
 
@@ -660,11 +687,13 @@ When the user reaches the last sentence, which is sequenceSix `#close-intro-butt
    }
 ```
 
-Once this function is in place, we need to create a mechanism to loop over `introSequences` object eveyrtime the user click on `#close-intro-button-text`.
+Once this function is in place, we need to create a mechanism to loop over `introSequences` object everytime the user clicks on `#close-intro-button-text`.
 
-In our `$( document ).ready()` we add `updateSequence()` and create a `click()` that listens to the clicks made on button `.close-intro-button`.
+In `$( document ).ready()` we add `updateSequence()` and create a `click()` that listens to the clicks made on button `.close-intro-button`.
 
-For every click on the button, the button activates `updateSequence()` which displays the next sentence on the sequence. When the user is at the last sentence the if statement logic will close the window and allow the user to interact with `.mission-intro-screen-div`
+For every click on the button, the button activates `updateSequence()` which displays the next sentence on the sequence. When the user is at the last sentence the if statement logic will close the window and allow the user to interact with `.mission-intro-screen-div`.
+
+   ```js
 
    /**
        *This section updates the sequences in .mission-intro-screen-div
@@ -683,6 +712,7 @@ For every click on the button, the button activates `updateSequence()` which dis
                enableClickDiv()
            }
        });
+   ```
 
 ## 4. Technologies <a name="tech"></a>
 
@@ -855,9 +885,9 @@ For every click on the button, the button activates `updateSequence()` which dis
 ## 6. Bugs & Considerations for the future <a name="bugs"></a>
 
 ### 6.0 Current bugs <a name="current-bugs"></a>
-The only known bug at this time is within `npcConversation()`: for some reason the logic loops over itself 3 times before moving on to the next function.
+The only known bugs at this time are within `npcConversation()` (for some reason the logic loops over itself 3 times before moving on to the next function) and in the healing system within a very specific scenario.
 
-This bug can be seen in the console by adding a print statement with `npcConversation()`
+**Regarding `npcConversation()`**: this bug can be seen in the console by adding a print statement with `npcConversation()`
 
 This resulted in the the hero recieving the muplier value timed by 3.
 
@@ -871,6 +901,8 @@ When recieving the multuplier, the property is set to `true` so it cannot be add
         hero.inventory.itemThree.multiplierApplied = true
     }
 ```
+
+**Regading the healing system**: if the hero's last action before getting killed by the NPC is to heal themselves, `$('.action-validation-container')` will turn to `show` before the hero dies. During a short moment the user could take an action. Although this action will not result in anything, `gameover()` will consider the hero has been killed twice and the game over message will be duplicated. A solution to this problem would be to review logic around displaying `$('.action-validation-container')` through a seperate function to manage it better and should be addressed for future developments.
 
  ### 6.1 Design & User Experience improvements <a name="design-improvements"></a>
 
