@@ -742,7 +742,7 @@ For every click on the button, the button activates `updateSequence()` which dis
          <img src="assets/readme-assets/jshint/jshint-metrics.png" alt="scripts.js" /><img src="assets/readme-assets/jshint/jshint-results.png" alt="scripts.js" />
       </p>
 
-   Note: 
+   **Note:** 
    * `npcOneClicked` and other similar variables considered as `undefined` by JSHint, cannot be changed to `let npcOneClicked` as it creates a loop where the hero avatar keeps moving up and down. It was therefore decided to ignore JSHint recommendation and leave the variable as is.
    * `createHero` is considered a variable, even though it is a function. I am not sure why JSHint is returning this result.
    * `Functions declared within loops referencing an outer scoped variable may lead to confusing semantics.`: this warning comes as the logic is updating a few global variables, which are not a problem for the scope of this project
